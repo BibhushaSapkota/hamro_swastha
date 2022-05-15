@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "163614653086",
+    "project_id": "merodocto",
+    "storage_bucket": "merodocto.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:163614653086:android:2c15337c47bbc249a0598f",
+        "android_client_info": {
+          "package_name": "com.example.mero_doctor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "163614653086-j9mor12afs9c3l0t5mba722ctonb1bk9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA16vBUjIFFKU21E4lD0G1sO1Sl30gQi9g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "163614653086-j9mor12afs9c3l0t5mba722ctonb1bk9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

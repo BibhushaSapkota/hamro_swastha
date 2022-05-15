@@ -1,12 +1,11 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/screens/login_screens.dart';
+import 'package:mero_doctor/screens/register_screen.dart';
 import 'package:mero_doctor/utils/constants.dart';
 
-
-
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -17,7 +16,8 @@ class MyApp extends StatelessWidget {
     double screenWidth = window.physicalSize.width;
     return MaterialApp(
       routes: {
-        "/":(context) => LoginPage(),
+        "/login": (context) => LoginPage(),
+        "/": (context) => RegisterScreen(),
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
