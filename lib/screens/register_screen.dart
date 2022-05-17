@@ -8,6 +8,33 @@ import 'package:mero_doctor/screens/loading.dart';
 import 'package:mero_doctor/screens/login_screens.dart';
 import 'package:mero_doctor/utils/constants.dart';
 
+
+class EmailFieldValidator {
+  static String? validate(String value){
+    if (value.isEmpty) {
+      return "Email should not be empty";
+        } else if (!RegExp(
+              "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
+                  .hasMatch(value)) {
+          return "Please! Enter a valid Email";
+      }
+    return null;
+  }
+
+  }
+
+class PasswordFieldValidator {
+  static String? validate(String value){
+    if (value!.isEmpty) {
+       return "Password should not be empty";
+        } else if (value.length < 6) {
+       return "Password must be 6 character or more";
+        }
+       return null;
+      }
+  }
+
+
 class RegisterScreen extends StatefulWidget {
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
