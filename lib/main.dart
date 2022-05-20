@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/screens/login_screens.dart';
+import 'package:mero_doctor/screens/patient_profile.dart';
 import 'package:mero_doctor/utils/constants.dart';
 
 
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       routes: {
         "/":(context) => LoginPage(),
+        "/profile":(context) => const ProfileScreen(),
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
