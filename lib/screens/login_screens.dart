@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -110,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                                       onSaved: (value) {
                                         emailController.text = value!;
                                       },
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         fillColor: Colors.black12,
                                         filled: true,
                                         border: OutlineInputBorder(
@@ -119,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                                               Radius.circular(20)),
                                         ),
                                       ),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 16,
                                           height: 0.8,
                                           color: Colors.black54),
@@ -149,7 +148,7 @@ class _LoginPageState extends State<LoginPage> {
                                         passwordController.text = value!;
                                       },
                                       obscureText: true,
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         fillColor: Colors.black12,
                                         filled: true,
                                         border: OutlineInputBorder(
@@ -158,7 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                                               Radius.circular(20)),
                                         ),
                                       ),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 16,
                                           height: 0.8,
                                           color: Colors.black54),
@@ -175,14 +174,14 @@ class _LoginPageState extends State<LoginPage> {
                                           children: [
                                             TextSpan(
                                                 text: "Click Here",
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     color: COLOR_SECONDARY),
                                                 recognizer:
                                                     TapGestureRecognizer()
                                                       ..onTap = () => {})
                                           ]),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 20,
                                     ),
                                     Center(
@@ -216,15 +215,15 @@ class _LoginPageState extends State<LoginPage> {
                                         },
                                         child: RichText(
                                             text: TextSpan(
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 16),
                                                 children: [
-                                              TextSpan(
+                                              const TextSpan(
                                                   text: "Don't have account? "),
                                               TextSpan(
-                                                  text: "Login",
-                                                  style: TextStyle(
+                                                  text: "Sign Up",
+                                                  style: const TextStyle(
                                                       color: COLOR_SECONDARY,
                                                       fontWeight:
                                                           FontWeight.bold),
