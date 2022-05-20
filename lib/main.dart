@@ -1,13 +1,17 @@
 import 'dart:ui';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:mero_doctor/screens/Choose_Authencation.dart';
+import 'package:mero_doctor/screens/choose_screen.dart';
 import 'package:mero_doctor/screens/login_screens.dart';
 import 'package:mero_doctor/screens/patient_profile.dart';
+import 'package:mero_doctor/screens/register_screen.dart';
 import 'package:mero_doctor/utils/constants.dart';
 
-
-
-void main() {
-  runApp(MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -20,6 +24,10 @@ class MyApp extends StatelessWidget {
       routes: {
         "/":(context) => LoginPage(),
         "/profile":(context) => const ProfileScreen(),
+        "/login": (context) => LoginPage(),
+        "/register": (context) => RegisterScreen(),
+        "/auth": (context) => ChooseAuth(),
+        "/": (context) => ChooseScreen(),
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
