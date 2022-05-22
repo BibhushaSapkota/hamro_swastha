@@ -1,10 +1,13 @@
 import 'dart:ui';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/screens/login_screens.dart';
 import 'package:mero_doctor/screens/register_screen.dart';
 import 'package:mero_doctor/utils/constants.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
