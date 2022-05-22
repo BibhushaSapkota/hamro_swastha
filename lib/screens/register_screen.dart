@@ -185,16 +185,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         height: 5,
                                       ),
                                       TextFormField(
-                                        validator: (value) {
-                                          if (value!.isEmpty) {
-                                            return "Email should not be empty";
-                                          } else if (!RegExp(
-                                                  "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
-                                              .hasMatch(value)) {
-                                            return "Please! Enter a valid Email";
-                                          }
-                                          return null;
-                                        },
+                                        validator: (value) => EmailFieldValidator.validate(value!),
                                         textInputAction: TextInputAction.next,
                                         controller: emailEditingController,
                                         decoration: InputDecoration(
@@ -229,14 +220,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       ),
                                       TextFormField(
                                         autofocus: false,
-                                        validator: (value) {
-                                          if (value!.isEmpty) {
-                                            return "Password should not be empty";
-                                          } else if (value.length < 6) {
-                                            return "Password must be 6 character or more";
-                                          }
-                                          return null;
-                                        },
+                                        validator: (value) => PasswordFieldValidator.validate(value!),
                                         textInputAction: TextInputAction.next,
                                         controller: passwordEditingController,
                                         obscureText: true,
