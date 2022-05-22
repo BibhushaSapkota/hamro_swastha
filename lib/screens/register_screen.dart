@@ -8,33 +8,6 @@ import 'package:mero_doctor/screens/loading.dart';
 import 'package:mero_doctor/screens/login_screens.dart';
 import 'package:mero_doctor/utils/constants.dart';
 
-
-class EmailFieldValidator {
-  static String? validate(String value){
-    if (value.isEmpty) {
-      return "Email should not be empty";
-        } else if (!RegExp(
-              "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
-                  .hasMatch(value)) {
-          return "Please! Enter a valid Email";
-      }
-    return null;
-  }
-
-  }
-
-class PasswordFieldValidator {
-  static String? validate(String value){
-    if (value!.isEmpty) {
-       return "Password should not be empty";
-        } else if (value.length < 6) {
-       return "Password must be 6 character or more";
-        }
-       return null;
-      }
-  }
-
-
 class RegisterScreen extends StatefulWidget {
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
@@ -113,11 +86,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         validator: (value) {
                                           if (value!.isEmpty) {
                                             return "First Name should not be empty";
+                                          } else if (value
+                                              .startsWith(RegExp(r'[0-9]'))) {
+                                            return "First Letter should not be integer.";
                                           }
                                           return null;
                                         },
                                         controller: firstNameEditingController,
-                                        decoration: InputDecoration(
+                                        decoration: const InputDecoration(
                                           prefixIcon:
                                               Icon(Icons.account_circle),
                                           fillColor: Colors.black12,
@@ -128,7 +104,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                 Radius.circular(20)),
                                           ),
                                         ),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 16,
                                             height: 0.8,
                                             color: Colors.black54),
@@ -149,6 +125,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         validator: (value) {
                                           if (value!.isEmpty) {
                                             return "Last Name should not be empty";
+                                          } else if (value
+                                              .startsWith(RegExp(r'[0-9]'))) {
+                                            return "First Letter should not be integer.";
                                           }
                                           return null;
                                         },
@@ -240,7 +219,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         textInputAction: TextInputAction.next,
                                         controller: passwordEditingController,
                                         obscureText: true,
-                                        decoration: InputDecoration(
+                                        decoration: const InputDecoration(
                                           prefixIcon: Icon(Icons.key),
                                           fillColor: Colors.black12,
                                           filled: true,
@@ -250,7 +229,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                 Radius.circular(20)),
                                           ),
                                         ),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 16,
                                             height: 0.8,
                                             color: Colors.black54),
@@ -285,17 +264,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         controller:
                                             confirmPasswordEditingController,
                                         obscureText: true,
-                                        decoration: InputDecoration(
+                                        decoration: const InputDecoration(
                                           prefixIcon: Icon(Icons.key),
                                           fillColor: Colors.black12,
                                           filled: true,
-                                          border: OutlineInputBorder(
+                                          border:  OutlineInputBorder(
                                             borderSide: BorderSide.none,
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(20)),
                                           ),
                                         ),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 16,
                                             height: 0.8,
                                             color: Colors.black54),
@@ -331,16 +310,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       Center(
                                         child: RichText(
                                             text: TextSpan(
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 16),
                                                 children: [
-                                              TextSpan(
+                                              const TextSpan(
                                                   text:
                                                       "Already have account? "),
                                               TextSpan(
                                                   text: "Login",
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                       color: COLOR_SECONDARY,
                                                       fontWeight: FontWeight
                                                           .bold),
@@ -352,7 +331,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                                 "/login")),
                                             ])),
                                       ),
-                                      SizedBox(height: 20.0),
+                                      const SizedBox(height: 20.0),
                                       Text(
                                         '$Success_message',
                                         style:
