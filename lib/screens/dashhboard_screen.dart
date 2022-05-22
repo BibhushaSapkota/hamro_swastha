@@ -60,6 +60,7 @@ class DashboardScreen extends StatelessWidget {
                   height: 5,
                 ),
                 const TextField(
+                  key: ValueKey("search"),
                   style: TextStyle(fontSize: 20),
                   decoration: InputDecoration(
                     hintText: "Search",

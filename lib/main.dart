@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/screens/Choose_Authencation.dart';
 import 'package:mero_doctor/screens/choose_screen.dart';
+import 'package:mero_doctor/screens/dashhboard_screen.dart';
 import 'package:mero_doctor/screens/login_screens.dart';
 import 'package:mero_doctor/screens/patient_profile.dart';
 import 'package:mero_doctor/screens/register_screen.dart';
@@ -27,7 +28,9 @@ class MyApp extends StatelessWidget {
         "/login": (context) => LoginPage(),
         "/register": (context) => RegisterScreen(),
         "/auth": (context) => ChooseAuth(),
-        "/": (context) => ChooseScreen(),
+        "/choose": (context) => ChooseScreen(),
+        "/dash":(context) =>  DashboardScreen()
+    
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
