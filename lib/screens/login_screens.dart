@@ -19,7 +19,7 @@ class EmailFieldValidator {
 
 class PasswordFieldValidator {
   static String? validate(String value){
-    if (value!.isEmpty) {
+    if (value.isEmpty) {
        return "Password should not be empty";
         } 
        return null;
