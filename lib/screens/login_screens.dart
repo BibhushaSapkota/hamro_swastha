@@ -2,9 +2,29 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-// import 'package:mero_doctor/screens/dashhboard_screen.dart';
 import 'package:mero_doctor/utils/constants.dart';
 import 'package:mero_doctor/screens/loading.dart';
+
+
+class EmailFieldValidator {
+  static String? validate(String value){
+    if (value.isEmpty) {
+      return "Email should not be empty";
+        } 
+    return null;
+  }
+
+  }
+
+class PasswordFieldValidator {
+  static String? validate(String value){
+    if (value.isEmpty) {
+       return "Password should not be empty";
+        } 
+       return null;
+      }
+  }
+
 
 class LoginPage extends StatefulWidget {
   @override
@@ -100,12 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                     TextFormField(
                                       controller: emailController,
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return "Email should not be empty";
-                                        }
-                                        return null;
-                                      },
+                                      validator: (value) => EmailFieldValidator.validate(value!),
                                       onSaved: (value) {
                                         emailController.text = value!;
                                       },
@@ -138,12 +153,7 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                     TextFormField(
                                       controller: passwordController,
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return "Password should not be empty";
-                                        }
-                                        return null;
-                                      },
+                                      validator: (value) => PasswordFieldValidator.validate(value!),
                                       onSaved: (value) {
                                         passwordController.text = value!;
                                       },
