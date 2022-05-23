@@ -4,7 +4,7 @@ import 'package:mero_doctor/utils/constants.dart';
 // import 'package:mero_doctor/widgets/category_widget.dart';
 
 class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({Key? key}) : super(key: key);
+  const DashboardScreen({Key? key, var id}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -4,7 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/screens/Choose_Authencation/Choose_Authencation_patient.dart';
 import 'package:mero_doctor/screens/Choose_Authencation/Choose_Authencation_doctor.dart';
-import 'package:mero_doctor/screens/Doctor/login_screens.dart';
+import 'package:mero_doctor/screens/Doctor/login_screens_doc.dart';
 import 'package:mero_doctor/screens/Doctor/register_screens_doctor.dart';
 import 'package:mero_doctor/screens/choose_screen.dart';
 import 'package:mero_doctor/screens/Patient/login_screens.dart';

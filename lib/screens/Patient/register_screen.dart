@@ -4,7 +4,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mero_doctor/models/user.dart';
-import 'package:mero_doctor/screens/Doctor/login_screens.dart';
 import 'package:mero_doctor/screens/loading.dart';
 import 'package:mero_doctor/screens/Patient/login_screens.dart';
 import 'package:mero_doctor/utils/constants.dart';

@@ -3,7 +3,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mero_doctor/models/auth.dart';
+import 'package:mero_doctor/models/auth_doctor.dart';
+import 'package:mero_doctor/models/auth_patient.dart';
 import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/Doctor/register_screens_doctor.dart';
 import 'package:mero_doctor/screens/Patient/register_screen.dart';
@@ -28,7 +29,6 @@ class _LoginPageDocState extends State<LoginPageDoc> {
   final _formKey = GlobalKey<FormState>();
   final _auth = FirebaseAuth.instance;
   bool loading = false;
-  GetUserEmail obj = GetUserEmail();
 
   void signIn(String email, String password) async {
     String lowerEmail = email.toLowerCase();
@@ -49,8 +49,8 @@ class _LoginPageDocState extends State<LoginPageDoc> {
                 //   {
                 ScaffoldMessenger.of(context)
                     .showSnackBar(SnackMessage.snackBarSucess),
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const DashboardScreen()))
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => LoadingScreenDoc()))
                 // }
                 // else
                 //   {
