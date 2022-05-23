@@ -22,7 +22,7 @@ void main() {
 
   test('empty password', () {
     var result = PasswordFieldValidator.validate('avjk');
-    expect(result, 'Password should');
+    expect(result, 'Password should not be empty');
   });
   
 }
