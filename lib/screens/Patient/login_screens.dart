@@ -2,11 +2,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:mero_doctor/screens/dashhboard_screen.dart';
 // import 'package:mero_doctor/screens/dashhboard_screen.dart';
 import 'package:mero_doctor/utils/constants.dart';
 import 'package:mero_doctor/screens/loading.dart';
+import 'package:mero_doctor/utils/snack_bar.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
+
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
@@ -29,12 +33,22 @@ class _LoginPageState extends State<LoginPage> {
       dynamic result = await _auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((uid) => {
-                Fluttertoast.showToast(msg: "Login Successful"),
-                // Navigator.of(context).pushReplacement(
-                //     MaterialPageRoute(builder: (context) => DashboardScreen()))
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(SnackMessage.snackBarSucess),
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const DashboardScreen()))
               })
           .catchError((e) {
-        Fluttertoast.showToast(msg: e!.message);
+        SnackBar(
+          content: Text(
+            "${e.message}",
+            style: const TextStyle(
+              fontWeight: FontWeight.w400,
+              color: Colors.white,
+            ),
+          ),
+          backgroundColor: Colors.redAccent,
+        );
       });
 
       if (result != null) {
@@ -54,6 +68,18 @@ class _LoginPageState extends State<LoginPage> {
         child: loading
             ? Loading()
             : Scaffold(
+                // appBar: AppBar(
+                //   leading: IconButton(
+                //       onPressed: () {
+                //         Navigator.popAndPushNamed(context, "/auth");
+                //       },
+                //       icon: const Icon(
+                //         Icons.arrow_back,
+                //         color: Colors.black,
+                //       )),
+                //   backgroundColor: Colors.transparent,
+                //   elevation: 0.0,
+                // ),
                 body: SizedBox(
                   height: screen.height,
                   width: screen.width,
@@ -169,7 +195,7 @@ class _LoginPageState extends State<LoginPage> {
                                     RichText(
                                       text: TextSpan(
                                           text: "Forgot your password? ",
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               color: COLOR_BLACK, fontSize: 16),
                                           children: [
                                             TextSpan(
@@ -211,7 +237,7 @@ class _LoginPageState extends State<LoginPage> {
                                       child: InkWell(
                                         onTap: () {
                                           Navigator.pushReplacementNamed(
-                                              context, "/login");
+                                              context, "/register_patient");
                                         },
                                         child: RichText(
                                             text: TextSpan(

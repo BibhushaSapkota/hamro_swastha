@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,6 +12,13 @@ class ChooseScreen extends StatefulWidget {
 }
 
 class _ChooseScreenState extends State<ChooseScreen> {
+
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final screen = MediaQuery.of(context).size;
@@ -47,7 +56,8 @@ class _ChooseScreenState extends State<ChooseScreen> {
                 children: <Widget>[
                   InkWell(
                     child: MaterialButton(
-                      onPressed: () => Navigator.pushNamed(context, "/auth"),
+                      onPressed: () =>
+                          Navigator.pushReplacementNamed(context, "/authDoc"),
                       child: Image.asset(
                         "assets/images/doctor.png",
                         height: 100,
@@ -59,12 +69,13 @@ class _ChooseScreenState extends State<ChooseScreen> {
                   Text(
                     "OR",
                     style: GoogleFonts.poppins(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                             fontWeight: FontWeight.w700, fontSize: 14)),
                   ),
                   InkWell(
                     child: MaterialButton(
-                      onPressed: () => Navigator.pushNamed(context, "/auth"),
+                      onPressed: () =>
+                          Navigator.pushReplacementNamed(context, "/auth"),
                       child: Image.asset(
                         "assets/images/patient.png",
                         height: 100,
@@ -75,7 +86,7 @@ class _ChooseScreenState extends State<ChooseScreen> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Padding(
