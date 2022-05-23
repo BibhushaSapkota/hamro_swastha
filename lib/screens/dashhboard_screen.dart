@@ -1,7 +1,12 @@
+import 'package:division/division.dart';
 import 'package:flutter/material.dart';
-// import 'package:mero_doctor/models/data.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:mero_doctor/models/data.dart';
 import 'package:mero_doctor/utils/constants.dart';
-// import 'package:mero_doctor/widgets/category_widget.dart';
+import 'package:mero_doctor/widgets/category_widget.dart';
+import 'package:mero_doctor/widgets/doctor_category_widget.dart';
+
+import '../widgets/doctor_top_widget.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -9,104 +14,139 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screen = MediaQuery.of(context).size;
-    final themeData = Theme.of(context);
     return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0.0,
-          leading: IconButton(
-            icon: const Icon(
-              Icons.menu,
-              color: Colors.black,
+        child: Scaffold(
+            bottomNavigationBar: Container(
+              child: const GNav(
+                activeColor: Color(0xffd36868),
+                color: Colors.black45,
+                tabBackgroundColor: Color(0xFFF1EFEF),
+                padding: EdgeInsets.all(16),
+                gap: 10,
+                curve: Curves.easeOutExpo,
+                duration: Duration(milliseconds: 400),
+                tabs: [
+                  GButton(icon: Icons.home, text: 'Home', textSize: 12,),
+                  GButton(
+                      icon: Icons.date_range_rounded,
+                      text: 'Schedule',
+                      textSize: 12),
+                  GButton(icon: Icons.notifications_active_rounded, text: 'Notification', textSize: 12),
+                  GButton(icon: Icons.person, text: 'Profile', textSize: 12),
+                ],
+              ),
             ),
-            onPressed: () {},
-          ),
-        ),
-        body: SizedBox(
-          height: screen.height,
-          width: screen.width,
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                // Container(
-                //     height: 50,
-                //     width: 50,
-                //     decoration: BoxDecoration(
-                //         color: COLOR_WHITE,
-                //         borderRadius: BorderRadius.circular(8),
-                //         border: Border.all(
-                //             color: COLOR_GREY.withAlpha(40), width: 2)),
-                //     padding: EdgeInsets.all(8),
-                //     child: Icon(
-                //       Icons.menu,
-                //       size: 24,
-                //     )),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Container(
-                    child: const Text(
-                      "Find Your\nConsultant",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 32,
-                          color: Colors.black),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                const TextField(
-                  style: TextStyle(fontSize: 20),
-                  decoration: InputDecoration(
-                    hintText: "Search",
-                    hintStyle: TextStyle(fontSize: 20),
-                    fillColor: Colors.black12,
-                    filled: true,
-                    prefixIcon: Icon(Icons.search),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Container(
-                    child: Text(
-                      "Categories",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 32,
-                          color: Colors.black),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-
-                // Expanded(
-                //   child: GridView.builder(
-                //     itemCount: categoryList.length,
-                //     gridDelegate:
-                //         const SliverGridDelegateWithFixedCrossAxisCount(
-                //             crossAxisCount: 2,
-                //             mainAxisSpacing: 10,
-                //             crossAxisSpacing: 10),
-                //     itemBuilder: (BuildContext context, index) {
-                //       return CategoryWidget(categoryList[index]);
-                //     },
-                //   ),
-                // )
+            backgroundColor: const Color(0xfff9f9f9),
+            body: ListView(
+              itemExtent: screen.height,
+              physics: const BouncingScrollPhysics(),
+              children: [
+                Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 20),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Txt("Find Your Desired\nConsultant",
+                              style: TxtStyle()
+                                ..fontSize(25)
+                                ..fontFamily("quicksand")
+                                ..fontWeight(FontWeight.bold)
+                                ..textColor(const Color(0xff2c295b)),),
+                            const CircleAvatar(
+                              radius: 20,
+                              backgroundImage: AssetImage("assets/images/profile.png"),
+                            )
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 24),
+                        alignment: Alignment.center,
+                        height: 50,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(50),
+                            boxShadow: [
+                              BoxShadow(
+                                offset: const Offset(0, 10),
+                                blurRadius: 20,
+                                color: Colors.grey.withOpacity(0.23),
+                              )
+                            ]),
+                        child: Row(
+                          children: [
+                            const Expanded(
+                              child: Padding(
+                                padding:
+                                EdgeInsets.symmetric(horizontal: 20),
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                    hintText: 'Search for a doctor',
+                                    hintStyle: TextStyle(
+                                      fontFamily: 'quicksand',
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 14,
+                                    ),
+                                    enabledBorder: InputBorder.none,
+                                    focusedBorder: InputBorder.none,
+                                  ),
+                                  style: TextStyle(
+                                    fontFamily: 'quicksand',
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Parent(
+                              style: ParentStyle()
+                                ..height(60)
+                                ..width(70)
+                                ..background.color(const Color(0xfff58173))
+                                ..borderRadius(all: 40),
+                              child: const Icon(
+                                Icons.search,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                          height: 40
+                      ),
+                      SizedBox(
+                        height: 140,
+                        child: ListView(
+                          padding: const EdgeInsets.only(left: 24),
+                          scrollDirection: Axis.horizontal,
+                          children: DiseasesList.map(
+                                  (e) => DoctorCategoryWidget(e)).toList(),
+                        ),
+                      ),
+                      Txt(
+                        "Top Categories",
+                        style: TxtStyle()
+                          ..fontFamily('quicksand')
+                          ..fontSize(18)
+                          ..margin(right: 24, left: 24)
+                          ..fontWeight(FontWeight.bold)
+                          ..textColor(const Color(0xff535282)),
+                      ),
+                      Expanded(
+                        child: ListView(
+                          shrinkWrap: true,
+                          padding: const EdgeInsets.symmetric(horizontal: 24),
+                          children: DoctorList.map((e) => TopDoctorWidget(e)).toList(),
+                        ),
+                      )
+                    ]),
               ],
-            ),
-          ),
-        ),
-      ),
-    );
+            )));
   }
 }

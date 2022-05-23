@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/screens/Choose_Authencation.dart';
 import 'package:mero_doctor/screens/choose_screen.dart';
+import 'package:mero_doctor/screens/dashhboard_screen.dart';
 import 'package:mero_doctor/screens/login_screens.dart';
 import 'package:mero_doctor/screens/register_screen.dart';
 import 'package:mero_doctor/screens/patient_profile.dart';
@@ -10,7 +11,14 @@ import 'package:mero_doctor/utils/constants.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: "AIzaSyA16vBUjIFFKU21E4lD0G1sO1Sl30gQi9g",
+      appId: "1:163614653086:android:2c15337c47bbc249a0598f",
+      messagingSenderId: "XXX",
+      projectId: "merodocto",
+    ),
+  );
   runApp(const MyApp());
 }
 
@@ -26,8 +34,9 @@ class MyApp extends StatelessWidget {
         "/register": (context) => RegisterScreen(),
         "/auth": (context) => ChooseAuth(),
         "/": (context) => ChooseScreen(),
-        "/":(context) => LoginPage(),
-        "/profile":(context) => const ProfileScreen(),
+        "/": (context) => LoginPage(),
+        "/profile": (context) => const ProfileScreen(),
+        "/dashboard_screen": (context) => DashboardScreen(),
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
