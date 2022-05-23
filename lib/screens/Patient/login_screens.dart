@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:mero_doctor/models/auth_patient.dart';
 import 'package:mero_doctor/screens/dashhboard_screen.dart';
 // import 'package:mero_doctor/screens/dashhboard_screen.dart';
 import 'package:mero_doctor/utils/constants.dart';
@@ -35,8 +36,8 @@ class _LoginPageState extends State<LoginPage> {
           .then((uid) => {
                 ScaffoldMessenger.of(context)
                     .showSnackBar(SnackMessage.snackBarSucess),
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const DashboardScreen()))
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => LoaderScreen()))
               })
           .catchError((e) {
         SnackBar(
