@@ -2,18 +2,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mero_doctor/models/user.dart';
+import 'package:mero_doctor/screens/Doctor/login_screens.dart';
 import 'package:mero_doctor/screens/loading.dart';
-import 'package:mero_doctor/screens/login_screens.dart';
 import 'package:mero_doctor/utils/constants.dart';
+import 'package:mero_doctor/utils/snack_bar.dart';
 
-class RegisterScreen extends StatefulWidget {
+class RegisterScreenDoc extends StatefulWidget {
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<RegisterScreenDoc> createState() => _RegisterScreenDocState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _RegisterScreenDocState extends State<RegisterScreenDoc> {
   final _auth = FirebaseAuth.instance;
   final _formKey = GlobalKey<FormState>();
 
@@ -34,6 +34,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
         child: loading
             ? Loading()
             : Scaffold(
+                appBar: AppBar(
+                  leading: IconButton(
+                      onPressed: () {
+                        Navigator.popAndPushNamed(context, "/auth");
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: Colors.black,
+                      )),
+                  backgroundColor: Colors.transparent,
+                  elevation: 0.0,
+                ),
                 body: SizedBox(
                   height: screen.height,
                   width: screen.width,
@@ -133,7 +145,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         },
                                         textInputAction: TextInputAction.next,
                                         controller: lastNameEditingController,
-                                        decoration: InputDecoration(
+                                        decoration: const InputDecoration(
                                           prefixIcon:
                                               Icon(Icons.account_circle),
                                           fillColor: Colors.black12,
@@ -144,7 +156,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                 Radius.circular(20)),
                                           ),
                                         ),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 16,
                                             height: 0.8,
                                             color: Colors.black54),
@@ -176,7 +188,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         },
                                         textInputAction: TextInputAction.next,
                                         controller: emailEditingController,
-                                        decoration: InputDecoration(
+                                        decoration: const InputDecoration(
                                           prefixIcon: Icon(Icons.mail),
                                           fillColor: Colors.black12,
                                           filled: true,
@@ -186,7 +198,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                 Radius.circular(20)),
                                           ),
                                         ),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 18,
                                             height: 0.8,
                                             color: Colors.black54),
@@ -268,7 +280,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           prefixIcon: Icon(Icons.key),
                                           fillColor: Colors.black12,
                                           filled: true,
-                                          border:  OutlineInputBorder(
+                                          border: OutlineInputBorder(
                                             borderSide: BorderSide.none,
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(20)),
@@ -286,7 +298,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       Center(
                                         child: MaterialButton(
                                           onPressed: () {
-                                            signUp(emailEditingController.text,
+                                            signUp(
+                                                emailEditingController.text
+                                                    .toLowerCase(),
                                                 passwordEditingController.text);
                                           },
                                           color: COLOR_SECONDARY,
@@ -362,7 +376,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) => {postDetailsFireStore()})
           .catchError((e) {
-        Fluttertoast.showToast(msg: e!.message);
+        // ScaffoldMessenger.of(context)
+        //     .showSnackBar(SnackMessage.snackBarAccountFail);
+        SnackBar(
+          content: Text(
+            "${e.message}",
+            style: const TextStyle(
+              fontWeight: FontWeight.w400,
+              color: Colors.white,
+            ),
+          ),
+          backgroundColor: Colors.redAccent,
+        );
       });
 
       if (result != null) {
@@ -381,19 +406,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
     FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
     User? user = _auth.currentUser;
 
-    UserModel userModel = UserModel();
+    DoctorModel docModel = DoctorModel();
 
-    userModel.email = user!.email;
-    userModel.uid = user.uid;
-    userModel.firstName = firstNameEditingController.text;
-    userModel.lastName = lastNameEditingController.text;
+    docModel.email = user!.email;
+    docModel.docid = user.uid;
+    docModel.firstName = firstNameEditingController.text;
+    docModel.lastName = lastNameEditingController.text;
+    docModel.password = passwordEditingController.text;
+    docModel.isDoctor = true;
 
     await firebaseFirestore
-        .collection("users")
+        .collection("doctors")
         .doc(user.uid)
-        .set(userModel.toMap());
-    Fluttertoast.showToast(msg: "Account Created Successfully");
-    Navigator.pushAndRemoveUntil(context,
-        MaterialPageRoute(builder: (context) => LoginPage()), (route) => false);
+        .set(docModel.toMap());
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackMessage.snackBarAccountSuccess);
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => LoginPageDoc()),
+        (route) => false);
   }
 }
