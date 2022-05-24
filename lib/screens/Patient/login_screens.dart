@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mero_doctor/models/auth_patient.dart';
 import 'package:mero_doctor/screens/dashhboard_screen.dart';
-// import 'package:mero_doctor/screens/dashhboard_screen.dart';
 import 'package:mero_doctor/utils/constants.dart';
 import 'package:mero_doctor/screens/loading.dart';
 import 'package:mero_doctor/utils/snack_bar.dart';
@@ -37,7 +36,10 @@ class _LoginPageState extends State<LoginPage> {
                 ScaffoldMessenger.of(context)
                     .showSnackBar(SnackMessage.snackBarSucess),
                 Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => LoaderScreen()))
+                    MaterialPageRoute(builder: (context) => LoaderScreen())),
+                Fluttertoast.showToast(msg: "Login Successful"),
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => DashboardScreen()))
               })
           .catchError((e) {
         SnackBar(

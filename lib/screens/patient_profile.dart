@@ -15,7 +15,7 @@ class ProfileScreen extends StatelessWidget {
             leading: IconButton(
               icon: Icon(Icons.arrow_back,
               color: Colors.black,),
-              onPressed: () {  },
+              onPressed: () { Navigator.popAndPushNamed(context, "/dashboard_screen"); },
             ),
             elevation: 0,
             backgroundColor: Colors.transparent,
