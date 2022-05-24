@@ -46,6 +46,7 @@ class _ControllerState extends State<Controller> {
       const CircularProgressIndicator();
       setState(() {
         email = loginUserModel.email.toString();
+        id = loginUserModel.uid.toString();
         isPatient = loginUserModel.isPatient;
       });
     });

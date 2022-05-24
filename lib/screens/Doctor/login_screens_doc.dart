@@ -94,7 +94,7 @@ class _LoginPageDocState extends State<LoginPageDoc> {
     final themeData = Theme.of(context);
     return SafeArea(
         child: loading
-            ? Loading()
+            ? const Loading()
             : Scaffold(
                 appBar: AppBar(
                   leading: IconButton(

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/Doctor/login_screens_doc.dart';
 import 'package:mero_doctor/screens/Doctor/register_screens_doctor.dart';
+import 'package:mero_doctor/utils/snack_bar.dart';
 
 class LoadingScreenDoc extends StatefulWidget {
   LoadingScreenDoc({Key? key}) : super(key: key);
@@ -62,6 +63,7 @@ class _ControllerDocState extends State<ControllerDoc> {
 
   @override
   Widget build(BuildContext context) {
+    const CircularProgressIndicator();
     return routeDoc();
   }
 }

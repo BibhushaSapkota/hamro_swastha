@@ -85,8 +85,7 @@ class _ChooseAuthState extends State<ChooseAuth> {
               child: InkWell(
                 child: MaterialButton(
                   onPressed: () {
-                    Navigator.pushReplacementNamed(
-                        context, "/register_patient");
+                    Navigator.pushReplacementNamed(context, "/register");
                   },
                   child: const Text(
                     "Register",

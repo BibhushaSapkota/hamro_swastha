@@ -1,11 +1,14 @@
 import 'dart:ui';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:mero_doctor/screens/Choose_Authencation.dart';
+import 'package:mero_doctor/screens/Choose_Authencation/Choose_Authencation_doctor.dart';
+import 'package:mero_doctor/screens/Choose_Authencation/Choose_Authencation_patient.dart';
+import 'package:mero_doctor/screens/Doctor/login_screens_doc.dart';
+import 'package:mero_doctor/screens/Doctor/register_screens_doctor.dart';
+import 'package:mero_doctor/screens/Patient/login_screens.dart';
+import 'package:mero_doctor/screens/Patient/register_screen.dart';
 import 'package:mero_doctor/screens/choose_screen.dart';
 import 'package:mero_doctor/screens/dashhboard_screen.dart';
-import 'package:mero_doctor/screens/login_screens.dart';
-import 'package:mero_doctor/screens/register_screen.dart';
 import 'package:mero_doctor/screens/patient_profile.dart';
 import 'package:mero_doctor/utils/constants.dart';
 
@@ -30,13 +33,15 @@ class MyApp extends StatelessWidget {
     double screenWidth = window.physicalSize.width;
     return MaterialApp(
       routes: {
-        "/login": (context) => LoginPage(),
+        "/login": (context) => const LoginPage(),
         "/register": (context) => RegisterScreen(),
-        "/auth": (context) => ChooseAuth(),
-        "/": (context) => ChooseScreen(),
-        "/": (context) => LoginPage(),
+        "/register_doctor": (context) => RegisterScreenDoc(),
+        "/authDoc": (context) => const ChooseAuthDoc(),
+        "/auth": (context) => const ChooseAuth(),
+        "/": (context) => const ChooseScreen(),
+        "/login_doctor": (context) => const LoginPageDoc(),
         "/profile": (context) => const ProfileScreen(),
-        "/dashboard_screen": (context) => DashboardScreen(),
+        "/dashboard_screen": (context) => const DashboardScreen(),
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
