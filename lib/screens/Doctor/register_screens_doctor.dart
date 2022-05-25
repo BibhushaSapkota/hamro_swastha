@@ -423,7 +423,7 @@ class _RegisterScreenDocState extends State<RegisterScreenDoc> {
         .showSnackBar(SnackMessage.snackBarAccountSuccess);
     Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => LoginPageDoc()),
+        MaterialPageRoute(builder: (context) => const LoginPageDoc()),
         (route) => false);
   }
 }

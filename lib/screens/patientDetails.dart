@@ -2,8 +2,29 @@ import 'package:division/division.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart' show BorderRadius, BoxFit, BuildContext, Column, Container, EdgeInsets, FontWeight, FormState, GlobalKey, Image, MediaQuery, Padding, RoundedRectangleBorder, Row, Size, SizedBox, Stack, State, StatefulWidget, Text, Widget;
-
+import 'package:flutter/cupertino.dart'
+    show
+        BorderRadius,
+        BoxFit,
+        BuildContext,
+        Column,
+        Container,
+        EdgeInsets,
+        FontWeight,
+        FormState,
+        GlobalKey,
+        Image,
+        MediaQuery,
+        Padding,
+        RoundedRectangleBorder,
+        Row,
+        Size,
+        SizedBox,
+        Stack,
+        State,
+        StatefulWidget,
+        Text,
+        Widget;
 
 class ReportScreen extends StatefulWidget {
   @override
@@ -14,7 +35,7 @@ class _ReportScreenState extends State<ReportScreen> {
   DateTime? _selectedDate;
   String? gender;
   final formKey = GlobalKey<FormState>();
-  String name="";
+  String name = "";
   @override
   Widget build(BuildContext context) {
     final Size screen = MediaQuery.of(context).size;
@@ -31,7 +52,7 @@ class _ReportScreenState extends State<ReportScreen> {
               children: [
                 Image.asset(
                   "assets/images/ic_reportPatient2.png",
-                  width: screen.width/2,
+                  width: screen.width / 2,
                   height: screen.height / 6,
                   fit: BoxFit.fill,
                 ),
@@ -40,34 +61,42 @@ class _ReportScreenState extends State<ReportScreen> {
             Positioned(
               bottom: 0,
               child: Image.asset("assets/images/ic_Reportpat.png",
-                  width: screen.width,height: screen.height / 8, fit: BoxFit.fill),
+                  width: screen.width,
+                  height: screen.height / 8,
+                  fit: BoxFit.fill),
             ),
-            SizedBox(height: 30,),
-            Txt("Personal Data",style: TxtStyle()
-              ..fontWeight(FontWeight.bold)
-              ..textColor(Colors.blue)
-              ..fontSize(16)
-              ..margin(top: 130)
-              ..padding(left: 20)
-              ,),
-            Txt("Personal Data",style: TxtStyle()
-              ..fontWeight(FontWeight.bold)
-              ..textColor(Colors.black)
-              ..fontSize(10)
-              ..margin(top: 165)
-              ..padding(left: 20)
-              ,),
-
+            SizedBox(
+              height: 30,
+            ),
+            Txt(
+              "Personal Data",
+              style: TxtStyle()
+                ..fontWeight(FontWeight.bold)
+                ..textColor(Colors.blue)
+                ..fontSize(16)
+                ..margin(top: 130)
+                ..padding(left: 20),
+            ),
+            Txt(
+              "Personal Data",
+              style: TxtStyle()
+                ..fontWeight(FontWeight.bold)
+                ..textColor(Colors.black)
+                ..fontSize(10)
+                ..margin(top: 165)
+                ..padding(left: 20),
+            ),
             Row(
               children: [
-                Txt("File Name.img",style: TxtStyle()
-                  ..fontWeight(FontWeight.bold)
-                  ..textColor(Colors.grey)
-                  ..fontSize(10)
-                  ..margin(top: 177)
-                  ..padding(left: 44)
-                  ,),
-
+                Txt(
+                  "File Name.img",
+                  style: TxtStyle()
+                    ..fontWeight(FontWeight.bold)
+                    ..textColor(Colors.grey)
+                    ..fontSize(10)
+                    ..margin(top: 177)
+                    ..padding(left: 44),
+                ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(88, 180, 0, 0),
                   child: ElevatedButton(
@@ -84,18 +113,17 @@ class _ReportScreenState extends State<ReportScreen> {
                     child: Text('Upload Photo'),
                   ),
                 )
-
               ],
             ),
-
-            Txt("Birthday",style: TxtStyle()
-              ..fontWeight(FontWeight.bold)
-              ..textColor(Colors.black)
-              ..fontSize(10)
-              ..margin(top: 225)
-              ..padding(left: 20)
-              ,),
-
+            Txt(
+              "Birthday",
+              style: TxtStyle()
+                ..fontWeight(FontWeight.bold)
+                ..textColor(Colors.black)
+                ..fontSize(10)
+                ..margin(top: 225)
+                ..padding(left: 20),
+            ),
             Padding(
               padding: const EdgeInsets.fromLTRB(5, 250, 10, 0),
               child: Container(
@@ -109,16 +137,15 @@ class _ReportScreenState extends State<ReportScreen> {
                 ),
               ),
             ),
-
-
-            Txt("Gender",style: TxtStyle()
-              ..fontWeight(FontWeight.bold)
-              ..textColor(Colors.black)
-              ..fontSize(10)
-              ..margin(top: 320)
-              ..padding(left: 20)
-              ,),
-
+            Txt(
+              "Gender",
+              style: TxtStyle()
+                ..fontWeight(FontWeight.bold)
+                ..textColor(Colors.black)
+                ..fontSize(10)
+                ..margin(top: 320)
+                ..padding(left: 20),
+            ),
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 340, 0, 0),
               child: Container(
@@ -129,20 +156,32 @@ class _ReportScreenState extends State<ReportScreen> {
                       children: [
                         Row(
                           children: [
-                            Radio(value: 1, groupValue: 'null', onChanged: (index) {}),
-                            Text('Male', style: TextStyle(fontSize: 11),)
+                            Radio(
+                                value: 1,
+                                groupValue: 'null',
+                                onChanged: (index) {}),
+                            Text(
+                              'Male',
+                              style: TextStyle(fontSize: 11),
+                            )
                           ],
                         ),
                         Row(
                           children: [
-                            Radio(value: 1, groupValue: 'null', onChanged: (index) {}),
-                            Text('Female',style: TextStyle(fontSize: 11))
+                            Radio(
+                                value: 1,
+                                groupValue: 'null',
+                                onChanged: (index) {}),
+                            Text('Female', style: TextStyle(fontSize: 11))
                           ],
                         ),
                         Row(
                           children: [
-                            Radio(value: 1, groupValue: 'null', onChanged: (index) {}),
-                            Text('Other',style: TextStyle(fontSize: 11))
+                            Radio(
+                                value: 1,
+                                groupValue: 'null',
+                                onChanged: (index) {}),
+                            Text('Other', style: TextStyle(fontSize: 11))
                           ],
                         ),
                       ],
@@ -151,15 +190,15 @@ class _ReportScreenState extends State<ReportScreen> {
                 ),
               ),
             ),
-
-            Txt("Contact No.",style: TxtStyle()
-              ..fontWeight(FontWeight.bold)
-              ..textColor(Colors.black)
-              ..fontSize(10)
-              ..margin(top: 389)
-              ..padding(left: 20)
-              ,),
-
+            Txt(
+              "Contact No.",
+              style: TxtStyle()
+                ..fontWeight(FontWeight.bold)
+                ..textColor(Colors.black)
+                ..fontSize(10)
+                ..margin(top: 389)
+                ..padding(left: 20),
+            ),
             Padding(
               padding: const EdgeInsets.fromLTRB(30, 401, 40, 0),
               child: TextField(
@@ -168,25 +207,26 @@ class _ReportScreenState extends State<ReportScreen> {
                 ),
               ),
             ),
-
-            Txt("Old medical report",style: TxtStyle()
-              ..fontWeight(FontWeight.bold)
-              ..textColor(Colors.black)
-              ..fontSize(10)
-              ..margin(top: 465)
-              ..padding(left: 20)
-              ,),
-
+            Txt(
+              "Old medical report",
+              style: TxtStyle()
+                ..fontWeight(FontWeight.bold)
+                ..textColor(Colors.black)
+                ..fontSize(10)
+                ..margin(top: 465)
+                ..padding(left: 20),
+            ),
             Row(
               children: [
-                Txt("File Name.img",style: TxtStyle()
-                  ..fontWeight(FontWeight.bold)
-                  ..textColor(Colors.grey)
-                  ..fontSize(10)
-                  ..margin(top: 485)
-                  ..padding(left: 44)
-                  ,),
-
+                Txt(
+                  "File Name.img",
+                  style: TxtStyle()
+                    ..fontWeight(FontWeight.bold)
+                    ..textColor(Colors.grey)
+                    ..fontSize(10)
+                    ..margin(top: 485)
+                    ..padding(left: 44),
+                ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(88, 490, 0, 0),
                   child: ElevatedButton(
@@ -203,10 +243,8 @@ class _ReportScreenState extends State<ReportScreen> {
                     child: Text('Upload Photo'),
                   ),
                 )
-
               ],
             ),
-
             Padding(
               padding: const EdgeInsets.fromLTRB(115, 565, 40, 0),
               child: ElevatedButton(
@@ -217,21 +255,18 @@ class _ReportScreenState extends State<ReportScreen> {
                   elevation: 200,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(32.0)),
-                  minimumSize: Size(150,50), //////// HERE
+                  minimumSize: Size(150, 50), //////// HERE
                 ),
                 onPressed: () {},
-                child: Text('Submit',style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),),
+                child: Text(
+                  'Submit',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
               ),
             ),
           ],
-
         ),
-
       ),
-
-
-
-
     );
   }
 }

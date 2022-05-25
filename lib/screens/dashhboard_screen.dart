@@ -2,6 +2,7 @@ import 'package:division/division.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:mero_doctor/models/data.dart';
+import 'package:mero_doctor/screens/patient_profile.dart';
 import 'package:mero_doctor/utils/constants.dart';
 import 'package:mero_doctor/widgets/category_widget.dart';
 import 'package:mero_doctor/widgets/doctor_category_widget.dart';
@@ -9,7 +10,8 @@ import 'package:mero_doctor/widgets/doctor_category_widget.dart';
 import '../widgets/doctor_top_widget.dart';
 
 class DashboardScreen extends StatelessWidget {
-  const DashboardScreen({Key? key, var id}) : super(key: key);
+  DashboardScreen({Key? key, required this.id}) : super(key: key);
+  String id;
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +67,12 @@ class DashboardScreen extends StatelessWidget {
                         ),
                         InkWell(
                           onTap: () {
-                            Navigator.popAndPushNamed(context, "/profile");
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        ProfileScreen(id: id)),
+                                (route) => false);
                           },
                           child: const CircleAvatar(
                             radius: 20,
