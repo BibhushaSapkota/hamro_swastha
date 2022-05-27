@@ -1,6 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -12,8 +9,6 @@ class ChooseScreen extends StatefulWidget {
 }
 
 class _ChooseScreenState extends State<ChooseScreen> {
-
-
   @override
   void initState() {
     super.initState();
@@ -98,28 +93,28 @@ class _ChooseScreenState extends State<ChooseScreen> {
                     Text(
                       "Doctor",
                       style: GoogleFonts.poppins(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                             fontWeight: FontWeight.w700, fontSize: 14),
                       ),
                     ),
                     Text(
                       "",
                       style: GoogleFonts.poppins(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                             fontWeight: FontWeight.w700, fontSize: 14),
                       ),
                     ),
                     Text(
                       "Patient",
                       style: GoogleFonts.poppins(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                             fontWeight: FontWeight.w700, fontSize: 14),
                       ),
                     ),
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 160,
               ),
               Image.asset(
