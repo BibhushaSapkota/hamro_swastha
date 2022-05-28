@@ -29,7 +29,7 @@ class _ControllerState extends State<Controller> {
   _ControllerState();
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loginUserModel = UserModel();
-  var id;
+  late String id;
   var email;
   bool? isPatient;
 

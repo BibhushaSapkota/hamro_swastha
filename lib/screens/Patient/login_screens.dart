@@ -38,8 +38,8 @@ class _LoginPageState extends State<LoginPage> {
                 Navigator.of(context).pushReplacement(
                     MaterialPageRoute(builder: (context) => LoaderScreen())),
                 Fluttertoast.showToast(msg: "Login Successful"),
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => DashboardScreen()))
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => DashboardScreen(id: '')))
               })
           .catchError((e) {
         SnackBar(

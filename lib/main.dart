@@ -12,6 +12,7 @@ import 'package:mero_doctor/screens/choose_screen.dart';
 import 'package:mero_doctor/screens/Patient/login_screens.dart';
 import 'package:mero_doctor/screens/Patient/register_screen.dart';
 import 'package:mero_doctor/screens/dashhboard_screen.dart';
+import 'package:mero_doctor/screens/patientDetails.dart';
 import 'package:mero_doctor/screens/patient_profile.dart';
 import 'package:mero_doctor/utils/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -44,11 +45,13 @@ class MyApp extends StatelessWidget {
         "/auth": (context) => const ChooseAuth(),
         "/": (context) => const ChooseScreen(),
         "/login_doctor": (context) => const LoginPageDoc(),
-        "/auth": (context) => ChooseAuth(),
-        "/": (context) => ChooseScreen(),
-        "/logindoc": (context) => LoginPage(),
-        "/profile": (context) => const ProfileScreen(),
-        "/dashboard_screen": (context) => const DashboardScreen(),
+        "/profile": (context) => ProfileScreen(
+              id: '',
+            ),
+        "/dashboard_screen": (context) => DashboardScreen(
+              id: '',
+            ),
+        "/profile_form": (context) => ReportScreen(),
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
