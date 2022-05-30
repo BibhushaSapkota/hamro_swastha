@@ -42,6 +42,11 @@ dependencies:
   flutter_svg: ^1.0.3
   google_fonts: ^2.3.2
   division: ^0.9.0
+  carousel_slider: ^4.1.1
+  firebase_storage: ^10.2.16
+  file_picker: ^4.5.1
+  image_picker: ^0.8.5+3
+
 
 dev_dependencies:
   flutter_test:

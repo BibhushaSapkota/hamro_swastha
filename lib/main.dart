@@ -13,6 +13,8 @@ import 'package:mero_doctor/screens/Patient/login_screens.dart';
 import 'package:mero_doctor/screens/Patient/register_screen.dart';
 import 'package:mero_doctor/screens/dashhboard_screen.dart';
 import 'package:mero_doctor/screens/patientDetails.dart';
+import 'package:mero_doctor/screens/doctor_dashboard.dart';
+import 'package:mero_doctor/screens/doctor_upload_info.dart';
 import 'package:mero_doctor/screens/patient_profile.dart';
 import 'package:mero_doctor/utils/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -52,6 +54,8 @@ class MyApp extends StatelessWidget {
               id: '',
             ),
         "/profile_form": (context) => ReportScreen(),
+        "/logindoc": (context) => const LoginPage(),
+        "/doctorprofile": (context) => const DoctorProfileScreen(),
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

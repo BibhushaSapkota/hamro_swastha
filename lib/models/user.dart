@@ -45,6 +45,8 @@ class DoctorModel {
   String? firstName;
   String? lastName;
   String? password;
+  String? specialization;
+  String? position;
   bool? isDoctor;
 
   DoctorModel({
@@ -54,6 +56,8 @@ class DoctorModel {
     this.lastName,
     this.password,
     this.isDoctor,
+    this.specialization,
+    this.position,
   });
 
   // Receiving Data from Server
@@ -65,6 +69,8 @@ class DoctorModel {
       lastName: map['lastName'],
       password: map['password'],
       isDoctor: map['isDoctor'],
+      specialization: map['specialization'],
+      position: map['position'],
     );
   }
 
@@ -77,6 +83,8 @@ class DoctorModel {
       "lastName": lastName,
       "password": password,
       "isDoctor": isDoctor,
+      "specialization": specialization,
+      "position": position,
     };
   }
 }

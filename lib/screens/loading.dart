@@ -17,3 +17,20 @@ class Loading extends StatelessWidget {
     );
   }
 }
+
+class LoadingSave extends StatelessWidget {
+  const LoadingSave({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      child: const Center(
+        child: SpinKitChasingDots(
+          color: Color.fromARGB(255, 90, 218, 227),
+          size: 50.0,
+        ),
+      ),
+    );
+  }
+}
