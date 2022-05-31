@@ -36,7 +36,7 @@ final List categoryList = [
 final List doctorList = [
   Doctor(
     "Dr. Late Bajracharya",
-    "https://www.nepalmediciti.com/UploadedImages/Dr.%20lata2.jpg",
+    "assets/images/ic_topDoctor.png",
     "Gyneocology",
     "MD Psychiatry",
     "10:00 - 12:00",
@@ -46,7 +46,7 @@ final List doctorList = [
   ),
   Doctor(
     "Dr. Raju Pangeni",
-    "https://hamshospital.com/wp-content/uploads/2018/07/Dr.-Raju-Pangeni.jpg",
+    "assets/images/ic_topDoctor2.png",
     "General Medicine",
     "MD, Fellow in Pain",
     "6:00 - 9:00",
@@ -56,7 +56,7 @@ final List doctorList = [
   ),
   Doctor(
       "Dr. Reet Poudel",
-      "https://b360nepal.com/wp-content/uploads/2020/09/Dr.-Nikesh-Rajbhandari-1.jpg",
+      "assets/images/ic_topDoctor3.png",
       "Psychiatric",
       "MBBS,MD",
       "12:00 - 4:00",
@@ -65,7 +65,7 @@ final List doctorList = [
           "surgery in Nepal. He is considered a good manager of the public hospitals."),
   Doctor(
       "Dr. Lata Gautam",
-      "http://aru.ac.uk/-/media/Images/Faculty/fst/biomedical-and-forensic-sciences/staff_234x234/lata-gautam2_234x234.jpg",
+      "assets/images/ic_topDoctor2.png",
       "Psychiatric",
       "MBBS, MD",
       "11:00 - 3:00",
@@ -74,7 +74,7 @@ final List doctorList = [
           "surgery in Nepal. He is considered a good manager of the public hospitals."),
   Doctor(
       "Dr. Roshan Piya",
-      "https://nepalpaincarecenter.com/wp-content/uploads/2020/12/dr.roshan.png",
+      "assets/images/ic_topDoctor3.png",
       "Pain Management",
       "COS",
       "5:00 - 8:00",
@@ -83,7 +83,7 @@ final List doctorList = [
           "surgery in Nepal. He is considered a good manager of the public hospitals."),
   Doctor(
       "Dr. Om Narayan Jha",
-      "https://omhospitalnepal.com/main_domain/wp-content/uploads/2020/06/10.1_Dr.-A.K-jha-2-500x500.jpg",
+      "assets/images/ic_topDoctor3.png",
       "General Medicine",
       "MP, COS",
       "8:00 - 12:00",
@@ -92,7 +92,7 @@ final List doctorList = [
           "surgery in Nepal. He is considered a good manager of the public hospitals."),
   Doctor(
       "Dr. Manish Pokhral",
-      "https://omhospitalnepal.com/main_domain/wp-content/uploads/2020/12/nabin-pokhrel-500x500.jpg",
+      "assets/images/ic_topDoctor2.png",
       "Cardiology",
       "DM-Cardiology",
       "6:00 - 11:00",
@@ -120,6 +120,12 @@ final List DoctorList=[
   TopDoctorCategory("assets/images/ic_topDoctor2.png",'Dr.Bina Zen','Eye Surgeon',const Color(0xfff9f3eb),const Color(0xffffb060)),
   TopDoctorCategory("assets/images/ic_topDoctor3.png",'Dr.Bina Zen','Eye Surgeon',const Color(0xcc1a6c4),const Color(0xffffc1af)),
   TopDoctorCategory("assets/images/ic_topDoctor2.png",'Dr.Bina Zen','Eye Surgeon',const Color(0xfff9f3eb),const Color(0xffffb060)),
+];
+final List DoctorDashBoard=[
+  DoctorWidgets("assets/images/ic_topDoctor.png",'Dr.Stordis Ben','Time:9:00 AM',),
+  DoctorWidgets("assets/images/profile.png",'Dr.Bina Zen','Time:9:00 AM',),
+  DoctorWidgets("assets/images/ic_topDoctor3.png",'Dr.Bina Zen','Time:9:00 AM',),
+  DoctorWidgets("assets/images/ic_topDoctor2.png",'Dr.Bina Zen','Time:9:00 AM',),
 
 
 

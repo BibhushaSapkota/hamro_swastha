@@ -24,3 +24,11 @@ class TopDoctorCategory{
 
   TopDoctorCategory(this.image, this.name, this.job,this.bgColor,this.bgColor2);
 }
+ class DoctorWidgets{
+  final String image;
+  final String name;
+  final String time;
+
+  DoctorWidgets(this.image, this.name, this.time);
+
+ }
