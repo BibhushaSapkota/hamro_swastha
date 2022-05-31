@@ -216,7 +216,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                 ..fontWeight(FontWeight.bold)
                                 ..textColor(Colors.black),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 6,
                             ),
                             Parent(

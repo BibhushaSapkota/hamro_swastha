@@ -68,6 +68,10 @@ class _LoginPageDocState extends State<LoginPageDoc> {
                 //   }
               })
           .catchError((e) {
+        print('Worng ppassword!!!');
+        setState(() {
+          loading = false;
+        });
         SnackBar(
           content: Text(
             "${e.message}",
@@ -81,7 +85,9 @@ class _LoginPageDocState extends State<LoginPageDoc> {
       });
 
       if (result != null) {
-        loading = false;
+        setState(() {
+          loading = false;
+        });
       }
     }
   }
