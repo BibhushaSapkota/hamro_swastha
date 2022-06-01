@@ -68,20 +68,19 @@ class _LoginPageDocState extends State<LoginPageDoc> {
                 //   }
               })
           .catchError((e) {
-        print('Worng ppassword!!!');
         setState(() {
           loading = false;
         });
-        SnackBar(
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text(
-            "${e.message}",
-            style: const TextStyle(
+            "Invalid Email or Password",
+            style: TextStyle(
               fontWeight: FontWeight.w400,
               color: Colors.white,
             ),
           ),
           backgroundColor: Colors.redAccent,
-        );
+        ));
       });
 
       if (result != null) {

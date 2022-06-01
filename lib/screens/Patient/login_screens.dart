@@ -42,20 +42,25 @@ class _LoginPageState extends State<LoginPage> {
                     builder: (context) => DashboardScreen(id: '')))
               })
           .catchError((e) {
-        SnackBar(
+        setState(() {
+          loading = false;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text(
-            "${e.message}",
-            style: const TextStyle(
+            "Invalid Email or Password",
+            style: TextStyle(
               fontWeight: FontWeight.w400,
               color: Colors.white,
             ),
           ),
           backgroundColor: Colors.redAccent,
-        );
+        ));
       });
 
       if (result != null) {
-        loading = false;
+        setState(() {
+          loading = false;
+        });
       }
     }
   }
@@ -69,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
     final themeData = Theme.of(context);
     return SafeArea(
         child: loading
-            ? Loading()
+            ? const Loading()
             : Scaffold(
                 // appBar: AppBar(
                 //   leading: IconButton(
