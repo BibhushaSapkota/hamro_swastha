@@ -60,6 +60,11 @@ class MyApp extends StatelessWidget {
         "/profile_form": (context) => ReportScreen(),
         "/logindoc": (context) => const LoginPage(),
         "/doctorprofile": (context) => const DoctorProfileScreen(),
+        "/auth": (context) => ChooseAuth(),
+        "/choose": (context) => ChooseScreen(),
+        "/doctor_dashboard": (context) => DoctorDashboardScreen(),
+        "/logindoc": (context) => LoginPage(),
+        "/doctor_info": (context) => const DoctorProfileScreen(),
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

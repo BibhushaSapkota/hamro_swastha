@@ -127,6 +127,4 @@ final List DoctorDashBoard=[
   DoctorWidgets("assets/images/ic_topDoctor3.png",'Dr.Bina Zen','Time:9:00 AM',),
   DoctorWidgets("assets/images/ic_topDoctor2.png",'Dr.Bina Zen','Time:9:00 AM',),
 
-
-
 ];
