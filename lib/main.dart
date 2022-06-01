@@ -9,8 +9,6 @@ import 'package:mero_doctor/screens/Doctor/register_screens_doctor.dart';
 import 'package:mero_doctor/screens/Patient/login_screens.dart';
 import 'package:mero_doctor/screens/Patient/register_screen.dart';
 import 'package:mero_doctor/screens/choose_screen.dart';
-import 'package:mero_doctor/screens/Patient/login_screens.dart';
-import 'package:mero_doctor/screens/Patient/register_screen.dart';
 import 'package:mero_doctor/screens/dashhboard_screen.dart';
 import 'package:mero_doctor/screens/doctor_list_screen.dart';
 import 'package:mero_doctor/screens/doctor_profile_screen.dart';
@@ -19,7 +17,6 @@ import 'package:mero_doctor/screens/doctor_dashboard.dart';
 import 'package:mero_doctor/screens/doctor_upload_info.dart';
 import 'package:mero_doctor/screens/patient_profile.dart';
 import 'package:mero_doctor/utils/constants.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -63,8 +60,6 @@ class MyApp extends StatelessWidget {
         "/auth": (context) => ChooseAuth(),
         "/choose": (context) => ChooseScreen(),
         "/doctor_dashboard": (context) => DoctorDashboardScreen(),
-        "/logindoc": (context) => LoginPage(),
-        "/doctor_info": (context) => const DoctorProfileScreen(),
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

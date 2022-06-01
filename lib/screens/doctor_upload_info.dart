@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/models.dart';
 import 'package:mero_doctor/utils/constants.dart';
 
-class DoctorProfileScreen extends StatelessWidget {
+class DoctorUploadInfoScreen extends StatelessWidget {
   final Doctor? doctor;
 
-  const DoctorProfileScreen({Key? key, this.doctor}) : super(key: key);
+  const DoctorUploadInfoScreen({Key? key, this.doctor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
