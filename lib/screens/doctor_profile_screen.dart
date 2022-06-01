@@ -3,9 +3,9 @@ import 'package:mero_doctor/models/models.dart';
 import 'package:mero_doctor/utils/constants.dart';
 
 class DoctorProfileScreen extends StatelessWidget {
-  final Doctor doctor;
+  final Doctor? doctor;
 
-  const DoctorProfileScreen({Key? key, required this.doctor}) : super(key: key);
+  const DoctorProfileScreen({Key? key, this.doctor}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class DoctorProfileScreen extends StatelessWidget {
                       child: CircleAvatar(
                         radius: 90,
                         backgroundImage: NetworkImage(
-                          doctor.image,
+                          doctor!.image,
                         ),
                       ),
                     ),
@@ -81,17 +81,17 @@ class DoctorProfileScreen extends StatelessWidget {
                           child: Column(
                             children: [
                               Text(
-                                doctor.name,
+                                doctor!.name,
                                 style: const TextStyle(
                                     fontSize: 13, color: Colors.white),
                               ),
                               Text(
-                                doctor.orgName,
+                                doctor!.orgName,
                                 style: const TextStyle(
                                     fontSize: 13, color: Colors.white),
                               ),
                               Text(
-                                doctor.qualification,
+                                doctor!.qualification,
                                 style: const TextStyle(
                                     fontSize: 13, color: Colors.white),
                               ),
@@ -111,7 +111,7 @@ class DoctorProfileScreen extends StatelessWidget {
                               children: [
                                 Row(
                                   mainAxisAlignment:
-                                  MainAxisAlignment.spaceAround,
+                                      MainAxisAlignment.spaceAround,
                                   children: [
                                     SizedBox(
                                       height: 50,
@@ -126,7 +126,7 @@ class DoctorProfileScreen extends StatelessWidget {
                                             primary: COLOR_SECONDARY,
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
-                                                BorderRadius.circular(50))),
+                                                    BorderRadius.circular(50))),
                                         label: const Text('Video Call'),
                                       ),
                                     ),
@@ -143,7 +143,7 @@ class DoctorProfileScreen extends StatelessWidget {
                                             primary: COLOR_SECONDARY,
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
-                                                BorderRadius.circular(50))),
+                                                    BorderRadius.circular(50))),
                                         label: const Text('Chat'),
                                       ),
                                     ),
@@ -151,21 +151,21 @@ class DoctorProfileScreen extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 10),
                                 Text(
-                                  doctor.orgName,
+                                  doctor!.orgName,
                                   style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 const SizedBox(height: 10),
                                 Text(
-                                  "About " + doctor.name,
+                                  "About " + doctor!.name,
                                   style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 const SizedBox(height: 10),
                                 Text(
-                                  doctor.description,
+                                  doctor!.description,
                                   style: const TextStyle(
                                     fontSize: 14,
                                     color: Colors.black54,
@@ -185,12 +185,12 @@ class DoctorProfileScreen extends StatelessWidget {
                                       child: Container(
                                         decoration: BoxDecoration(
                                           borderRadius:
-                                          BorderRadius.circular(20),
+                                              BorderRadius.circular(20),
                                           color: const Color(0xffa69d9d),
                                           boxShadow: [
                                             BoxShadow(
                                               color:
-                                              Colors.grey.withOpacity(0.5),
+                                                  Colors.grey.withOpacity(0.5),
                                               spreadRadius: 1,
                                               blurRadius: 3,
                                               offset: const Offset((0), 3),
@@ -228,12 +228,12 @@ class DoctorProfileScreen extends StatelessWidget {
                                             horizontal: 20, vertical: 10),
                                         decoration: BoxDecoration(
                                           borderRadius:
-                                          BorderRadius.circular(50),
+                                              BorderRadius.circular(50),
                                           color: const Color(0xffC5DFA4),
                                           boxShadow: [
                                             BoxShadow(
                                               color:
-                                              Colors.grey.withOpacity(0.5),
+                                                  Colors.grey.withOpacity(0.5),
                                               spreadRadius: 1,
                                               blurRadius: 3,
                                               offset: const Offset(0, 3),
@@ -259,7 +259,7 @@ class DoctorProfileScreen extends StatelessWidget {
                                       color: COLOR_SECONDARY,
                                       shape: RoundedRectangleBorder(
                                         borderRadius:
-                                        BorderRadius.circular(50.0),
+                                            BorderRadius.circular(50.0),
                                       ),
                                       minWidth: screen.width / 2,
                                       height: 50,

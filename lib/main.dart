@@ -13,6 +13,7 @@ import 'package:mero_doctor/screens/Patient/login_screens.dart';
 import 'package:mero_doctor/screens/Patient/register_screen.dart';
 import 'package:mero_doctor/screens/dashhboard_screen.dart';
 import 'package:mero_doctor/screens/doctor_list_screen.dart';
+import 'package:mero_doctor/screens/doctor_profile_screen.dart';
 import 'package:mero_doctor/screens/patientDetails.dart';
 import 'package:mero_doctor/screens/doctor_dashboard.dart';
 import 'package:mero_doctor/screens/doctor_upload_info.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
         "/login": (context) => const LoginPage(),
         "/register": (context) => RegisterScreen(),
         "/register_doctor": (context) => RegisterScreenDoc(),
+        "/register_patient": (context) => RegisterScreen(),
         "/authDoc": (context) => const ChooseAuthDoc(),
         "/auth": (context) => const ChooseAuth(),
         "/": (context) => const ChooseScreen(),

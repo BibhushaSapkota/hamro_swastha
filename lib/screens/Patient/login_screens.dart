@@ -16,10 +16,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final TapGestureRecognizer _gesturesRecongnizer = TapGestureRecognizer()
-    ..onTap = () {
-      debugPrint("Hello World");
-    };
   final _formKey = GlobalKey<FormState>();
   final _auth = FirebaseAuth.instance;
 
@@ -242,28 +238,42 @@ class _LoginPageState extends State<LoginPage> {
                                       height: 30,
                                     ),
                                     Center(
-                                      child: InkWell(
-                                        onTap: () {
-                                          Navigator.pushReplacementNamed(
-                                              context, "/register_patient");
-                                        },
-                                        child: RichText(
-                                            text: TextSpan(
-                                                style: const TextStyle(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          RichText(
+                                            text: const TextSpan(
+                                                style: TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 16),
                                                 children: [
-                                              const TextSpan(
-                                                  text: "Don't have account? "),
-                                              TextSpan(
-                                                  text: "Sign Up",
-                                                  style: const TextStyle(
-                                                      color: COLOR_SECONDARY,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                  recognizer:
-                                                      _gesturesRecongnizer)
-                                            ])),
+                                                  TextSpan(
+                                                      text:
+                                                          "Don't have account? ")
+                                                ]),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              Navigator.pushReplacementNamed(
+                                                  context, "/register_patient");
+                                            },
+                                            child: RichText(
+                                                text: const TextSpan(
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 16),
+                                                    children: [
+                                                  TextSpan(
+                                                    text: "Sign Up",
+                                                    style: TextStyle(
+                                                        color: COLOR_SECONDARY,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )
+                                                ])),
+                                          ),
+                                        ],
                                       ),
                                     )
                                   ],
