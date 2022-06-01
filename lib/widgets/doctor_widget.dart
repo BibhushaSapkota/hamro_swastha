@@ -10,8 +10,11 @@ class DoctorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>DoctorProfileScreen(doctor: doctor)));
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DoctorProfileScreen(doctor: doctor)));
       },
       child: Container(
         margin: const EdgeInsets.all(8.0),
@@ -31,8 +34,10 @@ class DoctorWidget extends StatelessWidget {
         child: Row(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.only(topLeft: Radius.circular(10), bottomLeft: Radius.circular(10)),
-              child: Image.network(
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  bottomLeft: Radius.circular(10)),
+              child: Image.asset(
                 doctor.image,
                 width: 90,
                 height: 90,
@@ -49,7 +54,9 @@ class DoctorWidget extends StatelessWidget {
                     doctor.name,
                     style: TextStyle(color: Colors.black, fontSize: 14),
                   ),
-                  SizedBox(height: 5,),
+                  SizedBox(
+                    height: 5,
+                  ),
                   RichText(
                     text: TextSpan(children: [
                       TextSpan(
@@ -68,7 +75,9 @@ class DoctorWidget extends StatelessWidget {
                       ),
                     ]),
                   ),
-                  SizedBox(height: 5,),
+                  SizedBox(
+                    height: 5,
+                  ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
