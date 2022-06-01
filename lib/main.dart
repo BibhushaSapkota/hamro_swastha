@@ -16,6 +16,7 @@ import 'package:mero_doctor/screens/patientDetails.dart';
 import 'package:mero_doctor/screens/doctor_dashboard.dart';
 import 'package:mero_doctor/screens/doctor_upload_info.dart';
 import 'package:mero_doctor/screens/patient_profile.dart';
+import 'package:mero_doctor/screens/patient_upload_profile.dart';
 import 'package:mero_doctor/utils/constants.dart';
 
 Future<void> main() async {
