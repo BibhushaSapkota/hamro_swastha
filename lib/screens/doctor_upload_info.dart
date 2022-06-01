@@ -11,14 +11,14 @@ import 'package:path/path.dart';
 import 'loading.dart';
 import 'dart:io';
 
-class DoctorProfileScreen extends StatefulWidget {
-  const DoctorProfileScreen({Key? key}) : super(key: key);
+class DoctorFormScreen extends StatefulWidget {
+  const DoctorFormScreen({Key? key}) : super(key: key);
 
   @override
-  State<DoctorProfileScreen> createState() => _DoctorProfileScreenState();
+  State<DoctorFormScreen> createState() => _DoctorFormScreenState();
 }
 
-class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
+class _DoctorFormScreenState extends State<DoctorFormScreen> {
   bool loading = false;
   int _value = -1;
   // Doctor Post
