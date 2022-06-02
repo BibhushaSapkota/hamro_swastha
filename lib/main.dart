@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
         "/auth": (context) => const ChooseAuth(),
         "/": (context) => const ChooseScreen(),
         "/login_doctor": (context) => const LoginPageDoc(),
-        "/doctorlist": (context) => const DoctorListScreen(),
+        "/doctorlist": (context) => DoctorListScreen(),
         "/profile": (context) => ProfileScreen(
               id: '',
             ),

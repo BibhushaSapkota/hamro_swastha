@@ -46,6 +46,11 @@ class DoctorModel {
   String? lastName;
   String? password;
   bool? isDoctor;
+  String? specialization;
+  String? position;
+  String? profileImageDownloadURL;
+  String? identificationImageDownloadURL;
+  String? licenseImageDownloadURL;
 
   DoctorModel({
     this.docid,
@@ -54,6 +59,11 @@ class DoctorModel {
     this.lastName,
     this.password,
     this.isDoctor,
+    this.specialization,
+    this.position,
+    this.profileImageDownloadURL,
+    this.identificationImageDownloadURL,
+    this.licenseImageDownloadURL,
   });
 
   // Receiving Data from Server
@@ -65,6 +75,11 @@ class DoctorModel {
       lastName: map['lastName'],
       password: map['password'],
       isDoctor: map['isDoctor'],
+      specialization: map['specialization'],
+      position: map['position'],
+      profileImageDownloadURL: map['profileImageDownloadURL'],
+      identificationImageDownloadURL: map['identificationImageDownloadURL'],
+      licenseImageDownloadURL: map['licenseImageDownloadURL'],
     );
   }
 
@@ -77,6 +92,11 @@ class DoctorModel {
       "lastName": lastName,
       "password": password,
       "isDoctor": isDoctor,
+      "specialization": specialization,
+      "position": position,
+      "profileImageDownloadURL": profileImageDownloadURL,
+      "identificationImageDownloadURL": identificationImageDownloadURL,
+      "licenseImageDownloadURL": licenseImageDownloadURL,
     };
   }
 }

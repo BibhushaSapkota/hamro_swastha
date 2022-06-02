@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mero_doctor/utils/constants.dart';
 import 'package:mero_doctor/widgets/doctor_widget.dart';
-
+import 'package:mero_doctor/models/data.dart';
 import '../models/data.dart';
 import '../models/models.dart';
 
 class DoctorListScreen extends StatelessWidget {
-  const DoctorListScreen({Key? key}) : super(key: key);
+  demo doctor = demo();
+  // const DoctorListScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
@@ -68,9 +69,9 @@ class DoctorListScreen extends StatelessWidget {
             Expanded(
               child: ListView.builder(
                 padding: const EdgeInsets.all(8),
-                itemCount: doctorList.length,
+                itemCount: doctor.doctorList.length,
                 itemBuilder: (BuildContext context, index) {
-                  return DoctorWidget(doctorList[index]);
+                  return DoctorWidget(doctor.doctorList[index]);
                 },
               ),
             )
