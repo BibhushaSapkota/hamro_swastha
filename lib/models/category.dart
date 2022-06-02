@@ -8,27 +8,28 @@ class Category {
   Category(this.image, this.categoryName, this.bgColor);
 }
 
-class DiseasesCategory{
+class DiseasesCategory {
   final String image;
   final String name;
 
   DiseasesCategory(this.image, this.name);
 }
 
-class TopDoctorCategory{
+class TopDoctorCategory {
   final String image;
   final String name;
   final String job;
   final Color bgColor;
   final Color bgColor2;
 
-  TopDoctorCategory(this.image, this.name, this.job,this.bgColor,this.bgColor2);
+  TopDoctorCategory(
+      this.image, this.name, this.job, this.bgColor, this.bgColor2);
 }
- class DoctorWidgets{
+
+class DoctorWidgets {
   final String image;
   final String name;
   final String time;
 
   DoctorWidgets(this.image, this.name, this.time);
-
- }
+}

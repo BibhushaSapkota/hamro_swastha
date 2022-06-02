@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mero_doctor/screens/doctor_dashboard.dart';
+import 'package:mero_doctor/screens/doctor_list_screen.dart';
 import 'package:mero_doctor/utils/snack_bar.dart';
 import 'package:path/path.dart';
 import 'loading.dart';
@@ -469,10 +470,11 @@ class _DoctorFormScreenState extends State<DoctorFormScreen> {
                                               loading = true;
                                             });
                                             postDetails().whenComplete(() {
-                                              Navigator.of(context).pushReplacement(
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const DoctorDashboard()));
+                                              Navigator.of(context)
+                                                  .pushReplacement(
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              DoctorListScreen()));
                                             });
                                           } else {
                                             ScaffoldMessenger.of(context)

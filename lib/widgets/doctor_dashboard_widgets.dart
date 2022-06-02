@@ -33,12 +33,14 @@ class DoctorDashBoardWidget extends StatelessWidget {
                   style: TxtStyle()
                     ..fontSize(16)
                     ..textColor(Colors.black)
+                    ..fontFamily('quicksand'),
                 ),
                 Txt(
                   category.time,
                   style: TxtStyle()
                     ..fontSize(16)
                     ..textColor(Colors.black)
+                    ..fontFamily('quicksand'),
                 ),
               ],
             ),
