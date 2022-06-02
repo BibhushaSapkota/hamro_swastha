@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
         "/dashboard_screen": (context) => DashboardScreen(
               id: '',
             ),
-        "/profile_form": (context) => ReportScreen(),
+        "/profile_form": (context) => PatientUploadScreen(),
         "/logindoc": (context) => const LoginPage(),
         "/doctorprofile": (context) => const DoctorProfileScreen(),
         "/auth": (context) => ChooseAuth(),
