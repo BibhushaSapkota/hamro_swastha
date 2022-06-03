@@ -1,16 +1,46 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/utils/constants.dart';
 import 'package:mero_doctor/widgets/doctor_widget.dart';
 import 'package:mero_doctor/models/data.dart';
 import '../models/data.dart';
 import '../models/models.dart';
 
-class DoctorListScreen extends StatelessWidget {
-  demo doctor = demo();
+class DoctorListScreen extends StatefulWidget {
+  @override
+  State<DoctorListScreen> createState() => _DoctorListScreenState();
+}
+
+class _DoctorListScreenState extends State<DoctorListScreen> {
+  demo doctor_list = demo();
+  DoctorModel doctor_data = DoctorModel();
   final CollectionReference data =
       FirebaseFirestore.instance.collection("doctors");
+
+  @override
+  void initState() {
+    super.initState();
+
+    data.get().then((value) {
+      value.docs.forEach((element) {
+        this.doctor_data = DoctorModel.fromMap(element.data());
+        String? name;
+        String? imageURL;
+        String? qualification;
+        String? orgName;
+        print(
+            "---------------------------- Doctor data ----------------------------");
+        setState(() {
+          name = "${doctor_data.firstName} ${doctor_data.lastName}";
+          imageURL = doctor_data.identificationImageDownloadURL;
+        });
+        this.doctor_list.doctorList.add(Doctor(name!, imageURL!, "orgName",
+            "qualification", "12323", "description"));
+      });
+    });
+  }
 
   // const DoctorListScreen({Key? key}) : super(key: key);
   @override
@@ -73,9 +103,9 @@ class DoctorListScreen extends StatelessWidget {
             Expanded(
               child: ListView.builder(
                 padding: const EdgeInsets.all(8),
-                itemCount: doctor.doctorList.length,
+                itemCount: doctor_list.doctorList.length,
                 itemBuilder: (BuildContext context, index) {
-                  return DoctorWidget(doctor.doctorList[index]);
+                  return DoctorWidget(doctor_list.doctorList[index]);
                 },
               ),
             )

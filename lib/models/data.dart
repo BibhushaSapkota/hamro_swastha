@@ -39,90 +39,17 @@ final List categoryList = [
 ];
 
 class demo {
-  User? user = FirebaseAuth.instance.currentUser;
-  DoctorModel docImage = DoctorModel();
-  String? image;
-
-  void Alldata() async {
-    await FirebaseFirestore.instance
-        .collection('doctors')
-        .doc(user?.uid)
-        .get()
-        .then((value) {
-      this.docImage = DoctorModel.fromMap(value.data());
-    }).whenComplete(() {
-      image = docImage.profileImageDownloadURL;
-      print("Image Url............");
-      print(image);
-    });
-  }
-
   final List doctorList = [
-    Doctor(
-      "Dr. Late Bajracharya",
-      "assets/images/ic_topDoctor.png",
-      "Gyneocology",
-      "MD Psychiatry",
-      "10:00 - 12:00",
-      "Dr. Late Bajracharya  MD, FACC (July 24, 1960) is a Cardiothoracic surgeon, professor and "
-          "Social worker. He is best known for leading the team of Nepalese surgeons that began Open-heart "
-          "surgery in Nepal. He is considered a good manager of the public hospitals.",
-    ),
-    Doctor(
-      "Dr. Raju Pangeni",
-      "assets/images/ic_topDoctor2.png",
-      "General Medicine",
-      "MD, Fellow in Pain",
-      "6:00 - 9:00",
-      "Dr. Raju Pangeni MD, FACC (July 24, 1960) is a Cardiothoracic surgeon, professor and "
-          "Social worker. He is best known for leading the team of Nepalese surgeons that began Open-heart "
-          "surgery in Nepal. He is considered a good manager of the public hospitals.",
-    ),
-    Doctor(
-        "Dr. Reet Poudel",
-        "assets/images/ic_topDoctor3.png",
-        "Psychiatric",
-        "MBBS,MD",
-        "12:00 - 4:00",
-        " Dr. Reet Poudel MD, FACC (July 24, 1960) is a Cardiothoracic surgeon, professor and "
-            "Social worker. He is best known for leading the team of Nepalese surgeons that began Open-heart "
-            "surgery in Nepal. He is considered a good manager of the public hospitals."),
-    Doctor(
-        "Dr. Lata Gautam",
-        "assets/images/ic_topDoctor2.png",
-        "Psychiatric",
-        "MBBS, MD",
-        "11:00 - 3:00",
-        " Dr. Lata Gautam MD, FACC (July 24, 1960) is a Cardiothoracic surgeon, professor and "
-            "Social worker. He is best known for leading the team of Nepalese surgeons that began Open-heart "
-            "surgery in Nepal. He is considered a good manager of the public hospitals."),
-    Doctor(
-        "Dr. Roshan Piya",
-        "assets/images/ic_topDoctor3.png",
-        "Pain Management",
-        "COS",
-        "5:00 - 8:00",
-        "  Dr. Roshan Piya MD, FACC (July 24, 1960) is a Cardiothoracic surgeon, professor and "
-            "Social worker. He is best known for leading the team of Nepalese surgeons that began Open-heart "
-            "surgery in Nepal. He is considered a good manager of the public hospitals."),
-    Doctor(
-        "Dr. Om Narayan Jha",
-        "assets/images/ic_topDoctor3.png",
-        "General Medicine",
-        "MP, COS",
-        "8:00 - 12:00",
-        "  Dr. Om Narayan Jha MD, FACC (July 24, 1960) is a Cardiothoracic surgeon, professor and "
-            "Social worker. He is best known for leading the team of Nepalese surgeons that began Open-heart "
-            "surgery in Nepal. He is considered a good manager of the public hospitals."),
-    Doctor(
-        "Dr. Manish Pokhral",
-        "assets/images/ic_topDoctor2.png",
-        "Cardiology",
-        "DM-Cardiology",
-        "6:00 - 11:00",
-        " Dr. Manish Pokhral MD, FACC (July 24, 1960) is a Cardiothoracic surgeon, professor and "
-            "Social worker. He is best known for leading the team of Nepalese surgeons that began Open-heart "
-            "surgery in Nepal. He is considered a good manager of the public hospitals."),
+    // Doctor(
+    //   "Dr. Late Bajracharya",
+    //   "assets/images/ic_topDoctor.png",
+    //   "Gyneocology",
+    //   "MD Psychiatry",
+    //   "10:00 - 12:00",
+    //   "Dr. Late Bajracharya  MD, FACC (July 24, 1960) is a Cardiothoracic surgeon, professor and "
+    //       "Social worker. He is best known for leading the team of Nepalese surgeons that began Open-heart "
+    //       "surgery in Nepal. He is considered a good manager of the public hospitals.",
+    // ),
   ];
 }
 
