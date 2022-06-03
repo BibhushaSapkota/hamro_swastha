@@ -401,6 +401,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
     userModel.password = passwordEditingController.text;
     userModel.isPatient = true;
     userModel.isFormCompleted = false;
+    userModel.gender = "";
+    userModel.contact = "";
+    userModel.date = "";
+    userModel.profilePicture = "";
+    userModel.oldReportFile = "";
 
     await firebaseFirestore
         .collection("users")

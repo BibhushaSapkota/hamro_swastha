@@ -160,14 +160,19 @@ class _PatientUploadScreenState extends State<PatientUploadScreen> {
                         child: CupertinoDatePicker(
                           initialDateTime: _dateTime,
                           backgroundColor: Colors.white,
-                          onDateTimeChanged: (dateTime) {
+                          onDateTimeChanged: (DateTime dateTime) {
                             print(dateTime);
                             setState(() {
                               _dateTime = dateTime;
                               date = _dateTime.toString();
                             });
                           },
-                          dateOrder: DatePickerDateOrder.dmy,
+                          use24hFormat: true,
+                          mode: CupertinoDatePickerMode.date,
+                          minuteInterval: 1,
+                          minimumYear: 1900,
+                          maximumYear: 2022,
+                          maximumDate: DateTime(2050, 12, 30),
                         ),
                       ),
                       Txt(
