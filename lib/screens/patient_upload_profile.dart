@@ -466,7 +466,7 @@ class _PatientUploadScreenState extends State<PatientUploadScreen> {
     FirebaseStorage firebaseStorage = FirebaseStorage.instance;
     // DownloadURL path
     String? profileImageDownloadUrl;
-    String? oldReportDownloadURL;
+    String? oldReportDownloadURLName;
 
     // if (identificationImageURL != "") {
     //   if (licenseImageURL != "") {
@@ -482,35 +482,32 @@ class _PatientUploadScreenState extends State<PatientUploadScreen> {
         print(e.toString());
       });
       // Getting Download link or path from networ;
-      ref1.getDownloadURL().then((value) {
+      await ref1.getDownloadURL().then((value) {
         setState(() {
           profileImageDownloadUrl = value.toString();
+          print("Profile Picture URL.........");
           print(profileImageDownloadUrl);
         });
       });
     }
-
-    // Creating a file with user uid 2 and adding identification file.
     Reference ref2 = firebaseStorage.ref('patientfiles/${user?.uid}_report');
-
     await ref2.putFile(File(oldReportImageUrlName!)).catchError((e) {
       print(e.toString());
     });
-
-    ref2.getDownloadURL().then((value) {
-      if (mounted) {
-        setState(() {
-          oldReportDownloadURL = value.toString();
-          print(oldReportDownloadURL);
-        });
-      }
+    await ref2.getDownloadURL().then((value) {
+      setState(() {
+        oldReportDownloadURLName = value.toString();
+        print('Report Url........');
+        print(oldReportDownloadURLName);
+      });
     });
-    FirebaseFirestore.instance.collection('users').doc(user?.uid).update({
+    await FirebaseFirestore.instance.collection('users').doc(user?.uid).update({
       'profilePicture': profileImageDownloadUrl,
       'gender': gender,
       'dateOfBirth': date,
-      'oldReportFile': oldReportDownloadURL,
+      'oldReportFile': oldReportDownloadURLName,
       'contact': phoneController.text,
+      'isFormCompleted': true,
     });
   }
 }

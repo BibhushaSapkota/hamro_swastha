@@ -19,6 +19,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String? firstName;
   String? lastName;
   String id;
+  String? profilePicture;
   UserModel userModel = UserModel();
 
   @override
@@ -29,6 +30,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       this.userModel = UserModel.fromMap(value.data());
     }).whenComplete(() {
       setState(() {
+        profilePicture = userModel.profilePicture.toString();
         firstName = userModel.firstName.toString();
         lastName = userModel.lastName.toString();
         capitalize(firstName!);
@@ -103,8 +105,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   _makeCircle(140),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(150),
-                    child: Image.asset(
-                      "assets/images/profile.png",
+                    child: Image.network(
+                      "${profilePicture}",
+                      scale: 1.0,
                       height: 120,
                       width: 120,
                     ),

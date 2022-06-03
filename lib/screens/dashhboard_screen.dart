@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:division/division.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:mero_doctor/models/data.dart';
+import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/patient_profile.dart';
 import 'package:mero_doctor/utils/constants.dart';
 import 'package:mero_doctor/widgets/category_widget.dart';
@@ -9,41 +11,63 @@ import 'package:mero_doctor/widgets/doctor_category_widget.dart';
 
 import '../widgets/doctor_top_widget.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends StatefulWidget {
   DashboardScreen({Key? key, required this.id}) : super(key: key);
   String id;
+
+  @override
+  State<DashboardScreen> createState() => _DashboardScreenState(id);
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  String? profileUrl;
+  String id;
+
+  _DashboardScreenState(this.id);
+  UserModel? userModel = UserModel();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    FirebaseFirestore.instance.collection('users').doc(id).get().then((value) {
+      this.userModel = UserModel.fromMap(value.data());
+    }).whenComplete(() {
+      setState(() {
+        profileUrl = userModel!.profilePicture.toString();
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final screen = MediaQuery.of(context).size;
     return SafeArea(
         child: Scaffold(
-            bottomNavigationBar: Container(
-              child: const GNav(
-                activeColor: Color(0xffd36868),
-                color: Colors.black45,
-                tabBackgroundColor: Color(0xFFF1EFEF),
-                padding: EdgeInsets.all(16),
-                gap: 10,
-                curve: Curves.easeOutExpo,
-                duration: Duration(milliseconds: 400),
-                tabs: [
-                  GButton(
-                    icon: Icons.home,
-                    text: 'Home',
-                    textSize: 12,
-                  ),
-                  GButton(
-                      icon: Icons.date_range_rounded,
-                      text: 'Schedule',
-                      textSize: 12),
-                  GButton(
-                      icon: Icons.notifications_active_rounded,
-                      text: 'Notification',
-                      textSize: 12),
-                  GButton(icon: Icons.person, text: 'Profile', textSize: 12),
-                ],
-              ),
+            bottomNavigationBar: const GNav(
+              activeColor: Color(0xffd36868),
+              color: Colors.black45,
+              tabBackgroundColor: Color(0xFFF1EFEF),
+              padding: EdgeInsets.all(16),
+              gap: 10,
+              curve: Curves.easeOutExpo,
+              duration: Duration(milliseconds: 400),
+              tabs: [
+                GButton(
+                  icon: Icons.home,
+                  text: 'Home',
+                  textSize: 12,
+                ),
+                GButton(
+                    icon: Icons.date_range_rounded,
+                    text: 'Schedule',
+                    textSize: 12),
+                GButton(
+                    icon: Icons.notifications_active_rounded,
+                    text: 'Notification',
+                    textSize: 12),
+                GButton(icon: Icons.person, text: 'Profile', textSize: 12),
+              ],
             ),
             backgroundColor: const Color(0xfff9f9f9),
             body: ListView(
@@ -85,12 +109,13 @@ class DashboardScreen extends StatelessWidget {
                                                   ProfileScreen(id: id)),
                                           (route) => false);
                                     },
-                                    child: const CircleAvatar(
+                                    child: CircleAvatar(
                                       radius: 20,
-                                      backgroundImage: AssetImage(
-                                          "assets/images/profile.png"),
+                                      backgroundImage: NetworkImage(
+                                        profileUrl!,
+                                      ),
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                             ),

@@ -5,6 +5,8 @@ class UserModel {
   String? lastName;
   bool? isPatient;
   String? password;
+  bool? isFormCompleted;
+  String? profilePicture;
 
   UserModel({
     this.uid,
@@ -13,6 +15,8 @@ class UserModel {
     this.lastName,
     this.password,
     this.isPatient,
+    this.isFormCompleted,
+    this.profilePicture,
   });
 
   // Receiving Data from Server
@@ -23,7 +27,9 @@ class UserModel {
         firstName: map['firstName'],
         lastName: map['lastName'],
         password: map['password'],
-        isPatient: map['isPatient']);
+        isPatient: map['isPatient'],
+        isFormCompleted: map['isFormCompleted'],
+        profilePicture: map['profilePicture']);
   }
 
   // Sending Data to the Server
@@ -35,6 +41,8 @@ class UserModel {
       "lastName": lastName,
       "password": password,
       "isPatient": isPatient,
+      "isFormCompleted": isFormCompleted,
+      "profilePicture": profilePicture,
     };
   }
 }

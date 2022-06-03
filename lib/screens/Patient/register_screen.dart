@@ -400,6 +400,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     userModel.lastName = lastNameEditingController.text;
     userModel.password = passwordEditingController.text;
     userModel.isPatient = true;
+    userModel.isFormCompleted = false;
 
     await firebaseFirestore
         .collection("users")

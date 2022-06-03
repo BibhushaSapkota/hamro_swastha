@@ -33,6 +33,7 @@ class _ControllerState extends State<Controller> {
   late String id;
   var email;
   bool? isPatient;
+  bool? isFormCompleted;
 
   @override
   void initState() {
@@ -49,13 +50,18 @@ class _ControllerState extends State<Controller> {
         email = loginUserModel.email.toString();
         id = loginUserModel.uid.toString();
         isPatient = loginUserModel.isPatient;
+        isFormCompleted = loginUserModel.isFormCompleted;
       });
     });
   }
 
   routing() {
     if (isPatient == true) {
-      return const PatientUploadScreen();
+      if (isFormCompleted == false) {
+        return const PatientUploadScreen();
+      } else {
+        return DashboardScreen(id: id);
+      }
     } else {
       return const LoginPage();
     }
