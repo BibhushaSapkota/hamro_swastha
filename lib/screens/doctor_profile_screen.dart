@@ -39,7 +39,7 @@ class DoctorProfileScreen extends StatelessWidget {
                       child: CircleAvatar(
                         radius: 90,
                         backgroundColor: Colors.white,
-                        backgroundImage: AssetImage(
+                        backgroundImage: NetworkImage(
                           doctor!.image,
                         ),
                       ),

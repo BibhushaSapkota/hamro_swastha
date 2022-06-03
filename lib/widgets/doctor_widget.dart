@@ -37,7 +37,7 @@ class DoctorWidget extends StatelessWidget {
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(10),
                   bottomLeft: Radius.circular(10)),
-              child: Image.asset(
+              child: Image.network(
                 doctor.image,
                 width: 90,
                 height: 90,
