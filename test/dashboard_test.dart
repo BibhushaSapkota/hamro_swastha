@@ -26,4 +26,12 @@ void main() {
     await tester.enterText(tfwidget, "ffff");
     expect(find.text("ffff"), findsOneWidget);
   });
+
+    testWidgets("icon testing", (WidgetTester tester) async {
+    await tester.pumpWidget(MaterialApp(
+      home: DashboardScreen(),
+    ));
+    expect(find.byIcon(Icons.menu), findsOneWidget);
+  });
+
 }
