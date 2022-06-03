@@ -15,9 +15,7 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screen = MediaQuery
-        .of(context)
-        .size;
+    final screen = MediaQuery.of(context).size;
     return SafeArea(
         child: Scaffold(
             bottomNavigationBar: Container(
@@ -59,65 +57,48 @@ class DashboardScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                      Txt(
-                      "Find Your Desired\nConsultant",
-                      style: TxtStyle()
-                        ..fontSize(25)
-                        ..fontFamily("quicksand")
-                        ..fontWeight(FontWeight.bold)
-                        ..textColor(const Color(0xff2c295b)
+                        Txt(
+                          "Find Your Desired\nConsultant",
+                          style: TxtStyle()
+                            ..fontSize(25)
+                            ..fontFamily("quicksand")
+                            ..fontWeight(FontWeight.bold)
+                            ..textColor(const Color(0xff2c295b)),
                         ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 20),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 24),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment
-                                .spaceBetween,
-                            children: [
-                              Txt("Find Your Desired\nConsultant",
-                                style: TxtStyle()
-                                  ..fontSize(25)
-                                  ..fontFamily("quicksand")
-                                  ..fontWeight(FontWeight.bold)
-                                  ..textColor(const Color(0xff2c295b)),),
-                              InkWell(
-                                onTap: () {
-                                  Navigator.popAndPushNamed(
-                                      context, "/profile");
-                                },
-                                child: const CircleAvatar(
-                                  radius: 20,
-                                  backgroundImage: AssetImage(
-                                      "assets/images/profile.png"),
-                                ),
-                              )
-                            ],
-                          ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 20),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 24),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ProfileScreen(id: id)),
+                                          (route) => false);
+                                    },
+                                    child: const CircleAvatar(
+                                      radius: 20,
+                                      backgroundImage: AssetImage(
+                                          "assets/images/profile.png"),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        ProfileScreen(id: id)),
-                                (route) => false);
-                          },
-                          child: const CircleAvatar(
-                            radius: 20,
-                            backgroundImage:
-                            AssetImage("assets/images/profile.png"),
-                          ),
-                        )
                       ],
                     ),
-                    ],
-                  ),),
+                  ),
                   const SizedBox(height: 16),
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 24),
@@ -177,8 +158,7 @@ class DashboardScreen extends StatelessWidget {
                     child: ListView(
                       padding: const EdgeInsets.only(left: 24),
                       scrollDirection: Axis.horizontal,
-                      children: DiseasesList.map((e) =>
-                          DoctorCategoryWidget(e))
+                      children: DiseasesList.map((e) => DoctorCategoryWidget(e))
                           .toList(),
                     ),
                   ),
@@ -196,7 +176,7 @@ class DashboardScreen extends StatelessWidget {
                       shrinkWrap: true,
                       padding: const EdgeInsets.symmetric(horizontal: 24),
                       children:
-                      DoctorList.map((e) => TopDoctorWidget(e)).toList(),
+                          DoctorList.map((e) => TopDoctorWidget(e)).toList(),
                     ),
                   )
                 ]),

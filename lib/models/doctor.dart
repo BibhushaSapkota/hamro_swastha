@@ -6,12 +6,6 @@ class Doctor {
   final String schedule;
   final String description;
 
-  Doctor(
-    this.name,
-    this.image,
-    this.orgName,
-    this.qualification,
-    this.schedule,
-      this.description
-  );
+  Doctor(this.name, this.image, this.orgName, this.qualification, this.schedule,
+      this.description);
 }

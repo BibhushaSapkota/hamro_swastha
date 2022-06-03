@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/Patient/login_screens.dart';
 import 'package:mero_doctor/screens/dashhboard_screen.dart';
+import 'package:mero_doctor/screens/patient_upload_profile.dart';
 
 class LoaderScreen extends StatefulWidget {
   LoaderScreen({Key? key}) : super(key: key);
@@ -54,7 +55,7 @@ class _ControllerState extends State<Controller> {
 
   routing() {
     if (isPatient == true) {
-      return DashboardScreen(id: id);
+      return const PatientUploadScreen();
     } else {
       return const LoginPage();
     }
