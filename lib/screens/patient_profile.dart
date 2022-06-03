@@ -7,15 +7,16 @@ import 'package:mero_doctor/screens/dashhboard_screen.dart';
 import '../utils/capatalize.dart';
 
 class ProfileScreen extends StatefulWidget {
-  ProfileScreen({Key? key, required this.id}) : super(key: key);
+  ProfileScreen({Key? key, required this.id, this.profilePicture})
+      : super(key: key);
   String id;
-
+  String? profilePicture;
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState(id);
+  State<ProfileScreen> createState() => _ProfileScreenState(id, profilePicture);
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  _ProfileScreenState(this.id);
+  _ProfileScreenState(this.id, this.profilePicture);
   String? firstName;
   String? lastName;
   String id;
@@ -30,7 +31,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       this.userModel = UserModel.fromMap(value.data());
     }).whenComplete(() {
       setState(() {
-        profilePicture = userModel.profilePicture.toString();
+        // profilePicture = userModel.profilePicture.toString();
         firstName = userModel.firstName.toString();
         lastName = userModel.lastName.toString();
         capitalize(firstName!);
@@ -59,6 +60,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 MaterialPageRoute(
                     builder: (context) => DashboardScreen(
                           id: id,
+                          profileUrl: profilePicture!,
                         )),
                 (route) => false);
           },
@@ -106,7 +108,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(150),
                     child: Image.network(
-                      "${profilePicture}",
+                      profilePicture!,
                       scale: 1.0,
                       height: 120,
                       width: 120,

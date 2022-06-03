@@ -30,10 +30,11 @@ class _ControllerState extends State<Controller> {
   _ControllerState();
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loginUserModel = UserModel();
-  late String id;
+  String? id;
   var email;
   bool? isPatient;
   bool? isFormCompleted;
+  String? profileUrl;
 
   @override
   void initState() {
@@ -51,6 +52,7 @@ class _ControllerState extends State<Controller> {
         id = loginUserModel.uid.toString();
         isPatient = loginUserModel.isPatient;
         isFormCompleted = loginUserModel.isFormCompleted;
+        profileUrl = loginUserModel.profilePicture.toString();
       });
     });
   }
@@ -60,7 +62,10 @@ class _ControllerState extends State<Controller> {
       if (isFormCompleted == false) {
         return const PatientUploadScreen();
       } else {
-        return DashboardScreen(id: id);
+        return DashboardScreen(
+          id: id!,
+          profileUrl: profileUrl!,
+        );
       }
     } else {
       return const LoginPage();

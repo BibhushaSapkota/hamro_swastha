@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:division/division.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:mero_doctor/models/data.dart';
@@ -12,33 +13,23 @@ import 'package:mero_doctor/widgets/doctor_category_widget.dart';
 import '../widgets/doctor_top_widget.dart';
 
 class DashboardScreen extends StatefulWidget {
-  DashboardScreen({Key? key, required this.id}) : super(key: key);
+  DashboardScreen({Key? key, required this.id, this.profileUrl})
+      : super(key: key);
   String id;
+  String? profileUrl;
 
   @override
-  State<DashboardScreen> createState() => _DashboardScreenState(id);
+  State<DashboardScreen> createState() => _DashboardScreenState(id, profileUrl);
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
   String? profileUrl;
   String id;
 
-  _DashboardScreenState(this.id);
+  _DashboardScreenState(this.id, this.profileUrl);
   UserModel? userModel = UserModel();
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    FirebaseFirestore.instance.collection('users').doc(id).get().then((value) {
-      this.userModel = UserModel.fromMap(value.data());
-    }).whenComplete(() {
-      setState(() {
-        profileUrl = userModel!.profilePicture.toString();
-      });
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final screen = MediaQuery.of(context).size;
@@ -106,13 +97,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  ProfileScreen(id: id)),
+                                                  ProfileScreen(
+                                                    id: id,
+                                                    profilePicture: profileUrl,
+                                                  )),
                                           (route) => false);
                                     },
                                     child: CircleAvatar(
                                       radius: 20,
                                       backgroundImage: NetworkImage(
-                                        profileUrl!,
+                                        "${profileUrl}",
                                       ),
                                     ),
                                   ),
