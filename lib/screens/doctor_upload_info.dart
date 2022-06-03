@@ -550,14 +550,16 @@ class _DoctorFormScreenState extends State<DoctorFormScreen> {
         print(e.toString());
       });
       // Getting Download link or path from networ;
-      ref1.getDownloadURL().then((value) {
+      await ref1.getDownloadURL().then((value) {
         setState(() {
           profileImageDownloadURL = value.toString();
+          print('Profile URL...............');
           print(profileImageDownloadURL);
         });
       });
     }
 
+    print('...............Identification and License...............');
     // Creating a file with user uid 2 and adding identification file.
     Reference ref2 = firebaseStorage.ref('doctorfiles/${user?.uid}2');
     // Creating a file with user uid 3 and adding license file.
@@ -570,15 +572,17 @@ class _DoctorFormScreenState extends State<DoctorFormScreen> {
       print(e.toString());
     });
 
-    ref2.getDownloadURL().then((value) {
+    await ref2.getDownloadURL().then((value) {
       setState(() {
         identificationImageDownloadURL = value.toString();
+        print('identification URL.........');
         print(identificationImageDownloadURL);
       });
     });
-    ref3.getDownloadURL().then((value) {
+    await ref3.getDownloadURL().then((value) {
       setState(() {
         licenseImageDownloadURL = value.toString();
+        print('License URL.........');
         print(licenseImageDownloadURL);
       });
       FirebaseFirestore.instance.collection('doctors').doc(user?.uid).update({

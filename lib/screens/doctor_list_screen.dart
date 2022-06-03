@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mero_doctor/utils/constants.dart';
@@ -8,6 +9,9 @@ import '../models/models.dart';
 
 class DoctorListScreen extends StatelessWidget {
   demo doctor = demo();
+  final CollectionReference data =
+      FirebaseFirestore.instance.collection("doctors");
+
   // const DoctorListScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
