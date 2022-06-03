@@ -8,6 +8,7 @@ import 'package:mero_doctor/screens/Doctor/login_screens_doc.dart';
 import 'package:mero_doctor/screens/Doctor/register_screens_doctor.dart';
 import 'package:mero_doctor/screens/Patient/login_screens.dart';
 import 'package:mero_doctor/screens/Patient/register_screen.dart';
+import 'package:mero_doctor/screens/calender_screen.dart';
 import 'package:mero_doctor/screens/choose_screen.dart';
 import 'package:mero_doctor/screens/Patient/login_screens.dart';
 import 'package:mero_doctor/screens/Patient/register_screen.dart';
@@ -62,6 +63,10 @@ class MyApp extends StatelessWidget {
         "/doctor_form": (context) => DoctorFormScreen(),
         "/logindoc": (context) => const LoginPage(),
         "/doctorprofile": (context) => const DoctorProfileScreen(),
+        "/auth": (context) => ChooseAuth(),
+        "/choose": (context) => ChooseScreen(),
+        "/doctor_dashboard": (context) => DoctorDashboardScreen(),
+        "/calender": (context) => CalenderScreen(),
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
