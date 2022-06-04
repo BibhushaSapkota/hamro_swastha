@@ -24,5 +24,6 @@ void main() {
     var result = PasswordFieldValidator.validate('avjk');
     expect(result, 'Password should not be empty');
   });
+
   
 }

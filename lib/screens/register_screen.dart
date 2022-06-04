@@ -34,6 +34,29 @@ class PasswordFieldValidator {
       }
   }
 
+class firstnameFieldValidator {
+  static String? validate(String value){
+    if (value.isEmpty) {
+      return "First Name should not be empty";
+      } else if (value
+      .startsWith(RegExp(r'[0-9]'))) {
+      return "First Letter should not be integer.";
+        }
+      return null;
+       }
+  }
+
+  class lastnameFieldValidator {
+  static String? validate(String value){
+    if (value.isEmpty) {
+        return "Last Name should not be empty";
+ } 
+    else if (value.startsWith(RegExp(r'[0-9]'))) {
+        return "First Letter should not be integer.";
+      }
+    return null;
+          }
+  }
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -110,15 +133,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       ),
                                       TextFormField(
                                         textInputAction: TextInputAction.next,
-                                        validator: (value) {
-                                          if (value!.isEmpty) {
-                                            return "First Name should not be empty";
-                                          } else if (value
-                                              .startsWith(RegExp(r'[0-9]'))) {
-                                            return "First Letter should not be integer.";
-                                          }
-                                          return null;
-                                        },
+                                        validator: (value) => firstnameFieldValidator.validate(value!),
                                         controller: firstNameEditingController,
                                         decoration: const InputDecoration(
                                           prefixIcon:
@@ -149,15 +164,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         height: 5,
                                       ),
                                       TextFormField(
-                                        validator: (value) {
-                                          if (value!.isEmpty) {
-                                            return "Last Name should not be empty";
-                                          } else if (value
-                                              .startsWith(RegExp(r'[0-9]'))) {
-                                            return "First Letter should not be integer.";
-                                          }
-                                          return null;
-                                        },
+                                        validator: (value) => lastnameFieldValidator.validate(value!),
+                                                        
                                         textInputAction: TextInputAction.next,
                                         controller: lastNameEditingController,
                                         decoration: InputDecoration(

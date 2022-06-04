@@ -22,4 +22,24 @@ void main() {
     var result = PasswordFieldValidator.validate('avjk');
     expect(result, 'Password must be 6 character or more');
   });
+
+    test('empty first name returns error string', () {
+    var result = firstnameFieldValidator.validate('');
+    expect(result, 'First Name should not be empty');
+  });
+
+  test('empty first name ', () {
+    var result = firstnameFieldValidator.validate('12bjubo');
+    expect(result, 'First Letter should not be integer.');
+  });
+  test('empty lastname returns error string', () {
+    var result = lastnameFieldValidator.validate('');
+    expect(result, 'Last Name should not be empty');
+  });
+
+  test('empty lastname', () {
+    var result = lastnameFieldValidator.validate('1avjk');
+    expect(result, 'First Letter should not be integer.');
+  });
 }
+
