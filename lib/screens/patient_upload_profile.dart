@@ -396,7 +396,7 @@ class _PatientUploadScreenState extends State<PatientUploadScreen> {
                         child: MaterialButton(
                           onPressed: () {
                             if (profileImage != "") {
-                              if (date!.isNotEmpty) {
+                              if (date != "") {
                                 if (gender != "") {
                                   if (phoneController.text.isNotEmpty) {
                                     if (oldReportImageUrlName != "") {

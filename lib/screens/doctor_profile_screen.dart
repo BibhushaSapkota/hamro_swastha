@@ -92,7 +92,7 @@ class DoctorProfileScreen extends StatelessWidget {
                                     fontSize: 13, color: Colors.white),
                               ),
                               Text(
-                                doctor!.qualification,
+                                doctor!.specialization,
                                 style: const TextStyle(
                                     fontSize: 13, color: Colors.white),
                               ),
@@ -251,7 +251,7 @@ class DoctorProfileScreen extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                const SizedBox(height: 50),
+                                const SizedBox(height: 15),
                                 Align(
                                   alignment: Alignment.bottomCenter,
                                   child: Center(

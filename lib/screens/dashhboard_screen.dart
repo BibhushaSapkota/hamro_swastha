@@ -1,14 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:division/division.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:mero_doctor/models/data.dart';
+import 'package:mero_doctor/models/doctor.dart';
 import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/patient_profile.dart';
-import 'package:mero_doctor/utils/constants.dart';
-import 'package:mero_doctor/widgets/category_widget.dart';
+import 'package:mero_doctor/utils/capatalize.dart';
 import 'package:mero_doctor/widgets/doctor_category_widget.dart';
+import 'package:mero_doctor/widgets/doctor_list_view.dart';
+import 'package:mero_doctor/widgets/doctor_widget.dart';
 
 import '../widgets/doctor_top_widget.dart';
 
@@ -23,13 +24,47 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  String? profileUrl;
-  String id;
-
   _DashboardScreenState(this.id, this.profileUrl);
   UserModel? userModel = UserModel();
+  String? profileUrl;
+  String id;
+  final DoctorListData _doctorListData = DoctorListData();
+
+  DoctorModel doctorModel = DoctorModel();
+  final CollectionReference _data =
+      FirebaseFirestore.instance.collection("doctors");
 
   @override
+  void initState() {
+    String? firstName;
+    String? lastName;
+    String? fullName;
+    String? imageUrl;
+    String? specialization;
+    String? description;
+
+    // TODO: implement initState
+    super.initState();
+    _data.get().then((value) {
+      value.docs.forEach((element) {
+        doctorModel = DoctorModel.fromMap(element.data());
+        setState(() {
+          firstName = doctorModel.firstName.toString();
+          lastName = doctorModel.lastName.toString();
+          String capFirst = capitalize(firstName!);
+          String capLast = capitalize(lastName!);
+          fullName = "${capFirst} ${capLast}";
+          imageUrl = doctorModel.profileImageDownloadURL;
+          specialization = doctorModel.specialization;
+          description = doctorModel.description;
+          print(description);
+        });
+        _doctorListData.doctorList.add(Doctor(
+            fullName!, imageUrl!, '', specialization!, '', description!));
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final screen = MediaQuery.of(context).size;
@@ -191,13 +226,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ..textColor(const Color(0xff535282)),
                   ),
                   Expanded(
-                    child: ListView(
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      children:
-                          DoctorList.map((e) => TopDoctorWidget(e)).toList(),
-                    ),
-                  )
+                      child: ListView.builder(
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    itemCount: _doctorListData.doctorList.length,
+                    itemBuilder: (BuildContext context, index) {
+                      return DoctorListView(_doctorListData.doctorList[index]);
+                    },
+                  ))
                 ]),
               ],
             )));

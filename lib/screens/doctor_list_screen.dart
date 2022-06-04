@@ -14,7 +14,7 @@ class DoctorListScreen extends StatefulWidget {
 }
 
 class _DoctorListScreenState extends State<DoctorListScreen> {
-  demo doctor_list = demo();
+  DoctorListData doctor_list = DoctorListData();
   DoctorModel doctor_data = DoctorModel();
   final CollectionReference data =
       FirebaseFirestore.instance.collection("doctors");

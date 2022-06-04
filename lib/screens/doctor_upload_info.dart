@@ -591,6 +591,7 @@ class _DoctorFormScreenState extends State<DoctorFormScreen> {
         'profileImageDownloadURL': profileImageDownloadURL,
         'identificationImageDownloadURL': identificationImageDownloadURL,
         'licenseImageDownloadURL': licenseImageDownloadURL,
+        'isFormCompleted':true,
       });
     });
   }

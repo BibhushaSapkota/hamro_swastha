@@ -52,7 +52,7 @@ class _LoginPageDocState extends State<LoginPageDoc> {
                 ScaffoldMessenger.of(context)
                     .showSnackBar(SnackMessage.snackBarSucess),
                 Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => DoctorListScreen()))
+                    MaterialPageRoute(builder: (context) => LoadingScreenDoc()))
                 // }
                 // else
                 //   {

@@ -414,6 +414,12 @@ class _RegisterScreenDocState extends State<RegisterScreenDoc> {
     docModel.lastName = lastNameEditingController.text;
     docModel.password = passwordEditingController.text;
     docModel.isDoctor = true;
+    docModel.isFormCompleted = false;
+    docModel.description = "";
+    docModel.identificationImageDownloadURL = "";
+    docModel.licenseImageDownloadURL = "";
+    docModel.profileImageDownloadURL = "";
+    docModel.specialization = "";
 
     await firebaseFirestore
         .collection("doctors")

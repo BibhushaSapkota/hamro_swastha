@@ -38,7 +38,7 @@ final List categoryList = [
   ),
 ];
 
-class demo {
+class DoctorListData {
   final List doctorList = [
     // Doctor(
     //   "Dr. Late Bajracharya",

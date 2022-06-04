@@ -75,6 +75,8 @@ class DoctorModel {
   String? profileImageDownloadURL;
   String? identificationImageDownloadURL;
   String? licenseImageDownloadURL;
+  String? description;
+  bool? isFormCompleted;
 
   DoctorModel({
     this.docid,
@@ -85,9 +87,11 @@ class DoctorModel {
     this.isDoctor,
     this.specialization,
     this.position,
+    this.isFormCompleted,
     this.profileImageDownloadURL,
     this.identificationImageDownloadURL,
     this.licenseImageDownloadURL,
+    this.description,
   });
 
   // Receiving Data from Server
@@ -104,6 +108,8 @@ class DoctorModel {
       profileImageDownloadURL: map['profileImageDownloadURL'],
       identificationImageDownloadURL: map['identificationImageDownloadURL'],
       licenseImageDownloadURL: map['licenseImageDownloadURL'],
+      description: map['description'],
+      isFormCompleted: map['isFormCompleted'],
     );
   }
 
@@ -121,6 +127,8 @@ class DoctorModel {
       "profileImageDownloadURL": profileImageDownloadURL,
       "identificationImageDownloadURL": identificationImageDownloadURL,
       "licenseImageDownloadURL": licenseImageDownloadURL,
+      "description": description,
+      "isFormCompleted": isFormCompleted,
     };
   }
 }

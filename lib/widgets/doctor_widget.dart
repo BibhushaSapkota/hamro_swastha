@@ -67,7 +67,7 @@ class DoctorWidget extends StatelessWidget {
                         ),
                       ),
                       TextSpan(
-                        text: ' (' + doctor.qualification + ')',
+                        text: ' (' + doctor.specialization + ')',
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 14,
