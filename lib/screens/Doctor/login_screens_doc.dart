@@ -9,6 +9,7 @@ import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/Doctor/register_screens_doctor.dart';
 import 'package:mero_doctor/screens/Patient/register_screen.dart';
 import 'package:mero_doctor/screens/dashhboard_screen.dart';
+import 'package:mero_doctor/screens/doctor_dashboard.dart';
 import 'package:mero_doctor/screens/doctor_list_screen.dart';
 import 'package:mero_doctor/screens/doctor_upload_info.dart';
 // import 'package:mero_doctor/screens/dashhboard_screen.dart';
@@ -52,7 +53,7 @@ class _LoginPageDocState extends State<LoginPageDoc> {
                 ScaffoldMessenger.of(context)
                     .showSnackBar(SnackMessage.snackBarSucess),
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const DoctorFormScreen()))
+                    builder: (context) => const DoctorDashboardScreen()))
                 // }
                 // else
                 //   {
