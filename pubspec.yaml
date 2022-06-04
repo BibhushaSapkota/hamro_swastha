@@ -46,7 +46,8 @@ dependencies:
   firebase_storage: ^10.2.16
   file_picker: ^4.5.1
   image_picker: ^0.8.5+3
-
+  intl_phone_number_input: ^0.7.0+2
+  table_calendar: ^3.0.6
 
 dev_dependencies:
   flutter_test:

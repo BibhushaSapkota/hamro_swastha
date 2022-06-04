@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:division/division.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:mero_doctor/models/data.dart';
+import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/patient_profile.dart';
 import 'package:mero_doctor/utils/constants.dart';
 import 'package:mero_doctor/widgets/category_widget.dart';
@@ -9,43 +12,53 @@ import 'package:mero_doctor/widgets/doctor_category_widget.dart';
 
 import '../widgets/doctor_top_widget.dart';
 
-class DashboardScreen extends StatelessWidget {
-  DashboardScreen({Key? key, required this.id}) : super(key: key);
+class DashboardScreen extends StatefulWidget {
+  DashboardScreen({Key? key, required this.id, this.profileUrl})
+      : super(key: key);
   String id;
+  String? profileUrl;
 
   @override
+  State<DashboardScreen> createState() => _DashboardScreenState(id, profileUrl);
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  String? profileUrl;
+  String id;
+
+  _DashboardScreenState(this.id, this.profileUrl);
+  UserModel? userModel = UserModel();
+
+  @override
+  @override
   Widget build(BuildContext context) {
-    final screen = MediaQuery
-        .of(context)
-        .size;
+    final screen = MediaQuery.of(context).size;
     return SafeArea(
         child: Scaffold(
-            bottomNavigationBar: Container(
-              child: const GNav(
-                activeColor: Color(0xffd36868),
-                color: Colors.black45,
-                tabBackgroundColor: Color(0xFFF1EFEF),
-                padding: EdgeInsets.all(16),
-                gap: 10,
-                curve: Curves.easeOutExpo,
-                duration: Duration(milliseconds: 400),
-                tabs: [
-                  GButton(
-                    icon: Icons.home,
-                    text: 'Home',
-                    textSize: 12,
-                  ),
-                  GButton(
-                      icon: Icons.date_range_rounded,
-                      text: 'Schedule',
-                      textSize: 12),
-                  GButton(
-                      icon: Icons.notifications_active_rounded,
-                      text: 'Notification',
-                      textSize: 12),
-                  GButton(icon: Icons.person, text: 'Profile', textSize: 12),
-                ],
-              ),
+            bottomNavigationBar: const GNav(
+              activeColor: Color(0xffd36868),
+              color: Colors.black45,
+              tabBackgroundColor: Color(0xFFF1EFEF),
+              padding: EdgeInsets.all(16),
+              gap: 10,
+              curve: Curves.easeOutExpo,
+              duration: Duration(milliseconds: 400),
+              tabs: [
+                GButton(
+                  icon: Icons.home,
+                  text: 'Home',
+                  textSize: 12,
+                ),
+                GButton(
+                    icon: Icons.date_range_rounded,
+                    text: 'Schedule',
+                    textSize: 12),
+                GButton(
+                    icon: Icons.notifications_active_rounded,
+                    text: 'Notification',
+                    textSize: 12),
+                GButton(icon: Icons.person, text: 'Profile', textSize: 12),
+              ],
             ),
             backgroundColor: const Color(0xfff9f9f9),
             body: ListView(
@@ -59,65 +72,52 @@ class DashboardScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                      Txt(
-                      "Find Your Desired\nConsultant",
-                      style: TxtStyle()
-                        ..fontSize(25)
-                        ..fontFamily("quicksand")
-                        ..fontWeight(FontWeight.bold)
-                        ..textColor(const Color(0xff2c295b)
+                        Txt(
+                          "Find Your Desired\nConsultant",
+                          style: TxtStyle()
+                            ..fontSize(25)
+                            ..fontFamily("quicksand")
+                            ..fontWeight(FontWeight.bold)
+                            ..textColor(const Color(0xff2c295b)),
                         ),
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 20),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 24),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment
-                                .spaceBetween,
-                            children: [
-                              Txt("Find Your Desired\nConsultant",
-                                style: TxtStyle()
-                                  ..fontSize(25)
-                                  ..fontFamily("quicksand")
-                                  ..fontWeight(FontWeight.bold)
-                                  ..textColor(const Color(0xff2c295b)),),
-                              InkWell(
-                                onTap: () {
-                                  Navigator.popAndPushNamed(
-                                      context, "/profile");
-                                },
-                                child: const CircleAvatar(
-                                  radius: 20,
-                                  backgroundImage: AssetImage(
-                                      "assets/images/profile.png"),
-                                ),
-                              )
-                            ],
-                          ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 20),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 24),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ProfileScreen(
+                                                    id: id,
+                                                    profilePicture: profileUrl,
+                                                  )),
+                                          (route) => false);
+                                    },
+                                    child: CircleAvatar(
+                                      radius: 20,
+                                      backgroundImage: NetworkImage(
+                                        "${profileUrl}",
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                        InkWell(
-                          onTap: () {
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        ProfileScreen(id: id)),
-                                (route) => false);
-                          },
-                          child: const CircleAvatar(
-                            radius: 20,
-                            backgroundImage:
-                            AssetImage("assets/images/profile.png"),
-                          ),
-                        )
                       ],
                     ),
-                    ],
-                  ),),
+                  ),
                   const SizedBox(height: 16),
                   Container(
                     margin: const EdgeInsets.symmetric(horizontal: 24),
@@ -177,8 +177,7 @@ class DashboardScreen extends StatelessWidget {
                     child: ListView(
                       padding: const EdgeInsets.only(left: 24),
                       scrollDirection: Axis.horizontal,
-                      children: DiseasesList.map((e) =>
-                          DoctorCategoryWidget(e))
+                      children: DiseasesList.map((e) => DoctorCategoryWidget(e))
                           .toList(),
                     ),
                   ),
@@ -196,7 +195,7 @@ class DashboardScreen extends StatelessWidget {
                       shrinkWrap: true,
                       padding: const EdgeInsets.symmetric(horizontal: 24),
                       children:
-                      DoctorList.map((e) => TopDoctorWidget(e)).toList(),
+                          DoctorList.map((e) => TopDoctorWidget(e)).toList(),
                     ),
                   )
                 ]),

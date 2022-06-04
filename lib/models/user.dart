@@ -5,6 +5,12 @@ class UserModel {
   String? lastName;
   bool? isPatient;
   String? password;
+  bool? isFormCompleted;
+  String? profilePicture;
+  String? gender;
+  String? contact;
+  String? date;
+  String? oldReportFile;
 
   UserModel({
     this.uid,
@@ -13,6 +19,12 @@ class UserModel {
     this.lastName,
     this.password,
     this.isPatient,
+    this.isFormCompleted,
+    this.profilePicture,
+    this.gender,
+    this.contact,
+    this.date,
+    this.oldReportFile,
   });
 
   // Receiving Data from Server
@@ -23,7 +35,13 @@ class UserModel {
         firstName: map['firstName'],
         lastName: map['lastName'],
         password: map['password'],
-        isPatient: map['isPatient']);
+        isPatient: map['isPatient'],
+        isFormCompleted: map['isFormCompleted'],
+        profilePicture: map['profilePicture'],
+        gender: map['gender'],
+        contact: map['contact'],
+        date: map['date'],
+        oldReportFile: map['oldReportFile']);
   }
 
   // Sending Data to the Server
@@ -35,6 +53,12 @@ class UserModel {
       "lastName": lastName,
       "password": password,
       "isPatient": isPatient,
+      "isFormCompleted": isFormCompleted,
+      "profilePicture": profilePicture,
+      'gender': gender,
+      'contact': contact,
+      'date': date,
+      'oldReportFile': oldReportFile
     };
   }
 }

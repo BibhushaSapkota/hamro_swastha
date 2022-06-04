@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/Patient/login_screens.dart';
 import 'package:mero_doctor/screens/dashhboard_screen.dart';
+import 'package:mero_doctor/screens/patient_upload_profile.dart';
 
 class LoaderScreen extends StatefulWidget {
   LoaderScreen({Key? key}) : super(key: key);
@@ -29,9 +30,11 @@ class _ControllerState extends State<Controller> {
   _ControllerState();
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loginUserModel = UserModel();
-  late String id;
+  String? id;
   var email;
   bool? isPatient;
+  bool? isFormCompleted;
+  String? profileUrl;
 
   @override
   void initState() {
@@ -48,13 +51,22 @@ class _ControllerState extends State<Controller> {
         email = loginUserModel.email.toString();
         id = loginUserModel.uid.toString();
         isPatient = loginUserModel.isPatient;
+        isFormCompleted = loginUserModel.isFormCompleted;
+        profileUrl = loginUserModel.profilePicture.toString();
       });
     });
   }
 
   routing() {
     if (isPatient == true) {
-      return DashboardScreen(id: id);
+      if (isFormCompleted == false) {
+        return const PatientUploadScreen();
+      } else {
+        return DashboardScreen(
+          id: id!,
+          profileUrl: profileUrl!,
+        );
+      }
     } else {
       return const LoginPage();
     }

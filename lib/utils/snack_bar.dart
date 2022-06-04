@@ -105,4 +105,78 @@ class SnackMessage {
     ),
     dismissDirection: DismissDirection.down,
   );
+
+  static const snackBarProfileFail = SnackBar(
+    content: Text(
+      "Profile is required!",
+      style: TextStyle(
+        fontWeight: FontWeight.w400,
+        color: Colors.white,
+      ),
+    ),
+    backgroundColor: Colors.red,
+    duration: Duration(
+      seconds: 3,
+    ),
+    dismissDirection: DismissDirection.down,
+  );
+  static const snackBarDateFail = SnackBar(
+    content: Text(
+      "Date of Birth is required!",
+      style: TextStyle(
+        fontWeight: FontWeight.w400,
+        color: Colors.white,
+      ),
+    ),
+    backgroundColor: Colors.red,
+    duration: Duration(
+      seconds: 3,
+    ),
+    dismissDirection: DismissDirection.down,
+  );
+
+  static const snackBarPhoneFail = SnackBar(
+    content: Text(
+      "Phone Number is required!",
+      style: TextStyle(
+        fontWeight: FontWeight.w400,
+        color: Colors.white,
+      ),
+    ),
+    backgroundColor: Colors.red,
+    duration: Duration(
+      seconds: 3,
+    ),
+    dismissDirection: DismissDirection.down,
+  );
+
+  static const snackBarOldReportFail = SnackBar(
+    content: Text(
+      "Old Report is required!",
+      style: TextStyle(
+        fontWeight: FontWeight.w400,
+        color: Colors.white,
+      ),
+    ),
+    backgroundColor: Colors.red,
+    duration: Duration(
+      seconds: 3,
+    ),
+    dismissDirection: DismissDirection.down,
+  );
+
+  static const snackBarGenderFail = SnackBar(
+    content: Text(
+      "Gender is required!",
+      style: TextStyle(
+        fontWeight: FontWeight.w400,
+        color: Colors.white,
+      ),
+    ),
+    backgroundColor: Colors.red,
+    duration: Duration(
+      seconds: 3,
+    ),
+    dismissDirection: DismissDirection.down,
+  );
 }

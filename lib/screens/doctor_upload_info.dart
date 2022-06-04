@@ -94,7 +94,7 @@ class _DoctorFormScreenState extends State<DoctorFormScreen> {
                                   borderRadius: BorderRadius.circular(90),
                                   child: profileImageURL == ""
                                       ? Image.asset(
-                                          "assets/images/profile.png",
+                                          "assets/images/profile.jpg",
                                           height: 70,
                                           width: 70,
                                         )
@@ -132,7 +132,7 @@ class _DoctorFormScreenState extends State<DoctorFormScreen> {
                                     ..background.color(const Color(0xff76B5C5)),
                                   child: Row(
                                     children: [
-                                      Icon(
+                                      const Icon(
                                         Icons.upload,
                                         size: 22,
                                         color: Colors.white,

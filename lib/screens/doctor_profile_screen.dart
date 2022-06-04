@@ -36,13 +36,18 @@ class DoctorProfileScreen extends StatelessWidget {
                       ),
                     ),
                     Center(
-                      child: CircleAvatar(
-                        radius: 90,
-                        backgroundColor: Colors.white,
-                        backgroundImage: NetworkImage(
-                          doctor!.image,
-                        ),
-                      ),
+                      child: doctor!.image == ""
+                          ? const CircleAvatar(
+                              radius: 90,
+                              backgroundColor: Colors.white,
+                              backgroundImage: AssetImage(
+                                "assets/images/profile.jpg",
+                              ))
+                          : CircleAvatar(
+                              radius: 90,
+                              backgroundColor: Colors.transparent,
+                              backgroundImage: NetworkImage(doctor!.image),
+                            ),
                     ),
                   ],
                 ),

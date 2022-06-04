@@ -8,6 +8,7 @@ import 'package:mero_doctor/screens/Doctor/login_screens_doc.dart';
 import 'package:mero_doctor/screens/Doctor/register_screens_doctor.dart';
 import 'package:mero_doctor/screens/Patient/login_screens.dart';
 import 'package:mero_doctor/screens/Patient/register_screen.dart';
+import 'package:mero_doctor/screens/calender_screen.dart';
 import 'package:mero_doctor/screens/choose_screen.dart';
 import 'package:mero_doctor/screens/Patient/login_screens.dart';
 import 'package:mero_doctor/screens/Patient/register_screen.dart';
@@ -18,6 +19,7 @@ import 'package:mero_doctor/screens/patientDetails.dart';
 import 'package:mero_doctor/screens/doctor_dashboard.dart';
 import 'package:mero_doctor/screens/doctor_upload_info.dart';
 import 'package:mero_doctor/screens/patient_profile.dart';
+import 'package:mero_doctor/screens/patient_upload_profile.dart';
 import 'package:mero_doctor/utils/constants.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -57,9 +59,14 @@ class MyApp extends StatelessWidget {
         "/dashboard_screen": (context) => DashboardScreen(
               id: '',
             ),
-        "/profile_form": (context) => ReportScreen(),
+        "/profile_form": (context) => PatientUploadScreen(),
+        "/doctor_form": (context) => DoctorFormScreen(),
         "/logindoc": (context) => const LoginPage(),
         "/doctorprofile": (context) => const DoctorProfileScreen(),
+        "/auth": (context) => ChooseAuth(),
+        "/choose": (context) => ChooseScreen(),
+        "/doctor_dashboard": (context) => DoctorDashboardScreen(),
+        "/calender": (context) => CalenderScreen(),
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
