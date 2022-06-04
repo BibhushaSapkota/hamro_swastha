@@ -83,7 +83,7 @@ final List DoctorDashBoard = [
     'Time:9:00 AM',
   ),
   DoctorWidgets(
-    "assets/images/profile.png",
+    "assets/images/profile.jpg",
     'Dr.Bina Zen',
     'Time:9:00 AM',
   ),

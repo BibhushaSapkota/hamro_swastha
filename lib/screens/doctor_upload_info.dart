@@ -94,7 +94,7 @@ class _DoctorFormScreenState extends State<DoctorFormScreen> {
                                   borderRadius: BorderRadius.circular(90),
                                   child: profileImageURL == ""
                                       ? Image.asset(
-                                          "assets/images/profile.png",
+                                          "assets/images/profile.jpg",
                                           height: 70,
                                           width: 70,
                                         )

@@ -38,8 +38,7 @@ class _DoctorDashboardScreenState extends State<DoctorDashboardScreen> {
                   style: ParentStyle()
                     ..borderRadius(all: 15)
                     ..background.image(
-                        path: 'assets/images/ic_doctor12.png',
-                        fit: BoxFit.cover)
+                        path: 'assets/images/profile.jpg', fit: BoxFit.cover)
                     ..width(screen.width)
                     ..height(200)
                     ..margin(
@@ -99,8 +98,8 @@ class _DoctorDashboardScreenState extends State<DoctorDashboardScreen> {
                     shrinkWrap: true,
                     padding: const EdgeInsets.symmetric(horizontal: 24),
                     children:
-                    DoctorDashBoard.map((e) => DoctorDashBoardWidget(e))
-                        .toList(),
+                        DoctorDashBoard.map((e) => DoctorDashBoardWidget(e))
+                            .toList(),
                   ),
                 )
               ],

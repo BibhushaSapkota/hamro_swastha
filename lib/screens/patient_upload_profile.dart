@@ -82,7 +82,7 @@ class _PatientUploadScreenState extends State<PatientUploadScreen> {
                                 borderRadius: BorderRadius.circular(90),
                                 child: profileImage == ""
                                     ? Image.asset(
-                                        "assets/images/profile.png",
+                                        "assets/images/profile.jpg",
                                         height: 70,
                                         width: 70,
                                       )

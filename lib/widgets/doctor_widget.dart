@@ -37,12 +37,19 @@ class DoctorWidget extends StatelessWidget {
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(10),
                   bottomLeft: Radius.circular(10)),
-              child: Image.network(
-                doctor.image,
-                width: 90,
-                height: 90,
-                fit: BoxFit.cover,
-              ),
+              child: doctor.image == ""
+                  ? Image.asset(
+                      "assets/images/profile.jpg",
+                      width: 90,
+                      height: 90,
+                      fit: BoxFit.cover,
+                    )
+                  : Image.network(
+                      doctor.image,
+                      width: 90,
+                      height: 90,
+                      fit: BoxFit.cover,
+                    ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 12.0),
