@@ -51,8 +51,8 @@ class _LoginPageDocState extends State<LoginPageDoc> {
                 //   {
                 ScaffoldMessenger.of(context)
                     .showSnackBar(SnackMessage.snackBarSucess),
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => DoctorListScreen()))
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const DoctorFormScreen()))
                 // }
                 // else
                 //   {
