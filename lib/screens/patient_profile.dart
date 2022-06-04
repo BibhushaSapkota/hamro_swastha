@@ -22,6 +22,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String id;
   String? profilePicture;
   UserModel userModel = UserModel();
+  String? capFirst;
+  String? capLast;
 
   @override
   void initState() {
@@ -34,8 +36,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         // profilePicture = userModel.profilePicture.toString();
         firstName = userModel.firstName.toString();
         lastName = userModel.lastName.toString();
-        String capFirst = capitalize(firstName!);
-        String capLast = capitalize(lastName!);
+        capFirst = capitalize(firstName!);
+        capLast = capitalize(lastName!);
       });
     });
     // FirebaseFirestore.instance.collection('users').doc(id);
@@ -60,7 +62,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 MaterialPageRoute(
                     builder: (context) => DashboardScreen(
                           id: id,
-                          profileUrl: profilePicture!,
+                          profileUrl: profilePicture,
                         )),
                 (route) => false);
           },
