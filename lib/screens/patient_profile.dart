@@ -34,8 +34,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         // profilePicture = userModel.profilePicture.toString();
         firstName = userModel.firstName.toString();
         lastName = userModel.lastName.toString();
-        capitalize(firstName!);
-        capitalize(lastName!);
+        String capFirst = capitalize(firstName!);
+        String capLast = capitalize(lastName!);
       });
     });
     // FirebaseFirestore.instance.collection('users').doc(id);
@@ -118,7 +118,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               const SizedBox(height: 30),
               Text(
-                "${firstName} ${lastName}",
+                "${capFirst} ${capLast}",
                 style: TextStyle(
                   color: textColor,
                   fontSize: 20,

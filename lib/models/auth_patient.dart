@@ -64,7 +64,7 @@ class _ControllerState extends State<Controller> {
       } else {
         return DashboardScreen(
           id: id!,
-          profileUrl: profileUrl!,
+          profileUrl: profileUrl,
         );
       }
     } else {
