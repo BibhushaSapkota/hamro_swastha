@@ -121,6 +121,13 @@ final List DoctorList=[
   TopDoctorCategory("assets/images/ic_topDoctor3.png",'Dr.Bina Zen','Eye Surgeon',const Color(0xcc1a6c4),const Color(0xffffc1af)),
   TopDoctorCategory("assets/images/ic_topDoctor2.png",'Dr.Bina Zen','Eye Surgeon',const Color(0xfff9f3eb),const Color(0xffffb060)),
 
+];
+final List DoctorDashBoard=[
+  DoctorWidgets("assets/images/ic_topDoctor.png",'Dr.Stordis Ben','Time:9:00 AM',),
+  DoctorWidgets("assets/images/profile.png",'Dr.Bina Zen','Time:9:00 AM',),
+  DoctorWidgets("assets/images/ic_topDoctor3.png",'Dr.Bina Zen','Time:9:00 AM',),
+  DoctorWidgets("assets/images/ic_topDoctor2.png",'Dr.Bina Zen','Time:9:00 AM',),
+
 
 
 ];

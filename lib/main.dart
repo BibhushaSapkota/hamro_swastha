@@ -10,7 +10,10 @@ import 'package:mero_doctor/screens/Patient/register_screen.dart';
 import 'package:mero_doctor/screens/choose_screen.dart';
 import 'package:mero_doctor/screens/dashhboard_screen.dart';
 import 'package:mero_doctor/screens/patientDetails.dart';
+import 'package:mero_doctor/screens/doctor_dashboard.dart';
+import 'package:mero_doctor/screens/doctor_upload_info.dart';
 import 'package:mero_doctor/screens/patient_profile.dart';
+import 'package:mero_doctor/screens/patient_upload_profile.dart';
 import 'package:mero_doctor/utils/constants.dart';
 
 Future<void> main() async {
@@ -52,6 +55,12 @@ class MyApp extends StatelessWidget {
               id: '',
             ),
         "/profile_form": (context) => ReportScreen(),
+        "/auth": (context) => ChooseAuth(),
+        "/choose": (context) => ChooseScreen(),
+        "/doctor_dashboard": (context) => DoctorDashboardScreen(),
+        "/patient_upload_info": (context) => PatientUploadScreen(),
+        "/logindoc": (context) => LoginPage(),
+        "/doctor_info": (context) => const DoctorProfileScreen(),
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
