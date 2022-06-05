@@ -30,24 +30,35 @@ class DoctorListView extends StatelessWidget {
             Stack(
               alignment: Alignment.center,
               children: [
-                Parent(
-                    style: ParentStyle()
-                      ..width(60)
-                      ..height(60)
-                      ..borderRadius(all: 60)
-                      ..elevation(4, color: Colors.grey.shade300)
-                      ..background.color(const Color(0xffffb060))),
-                doctor.image != ""
-                    ? Image.network(
-                        doctor.image,
-                        height: 60,
-                        width: 60,
-                      )
-                    : Image.asset(
-                        "assets/images/profile.jpg",
-                        height: 60,
-                        width: 60,
-                      ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                  child: Parent(
+                      style: ParentStyle()
+                        ..width(60)
+                        ..height(60)
+                        ..borderRadius(all: 60)
+                        ..elevation(4, color: Colors.grey.shade300)
+                        ..background.color(const Color(0xffffb060))),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                  child: Container(
+                    height: 60,
+                    width: 60,
+                    child: doctor.image == ""
+                        ? const CircleAvatar(
+                            radius: 90,
+                            backgroundColor: Colors.white,
+                            backgroundImage: AssetImage(
+                              "assets/images/profile.jpg",
+                            ))
+                        : CircleAvatar(
+                            radius: 90,
+                            backgroundColor: Colors.transparent,
+                            backgroundImage: NetworkImage(doctor.image),
+                          ),
+                  ),
+                ),
               ],
             ),
             Expanded(
