@@ -37,11 +37,17 @@ class DoctorListView extends StatelessWidget {
                       ..borderRadius(all: 60)
                       ..elevation(4, color: Colors.grey.shade300)
                       ..background.color(const Color(0xffffb060))),
-                Image.network(
-                  doctor.image,
-                  height: 60,
-                  width: 60,
-                ),
+                doctor.image != ""
+                    ? Image.network(
+                        doctor.image,
+                        height: 60,
+                        width: 60,
+                      )
+                    : Image.asset(
+                        "assets/images/profile.jpg",
+                        height: 60,
+                        width: 60,
+                      ),
               ],
             ),
             Expanded(

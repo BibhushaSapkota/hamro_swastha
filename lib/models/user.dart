@@ -40,7 +40,7 @@ class UserModel {
         profilePicture: map['profilePicture'],
         gender: map['gender'],
         contact: map['contact'],
-        date: map['date'],
+        date: map['dateOfBirth'],
         oldReportFile: map['oldReportFile']);
   }
 
@@ -57,7 +57,7 @@ class UserModel {
       "profilePicture": profilePicture,
       'gender': gender,
       'contact': contact,
-      'date': date,
+      'dateOfBirth': date,
       'oldReportFile': oldReportFile
     };
   }

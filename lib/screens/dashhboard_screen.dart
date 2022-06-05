@@ -36,25 +36,28 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   void initState() {
-    String? firstName;
-    String? lastName;
-    String? fullName;
-    String? imageUrl;
-    String? specialization;
-    String? description;
-
     // TODO: implement initState
     super.initState();
     _data.get().then((value) {
       value.docs.forEach((element) {
         doctorModel = DoctorModel.fromMap(element.data());
+        String? firstName;
+        String? lastName;
+        String? fullName;
+        String? imageUrl = "";
+        String? specialization;
+        String? description;
         setState(() {
           firstName = doctorModel.firstName.toString();
           lastName = doctorModel.lastName.toString();
           String capFirst = capitalize(firstName!);
           String capLast = capitalize(lastName!);
           fullName = "${capFirst} ${capLast}";
-          imageUrl = doctorModel.profileImageDownloadURL;
+          if (doctorModel.profileImageDownloadURL != null) {
+            imageUrl = doctorModel.profileImageDownloadURL;
+          } else {
+            print(doctorModel.profileImageDownloadURL);
+          }
           specialization = doctorModel.specialization;
           description = doctorModel.description;
           print(description);

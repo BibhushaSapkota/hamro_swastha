@@ -33,6 +33,7 @@ class _PatientUploadScreenState extends State<PatientUploadScreen> {
   String? profileImage = '';
   String? oldReportImage = '';
   String? oldReportImageUrlName = '';
+  String? profileImageDownloadUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -406,8 +407,10 @@ class _PatientUploadScreenState extends State<PatientUploadScreen> {
                                       postDetails().whenComplete(() {
                                         Navigator.of(context)
                                             .pushReplacement(MaterialPageRoute(
-                                          builder: (context) =>
-                                              DashboardScreen(id: '$id'),
+                                          builder: (context) => DashboardScreen(
+                                            id: '$id',
+                                            profileUrl: profileImageDownloadUrl,
+                                          ),
                                         ));
                                       });
                                     } else {
@@ -470,7 +473,6 @@ class _PatientUploadScreenState extends State<PatientUploadScreen> {
     id = user?.uid;
     FirebaseStorage firebaseStorage = FirebaseStorage.instance;
     // DownloadURL path
-    String? profileImageDownloadUrl;
     String? oldReportDownloadURLName;
 
     // if (identificationImageURL != "") {
