@@ -1,5 +1,5 @@
 import 'package:division/division.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_slider/carousel slider.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/category.dart';
 
