@@ -1,5 +1,5 @@
+import 'dart:js';
 import 'dart:ui';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/screens/Choose_Authencation/Choose_Authencation_doctor.dart';
@@ -10,19 +10,20 @@ import 'package:mero_doctor/screens/Patient/login_screens.dart';
 import 'package:mero_doctor/screens/Patient/register_screen.dart';
 import 'package:mero_doctor/screens/calender_screen.dart';
 import 'package:mero_doctor/screens/choose_screen.dart';
-import 'package:mero_doctor/screens/Patient/login_screens.dart';
-import 'package:mero_doctor/screens/Patient/register_screen.dart';
 import 'package:mero_doctor/screens/dashhboard_screen.dart';
 import 'package:mero_doctor/screens/doctorView.dart';
 import 'package:mero_doctor/screens/doctor_list_screen.dart';
 import 'package:mero_doctor/screens/doctor_profile_screen.dart';
-import 'package:mero_doctor/screens/patientDetails.dart';
 import 'package:mero_doctor/screens/doctor_dashboard.dart';
 import 'package:mero_doctor/screens/doctor_upload_info.dart';
+import 'package:mero_doctor/screens/forgetpass_screen.dart';
+import 'package:mero_doctor/screens/otp_screen.dart';
 import 'package:mero_doctor/screens/patient_profile.dart';
 import 'package:mero_doctor/screens/patient_upload_profile.dart';
+import 'package:mero_doctor/screens/splash_screen.dart';
+import 'package:mero_doctor/screens/walkthrough_screens.dart';
 import 'package:mero_doctor/utils/constants.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,7 +52,7 @@ class MyApp extends StatelessWidget {
         "/register_patient": (context) => RegisterScreen(),
         "/authDoc": (context) => const ChooseAuthDoc(),
         "/auth": (context) => const ChooseAuth(),
-        "/": (context) => const ChooseScreen(),
+        "/choose_option": (context) => const ChooseScreen(),
         "/login_doctor": (context) => const LoginPageDoc(),
         "/doctorlist": (context) => DoctorListScreen(),
         "/profile": (context) => ProfileScreen(
@@ -60,16 +61,21 @@ class MyApp extends StatelessWidget {
         "/dashboard_screen": (context) => DashboardScreen(
               id: '',
             ),
+        '/': (context) => SplashScreen(),
+        '/walkthrough': (context) => WalkthroughScreen(),
         "/profile_form": (context) => PatientUploadScreen(),
         "/doctor_form": (context) => DoctorFormScreen(),
         "/logindoc": (context) => const LoginPage(),
         "/doctorprofile": (context) => const DoctorProfileScreen(),
-        "/auth": (context) => ChooseAuth(),
-        "/choose": (context) => ChooseScreen(),
         "/doctor_dashboard": (context) => DoctorDashboardScreen(),
         "/calender": (context) => CalenderScreen(),
+<<<<<<< HEAD
 
 
+=======
+        "/forgetpass":(context) =>EnterEmailPage(),
+        "/sendotp":(context) => EnterOtpPage(),
+>>>>>>> a7f370a3148f6cfb5dc183bbfdec69fc5e06fbd6
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
