@@ -197,6 +197,7 @@ class _LoginPageState extends State<LoginPage> {
                                       height: 20,
                                     ),
                                     RichText(
+                                      
                                       text: TextSpan(
                                           text: "Forgot your password? ",
                                           style: const TextStyle(
@@ -208,7 +209,8 @@ class _LoginPageState extends State<LoginPage> {
                                                     color: COLOR_SECONDARY),
                                                 recognizer:
                                                     TapGestureRecognizer()
-                                                      ..onTap = () => {})
+                                                      ..onTap = () => { Navigator.pushReplacementNamed(
+                                                  context, "/forgetpass")})
                                           ]),
                                     ),
                                     const SizedBox(

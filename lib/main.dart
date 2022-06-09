@@ -1,3 +1,4 @@
+import 'dart:js';
 import 'dart:ui';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -14,11 +15,14 @@ import 'package:mero_doctor/screens/doctor_list_screen.dart';
 import 'package:mero_doctor/screens/doctor_profile_screen.dart';
 import 'package:mero_doctor/screens/doctor_dashboard.dart';
 import 'package:mero_doctor/screens/doctor_upload_info.dart';
+import 'package:mero_doctor/screens/forgetpass_screen.dart';
+import 'package:mero_doctor/screens/otp_screen.dart';
 import 'package:mero_doctor/screens/patient_profile.dart';
 import 'package:mero_doctor/screens/patient_upload_profile.dart';
 import 'package:mero_doctor/screens/splash_screen.dart';
 import 'package:mero_doctor/screens/walkthrough_screens.dart';
 import 'package:mero_doctor/utils/constants.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -64,6 +68,8 @@ class MyApp extends StatelessWidget {
         "/doctorprofile": (context) => const DoctorProfileScreen(),
         "/doctor_dashboard": (context) => DoctorDashboardScreen(),
         "/calender": (context) => CalenderScreen(),
+        "/forgetpass":(context) =>EnterEmailPage(),
+        "/sendotp":(context) => EnterOtpPage(),
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
