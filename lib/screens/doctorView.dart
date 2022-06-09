@@ -134,8 +134,6 @@ class _doctorViewState extends State<doctorView> {
                             ],
                           ),
 
-
-
                           SizedBox(
                             height: 20,
                           ),

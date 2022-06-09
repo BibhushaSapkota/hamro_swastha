@@ -1,4 +1,4 @@
-import 'dart:js';
+
 import 'dart:ui';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
         "/dashboard_screen": (context) => DashboardScreen(
               id: '',
             ),
-        '/': (context) => SplashScreen(),
+         '/': (context) => SplashScreen(),
         '/walkthrough': (context) => WalkthroughScreen(),
         "/profile_form": (context) => PatientUploadScreen(),
         "/doctor_form": (context) => DoctorFormScreen(),
@@ -69,13 +69,11 @@ class MyApp extends StatelessWidget {
         "/doctorprofile": (context) => const DoctorProfileScreen(),
         "/doctor_dashboard": (context) => DoctorDashboardScreen(),
         "/calender": (context) => CalenderScreen(),
-<<<<<<< HEAD
 
-
-=======
         "/forgetpass":(context) =>EnterEmailPage(),
         "/sendotp":(context) => EnterOtpPage(),
->>>>>>> a7f370a3148f6cfb5dc183bbfdec69fc5e06fbd6
+        '/docorview': (context) => doctorView(),
+
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
