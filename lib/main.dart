@@ -13,6 +13,7 @@ import 'package:mero_doctor/screens/choose_screen.dart';
 import 'package:mero_doctor/screens/Patient/login_screens.dart';
 import 'package:mero_doctor/screens/Patient/register_screen.dart';
 import 'package:mero_doctor/screens/dashhboard_screen.dart';
+import 'package:mero_doctor/screens/doctorView.dart';
 import 'package:mero_doctor/screens/doctor_list_screen.dart';
 import 'package:mero_doctor/screens/doctor_profile_screen.dart';
 import 'package:mero_doctor/screens/patientDetails.dart';
@@ -44,29 +45,32 @@ class MyApp extends StatelessWidget {
     double screenWidth = window.physicalSize.width;
     return MaterialApp(
       routes: {
-        "/login": (context) => const LoginPage(),
-        "/register": (context) => RegisterScreen(),
-        "/register_doctor": (context) => RegisterScreenDoc(),
-        "/register_patient": (context) => RegisterScreen(),
-        "/authDoc": (context) => const ChooseAuthDoc(),
-        "/auth": (context) => const ChooseAuth(),
-        "/": (context) => const ChooseScreen(),
-        "/login_doctor": (context) => const LoginPageDoc(),
-        "/doctorlist": (context) => DoctorListScreen(),
-        "/profile": (context) => ProfileScreen(
-              id: '',
-            ),
-        "/dashboard_screen": (context) => DashboardScreen(
-              id: '',
-            ),
-        "/profile_form": (context) => PatientUploadScreen(),
-        "/doctor_form": (context) => DoctorFormScreen(),
-        "/logindoc": (context) => const LoginPage(),
-        "/doctorprofile": (context) => const DoctorProfileScreen(),
-        "/auth": (context) => ChooseAuth(),
-        "/choose": (context) => ChooseScreen(),
-        "/doctor_dashboard": (context) => DoctorDashboardScreen(),
-        "/calender": (context) => CalenderScreen(),
+        // "/login": (context) => const LoginPage(),
+        // "/register": (context) => RegisterScreen(),
+        // "/register_doctor": (context) => RegisterScreenDoc(),
+        // "/register_patient": (context) => RegisterScreen(),
+        // "/authDoc": (context) => const ChooseAuthDoc(),
+        // "/auth": (context) => const ChooseAuth(),
+        // "/": (context) => const ChooseScreen(),
+        // "/login_doctor": (context) => const LoginPageDoc(),
+        // "/doctorlist": (context) => DoctorListScreen(),
+        // "/profile": (context) => ProfileScreen(
+        //       id: '',
+        //     ),
+        // "/dashboard_screen": (context) => DashboardScreen(
+        //       id: '',
+        //     ),
+        // "/profile_form": (context) => PatientUploadScreen(),
+        // "/doctor_form": (context) => DoctorFormScreen(),
+        // "/logindoc": (context) => const LoginPage(),
+        // "/doctorprofile": (context) => const DoctorProfileScreen(),
+        // "/auth": (context) => ChooseAuth(),
+        // "/choose": (context) => ChooseScreen(),
+        // "/doctor_dashboard": (context) => DoctorDashboardScreen(),
+        // "/calender": (context) => CalenderScreen(),
+        "/": (context) => doctorView(),
+
+
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
