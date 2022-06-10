@@ -10,11 +10,13 @@ import 'package:mero_doctor/screens/Patient/register_screen.dart';
 import 'package:mero_doctor/screens/calender_screen.dart';
 import 'package:mero_doctor/screens/choose_screen.dart';
 import 'package:mero_doctor/screens/dashhboard_screen.dart';
+import 'package:mero_doctor/screens/doctorView.dart';
 import 'package:mero_doctor/screens/doctor_list_screen.dart';
 import 'package:mero_doctor/screens/doctor_profile_screen.dart';
 import 'package:mero_doctor/screens/doctor_dashboard.dart';
 import 'package:mero_doctor/screens/doctor_upload_info.dart';
-import 'package:mero_doctor/screens/forget_password.dart';
+import 'package:mero_doctor/screens/forgetpass_screen.dart';
+import 'package:mero_doctor/screens/otp_screen.dart';
 import 'package:mero_doctor/screens/patient_profile.dart';
 import 'package:mero_doctor/screens/patient_upload_profile.dart';
 import 'package:mero_doctor/screens/splash_screen.dart';
@@ -57,8 +59,7 @@ class MyApp extends StatelessWidget {
         "/dashboard_screen": (context) => DashboardScreen(
               id: '',
             ),
-        // '/': (context) => SplashScreen(),
-        '/': (context) => ForgetPassword(),
+        '/': (context) => SplashScreen(),
         '/walkthrough': (context) => WalkthroughScreen(),
         "/profile_form": (context) => PatientUploadScreen(),
         "/doctor_form": (context) => DoctorFormScreen(),
@@ -66,6 +67,9 @@ class MyApp extends StatelessWidget {
         "/doctorprofile": (context) => const DoctorProfileScreen(),
         "/doctor_dashboard": (context) => DoctorDashboardScreen(),
         "/calender": (context) => CalenderScreen(),
+        "/forgetpass": (context) => EnterEmailPage(),
+        "/sendotp": (context) => EnterOtpPage(),
+        '/docorview': (context) => doctorView(),
       },
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

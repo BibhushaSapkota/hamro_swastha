@@ -22,9 +22,15 @@ class DoctorDashBoardWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CircleAvatar(
-              radius: 30,
-              backgroundImage: AssetImage(category.image),
+            InkWell(
+              onTap: (){
+                print("pressed");
+                Navigator.of(context).pushNamed("/docorview");
+              },
+              child: CircleAvatar(
+                radius: 30,
+                backgroundImage: AssetImage(category.image),
+              ),
             ),
             Column(
               children: [
