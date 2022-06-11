@@ -358,28 +358,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
       setState(() {
         loading = true;
       });
-      dynamic result = await _auth
-          .createUserWithEmailAndPassword(email: lowerEmail, password: password)
-          .then((value) => {postDetailsFireStore()})
-          .catchError((e) {
-        // ScaffoldMessenger.of(context)
-        //     .showSnackBar(SnackMessage.snackBarAccountFail);
-        SnackBar(
-          content: Text(
-            "${e.message}",
-            style: const TextStyle(
-              fontWeight: FontWeight.w400,
-              color: Colors.white,
+      try {
+        dynamic result = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+                email: lowerEmail, password: password)
+            .then((value) => {postDetailsFireStore()})
+            .catchError((e) {
+          // ScaffoldMessenger.of(context)
+          //     .showSnackBar(SnackMessage.snackBarAccountFail);
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(
+              "${e.message}",
+              style: const TextStyle(
+                fontWeight: FontWeight.w400,
+                color: Colors.white,
+              ),
             ),
-          ),
-          backgroundColor: Colors.redAccent,
-        );
-      });
-
-      if (result != null) {
-        setState(() {
-          loading = false;
+            backgroundColor: Colors.redAccent,
+          ));
         });
+
+        if (result != null) {
+          setState(() {
+            loading = false;
+          });
+        }
+      } on FirebaseAuthException catch (e) {
+        print(e.message);
       }
     }
   }

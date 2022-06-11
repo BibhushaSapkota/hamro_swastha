@@ -57,13 +57,13 @@ class _WalkthroughScreenState extends State<WalkthroughScreen> {
         ),
         bottomSheet: isLastPage
             ? Padding(
-                padding: const EdgeInsets.fromLTRB(60, 0, 60, 20),
+                padding: const EdgeInsets.fromLTRB(60, 0, 60, 10),
                 child: TextButton(
                   style: TextButton.styleFrom(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
                       backgroundColor: COLOR_SECONDARY,
-                      minimumSize: const Size.fromHeight(70)),
+                      minimumSize: const Size.fromHeight(60)),
                   child: const Text(
                     "Get Started",
                     style: TextStyle(fontSize: 20, color: Colors.white),
@@ -129,7 +129,7 @@ Widget buildPage({
             style: TextStyle(fontSize: 30, color: COLOR_SECONDARY),
           ),
           SizedBox(
-            height: 40,
+            height: 20,
           ),
           Image.asset(
             image,
@@ -137,7 +137,7 @@ Widget buildPage({
             height: 350,
           ),
           SizedBox(
-            height: 40,
+            height: 20,
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),

@@ -59,6 +59,8 @@ class MyApp extends StatelessWidget {
         "/dashboard_screen": (context) => DashboardScreen(
               id: '',
             ),
+        // '/': (context) => EnterOtpPage(),
+        // "/": (context) => EnterEmailPage(),
         '/': (context) => SplashScreen(),
         '/walkthrough': (context) => WalkthroughScreen(),
         "/profile_form": (context) => PatientUploadScreen(),
