@@ -10,6 +10,8 @@ import 'package:mero_doctor/utils/constants.dart';
 import 'package:mero_doctor/utils/snack_bar.dart';
 
 class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({Key? key}) : super(key: key);
+
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }

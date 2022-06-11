@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:division/division.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -10,6 +11,26 @@ class CalenderScreen extends StatefulWidget {
 }
 
 class _CalenderScreenState extends State<CalenderScreen> {
+  List<String> appointmentDate = [];
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  getAppointmentDate(String selectedDate) {
+    CollectionReference data = FirebaseFirestore.instance.collection("doctors");
+    data.doc("CUy4nAvnpNhAPUaQAdVjTrXI1682").snapshots().listen((snapshot) {
+      Map<String, dynamic> data = snapshot["appointmentDate"];
+      if(data.containsKey(selectedDate)){
+        appointmentDate = List.from(data[selectedDate]);
+      }else{
+        appointmentDate = [];
+      }
+      setState(() => {appointmentDate = appointmentDate});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final Size screen = MediaQuery.of(context).size;
@@ -20,9 +41,9 @@ class _CalenderScreenState extends State<CalenderScreen> {
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: const Icon(
+            const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(
                 Icons.menu,
                 size: 26,
                 color: Colors.black,
@@ -45,6 +66,11 @@ class _CalenderScreenState extends State<CalenderScreen> {
                 firstDay: DateTime.utc(2010, 10, 16),
                 lastDay: DateTime.utc(2030, 3, 14),
                 focusedDay: DateTime.now(),
+                onDaySelected: (selectedDay, focusedDay) {
+                  String selectedDate =
+                      "${selectedDay.year}-${selectedDay.month < 10 ? "0${selectedDay.month}" : selectedDay.month}-${selectedDay.day}";
+                  getAppointmentDate(selectedDate);
+                },
               ),
             ),
             const SizedBox(
@@ -64,7 +90,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Txt(
-                          'Schedule',
+                          'Time Slots',
                           style: TxtStyle()
                             ..fontSize(24)
                             ..padding(left: 16)
@@ -76,17 +102,10 @@ class _CalenderScreenState extends State<CalenderScreen> {
                         SizedBox(
                           child: SizedBox(
                             height: 86,
-                            child: ListView(
+                            child: appointmentDate.isEmpty ? Text("No Time Slot Available.") : ListView(
                               shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
-                              children: [
-                                _getCategoryInfo("Sun", "01"),
-                                _getCategoryInfo("Mon", "09"),
-                                _getCategoryInfo("Tues", "07"),
-                                _getCategoryInfo("Wed", "03"),
-                                _getCategoryInfo("Thur", "12"),
-                                _getCategoryInfo("Frid", "7"),
-                              ],
+                              children: appointmentDate.map((e) => _getCategoryInfo(e)).toList(),
                             ),
                           ),
                         ),
@@ -138,33 +157,21 @@ class _CalenderScreenState extends State<CalenderScreen> {
   }
 }
 
-Widget _getCategoryInfo(String title, String value) {
+Widget _getCategoryInfo(String value) {
   return Parent(
-    style: ParentStyle()
-      ..height(80)
-      ..width(92)
-      ..elevation(3, color: Colors.grey.withOpacity(0.5))
-      ..margin(right: 10)
-      ..borderRadius(all: 10)
-      ..background.color(Colors.grey.shade100),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Txt(
-          title,
-          style: TxtStyle()
-            ..fontSize(12)
-            ..fontWeight(FontWeight.bold)
-            ..textColor(const Color(0xff76B5C5)),
-        ),
-        Txt(
-          value,
-          style: TxtStyle()
-            ..margin(top: 10)
-            ..fontSize(12)
-            ..textColor(Colors.black),
-        ),
-      ],
-    ),
-  );
+      style: ParentStyle()
+        ..height(80)
+        ..width(92)
+        ..elevation(3, color: Colors.grey.withOpacity(0.5))
+        ..margin(right: 10)
+        ..borderRadius(all: 10)
+        ..background.color(const Color(0xffdaebff)),
+      child: Txt(
+        value,
+        style: TxtStyle()
+          ..margin(top: 10)
+          ..alignmentContent.center()
+          ..fontSize(16)
+          ..textColor(Colors.black),
+      ));
 }
