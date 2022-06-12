@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/models.dart';
+import 'package:mero_doctor/screens/calender_screen.dart';
 import 'package:mero_doctor/utils/constants.dart';
 
 class DoctorProfileScreen extends StatelessWidget {
@@ -269,10 +270,16 @@ class DoctorProfileScreen extends StatelessWidget {
                                       ),
                                       minWidth: screen.width / 2,
                                       height: 50,
-                                      child: const Text(
-                                        "Book an Appointment",
-                                        style: TextStyle(
-                                            color: COLOR_WHITE, fontSize: 18),
+                                      child: GestureDetector(
+                                        onTap: ()=>{
+                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>
+                                            CalenderScreen(doctor: doctor!)))
+                                        },
+                                        child: const Text(
+                                          "Book an Appointment",
+                                          style: TextStyle(
+                                              color: COLOR_WHITE, fontSize: 18),
+                                        ),
                                       ),
                                     ),
                                   ),

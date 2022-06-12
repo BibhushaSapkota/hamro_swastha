@@ -56,8 +56,7 @@ class _doctorViewState extends State<doctorView> {
                   height: 160,
                   width: 180,
                   child: Stack(
-                    fit: StackFit.expand,
-                    overflow: Overflow.visible,
+                    clipBehavior: Clip.none, fit: StackFit.expand,
                     children: [
                       CircleAvatar(
                         child: Image.asset("assets/images/doctor_view.png"),

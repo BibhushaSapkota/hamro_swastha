@@ -1,10 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:division/division.dart';
 import 'package:flutter/material.dart';
+import 'package:mero_doctor/models/doctor.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CalenderScreen extends StatefulWidget {
-  const CalenderScreen({Key? key}) : super(key: key);
+  final Doctor doctor;
+
+  const CalenderScreen({Key? key, required this.doctor}) : super(key: key);
 
   @override
   State<CalenderScreen> createState() => _CalenderScreenState();
@@ -20,11 +23,11 @@ class _CalenderScreenState extends State<CalenderScreen> {
 
   getAppointmentDate(String selectedDate) {
     CollectionReference data = FirebaseFirestore.instance.collection("doctors");
-    data.doc("CUy4nAvnpNhAPUaQAdVjTrXI1682").snapshots().listen((snapshot) {
+    data.doc("DXSVyLt6fRZh3zqjELdI8q9Divq1").snapshots().listen((snapshot) {
       Map<String, dynamic> data = snapshot["appointmentDate"];
-      if(data.containsKey(selectedDate)){
+      if (data.containsKey(selectedDate)) {
         appointmentDate = List.from(data[selectedDate]);
-      }else{
+      } else {
         appointmentDate = [];
       }
       setState(() => {appointmentDate = appointmentDate});
@@ -102,11 +105,15 @@ class _CalenderScreenState extends State<CalenderScreen> {
                         SizedBox(
                           child: SizedBox(
                             height: 86,
-                            child: appointmentDate.isEmpty ? Text("No Time Slot Available.") : ListView(
-                              shrinkWrap: true,
-                              scrollDirection: Axis.horizontal,
-                              children: appointmentDate.map((e) => _getCategoryInfo(e)).toList(),
-                            ),
+                            child: appointmentDate.isEmpty
+                                ? Text("No Time Slot Available.")
+                                : ListView(
+                                    shrinkWrap: true,
+                                    scrollDirection: Axis.horizontal,
+                                    children: appointmentDate
+                                        .map((e) => _getCategoryInfo(e))
+                                        .toList(),
+                                  ),
                           ),
                         ),
                         const SizedBox(
