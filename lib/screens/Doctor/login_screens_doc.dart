@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:mero_doctor/models/auth_doctor.dart';
 import 'package:mero_doctor/models/auth_patient.dart';
 import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/Doctor/register_screens_doctor.dart';
+import 'package:mero_doctor/screens/GoogleLogin/google_login.dart';
 import 'package:mero_doctor/screens/Patient/register_screen.dart';
 import 'package:mero_doctor/screens/dashhboard_screen.dart';
 import 'package:mero_doctor/screens/doctor_dashboard.dart';
@@ -16,6 +18,7 @@ import 'package:mero_doctor/screens/doctor_upload_info.dart';
 import 'package:mero_doctor/utils/constants.dart';
 import 'package:mero_doctor/screens/loading.dart';
 import 'package:mero_doctor/utils/snack_bar.dart';
+import 'package:provider/provider.dart';
 
 class LoginPageDoc extends StatefulWidget {
   const LoginPageDoc({Key? key}) : super(key: key);
@@ -25,10 +28,6 @@ class LoginPageDoc extends StatefulWidget {
 }
 
 class _LoginPageDocState extends State<LoginPageDoc> {
-  final TapGestureRecognizer _gesturesRecongnizer = TapGestureRecognizer()
-    ..onTap = () {
-      debugPrint("Hello World");
-    };
   final _formKey = GlobalKey<FormState>();
   final _auth = FirebaseAuth.instance;
   bool loading = false;
@@ -98,6 +97,10 @@ class _LoginPageDocState extends State<LoginPageDoc> {
 
   @override
   Widget build(BuildContext context) {
+    final TapGestureRecognizer _gesturesRecongnizer = TapGestureRecognizer()
+      ..onTap = () {
+        Navigator.of(context).pushNamed('/register_doctor');
+      };
     final screen = MediaQuery.of(context).size;
     final themeData = Theme.of(context);
     return SafeArea(
@@ -271,32 +274,68 @@ class _LoginPageDocState extends State<LoginPageDoc> {
                                       ),
                                     ),
                                     const SizedBox(
-                                      height: 30,
+                                      height: 5,
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        final provider =
+                                            Provider.of<GoogleLogInProvider>(
+                                                context,
+                                                listen: false);
+                                        provider.googleLogout();
+                                      },
+                                      child: Text('Logout'),
                                     ),
                                     Center(
-                                      child: InkWell(
-                                        onTap: () {
-                                          Navigator.pushReplacementNamed(
-                                              context, "/login");
-                                        },
-                                        child: RichText(
-                                            text: TextSpan(
-                                                style: const TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 16),
-                                                children: [
-                                              const TextSpan(
-                                                  text: "Don't have account? "),
-                                              TextSpan(
-                                                  text: "Sign Up",
-                                                  style: const TextStyle(
-                                                      color: COLOR_SECONDARY,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                  recognizer:
-                                                      _gesturesRecongnizer)
-                                            ])),
+                                      child: SizedBox(
+                                        height: 50.0,
+                                        width: 50.0,
+                                        child: InkWell(
+                                          onTap: () {
+                                            final provider = Provider.of<
+                                                    GoogleLogInProvider>(
+                                                context,
+                                                listen: false);
+                                            provider.googleLogin().then((data) {
+                                              postDetails(data);
+                                            });
+                                          },
+                                          child: Image.asset(
+                                              "assets/images/google.png"),
+                                        ),
                                       ),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Center(
+                                          child: InkWell(
+                                            onTap: () {
+                                              Navigator.pushReplacementNamed(
+                                                  context, "/register_doctor");
+                                            },
+                                            child: RichText(
+                                                text: TextSpan(
+                                                    style: const TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 16),
+                                                    children: [
+                                                  const TextSpan(
+                                                      text:
+                                                          "Don't have account? "),
+                                                  TextSpan(
+                                                      text: "Sign Up",
+                                                      style: const TextStyle(
+                                                          color:
+                                                              COLOR_SECONDARY,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                      recognizer:
+                                                          _gesturesRecongnizer)
+                                                ])),
+                                          ),
+                                        ),
+                                      ],
                                     )
                                   ],
                                 ),
@@ -307,5 +346,39 @@ class _LoginPageDocState extends State<LoginPageDoc> {
                   ),
                 ),
               ));
+  }
+
+  Future postDetails(data) async {
+    DoctorModel doctorModel = DoctorModel();
+    await FirebaseFirestore.instance
+        .collection('doctors')
+        .doc(data.uid)
+        .get()
+        .then((value) {
+      print('Value Exists or not???.......');
+      print(value.exists);
+
+      if (value.exists) {
+        print('Value Exists');
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => LoadingScreenDoc()));
+      } else {
+        doctorModel.firstName = data.displayName.toString();
+        doctorModel.email = data.email.toString();
+        doctorModel.profileImageDownloadURL = data.photoURL.toString();
+        doctorModel.isFormCompleted = false;
+        doctorModel.isDoctor = true;
+        doctorModel.isGoogleUser = true;
+        doctorModel.isNormalUser = false;
+        FirebaseFirestore.instance
+            .collection('doctors')
+            .doc(data.uid)
+            .set(doctorModel.toMap())
+            .whenComplete(() {
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => LoadingScreenDoc()));
+        });
+      }
+    });
   }
 }

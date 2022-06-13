@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/dashhboard_screen.dart';
 import 'package:mero_doctor/screens/loading.dart';
 import 'package:mero_doctor/utils/snack_bar.dart';
@@ -22,6 +23,9 @@ class PatientUploadScreen extends StatefulWidget {
 }
 
 class _PatientUploadScreenState extends State<PatientUploadScreen> {
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel userModel = UserModel();
+
   String? id;
   bool loading = false;
   DateTime _dateTime = DateTime.utc(2022, 03, 6);
@@ -34,6 +38,23 @@ class _PatientUploadScreenState extends State<PatientUploadScreen> {
   String? oldReportImage = '';
   String? oldReportImageUrlName = '';
   String? profileImageDownloadUrl;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(user?.uid)
+        .get()
+        .then((value) {
+      userModel = UserModel.fromMap(value.data());
+      setState(() {
+        if (userModel.isGoogleUser!) {
+          profileImage = "${user?.photoURL}";
+        }
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,9 +108,11 @@ class _PatientUploadScreenState extends State<PatientUploadScreen> {
                                         height: 70,
                                         width: 70,
                                       )
-                                    : Image.file(
-                                        File('$profileImage'),
-                                      ),
+                                    : userModel.isGoogleUser! == true
+                                        ? Image.network("${profileImage}")
+                                        : Image.file(
+                                            File('$profileImage'),
+                                          ),
                               ),
                             ),
                             MaterialButton(

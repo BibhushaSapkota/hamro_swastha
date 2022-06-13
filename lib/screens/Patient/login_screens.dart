@@ -1,12 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mero_doctor/models/auth_patient.dart';
+import 'package:mero_doctor/models/user.dart';
+import 'package:mero_doctor/screens/GoogleLogin/google_login.dart';
 import 'package:mero_doctor/screens/dashhboard_screen.dart';
 import 'package:mero_doctor/utils/constants.dart';
 import 'package:mero_doctor/screens/loading.dart';
 import 'package:mero_doctor/utils/snack_bar.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -197,7 +201,6 @@ class _LoginPageState extends State<LoginPage> {
                                       height: 20,
                                     ),
                                     RichText(
-                                      
                                       text: TextSpan(
                                           text: "Forgot your password? ",
                                           style: const TextStyle(
@@ -209,8 +212,12 @@ class _LoginPageState extends State<LoginPage> {
                                                     color: COLOR_SECONDARY),
                                                 recognizer:
                                                     TapGestureRecognizer()
-                                                      ..onTap = () => { Navigator.pushReplacementNamed(
-                                                  context, "/forgetpass")})
+                                                      ..onTap = () => {
+                                                            Navigator
+                                                                .pushReplacementNamed(
+                                                                    context,
+                                                                    "/forgetpass")
+                                                          })
                                           ]),
                                     ),
                                     const SizedBox(
@@ -237,7 +244,36 @@ class _LoginPageState extends State<LoginPage> {
                                       ),
                                     ),
                                     const SizedBox(
-                                      height: 30,
+                                      height: 15,
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        final provider =
+                                            Provider.of<GoogleLogInProvider>(
+                                                context,
+                                                listen: false);
+                                        provider.googleLogout();
+                                      },
+                                      child: Text('Logout'),
+                                    ),
+                                    Center(
+                                      child: SizedBox(
+                                        height: 50.0,
+                                        width: 50.0,
+                                        child: InkWell(
+                                          onTap: () {
+                                            final provider = Provider.of<
+                                                    GoogleLogInProvider>(
+                                                context,
+                                                listen: false);
+                                            provider.googleLogin().then((data) {
+                                              postDetails(data);
+                                            });
+                                          },
+                                          child: Image.asset(
+                                              "assets/images/google.png"),
+                                        ),
+                                      ),
                                     ),
                                     Center(
                                       child: Row(
@@ -287,5 +323,39 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ));
+  }
+
+  Future postDetails(data) async {
+    UserModel userModel = UserModel();
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(data.uid)
+        .get()
+        .then((value) {
+      print('Value Exists or not???.......');
+      print(value.exists);
+
+      if (value.exists) {
+        print('Value Exists');
+        Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => LoaderScreen()));
+      } else {
+        userModel.firstName = data.displayName.toString();
+        userModel.email = data.email.toString();
+        userModel.profilePicture = data.photoURL.toString();
+        userModel.isFormCompleted = false;
+        userModel.isPatient = true;
+        userModel.isGoogleUser = true;
+        userModel.isNormalUser = false;
+        FirebaseFirestore.instance
+            .collection('users')
+            .doc(data.uid)
+            .set(userModel.toMap())
+            .whenComplete(() {
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => LoaderScreen()));
+        });
+      }
+    });
   }
 }

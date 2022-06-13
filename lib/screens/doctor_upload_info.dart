@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/doctor_dashboard.dart';
 import 'package:mero_doctor/screens/doctor_list_screen.dart';
 import 'package:mero_doctor/utils/snack_bar.dart';
@@ -20,6 +21,8 @@ class DoctorFormScreen extends StatefulWidget {
 }
 
 class _DoctorFormScreenState extends State<DoctorFormScreen> {
+  User? user = FirebaseAuth.instance.currentUser;
+  DoctorModel doctorModel = DoctorModel();
   bool loading = false;
   int _value = -1;
   // Doctor Post
@@ -43,6 +46,27 @@ class _DoctorFormScreenState extends State<DoctorFormScreen> {
 // File name to display in the screen
   String? identificatoinImageURLname = "";
   String? licenseImageURLname = "";
+
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    super.initState();
+    FirebaseFirestore.instance
+        .collection('doctors')
+        .doc(user?.uid)
+        .get()
+        .then((value) {
+      doctorModel = DoctorModel.fromMap(value.data());
+      setState(() {
+        if (doctorModel.isGoogleUser!) {
+          profileImageURL = "${user?.photoURL}";
+          print('ProfileImageURL');
+          print(profileImageURL);
+        }
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,9 +122,11 @@ class _DoctorFormScreenState extends State<DoctorFormScreen> {
                                           height: 70,
                                           width: 70,
                                         )
-                                      : Image.file(
-                                          File('$profileImageURL'),
-                                        )),
+                                      : doctorModel.isGoogleUser == true
+                                          ? Image.network('$profileImageURL')
+                                          : Image.file(
+                                              File('$profileImageURL'),
+                                            )),
                             ),
                             InkWell(
                               onTap: () async {
@@ -528,7 +554,6 @@ class _DoctorFormScreenState extends State<DoctorFormScreen> {
   }
 
   Future postDetails() async {
-    User? user = FirebaseAuth.instance.currentUser;
     FirebaseStorage firebaseStorage = FirebaseStorage.instance;
 
     // DownloadURL path
@@ -591,7 +616,7 @@ class _DoctorFormScreenState extends State<DoctorFormScreen> {
         'profileImageDownloadURL': profileImageDownloadURL,
         'identificationImageDownloadURL': identificationImageDownloadURL,
         'licenseImageDownloadURL': licenseImageDownloadURL,
-        'isFormCompleted':true,
+        'isFormCompleted': true,
       });
     });
   }

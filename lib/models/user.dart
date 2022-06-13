@@ -6,6 +6,8 @@ class UserModel {
   bool? isPatient;
   String? password;
   bool? isFormCompleted;
+  bool? isNormalUser;
+  bool? isGoogleUser;
   String? profilePicture;
   String? gender;
   String? contact;
@@ -25,23 +27,28 @@ class UserModel {
     this.contact,
     this.date,
     this.oldReportFile,
+    this.isGoogleUser,
+    this.isNormalUser,
   });
 
   // Receiving Data from Server
   factory UserModel.fromMap(map) {
     return UserModel(
-        uid: map['uid'],
-        email: map['email'],
-        firstName: map['firstName'],
-        lastName: map['lastName'],
-        password: map['password'],
-        isPatient: map['isPatient'],
-        isFormCompleted: map['isFormCompleted'],
-        profilePicture: map['profilePicture'],
-        gender: map['gender'],
-        contact: map['contact'],
-        date: map['dateOfBirth'],
-        oldReportFile: map['oldReportFile']);
+      uid: map['uid'],
+      email: map['email'],
+      firstName: map['firstName'],
+      lastName: map['lastName'],
+      password: map['password'],
+      isPatient: map['isPatient'],
+      isFormCompleted: map['isFormCompleted'],
+      profilePicture: map['profilePicture'],
+      gender: map['gender'],
+      contact: map['contact'],
+      date: map['dateOfBirth'],
+      oldReportFile: map['oldReportFile'],
+      isGoogleUser: map['isGoogleUser'],
+      isNormalUser: map['isNormalUser'],
+    );
   }
 
   // Sending Data to the Server
@@ -58,7 +65,9 @@ class UserModel {
       'gender': gender,
       'contact': contact,
       'dateOfBirth': date,
-      'oldReportFile': oldReportFile
+      'oldReportFile': oldReportFile,
+      'isGoogleUser': isGoogleUser,
+      'isNormalUser': isNormalUser,
     };
   }
 }
@@ -77,6 +86,8 @@ class DoctorModel {
   String? licenseImageDownloadURL;
   String? description;
   bool? isFormCompleted;
+  bool? isGoogleUser;
+  bool? isNormalUser;
 
   DoctorModel({
     this.docid,
@@ -92,6 +103,8 @@ class DoctorModel {
     this.identificationImageDownloadURL,
     this.licenseImageDownloadURL,
     this.description,
+    this.isGoogleUser,
+    this.isNormalUser,
   });
 
   // Receiving Data from Server
@@ -110,6 +123,8 @@ class DoctorModel {
       licenseImageDownloadURL: map['licenseImageDownloadURL'],
       description: map['description'],
       isFormCompleted: map['isFormCompleted'],
+      isGoogleUser: map['isGoogleUser'],
+      isNormalUser: map['isNormalUser'],
     );
   }
 
@@ -129,6 +144,8 @@ class DoctorModel {
       "licenseImageDownloadURL": licenseImageDownloadURL,
       "description": description,
       "isFormCompleted": isFormCompleted,
+      "isGoogleUser": isGoogleUser,
+      "isNormalUser": isNormalUser,
     };
   }
 }
