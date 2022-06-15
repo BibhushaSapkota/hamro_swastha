@@ -21,6 +21,7 @@ import 'package:mero_doctor/screens/otp_screen.dart';
 import 'package:mero_doctor/screens/patient_profile.dart';
 import 'package:mero_doctor/screens/patient_upload_profile.dart';
 import 'package:mero_doctor/screens/splash_screen.dart';
+import 'package:mero_doctor/screens/userHistory.dart';
 import 'package:mero_doctor/screens/walkthrough_screens.dart';
 import 'package:mero_doctor/utils/constants.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +29,7 @@ import 'package:provider/provider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
+
     options: const FirebaseOptions(
       apiKey: "AIzaSyA16vBUjIFFKU21E4lD0G1sO1Sl30gQi9g",
       appId: "1:163614653086:android:2c15337c47bbc249a0598f",
@@ -75,6 +77,7 @@ class MyApp extends StatelessWidget {
           "/forgetpass": (context) => EnterEmailPage(),
           "/sendotp": (context) => EnterOtpPage(),
           '/docorview': (context) => const doctorView(),
+          '/userhistory': (context) => userHistory(),
         },
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
