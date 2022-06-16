@@ -62,8 +62,8 @@ class _ControllerDocState extends State<ControllerDoc> {
   routeDoc() {
     if (isDoctor == true) {
       if (isFormCompleted == true) {
-        return DoctorListScreen();
-        // return const DoctorDashboardScreen();
+        // return DoctorListScreen();
+        return const DoctorDashboardScreen();
         // return DashboardScreen(id: id);
       } else {
         return DoctorFormScreen();
