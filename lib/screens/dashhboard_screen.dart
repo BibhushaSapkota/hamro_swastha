@@ -63,7 +63,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           print(description);
         });
         _doctorListData.doctorList.add(Doctor(
-            fullName!, imageUrl!, '', specialization!, '', description!));
+            id, fullName!, imageUrl!, '', specialization!, '', description!));
       });
     });
   }
