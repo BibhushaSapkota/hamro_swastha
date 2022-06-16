@@ -20,6 +20,7 @@ import 'package:mero_doctor/screens/forgetpass_screen.dart';
 import 'package:mero_doctor/screens/otp_screen.dart';
 import 'package:mero_doctor/screens/patient_profile.dart';
 import 'package:mero_doctor/screens/patient_upload_profile.dart';
+import 'package:mero_doctor/screens/payment_screen.dart';
 import 'package:mero_doctor/screens/splash_screen.dart';
 import 'package:mero_doctor/screens/userHistory.dart';
 import 'package:mero_doctor/screens/walkthrough_screens.dart';
@@ -46,7 +47,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = window.physicalSize.width;
     return ChangeNotifierProvider(
-      create: (context) => GoogleLogInProvider(),
+      create: (context) =>
+          GoogleLogInProvider()
+      ,
       child: MaterialApp(
         routes: {
           "/login": (context) => const LoginPage(),
@@ -58,10 +61,12 @@ class MyApp extends StatelessWidget {
           "/choose_option": (context) => const ChooseScreen(),
           "/login_doctor": (context) => const LoginPageDoc(),
           "/doctorlist": (context) => DoctorListScreen(),
-          "/profile": (context) => ProfileScreen(
+          "/profile": (context) =>
+              ProfileScreen(
                 id: '',
               ),
-          "/dashboard_screen": (context) => DashboardScreen(
+          "/dashboard_screen": (context) =>
+              DashboardScreen(
                 id: '',
               ),
           // '/': (context) => EnterOtpPage(),
@@ -76,13 +81,14 @@ class MyApp extends StatelessWidget {
           "/forgetpass": (context) => EnterEmailPage(),
           "/sendotp": (context) => EnterOtpPage(),
           '/userhistory': (context) => DoctorHistoryScreen(),
+          '/payment': (context) => PaymentScreen(),
         },
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             primaryColor: COLOR_PRIMARY,
             accentColor: COLOR_SECONDARY,
             textTheme:
-                screenWidth < 500 ? TEXT_THEME_SMALL : TEXT_THEME_DEFAULT),
+            screenWidth < 500 ? TEXT_THEME_SMALL : TEXT_THEME_DEFAULT),
       ),
     );
   }
