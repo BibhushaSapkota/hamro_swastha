@@ -271,9 +271,13 @@ class DoctorProfileScreen extends StatelessWidget {
                                       minWidth: screen.width / 2,
                                       height: 50,
                                       child: GestureDetector(
-                                        onTap: ()=>{
-                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>
-                                            CalenderScreen(doctor: doctor!)))
+                                        onTap: () => {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      CalenderScreen(
+                                                          doctor: doctor!)))
                                         },
                                         child: const Text(
                                           "Book an Appointment",

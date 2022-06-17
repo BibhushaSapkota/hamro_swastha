@@ -1,20 +1,37 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/doctor.dart';
 import 'package:mero_doctor/screens/doctor_profile_screen.dart';
 
+// ignore: must_be_immutable
 class DoctorWidget extends StatelessWidget {
+  User? user = FirebaseAuth.instance.currentUser;
   final Doctor doctor;
 
-  const DoctorWidget(this.doctor) : super();
+  DoctorWidget(this.doctor, {Key? key}) : super(key: key);
+  DoctorHistoryModel doctorHistoryModel = DoctorHistoryModel();
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
+      onTap: () async {
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => DoctorProfileScreen(doctor: doctor)));
+        doctorHistoryModel.id = doctor.id;
+        doctorHistoryModel.description = doctor.description;
+        doctorHistoryModel.image = doctor.image;
+        doctorHistoryModel.name = doctor.name;
+        doctorHistoryModel.orgName = doctor.orgName;
+        doctorHistoryModel.schedule = doctor.schedule;
+        doctorHistoryModel.specialization = doctor.specialization;
+        print(doctorHistoryModel.id);
+        await FirebaseFirestore.instance
+            .collection('${user?.uid}')
+            .doc(doctor.id)
+            .set(doctorHistoryModel.toMap());
       },
       child: Container(
         margin: const EdgeInsets.all(8.0),

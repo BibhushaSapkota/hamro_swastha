@@ -1,19 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mero_doctor/models/category.dart';
+import 'package:mero_doctor/screens/doctor_dashboard.dart';
+import 'package:mero_doctor/widgets/doctor_widget.dart';
 
 import 'dashhboard_screen.dart';
 
-class doctorView extends StatefulWidget {
-  const doctorView({Key? key}) : super(key: key);
-
-  @override
-  State<doctorView> createState() => _doctorViewState();
-}
-
-class _doctorViewState extends State<doctorView> {
-  get profilePicture => null;
-  get id => null;
+class doctorView extends StatelessWidget {
+  final DoctorWidgets details;
+  doctorView(this.details, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,14 +25,9 @@ class _doctorViewState extends State<doctorView> {
               color: Colors.black,
             ),
             onPressed: () {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => DashboardScreen(
-                            id: id,
-                            profileUrl: profilePicture,
-                          )),
-                  (route) => false);
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) => const DoctorDashboardScreen()));
+              // Navigator.pop(context);
             },
           ),
           elevation: 0,
@@ -60,7 +51,8 @@ class _doctorViewState extends State<doctorView> {
                     fit: StackFit.expand,
                     children: [
                       CircleAvatar(
-                        child: Image.asset("assets/images/doctor_view.png"),
+                        backgroundColor: Colors.grey[800],
+                        backgroundImage: AssetImage(details.image),
                       ),
                     ],
                   ),
@@ -69,7 +61,7 @@ class _doctorViewState extends State<doctorView> {
                   height: 12,
                 ),
                 Text(
-                  "Mr. Anup Burlakoti",
+                  "${details.name}",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
                 SizedBox(

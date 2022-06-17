@@ -1,6 +1,7 @@
 import 'package:division/division.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/category.dart';
+import 'package:mero_doctor/screens/doctorView.dart';
 
 class DoctorDashBoardWidget extends StatelessWidget {
   final DoctorWidgets category;
@@ -23,9 +24,10 @@ class DoctorDashBoardWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             InkWell(
-              onTap: (){
+              onTap: () {
                 print("pressed");
-                Navigator.of(context).pushNamed("/docorview");
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => doctorView(category)));
               },
               child: CircleAvatar(
                 radius: 30,

@@ -4,9 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/Doctor/login_screens_doc.dart';
 import 'package:mero_doctor/screens/Doctor/register_screens_doctor.dart';
+import 'package:mero_doctor/screens/doctor_dashboard.dart';
 import 'package:mero_doctor/screens/doctor_list_screen.dart';
 import 'package:mero_doctor/screens/doctor_upload_info.dart';
 import 'package:mero_doctor/utils/snack_bar.dart';
+import 'package:mero_doctor/screens/dashhboard_screen.dart';
 
 class LoadingScreenDoc extends StatefulWidget {
   LoadingScreenDoc({Key? key}) : super(key: key);
@@ -60,7 +62,9 @@ class _ControllerDocState extends State<ControllerDoc> {
   routeDoc() {
     if (isDoctor == true) {
       if (isFormCompleted == true) {
-        return DoctorListScreen();
+        // return DoctorListScreen();
+        return const DoctorDashboardScreen();
+        // return DashboardScreen(id: id);
       } else {
         return DoctorFormScreen();
       }

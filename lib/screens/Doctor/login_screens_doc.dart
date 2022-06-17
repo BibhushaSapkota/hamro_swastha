@@ -363,6 +363,7 @@ class _LoginPageDocState extends State<LoginPageDoc> {
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => LoadingScreenDoc()));
       } else {
+        doctorModel.docid = data.uid.toString();
         doctorModel.firstName = data.displayName.toString();
         doctorModel.email = data.email.toString();
         doctorModel.profileImageDownloadURL = data.photoURL.toString();

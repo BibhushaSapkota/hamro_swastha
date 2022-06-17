@@ -26,6 +26,7 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
     data.get().then((value) {
       value.docs.forEach((element) {
         this.doctor_data = DoctorModel.fromMap(element.data());
+        String? id;
         String? name;
         String? imageURL = "";
         String? qualification;
@@ -33,14 +34,16 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
         print(
             "---------------------------- Doctor data ----------------------------");
         setState(() {
+          id = doctor_data.docid.toString();
           name = "${doctor_data.firstName} ${doctor_data.lastName}";
           print("Profile Pic..............");
           if (doctor_data.profileImageDownloadURL != null) {
             imageURL = doctor_data.profileImageDownloadURL;
           }
+          print(id);
           print(imageURL);
         });
-        this.doctor_list.doctorList.add(Doctor(name!, imageURL!, "orgName",
+        this.doctor_list.doctorList.add(Doctor(id!, name!, imageURL!, "orgName",
             "qualification", "12323", "description"));
       });
     });
