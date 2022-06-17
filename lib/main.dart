@@ -8,7 +8,7 @@ import 'package:mero_doctor/screens/Doctor/register_screens_doctor.dart';
 import 'package:mero_doctor/screens/GoogleLogin/google_login.dart';
 import 'package:mero_doctor/screens/Patient/login_screens.dart';
 import 'package:mero_doctor/screens/Patient/register_screen.dart';
-import 'package:mero_doctor/screens/calender_screen.dart';
+import 'package:mero_doctor/screens/bookmark_page.dart';
 import 'package:mero_doctor/screens/choose_screen.dart';
 import 'package:mero_doctor/screens/dashhboard_screen.dart';
 import 'package:mero_doctor/screens/doctorView.dart';
@@ -29,7 +29,6 @@ import 'package:provider/provider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-
     options: const FirebaseOptions(
       apiKey: "AIzaSyA16vBUjIFFKU21E4lD0G1sO1Sl30gQi9g",
       appId: "1:163614653086:android:2c15337c47bbc249a0598f",
@@ -67,7 +66,7 @@ class MyApp extends StatelessWidget {
               ),
           // '/': (context) => EnterOtpPage(),
           // "/": (context) => EnterEmailPage(),
-          '/': (context) => SplashScreen(),
+          // '/': (context) => SplashScreen(),
           '/walkthrough': (context) => const WalkthroughScreen(),
           "/profile_form": (context) => const PatientUploadScreen(),
           "/doctor_form": (context) => const DoctorFormScreen(),
@@ -76,8 +75,9 @@ class MyApp extends StatelessWidget {
           "/doctor_dashboard": (context) => const DoctorDashboardScreen(),
           "/forgetpass": (context) => EnterEmailPage(),
           "/sendotp": (context) => EnterOtpPage(),
-          '/docorview': (context) => const doctorView(),
+          '/doctorview': (context) => const doctorView(),
           '/userhistory': (context) => userHistory(),
+          '/': (context) => const Bookmarked(),
         },
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
