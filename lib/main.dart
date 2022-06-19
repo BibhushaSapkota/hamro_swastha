@@ -48,9 +48,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     double screenWidth = window.physicalSize.width;
     return ChangeNotifierProvider(
-      create: (context) =>
-          GoogleLogInProvider()
-      ,
+      create: (context) => GoogleLogInProvider(),
       child: MaterialApp(
         routes: {
           "/login": (context) => const LoginPage(),
@@ -59,20 +57,19 @@ class MyApp extends StatelessWidget {
           "/register_patient": (context) => const RegisterScreen(),
           "/authDoc": (context) => const ChooseAuthDoc(),
           "/auth": (context) => const ChooseAuth(),
-          "/choose_option": (context) => const ChooseScreen(),
+          "/": (context) => const ChooseScreen(),
+          // "/choose_option": (context) => const ChooseScreen(),
           "/login_doctor": (context) => const LoginPageDoc(),
           "/doctorlist": (context) => DoctorListScreen(),
-          "/profile": (context) =>
-              ProfileScreen(
+          "/profile": (context) => ProfileScreen(
                 id: '',
               ),
-          "/dashboard_screen": (context) =>
-              DashboardScreen(
+          "/dashboard_screen": (context) => DashboardScreen(
                 id: '',
               ),
           // '/': (context) => EnterOtpPage(),
           // "/": (context) => EnterEmailPage(),
-          '/splash': (context) => SplashScreen(),
+          // '/': (context) => SplashScreen(),
           '/walkthrough': (context) => const WalkthroughScreen(),
           "/profile_form": (context) => const PatientUploadScreen(),
           "/doctor_form": (context) => const DoctorFormScreen(),
@@ -83,15 +80,14 @@ class MyApp extends StatelessWidget {
           "/sendotp": (context) => EnterOtpPage(),
           '/userhistory': (context) => DoctorHistoryScreen(),
           '/payment': (context) => PaymentScreen(),
-          '/': (context) => DoctorCategoryScreen(),
-
+          // '/': (context) => DoctorCategoryScreen(),
         },
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             primaryColor: COLOR_PRIMARY,
             accentColor: COLOR_SECONDARY,
             textTheme:
-            screenWidth < 500 ? TEXT_THEME_SMALL : TEXT_THEME_DEFAULT),
+                screenWidth < 500 ? TEXT_THEME_SMALL : TEXT_THEME_DEFAULT),
       ),
     );
   }
