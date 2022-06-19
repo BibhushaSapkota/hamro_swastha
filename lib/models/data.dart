@@ -55,9 +55,9 @@ class DoctorListData {
 
 final List DiseasesList = [
   DiseasesCategory("assets/images/ic_heart.png", 'Cardiology'),
-  DiseasesCategory("assets/images/ic_teeth.png", 'dermatology'),
-  DiseasesCategory("assets/images/ic_eye.png", 'psychiatry'),
-  DiseasesCategory("assets/images/ic_fever.png", 'nephrology'),
+  DiseasesCategory("assets/images/ic_teeth.png", 'Dermatology'),
+  DiseasesCategory("assets/images/ic_eye.png", 'Psychiatry'),
+  DiseasesCategory("assets/images/ic_fever.png", 'Nephrology'),
   // DiseasesCategory("assets/images/ic_cancer.png", 'Rectal Surgeon'),
   // DiseasesCategory("assets/images/ic_covid.png", 'Covid'),
   // DiseasesCategory("assets/images/ic_diarhea.png", 'Gastroenterologists'),

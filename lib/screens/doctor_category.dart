@@ -140,14 +140,14 @@ class _DoctorCategoryScreenState extends State<DoctorCategoryScreen> {
                           itemBuilder: (BuildContext context, index) {
                             return DoctorWidget(cardiology[index]);
                           })
-                      : widget.category.name == 'dermatology'
+                      : widget.category.name == 'Dermatology'
                           ? ListView.builder(
                               padding: const EdgeInsets.all(8),
                               itemCount: dermatology.length,
                               itemBuilder: (BuildContext context, index) {
                                 return DoctorWidget(dermatology[index]);
                               })
-                          : widget.category.name == 'psychiatry'
+                          : widget.category.name == 'Psychiatry'
                               ? ListView.builder(
                                   padding: const EdgeInsets.all(8),
                                   itemCount: psychiatry.length,
