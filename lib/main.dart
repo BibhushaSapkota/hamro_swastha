@@ -12,6 +12,7 @@ import 'package:mero_doctor/screens/bookmark_page.dart';
 import 'package:mero_doctor/screens/choose_screen.dart';
 import 'package:mero_doctor/screens/dashhboard_screen.dart';
 import 'package:mero_doctor/screens/doctorView.dart';
+import 'package:mero_doctor/screens/doctor_category.dart';
 import 'package:mero_doctor/screens/doctor_list_screen.dart';
 import 'package:mero_doctor/screens/doctor_profile_screen.dart';
 import 'package:mero_doctor/screens/doctor_dashboard.dart';
@@ -58,7 +59,8 @@ class MyApp extends StatelessWidget {
           "/register_patient": (context) => const RegisterScreen(),
           "/authDoc": (context) => const ChooseAuthDoc(),
           "/auth": (context) => const ChooseAuth(),
-          "/choose_option": (context) => const ChooseScreen(),
+          "/": (context) => const ChooseScreen(),
+          // "/choose_option": (context) => const ChooseScreen(),
           "/login_doctor": (context) => const LoginPageDoc(),
           "/doctorlist": (context) => DoctorListScreen(),
           "/profile": (context) => ProfileScreen(
@@ -69,7 +71,7 @@ class MyApp extends StatelessWidget {
               ),
           // '/': (context) => EnterOtpPage(),
           // "/": (context) => EnterEmailPage(),
-          '/': (context) => SplashScreen(),
+          // '/': (context) => SplashScreen(),
           '/walkthrough': (context) => const WalkthroughScreen(),
           "/profile_form": (context) => const PatientUploadScreen(),
           "/doctor_form": (context) => const DoctorFormScreen(),
@@ -80,6 +82,7 @@ class MyApp extends StatelessWidget {
           "/sendotp": (context) => EnterOtpPage(),
           '/userhistory': (context) => DoctorHistoryScreen(),
           '/payment': (context) => PaymentScreen(),
+          // '/': (context) => DoctorCategoryScreen(),
         },
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

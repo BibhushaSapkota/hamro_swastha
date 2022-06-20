@@ -55,15 +55,15 @@ class DoctorListData {
 
 final List DiseasesList = [
   DiseasesCategory("assets/images/ic_heart.png", 'Cardiology'),
-  DiseasesCategory("assets/images/ic_teeth.png", 'Dentist'),
-  DiseasesCategory("assets/images/ic_eye.png", 'Eye Specialist'),
-  DiseasesCategory("assets/images/ic_fever.png", 'General'),
-  DiseasesCategory("assets/images/ic_cancer.png", 'Rectal Surgeon'),
-  DiseasesCategory("assets/images/ic_covid.png", 'Covid'),
-  DiseasesCategory("assets/images/ic_diarhea.png", 'Gastroenterologists'),
-  DiseasesCategory("assets/images/ic_anaemia.png", 'Anaemia'),
-  DiseasesCategory("assets/images/ic_tuberclosis.png", 'Tuberculosis'),
-  DiseasesCategory("assets/images/ic_alzheimer.png", 'Alzheimer'),
+  DiseasesCategory("assets/images/ic_teeth.png", 'Dermatology'),
+  DiseasesCategory("assets/images/ic_eye.png", 'Psychiatry'),
+  DiseasesCategory("assets/images/ic_fever.png", 'Nephrology'),
+  // DiseasesCategory("assets/images/ic_cancer.png", 'Rectal Surgeon'),
+  // DiseasesCategory("assets/images/ic_covid.png", 'Covid'),
+  // DiseasesCategory("assets/images/ic_diarhea.png", 'Gastroenterologists'),
+  // DiseasesCategory("assets/images/ic_anaemia.png", 'Anaemia'),
+  // DiseasesCategory("assets/images/ic_tuberclosis.png", 'Tuberculosis'),
+  // DiseasesCategory("assets/images/ic_alzheimer.png", 'Alzheimer'),
 ];
 
 final List DoctorList = [
