@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/user.dart';
+import 'package:mero_doctor/screens/bookmark_page.dart';
 import 'package:mero_doctor/screens/dashhboard_screen.dart';
 
 import '../utils/capatalize.dart';
@@ -136,6 +137,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         "Notification", Icons.notifications_active_outlined),
                     _getCard(
                         "My Prescription", Icons.medical_services_outlined),
+                    InkWell(
+                      child: _getCard("My Bookmark", Icons.bookmark),
+                      onTap: () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => const Bookmarked()));
+                      },
+                    ),
                     _getCard("My Appointment", Icons.app_blocking),
                     _getCard("History", Icons.watch_later_outlined),
                     _getCard("Location", Icons.location_on_outlined),

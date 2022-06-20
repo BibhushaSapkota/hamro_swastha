@@ -7,8 +7,20 @@ class Doctor {
   final String schedule;
   final String description;
 
-  Doctor(this.id, this.name, this.image, this.orgName, this.specialization,
-      this.schedule, this.description);
+  Doctor(
+    this.id,
+    this.name,
+    this.image,
+    this.orgName,
+    this.specialization,
+    this.schedule,
+    this.description,
+  );
+}
+
+class Doctors {
+  String? id;
+  Doctors({this.id});
 }
 
 class DoctorHistoryModel {

@@ -13,84 +13,95 @@ class _ChooseAuthState extends State<ChooseAuth> {
   @override
   Widget build(BuildContext context) {
     final screen = MediaQuery.of(context).size;
-    return SafeArea(child: Scaffold(
+    return SafeArea(
+        child: Scaffold(
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            const SizedBox(height: 80,),
+            const SizedBox(
+              height: 80,
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 85),
-              child: Image.asset("assets/images/mero_health_logo.png",
+              child: Image.asset(
+                "assets/images/mero_health_logo.png",
                 height: 200,
-                width: 200,),
-            ),
-            const SizedBox(height: 120,),
-            Center(
-              child: InkWell(
-                child: MaterialButton(onPressed: (){
-                  Navigator.popAndPushNamed(context, "/login");
-                },
-                child: const Text("Login",
-                  style: TextStyle(
-                    color: COLOR_WHITE,
-                    fontSize: 18,
-                  ),
-                ),
-
-                  color: COLOR_SECONDARY,
-                  minWidth: screen.width /2,
-                  height: 50,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)
-                  ),
-                ),
-
+                width: 200,
               ),
             ),
-            const SizedBox(height: 10,),
-            Text("OR",
-            style: GoogleFonts.poppins(
-              textStyle: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w400,
-                  color: Color(0xff717171),
-
-              )
-            ),),
-            const SizedBox(height: 10,),
+            const SizedBox(
+              height: 120,
+            ),
             Center(
               child: InkWell(
-                child: MaterialButton(onPressed: (){
-                  Navigator.popAndPushNamed(context, "/register");
-                },
-                  child: const Text("Register",
+                child: MaterialButton(
+                  onPressed: () {
+                    Navigator.popAndPushNamed(context, "/login");
+                  },
+                  child: const Text(
+                    "Login",
                     style: TextStyle(
                       color: COLOR_WHITE,
                       fontSize: 18,
                     ),
                   ),
-
                   color: COLOR_SECONDARY,
-                  minWidth: screen.width /2,
+                  minWidth: screen.width / 2,
                   height: 50,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)
-                  ),
+                      borderRadius: BorderRadius.circular(20)),
                 ),
-
               ),
             ),
-            const SizedBox(height: 150,),
-            Text("Powered By Mero Health",
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              "OR",
               style: GoogleFonts.poppins(
-                  textStyle: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.black,
-
-                  )
-              ),),
+                  textStyle: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
+                color: Color(0xff717171),
+              )),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Center(
+              child: InkWell(
+                child: MaterialButton(
+                  onPressed: () {
+                    Navigator.popAndPushNamed(context, "/register");
+                  },
+                  child: const Text(
+                    "Register",
+                    style: TextStyle(
+                      color: COLOR_WHITE,
+                      fontSize: 18,
+                    ),
+                  ),
+                  color: COLOR_SECONDARY,
+                  minWidth: screen.width / 2,
+                  height: 50,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 150,
+            ),
+            Text(
+              "Powered By Mero Health",
+              style: GoogleFonts.poppins(
+                  textStyle: const TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w400,
+                color: Colors.black,
+              )),
+            ),
           ],
         ),
       ),

@@ -46,8 +46,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = window.physicalSize.width;
-    return ChangeNotifierProvider(
-      create: (context) => GoogleLogInProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => GoogleLogInProvider()),
+      ],
       child: MaterialApp(
         routes: {
           "/login": (context) => const LoginPage(),
@@ -67,7 +69,7 @@ class MyApp extends StatelessWidget {
               ),
           // '/': (context) => EnterOtpPage(),
           // "/": (context) => EnterEmailPage(),
-          // '/': (context) => SplashScreen(),
+          '/': (context) => SplashScreen(),
           '/walkthrough': (context) => const WalkthroughScreen(),
           "/profile_form": (context) => const PatientUploadScreen(),
           "/doctor_form": (context) => const DoctorFormScreen(),

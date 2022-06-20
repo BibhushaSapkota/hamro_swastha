@@ -47,7 +47,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
         String? imageUrl = "";
         String? specialization;
         String? description;
+        String? docid = "";
         setState(() {
+          docid = doctorModel.docid.toString();
           firstName = doctorModel.firstName.toString();
           lastName = doctorModel.lastName.toString();
           String capFirst = capitalize(firstName!);
@@ -62,8 +64,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
           description = doctorModel.description;
           print(description);
         });
-        _doctorListData.doctorList.add(Doctor(
-            id, fullName!, imageUrl!, '', specialization!, '', description!));
+        _doctorListData.doctorList.add(Doctor(docid!, fullName!, imageUrl!, '',
+            specialization!, '', description!));
       });
     });
   }
@@ -234,7 +236,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 24),
                     itemCount: _doctorListData.doctorList.length,
                     itemBuilder: (BuildContext context, index) {
-                      return DoctorListView(_doctorListData.doctorList[index]);
+                      return DoctorListView(
+                          _doctorListData.doctorList[index], id);
                     },
                   ))
                 ]),

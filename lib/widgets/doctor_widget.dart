@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/doctor.dart';
 import 'package:mero_doctor/screens/doctor_profile_screen.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class DoctorWidget extends StatelessWidget {
