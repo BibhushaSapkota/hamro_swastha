@@ -53,6 +53,10 @@ class DoctorListData {
   ];
 }
 
+class BookMarked {
+  final List bookMarked = [];
+}
+
 final List DiseasesList = [
   DiseasesCategory("assets/images/ic_heart.png", 'Cardiology'),
   DiseasesCategory("assets/images/ic_teeth.png", 'Dermatology'),

@@ -1,7 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:division/division.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:mero_doctor/models/data.dart';
 import 'package:mero_doctor/models/doctor.dart';
 import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/doctor_profile_screen.dart';
@@ -10,7 +9,6 @@ import 'package:mero_doctor/utils/constants.dart';
 class DoctorListView extends StatefulWidget {
   final Doctor doctor;
   String? uid;
-
   DoctorListView(this.doctor, this.uid) : super();
 
   @override
@@ -22,7 +20,9 @@ class _DoctorListViewState extends State<DoctorListView> {
   final Doctor doctor;
   String? uid;
 
-  bool? isBookMarked = false;
+  final BookMarked _bookMarked = BookMarked();
+
+  final List bookList = [];
   final UserModel _userModel = UserModel();
 
   @override
@@ -110,10 +110,15 @@ class _DoctorListViewState extends State<DoctorListView> {
               child: IconButton(
                 onPressed: () {
                   setState(() {
-                    isBookMarked = !isBookMarked!;
+                    if (_bookMarked.bookMarked.contains(doctor.id)) {
+                      _bookMarked.bookMarked.remove(doctor.id);
+                    } else {
+                      _bookMarked.bookMarked.add(doctor.id);
+                    }
                   });
+                  print(_bookMarked.bookMarked);
                 },
-                icon: isBookMarked!
+                icon: _bookMarked.bookMarked.contains(doctor.id)
                     ? const Icon(
                         Icons.bookmark_add,
                         color: COLOR_PRIMARY,

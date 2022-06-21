@@ -13,6 +13,7 @@ class UserModel {
   String? contact;
   String? date;
   String? oldReportFile;
+  List? bookMarked = [];
 
   UserModel({
     this.uid,
@@ -29,27 +30,27 @@ class UserModel {
     this.oldReportFile,
     this.isGoogleUser,
     this.isNormalUser,
+    this.bookMarked,
   });
 
   // Receiving Data from Server
-  factory UserModel.fromMap(map) {
-    return UserModel(
-      uid: map['uid'],
-      email: map['email'],
-      firstName: map['firstName'],
-      lastName: map['lastName'],
-      password: map['password'],
-      isPatient: map['isPatient'],
-      isFormCompleted: map['isFormCompleted'],
-      profilePicture: map['profilePicture'],
-      gender: map['gender'],
-      contact: map['contact'],
-      date: map['dateOfBirth'],
-      oldReportFile: map['oldReportFile'],
-      isGoogleUser: map['isGoogleUser'],
-      isNormalUser: map['isNormalUser'],
-    );
-  }
+  factory UserModel.fromMap(map) => UserModel(
+        uid: map['uid'],
+        email: map['email'],
+        firstName: map['firstName'],
+        lastName: map['lastName'],
+        password: map['password'],
+        isPatient: map['isPatient'],
+        isFormCompleted: map['isFormCompleted'],
+        profilePicture: map['profilePicture'],
+        gender: map['gender'],
+        contact: map['contact'],
+        date: map['dateOfBirth'],
+        oldReportFile: map['oldReportFile'],
+        isGoogleUser: map['isGoogleUser'],
+        isNormalUser: map['isNormalUser'],
+        bookMarked: map["bookMarked"],
+      );
 
   // Sending Data to the Server
   Map<String, dynamic> toMap() {
@@ -68,6 +69,7 @@ class UserModel {
       'oldReportFile': oldReportFile,
       'isGoogleUser': isGoogleUser,
       'isNormalUser': isNormalUser,
+      'bookMarked': bookMarked,
     };
   }
 }
