@@ -11,6 +11,7 @@ class WalkthroughScreen extends StatefulWidget {
 }
 
 class _WalkthroughScreenState extends State<WalkthroughScreen> {
+
   final controller = PageController();
   bool isLastPage = false;
 
@@ -22,6 +23,7 @@ class _WalkthroughScreenState extends State<WalkthroughScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final Size screen = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -62,11 +64,12 @@ class _WalkthroughScreenState extends State<WalkthroughScreen> {
                   style: TextButton.styleFrom(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50)),
-                      backgroundColor: COLOR_SECONDARY,
+                      backgroundColor:COLOR_SECONDARY,
                       minimumSize: const Size.fromHeight(60)),
-                  child: const Text(
+
+          child: const Text(
                     "Get Started",
-                    style: TextStyle(fontSize: 20, color: Colors.white),
+                    style: TextStyle(fontSize: 20, color: Colors.black),
                   ),
                   onPressed: () async {
                     Navigator.pushReplacementNamed(context, "/choose_option");
