@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:division/division.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/data.dart';
@@ -116,7 +117,6 @@ class _DoctorListViewState extends State<DoctorListView> {
                       _bookMarked.bookMarked.add(doctor.id);
                     }
                   });
-                  print(_bookMarked.bookMarked);
                 },
                 icon: _bookMarked.bookMarked.contains(doctor.id)
                     ? const Icon(

@@ -8,7 +8,6 @@ class DoctorProfileScreen extends StatelessWidget {
 
   const DoctorProfileScreen({Key? key, this.doctor}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     final Size screen = MediaQuery.of(context).size;

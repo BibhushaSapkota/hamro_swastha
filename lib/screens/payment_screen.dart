@@ -1,8 +1,10 @@
 import 'package:division/division.dart';
 import 'package:flutter/material.dart';
+import 'package:mero_doctor/screens/payment.dart';
 
 class PaymentScreen extends StatelessWidget {
   const PaymentScreen({Key? key}) : super(key: key);
+  final String? getPay = "3200";
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +18,13 @@ class PaymentScreen extends StatelessWidget {
             width: screen.width,
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [Color(0xff83EAF1), Color(0xff63A4FF)]),
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color(0xff83EAF1),
+                  Color(0xff63A4FF),
+                ],
+              ),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,7 +34,7 @@ class PaymentScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.arrow_back,
                         size: 32,
                         color: Colors.white,
@@ -43,7 +49,7 @@ class PaymentScreen extends StatelessWidget {
                   ),
                 ),
                 Txt(
-                  'Rs. 3,200',
+                  '$getPay',
                   style: TxtStyle()
                     ..textColor(Colors.white)
                     ..fontSize(25)
@@ -103,7 +109,7 @@ class PaymentScreen extends StatelessWidget {
                                   'assets/images/esewa.png',
                                 ),
                                 Txt(
-                                  'Esewa ',
+                                  'Esewa',
                                   style: TxtStyle()
                                     ..textColor(Colors.black)
                                     ..fontSize(22)
@@ -127,11 +133,20 @@ class PaymentScreen extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                Image.asset(
-                                  'assets/images/khalti.png',
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).pushAndRemoveUntil(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                KhaltiPaymentPage(
+                                                    getPay: getPay)),
+                                        (route) => false);
+                                  },
+                                  child:
+                                      Image.asset('assets/images/khalti.png'),
                                 ),
                                 Txt(
-                                  'Khalti ',
+                                  'Khalti',
                                   style: TxtStyle()
                                     ..textColor(Colors.black)
                                     ..fontSize(22)
@@ -140,10 +155,10 @@ class PaymentScreen extends StatelessWidget {
                               ],
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 50,
                           ),
-                          Center(
+                          const Center(
                             child: Text(
                               "Powered by Mero Health",
                               textAlign: TextAlign.center,

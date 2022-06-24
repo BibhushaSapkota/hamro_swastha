@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class UserModel {
   String? uid;
   String? email;
@@ -70,6 +72,19 @@ class UserModel {
       'isGoogleUser': isGoogleUser,
       'isNormalUser': isNormalUser,
       'bookMarked': bookMarked,
+    };
+  }
+
+  Map<String, dynamic> favoriteList(String date,String amount) {
+    return {
+      'transaction_details': FieldValue.arrayUnion([
+        {
+          'transaction_date': date,
+          'transaction_amount':amount,
+        }
+      ]),
+      
+      
     };
   }
 }

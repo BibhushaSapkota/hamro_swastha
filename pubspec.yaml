@@ -53,6 +53,7 @@ dependencies:
   google_sign_in: ^5.3.3
   provider: ^6.0.2
   get: ^4.6.5
+  khalti_flutter: ^2.0.2
 
 dev_dependencies:
   flutter_test:
