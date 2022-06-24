@@ -1,11 +1,30 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:division/division.dart';
 import 'package:flutter/material.dart';
+import 'package:mero_doctor/models/data.dart';
 import 'package:mero_doctor/models/doctor.dart';
+import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/doctor_profile_screen.dart';
+import 'package:mero_doctor/utils/constants.dart';
 
-class DoctorListView extends StatelessWidget {
+class DoctorListView extends StatefulWidget {
   final Doctor doctor;
-  const DoctorListView(this.doctor) : super();
+  String? uid;
+  DoctorListView(this.doctor, this.uid) : super();
+
+  @override
+  State<DoctorListView> createState() => _DoctorListViewState(doctor, uid);
+}
+
+class _DoctorListViewState extends State<DoctorListView> {
+  _DoctorListViewState(this.doctor, this.uid);
+  final Doctor doctor;
+  String? uid;
+
+  final BookMarked _bookMarked = BookMarked();
+
+  final List bookList = [];
+  final UserModel _userModel = UserModel();
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +64,7 @@ class DoctorListView extends StatelessWidget {
                   child: Container(
                     height: 60,
                     width: 60,
-                    child: doctor.image == ""
+                    child: widget.doctor.image == ""
                         ? const CircleAvatar(
                             radius: 90,
                             backgroundColor: Colors.white,
@@ -55,7 +74,7 @@ class DoctorListView extends StatelessWidget {
                         : CircleAvatar(
                             radius: 90,
                             backgroundColor: Colors.transparent,
-                            backgroundImage: NetworkImage(doctor.image),
+                            backgroundImage: NetworkImage(widget.doctor.image),
                           ),
                   ),
                 ),
@@ -68,7 +87,7 @@ class DoctorListView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Txt(
-                      doctor.name,
+                      widget.doctor.name,
                       style: TxtStyle()
                         ..fontSize(16)
                         ..textColor(const Color(0xff7f819b))
@@ -76,7 +95,7 @@ class DoctorListView extends StatelessWidget {
                         ..textColor(Colors.black),
                     ),
                     Txt(
-                      doctor.specialization,
+                      widget.doctor.specialization,
                       style: TxtStyle()
                         ..textColor(const Color(0xff5d5ba3))
                         ..fontWeight(FontWeight.bold)
@@ -85,6 +104,31 @@ class DoctorListView extends StatelessWidget {
                     ),
                   ],
                 ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 12, 0),
+              child: IconButton(
+                onPressed: () {
+                  setState(() {
+                    if (_bookMarked.bookMarked.contains(doctor.id)) {
+                      _bookMarked.bookMarked.remove(doctor.id);
+                    } else {
+                      _bookMarked.bookMarked.add(doctor.id);
+                    }
+                  });
+                },
+                icon: _bookMarked.bookMarked.contains(doctor.id)
+                    ? const Icon(
+                        Icons.bookmark_add,
+                        color: COLOR_PRIMARY,
+                        size: 35,
+                      )
+                    : const Icon(
+                        Icons.bookmark_add_outlined,
+                        size: 35,
+                        color: COLOR_GREY,
+                      ),
               ),
             ),
           ],

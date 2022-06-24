@@ -51,6 +51,7 @@ class _PatientUploadScreenState extends State<PatientUploadScreen> {
       setState(() {
         if (userModel.isGoogleUser!) {
           profileImage = "${user?.photoURL}";
+          phoneController.text = "${user?.phoneNumber}";
         }
       });
     });
