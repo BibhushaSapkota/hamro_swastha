@@ -440,27 +440,27 @@ class _PatientUploadScreenState extends State<PatientUploadScreen> {
                                     } else {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
-                                              SnackMessage.snackBarDateFail);
+                                              SnackMessage.errorSnackBar("Date of Birth is required!"));
                                       return;
                                     }
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackMessage.snackBarPhoneFail);
+                                        SnackMessage.errorSnackBar("Phone Number is required!"));
                                     return;
                                   }
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackMessage.snackBarGenderFail);
+                                      SnackMessage.errorSnackBar("Gender is required!"));
                                   return;
                                 }
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackMessage.snackBarDateFail);
+                                    SnackMessage.errorSnackBar("Date of Birth is required!"));
                                 return;
                               }
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackMessage.snackBarProfileFail);
+                                  SnackMessage.errorSnackBar("Profile is required!"));
                               return;
                             }
                           },
