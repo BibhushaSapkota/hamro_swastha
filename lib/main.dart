@@ -87,7 +87,6 @@ class MyApp extends StatelessWidget {
                 "/profile_form": (context) => const PatientUploadScreen(),
                 "/doctor_form": (context) => const DoctorFormScreen(),
                 "/logindoc": (context) => const LoginPage(),
-                "/doctorprofile": (context) => const DoctorProfileScreen(),
                 "/doctor_dashboard": (context) => const DoctorDashboardScreen(),
                 "/forgetpass": (context) => EnterEmailPage(),
                 "/sendotp": (context) => EnterOtpPage(),
