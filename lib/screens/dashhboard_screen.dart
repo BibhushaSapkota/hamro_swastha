@@ -5,8 +5,11 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:mero_doctor/models/data.dart';
 import 'package:mero_doctor/models/doctor.dart';
 import 'package:mero_doctor/models/user.dart';
+import 'package:mero_doctor/screens/HomepagePatient.dart';
+import 'package:mero_doctor/screens/SearchPageDoctor.dart';
 import 'package:mero_doctor/screens/patient_profile.dart';
 import 'package:mero_doctor/utils/capatalize.dart';
+import 'package:mero_doctor/utils/constants.dart';
 import 'package:mero_doctor/widgets/doctor_category_widget.dart';
 import 'package:mero_doctor/widgets/doctor_list_view.dart';
 import 'package:mero_doctor/widgets/doctor_widget.dart';
@@ -75,7 +78,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
     final screen = MediaQuery.of(context).size;
     return SafeArea(
         child: Scaffold(
-
             bottomNavigationBar: const GNav(
               activeColor: Color(0xffd36868),
               color: Colors.black45,
@@ -159,58 +161,52 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 16),
-                  Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 24),
-                    alignment: Alignment.center,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(50),
-                        boxShadow: [
-                          BoxShadow(
-                            offset: const Offset(0, 10),
-                            blurRadius: 20,
-                            color: Colors.grey.withOpacity(0.23),
-                          )
-                        ]),
-                    child: Row(
-                      children: [
-                        const Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 20),
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: 'Search for a doctor',
-                                hintStyle: TextStyle(
-                                  fontFamily: 'quicksand',
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14,
-                                ),
-                                enabledBorder: InputBorder.none,
-                                focusedBorder: InputBorder.none,
-                              ),
+                  const SizedBox(height: 25),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                        child: MaterialButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const PatientMessagePage()));
+                          },
+                          color: COLOR_SECONDARY,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50.0),
+                          ),
+                          child: Text('Messages',
                               style: TextStyle(
-                                fontFamily: 'quicksand',
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14,
-                              ),
-                            ),
+                                  // decoration: TextDecoration.underline,
+                                  color: Colors.white,
+                                  fontSize: 15)),
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
+                        child: MaterialButton(
+                          color: COLOR_SECONDARY,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(50.0),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const SearchPageDoctor()));
+                          },
+                          child: Text(
+                            'Search Doctors by name.',
+                            style: TextStyle(color: Colors.white, fontSize: 15),
                           ),
                         ),
-                        Parent(
-                          style: ParentStyle()
-                            ..height(60)
-                            ..width(70)
-                            ..background.color(const Color(0xfff58173))
-                            ..borderRadius(all: 40),
-                          child: const Icon(
-                            Icons.search,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ],
-                    ),
+                      )
+                    ],
                   ),
                   const SizedBox(height: 40),
                   SizedBox(

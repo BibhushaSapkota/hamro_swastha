@@ -1,12 +1,61 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mero_doctor/models/chatRoom.dart';
 import 'package:mero_doctor/models/models.dart';
 import 'package:mero_doctor/screens/calender_screen.dart';
+import 'package:mero_doctor/screens/chatRoom.dart';
 import 'package:mero_doctor/utils/constants.dart';
+import 'package:uuid/uuid.dart';
 
 class DoctorProfileScreen extends StatelessWidget {
   final Doctor? doctor;
 
-  const DoctorProfileScreen({Key? key, this.doctor}) : super(key: key);
+  var uid = Uuid();
+
+  User? user = FirebaseAuth.instance.currentUser;
+  DoctorProfileScreen({Key? key, this.doctor}) : super(key: key);
+
+  // Creating CHatRoom For two User
+  Future<ChatRoomModel?> getChatRoomModel(Doctor targetUser) async {
+    ChatRoomModel? chatRoom;
+
+    QuerySnapshot snapshot = await FirebaseFirestore.instance
+        .collection('chatrooms')
+        .where("participants.${user!.uid}", isEqualTo: true)
+        .where("participants.${targetUser.id}", isEqualTo: true)
+        .get();
+
+    if (snapshot.docs.length > 0) {
+      print("Chat Room Exists");
+      var docData = snapshot.docs[0].data();
+      ChatRoomModel existingChatRoom =
+          ChatRoomModel.fromMap(docData as Map<String, dynamic>);
+      // print('My id........');
+      // print(user?.uid);
+      // print('Targets id......');
+      // print(targetUser.uid);
+      chatRoom = existingChatRoom;
+    } else {
+      ChatRoomModel newChatRoom = ChatRoomModel(
+          chatroomId: uid.v1(),
+          lastMessage: "",
+          roomCreated: DateTime.now(),
+          participants: {
+            user!.uid.toString(): true,
+            targetUser.id.toString(): true,
+          });
+
+      await FirebaseFirestore.instance
+          .collection("chatrooms")
+          .doc(newChatRoom.chatroomId)
+          .set(newChatRoom.toMap());
+      print("New Chat room created!");
+      chatRoom = newChatRoom;
+    }
+
+    return chatRoom;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -137,11 +186,28 @@ class DoctorProfileScreen extends StatelessWidget {
                                         label: const Text('Video Call'),
                                       ),
                                     ),
+// ------------------------------------ Chat function ------------------------------------
                                     SizedBox(
                                       height: 50,
                                       width: screen.width / 2 - 30,
                                       child: ElevatedButton.icon(
-                                        onPressed: () {},
+                                        onPressed: () async {
+                                          ChatRoomModel? chatRoomModel =
+                                              await getChatRoomModel(doctor!);
+                                          if (chatRoomModel != null) {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ChatRoom(
+                                                          username:
+                                                              doctor!.name,
+                                                          targetUser: doctor,
+                                                          chatroom:
+                                                              chatRoomModel,
+                                                        )));
+                                          }
+                                        },
                                         icon: const Icon(
                                           Icons.chat,
                                           size: 24.0,

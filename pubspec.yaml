@@ -54,6 +54,7 @@ dependencies:
   provider: ^6.0.2
   get: ^4.6.5
   khalti_flutter: ^2.0.2
+  uuid: ^3.0.6
 
 dev_dependencies:
   flutter_test:
