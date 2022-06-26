@@ -505,28 +505,28 @@ class _DoctorFormScreenState extends State<DoctorFormScreen> {
                                           } else {
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(SnackMessage
-                                                    .snackBarPositionFail);
+                                                    .errorSnackBar("Doctor Post is required!"));
 
                                             return;
                                           }
                                         } else {
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(SnackMessage
-                                                  .snackBarSpecializationFail);
+                                                  .errorSnackBar("Doctor Specialization is required!"));
 
                                           return;
                                         }
                                       } else {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(SnackMessage
-                                                .snackBarLicenseFail);
+                                                .errorSnackBar("Doctor License file is required!"));
 
                                         return;
                                       }
                                     } else {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(SnackMessage
-                                              .snackBarIdentificationFail);
+                                              .errorSnackBar("Doctor Identification file is required!"));
                                       return;
                                     }
                                   },

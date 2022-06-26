@@ -419,7 +419,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         .doc(user.uid)
         .set(userModel.toMap());
     ScaffoldMessenger.of(context)
-        .showSnackBar(SnackMessage.snackBarAccountSuccess);
+        .showSnackBar(SnackMessage.successSnackBar("Account Created Successful."));
     Navigator.pushAndRemoveUntil(context,
         MaterialPageRoute(builder: (context) => LoginPage()), (route) => false);
   }

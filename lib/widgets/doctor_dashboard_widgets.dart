@@ -4,7 +4,7 @@ import 'package:mero_doctor/models/category.dart';
 import 'package:mero_doctor/screens/doctorView.dart';
 
 class DoctorDashBoardWidget extends StatelessWidget {
-  final DoctorWidgets category;
+  final Map<String, dynamic> category;
 
   const DoctorDashBoardWidget(this.category) : super();
 
@@ -26,25 +26,25 @@ class DoctorDashBoardWidget extends StatelessWidget {
             InkWell(
               onTap: () {
                 print("pressed");
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => doctorView(category)));
+                // Navigator.of(context).pushReplacement(MaterialPageRoute(
+                //     builder: (context) => doctorView()));
               },
               child: CircleAvatar(
                 radius: 30,
-                backgroundImage: AssetImage(category.image),
+                backgroundImage: AssetImage(category["profilePicture"]),
               ),
             ),
             Column(
               children: [
                 Txt(
-                  category.name,
+                  category["username"],
                   style: TxtStyle()
                     ..fontSize(16)
                     ..textColor(Colors.black)
                     ..fontFamily('quicksand'),
                 ),
                 Txt(
-                  category.time,
+                  category["time"],
                   style: TxtStyle()
                     ..fontSize(16)
                     ..textColor(Colors.black)
