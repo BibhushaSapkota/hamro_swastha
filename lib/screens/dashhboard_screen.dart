@@ -75,6 +75,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     final screen = MediaQuery.of(context).size;
     return SafeArea(
         child: Scaffold(
+
             bottomNavigationBar: const GNav(
               activeColor: Color(0xffd36868),
               color: Colors.black45,

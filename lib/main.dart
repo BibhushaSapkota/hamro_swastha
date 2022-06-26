@@ -7,6 +7,7 @@ import 'package:mero_doctor/screens/Choose_Authencation/Choose_Authencation_pati
 import 'package:mero_doctor/screens/Doctor/login_screens_doc.dart';
 import 'package:mero_doctor/screens/Doctor/register_screens_doctor.dart';
 import 'package:mero_doctor/screens/GoogleLogin/google_login.dart';
+import 'package:mero_doctor/screens/NotificaitonView.dart';
 import 'package:mero_doctor/screens/Patient/login_screens.dart';
 import 'package:mero_doctor/screens/Patient/register_screen.dart';
 import 'package:mero_doctor/screens/choose_screen.dart';
@@ -45,6 +46,53 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = window.physicalSize.width;
+<<<<<<< HEAD
+    return ChangeNotifierProvider(
+      create: (context) => GoogleLogInProvider(),
+      child: MaterialApp(
+        routes: {
+          "/login": (context) => const LoginPage(),
+          "/register": (context) => const RegisterScreen(),
+          "/register_doctor": (context) => RegisterScreenDoc(),
+          "/register_patient": (context) => const RegisterScreen(),
+          "/authDoc": (context) => const ChooseAuthDoc(),
+          "/auth": (context) => const ChooseAuth(),
+          "/choose_option": (context) => const ChooseScreen(),
+          "/login_doctor": (context) => const LoginPageDoc(),
+          "/doctorlist": (context) => DoctorListScreen(),
+          "/profile": (context) => ProfileScreen(
+                id: '',
+              ),
+          "/": (context) => DashboardScreen(
+                id: '',
+              ),
+
+          // dashboard_screen
+          // '/': (context) => EnterOtpPage(),
+          // "/": (context) => EnterEmailPage(),
+          '/': (context) => SplashScreen(),
+          '/walkthrough': (context) => const WalkthroughScreen(),
+          "/profile_form": (context) => const PatientUploadScreen(),
+          "/doctor_form": (context) => const DoctorFormScreen(),
+          "/logindoc": (context) => const LoginPage(),
+          "/doctorprofile": (context) => const DoctorProfileScreen(),
+          "/doctor_dashboard": (context) => const DoctorDashboardScreen(),
+          "/forgetpass": (context) => EnterEmailPage(),
+          "/sendotp": (context) => EnterOtpPage(),
+          '/docorview': (context) => const doctorView(),
+          '/userhistory': (context) => userHistory(),
+
+           '/notificationPatient': (context) => NotificationView(),
+
+        },
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            primaryColor: COLOR_PRIMARY,
+            accentColor: COLOR_SECONDARY,
+            textTheme:
+                screenWidth < 500 ? TEXT_THEME_SMALL : TEXT_THEME_DEFAULT),
+      ),
+=======
 
     return MultiProvider(
       providers: [
@@ -104,6 +152,7 @@ class MyApp extends StatelessWidget {
                       : TEXT_THEME_DEFAULT),
             );
           }),
+>>>>>>> 3a8e03c73e1c015b054750d1880ade4728fffe6f
     );
   }
 }
