@@ -88,7 +88,6 @@ class _KhaltiPaymentPageState extends State<KhaltiPaymentPage> {
                     ),
                     preferences: [
                       PaymentPreference.khalti,
-                      PaymentPreference.connectIPS,
                     ],
                     onSuccess: (su) {
                       String date = DateTime.now().toString();

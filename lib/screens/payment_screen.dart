@@ -1,6 +1,7 @@
 import 'package:division/division.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/screens/payment.dart';
+import 'package:mero_doctor/utils/constants.dart';
 
 class PaymentScreen extends StatelessWidget {
   const PaymentScreen({Key? key}) : super(key: key);
@@ -81,7 +82,11 @@ class PaymentScreen extends StatelessWidget {
                               ..margin(left: 24, top: 16)
                               ..fontWeight(FontWeight.bold),
                           ),
-                          Image.asset('assets/images/payment.png'),
+                          Image.asset(
+                            'assets/images/payment.png',
+                            height: screen.height / 4,
+                            width: screen.width,
+                          ),
                           Txt(
                             'Payment Methods',
                             style: TxtStyle()
@@ -90,69 +95,40 @@ class PaymentScreen extends StatelessWidget {
                               ..margin(left: 24, top: 12)
                               ..fontWeight(FontWeight.bold),
                           ),
-                          Parent(
-                            style: ParentStyle()
-                              ..height(70)
-                              ..width(screen.width)
-                              ..margin(top: 18, left: 22, right: 22)
-                              ..background.color(Colors.white)
-                              ..boxShadow(
-                                color: const Color(0xffdddef2),
-                                blur: 20,
-                                offset: const Offset(0, 10),
-                              )
-                              ..borderRadius(all: 15),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Image.asset(
-                                  'assets/images/esewa.png',
-                                ),
-                                Txt(
-                                  'Esewa',
-                                  style: TxtStyle()
-                                    ..textColor(Colors.black)
-                                    ..fontSize(22)
-                                    ..fontWeight(FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Parent(
-                            style: ParentStyle()
-                              ..height(70)
-                              ..width(screen.width)
-                              ..margin(top: 30, left: 22, right: 22)
-                              ..background.color(Colors.white)
-                              ..boxShadow(
-                                color: const Color(0xffdddef2),
-                                blur: 10,
-                                offset: const Offset(0, 10),
-                              )
-                              ..borderRadius(all: 15),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.of(context).pushAndRemoveUntil(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                KhaltiPaymentPage(
-                                                    getPay: getPay)),
-                                        (route) => false);
-                                  },
-                                  child:
-                                      Image.asset('assets/images/khalti.png'),
-                                ),
-                                Txt(
-                                  'Khalti',
-                                  style: TxtStyle()
-                                    ..textColor(Colors.black)
-                                    ..fontSize(22)
-                                    ..fontWeight(FontWeight.bold),
-                                ),
-                              ],
+                          InkWell(
+                            onTap: () {
+                              Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          KhaltiPaymentPage(getPay: getPay)),
+                                  (route) => false);
+                            },
+                            child: Parent(
+                              style: ParentStyle()
+                                ..height(80)
+                                ..width(screen.width)
+                                ..margin(top: 30, left: 22, right: 22)
+                                ..background.color(Colors.white)
+                                ..boxShadow(
+                                  color: const Color(0xffdddef2),
+                                  blur: 10,
+                                  offset: const Offset(0, 10),
+                                )
+                                ..borderRadius(all: 15),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset('assets/images/khalti.png'),
+
+                                  // Txt(
+                                  //   'Khalti',
+                                  //   style: TxtStyle()
+                                  //     ..textColor(Colors.black)
+                                  //     ..fontSize(22)
+                                  //     ..fontWeight(FontWeight.bold),
+                                  // ),
+                                ],
+                              ),
                             ),
                           ),
                           const SizedBox(
