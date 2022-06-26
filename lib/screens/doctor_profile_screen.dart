@@ -1,30 +1,16 @@
-<<<<<<< HEAD
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/chatRoom.dart';
-=======
-import 'package:division/division.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
->>>>>>> 24eeaa5a72a67f55e1917f8f9c08d95959b961d1
 import 'package:mero_doctor/models/models.dart';
 import 'package:mero_doctor/screens/calender_screen.dart';
 import 'package:mero_doctor/screens/chatRoom.dart';
 import 'package:mero_doctor/utils/constants.dart';
 import 'package:uuid/uuid.dart';
 
-class DoctorProfileScreen extends StatefulWidget {
-  final Doctor doctor;
+class DoctorProfileScreen extends StatelessWidget {
+  final Doctor? doctor;
 
-  const DoctorProfileScreen({Key? key, required this.doctor}) : super(key: key);
-
-  @override
-  State<DoctorProfileScreen> createState() => _DoctorProfileScreenState();
-}
-
-<<<<<<< HEAD
   var uid = Uuid();
 
   User? user = FirebaseAuth.instance.currentUser;
@@ -70,10 +56,6 @@ class DoctorProfileScreen extends StatefulWidget {
 
     return chatRoom;
   }
-=======
-class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
-  double rating = 0;
->>>>>>> 24eeaa5a72a67f55e1917f8f9c08d95959b961d1
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +86,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                       ),
                     ),
                     Center(
-                      child: widget.doctor.image == ""
+                      child: doctor!.image == ""
                           ? const CircleAvatar(
                               radius: 90,
                               backgroundColor: Colors.white,
@@ -114,8 +96,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                           : CircleAvatar(
                               radius: 90,
                               backgroundColor: Colors.transparent,
-                              backgroundImage:
-                                  NetworkImage(widget.doctor.image),
+                              backgroundImage: NetworkImage(doctor!.image),
                             ),
                     ),
                   ],
@@ -156,17 +137,17 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                           child: Column(
                             children: [
                               Text(
-                                widget.doctor.name,
+                                doctor!.name,
                                 style: const TextStyle(
                                     fontSize: 13, color: Colors.white),
                               ),
                               Text(
-                                widget.doctor.orgName,
+                                doctor!.orgName,
                                 style: const TextStyle(
                                     fontSize: 13, color: Colors.white),
                               ),
                               Text(
-                                widget.doctor.specialization,
+                                doctor!.specialization,
                                 style: const TextStyle(
                                     fontSize: 13, color: Colors.white),
                               ),
@@ -242,46 +223,22 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                   ],
                                 ),
                                 const SizedBox(height: 10),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      widget.doctor.orgName,
-                                      style: const TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    RatingBar.builder(
-                                      initialRating: 4,
-                                      minRating: 1,
-                                      direction: Axis.horizontal,
-                                      allowHalfRating: false,
-                                      itemCount: 5,
-                                      itemSize: 20,
-                                      itemBuilder: (context, _) => const Icon(
-                                        Icons.star,
-                                        color: Colors.amber,
-                                      ),
-                                      updateOnDrag: true,
-                                      onRatingUpdate: (rating) => setState(
-                                        () {
-                                          this.rating = rating;
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 10),
                                 Text(
-                                  "About " + widget.doctor.name,
+                                  doctor!.orgName,
                                   style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 const SizedBox(height: 10),
                                 Text(
-                                  widget.doctor.description,
+                                  "About " + doctor!.name,
+                                  style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(height: 10),
+                                Text(
+                                  doctor!.description,
                                   style: const TextStyle(
                                     fontSize: 14,
                                     color: Colors.black54,
@@ -382,13 +339,11 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                       child: GestureDetector(
                                         onTap: () => {
                                           Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  CalenderScreen(
-                                                      doctor: widget.doctor),
-                                            ),
-                                          )
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      CalenderScreen(
+                                                          doctor: doctor!)))
                                         },
                                         child: const Text(
                                           "Book an Appointment",
@@ -407,7 +362,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                     ],
                   ),
                 ),
-              ),
+              )
             ],
           ),
         ),
