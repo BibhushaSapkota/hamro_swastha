@@ -50,7 +50,7 @@ class _LoginPageDocState extends State<LoginPageDoc> {
                 // if (obj.isPatient(lowerEmail) == 'true')
                 //   {
                 ScaffoldMessenger.of(context)
-                    .showSnackBar(SnackMessage.snackBarSucess),
+                    .showSnackBar(SnackMessage.successSnackBar("Login Successful.")),
                 Navigator.of(context).pushReplacement(
                     MaterialPageRoute(builder: (context) => LoadingScreenDoc()))
                 // }

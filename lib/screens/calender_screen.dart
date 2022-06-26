@@ -1,8 +1,15 @@
+import 'dart:collection';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:division/division.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mero_doctor/models/doctor.dart';
+import 'package:mero_doctor/models/user.dart';
 import 'package:table_calendar/table_calendar.dart';
+
+import '../utils/snack_bar.dart';
 
 class CalenderScreen extends StatefulWidget {
   final Doctor doctor;
@@ -15,6 +22,10 @@ class CalenderScreen extends StatefulWidget {
 
 class _CalenderScreenState extends State<CalenderScreen> {
   List<String> appointmentDate = [];
+  int selectedIndex = -1;
+  String selectedDate = "";
+  final CollectionReference data =
+      FirebaseFirestore.instance.collection("doctors");
 
   @override
   void initState() {
@@ -22,8 +33,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
   }
 
   getAppointmentDate(String selectedDate) {
-    CollectionReference data = FirebaseFirestore.instance.collection("doctors");
-    data.doc("DXSVyLt6fRZh3zqjELdI8q9Divq1").snapshots().listen((snapshot) {
+    data.doc(widget.doctor.id).snapshots().listen((snapshot) {
       Map<String, dynamic> data = snapshot["appointmentDate"];
       if (data.containsKey(selectedDate)) {
         appointmentDate = List.from(data[selectedDate]);
@@ -32,6 +42,36 @@ class _CalenderScreenState extends State<CalenderScreen> {
       }
       setState(() => {appointmentDate = appointmentDate});
     });
+  }
+
+  bookAppointment() async {
+    if (selectedIndex == -1) return;
+    var user = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+
+    UserModel userModel = UserModel.fromMap(user.data());
+    String name = "${userModel.firstName}  ${userModel.lastName}";
+
+    Map<String, String> appointment = {
+      "date": selectedDate,
+      "time": appointmentDate[selectedIndex],
+      "username": name,
+      "profilePicture": userModel.profilePicture ?? "",
+    };
+
+    try {
+      await data
+          .doc(widget.doctor.id)
+          .collection("upcomingAppointment")
+          .add(appointment);
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackMessage.successSnackBar("Appointment booked successfully!!"));
+    } catch (ex) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackMessage.successSnackBar(ex.toString()));
+    }
   }
 
   @override
@@ -70,9 +110,10 @@ class _CalenderScreenState extends State<CalenderScreen> {
                 lastDay: DateTime.utc(2030, 3, 14),
                 focusedDay: DateTime.now(),
                 onDaySelected: (selectedDay, focusedDay) {
-                  String selectedDate =
+                  String selectedDat =
                       "${selectedDay.year}-${selectedDay.month < 10 ? "0${selectedDay.month}" : selectedDay.month}-${selectedDay.day}";
-                  getAppointmentDate(selectedDate);
+                  setState(() => {selectedDate = selectedDat});
+                  getAppointmentDate(selectedDat);
                 },
               ),
             ),
@@ -106,13 +147,24 @@ class _CalenderScreenState extends State<CalenderScreen> {
                           child: SizedBox(
                             height: 86,
                             child: appointmentDate.isEmpty
-                                ? Text("No Time Slot Available.")
-                                : ListView(
+                                ? const Text("No Time Slot Available.")
+                                : ListView.builder(
+                                    itemCount: appointmentDate.length,
                                     shrinkWrap: true,
                                     scrollDirection: Axis.horizontal,
-                                    children: appointmentDate
-                                        .map((e) => _getCategoryInfo(e))
-                                        .toList(),
+                                    itemBuilder: (context, index) {
+                                      return _getCategoryInfo(
+                                          appointmentDate[index],
+                                          Gestures()
+                                            ..onTap(
+                                              () {
+                                                setState(() =>
+                                                    {selectedIndex = index});
+                                              },
+                                            ),
+                                          index,
+                                          selectedIndex);
+                                    },
                                   ),
                           ),
                         ),
@@ -121,6 +173,8 @@ class _CalenderScreenState extends State<CalenderScreen> {
                         ),
                         Center(
                           child: Parent(
+                              gesture: Gestures()
+                                ..onTap(() => bookAppointment()),
                               style: ParentStyle()
                                 ..height(52)
                                 ..elevation(3, color: Colors.black12)
@@ -164,21 +218,26 @@ class _CalenderScreenState extends State<CalenderScreen> {
   }
 }
 
-Widget _getCategoryInfo(String value) {
+Widget _getCategoryInfo(
+    String value, Gestures gesture, int index, selectedIndex) {
   return Parent(
-      style: ParentStyle()
-        ..height(80)
-        ..width(92)
-        ..elevation(3, color: Colors.grey.withOpacity(0.5))
-        ..margin(right: 10)
-        ..borderRadius(all: 10)
-        ..background.color(const Color(0xffdaebff)),
-      child: Txt(
-        value,
-        style: TxtStyle()
-          ..margin(top: 10)
-          ..alignmentContent.center()
-          ..fontSize(16)
-          ..textColor(Colors.black),
-      ));
+    gesture: gesture,
+    style: ParentStyle()
+      ..height(80)
+      ..width(92)
+      ..elevation(3, color: Colors.grey.withOpacity(0.5))
+      ..margin(right: 10)
+      ..borderRadius(all: 10)
+      ..background.color((index == selectedIndex)
+          ? const Color(0xff90a7c7)
+          : const Color(0xffdaebff)),
+    child: Txt(
+      value,
+      style: TxtStyle()
+        ..margin(top: 10)
+        ..alignmentContent.center()
+        ..fontSize(16)
+        ..textColor(Colors.black),
+    ),
+  );
 }

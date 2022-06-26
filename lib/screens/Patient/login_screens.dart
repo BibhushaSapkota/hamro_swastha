@@ -33,8 +33,8 @@ class _LoginPageState extends State<LoginPage> {
       dynamic result = await _auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((uid) => {
-                ScaffoldMessenger.of(context)
-                    .showSnackBar(SnackMessage.snackBarSucess),
+                ScaffoldMessenger.of(context).showSnackBar(
+                    SnackMessage.successSnackBar("Login Successful.")),
                 Navigator.of(context).pushReplacement(
                     MaterialPageRoute(builder: (context) => LoaderScreen())),
                 Fluttertoast.showToast(msg: "Login Successful"),
@@ -45,16 +45,8 @@ class _LoginPageState extends State<LoginPage> {
         setState(() {
           loading = false;
         });
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text(
-            "Invalid Email or Password",
-            style: TextStyle(
-              fontWeight: FontWeight.w400,
-              color: Colors.white,
-            ),
-          ),
-          backgroundColor: Colors.redAccent,
-        ));
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackMessage.errorSnackBar("Invalid Email or Password"));
       });
 
       if (result != null) {

@@ -51,6 +51,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => GoogleLogInProvider()),
       ],
+<<<<<<< HEAD
       child: KhaltiScope(
           publicKey: 'test_public_key_2ee3f8daa2844fbb9681b6c45ebffb05',
           builder: (context, navigatorKey) {
@@ -105,6 +106,47 @@ class MyApp extends StatelessWidget {
                       : TEXT_THEME_DEFAULT),
             );
           }),
+=======
+      child: MaterialApp(
+        routes: {
+          "/login": (context) => const LoginPage(),
+          "/register": (context) => const RegisterScreen(),
+          "/register_doctor": (context) => RegisterScreenDoc(),
+          "/register_patient": (context) => const RegisterScreen(),
+          "/authDoc": (context) => const ChooseAuthDoc(),
+          "/auth": (context) => const ChooseAuth(),
+          "/": (context) => const ChooseScreen(),
+          // "/choose_option": (context) => const ChooseScreen(),
+          "/login_doctor": (context) => const LoginPageDoc(),
+          "/doctorlist": (context) => DoctorListScreen(),
+          "/profile": (context) => ProfileScreen(
+                id: '',
+              ),
+          "/dashboard_screen": (context) => DashboardScreen(
+                id: '',
+              ),
+          // '/': (context) => EnterOtpPage(),
+          // "/": (context) => EnterEmailPage(),
+          // '/': (context) => SplashScreen(),
+          '/walkthrough': (context) => const WalkthroughScreen(),
+          "/profile_form": (context) => const PatientUploadScreen(),
+          "/doctor_form": (context) => const DoctorFormScreen(),
+          "/logindoc": (context) => const LoginPage(),
+          "/doctor_dashboard": (context) => const DoctorDashboardScreen(),
+          "/forgetpass": (context) => EnterEmailPage(),
+          "/sendotp": (context) => EnterOtpPage(),
+          '/userhistory': (context) => DoctorHistoryScreen(),
+          '/payment': (context) => PaymentScreen(),
+          // '/': (context) => DoctorCategoryScreen(),
+        },
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            primaryColor: COLOR_PRIMARY,
+            accentColor: COLOR_SECONDARY,
+            textTheme:
+                screenWidth < 500 ? TEXT_THEME_SMALL : TEXT_THEME_DEFAULT),
+      ),
+>>>>>>> 24eeaa5a72a67f55e1917f8f9c08d95959b961d1
     );
   }
 }

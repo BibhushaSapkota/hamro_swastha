@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:division/division.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,26 @@ class DoctorDashboardScreen extends StatefulWidget {
 }
 
 class _DoctorDashboardScreenState extends State<DoctorDashboardScreen> {
+  List<Map<String, dynamic>> appointmentList = [];
+  final CollectionReference data =
+      FirebaseFirestore.instance.collection("doctors");
+
+  @override
+  void initState() {
+    super.initState();
+    getUpcomingAppointment();
+  }
+
+  getUpcomingAppointment() async {
+    var result = await data
+        .doc("DXSVyLt6fRZh3zqjELdI8q9Divq1")
+        .collection("upcomingAppointment")
+        .get();
+    for (var doc in result.docs) {
+      appointmentList.add(doc.data());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final Size screen = MediaQuery.of(context).size;
@@ -98,7 +119,7 @@ class _DoctorDashboardScreenState extends State<DoctorDashboardScreen> {
                     shrinkWrap: true,
                     padding: const EdgeInsets.symmetric(horizontal: 24),
                     children:
-                        DoctorDashBoard.map((e) => DoctorDashBoardWidget(e))
+                        appointmentList.map((e) => DoctorDashBoardWidget(e))
                             .toList(),
                   ),
                 )
