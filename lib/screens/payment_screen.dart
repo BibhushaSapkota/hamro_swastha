@@ -4,7 +4,7 @@ import 'package:mero_doctor/screens/payment.dart';
 
 class PaymentScreen extends StatelessWidget {
   const PaymentScreen({Key? key}) : super(key: key);
-  final String? getPay = "3200";
+  final String? getPay = "10";
 
   @override
   Widget build(BuildContext context) {

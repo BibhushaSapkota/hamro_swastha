@@ -75,16 +75,14 @@ class UserModel {
     };
   }
 
-  Map<String, dynamic> favoriteList(String date,String amount) {
+  Map<String, dynamic> favoriteList(String date, String amount) {
     return {
       'transaction_details': FieldValue.arrayUnion([
         {
           'transaction_date': date,
-          'transaction_amount':amount,
+          'transaction_amount': 'Rs.$amount',
         }
       ]),
-      
-      
     };
   }
 }

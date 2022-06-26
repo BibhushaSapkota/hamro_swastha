@@ -83,16 +83,16 @@ class _KhaltiPaymentPageState extends State<KhaltiPaymentPage> {
                   KhaltiScope.of(context).pay(
                     config: PaymentConfig(
                       amount: getAmt(),
-                      productIdentity: '',
-                      productName: '',
+                      productIdentity: 'Doctor Bill',
+                      productName: 'MyBooking',
                     ),
                     preferences: [
                       PaymentPreference.khalti,
                       PaymentPreference.connectIPS,
                     ],
                     onSuccess: (su) {
-                      dynamic date = DateTime.now().toString();
-                      transaction(date, getAmt().toString());
+                      String date = DateTime.now().toString();
+                      transaction(date, (getAmt() / 100).toString());
                       const successsnackBar = SnackBar(
                         content: Text(
                           'Payment Successful',
