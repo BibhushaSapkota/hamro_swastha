@@ -4,28 +4,26 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/chatRoom.dart';
-import 'package:mero_doctor/models/doctor.dart';
 import 'package:mero_doctor/models/user.dart';
-import 'package:mero_doctor/screens/SearchPageDoctor.dart';
-import 'package:mero_doctor/screens/chatRoom.dart';
-import 'package:mero_doctor/utils/capatalize.dart';
-import 'package:mero_doctor/utils/constants.dart';
+import 'package:mero_doctor/screens/SearchPage.dart';
+import 'package:mero_doctor/screens/chatRoomDoctor.dart';
 import 'package:uuid/uuid.dart';
 
-class PatientMessagePage extends StatefulWidget {
-  const PatientMessagePage({Key? key}) : super(key: key);
+class MessagePageDoctor extends StatefulWidget {
+  const MessagePageDoctor({Key? key}) : super(key: key);
 
   @override
-  _PatientMessagePageState createState() => _PatientMessagePageState();
+  _MessagePageDoctorState createState() => _MessagePageDoctorState();
 }
 
-class _PatientMessagePageState extends State<PatientMessagePage> {
+class _MessagePageDoctorState extends State<MessagePageDoctor> {
   User? user = FirebaseAuth.instance.currentUser;
   var uuid = Uuid();
-  DoctorModel doctor = DoctorModel();
+  bool isDoctor = false;
+  UserModel patient = UserModel();
   User? firebaseUser = FirebaseAuth.instance.currentUser;
-  final CollectionReference DoctorUserdata =
-      FirebaseFirestore.instance.collection('doctor');
+  final CollectionReference CustomerUserdata =
+      FirebaseFirestore.instance.collection('users');
 
   @override
   void initState() {
@@ -34,65 +32,32 @@ class _PatientMessagePageState extends State<PatientMessagePage> {
     print('printed1');
   }
 
-  Future getDoctorById(String uid) async {
-    DoctorModel? doctor;
-    String id = "";
-    String name = "";
-    String image = "";
-    String schedule = "";
-    String orgName = "Not Specified";
-    String position = "Not Specified";
-    String description = "Not Specified";
+  Future getCustomerById(String uid) async {
+    UserModel? patient;
 
     DocumentSnapshot docSnap =
-        await FirebaseFirestore.instance.collection("doctors").doc(uid).get();
+        await FirebaseFirestore.instance.collection("users").doc(uid).get();
 
     if (docSnap != null) {
-      doctor = DoctorModel.fromMap(docSnap.data());
-      // print(customer.first_name);
-    }
-    if (doctor!.docid != "") {
-      id = doctor.docid!;
-    }
-    if (doctor.firstName != "") {
-      name = doctor.firstName!;
-    }
-    if (doctor.profileImageDownloadURL != "") {
-      image = doctor.profileImageDownloadURL!;
-    }
-    if (doctor.description != null) {
-      description = doctor.description!;
-    }
-    if (doctor.position != null) {
-      position = doctor.position!;
-    }
-    if (doctor.specialization != null) {
-      orgName = doctor.specialization!;
+      patient = UserModel.fromMap(docSnap.data());
+      // print(patient.first_name);
     }
 
-    Doctor doctorData =
-        Doctor(id, name, image, orgName, position, "12:00", description);
-
-    print('Data inside list..............................');
-    print(doctorData.id);
-
-    return doctorData;
+    return patient!;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: COLOR_SECONDARY,
         actions: [
           FlatButton(
               onPressed: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute(
-                      builder: (context) => const SearchPageDoctor()),
+                  MaterialPageRoute(builder: (context) => SearchPagePatient()),
                 );
               },
-              child: const Text('Search'))
+              child: Text('Search'))
         ],
       ),
       body: SafeArea(
@@ -127,58 +92,53 @@ class _PatientMessagePageState extends State<PatientMessagePage> {
                         print(participants_keys);
 
                         return FutureBuilder(
-                            future: getDoctorById(participants_keys[0]),
+                            future: getCustomerById(participants_keys[0]),
                             builder: (context, userData) {
                               if (userData.connectionState ==
                                   ConnectionState.done) {
                                 if (userData.data != null) {
-                                  // Customer targetDoctoreUser =
-                                  //     userData.data as Customer;
-                                  Doctor targetDoctoreUser =
-                                      userData.data as Doctor;
+                                  UserModel targetPatient =
+                                      userData.data as UserModel;
+                                  // DoctorModel targetPatient =
+                                  //     userData.data as DoctorModel;
 
                                   return ListTile(
                                       onTap: () {
                                         Navigator.push(context,
                                             MaterialPageRoute(
                                                 builder: (context) {
-                                          return ChatRoom(
-                                              targetUser: targetDoctoreUser,
+                                          return ChatRoomDoctor(
+                                              targetUser: targetPatient,
                                               chatroom: chatRoomModel,
-                                              username: targetDoctoreUser.name
+                                              username: targetPatient.firstName
                                                   .toString());
                                         }));
                                       },
-                                      leading: targetDoctoreUser.image
+                                      leading: targetPatient.profilePicture
                                                   .toString() ==
                                               ""
                                           ? CircleAvatar(
-                                              backgroundColor: Color.fromARGB(
-                                                  255, 27, 216, 33),
+                                              backgroundColor:
+                                                  Colors.green[100],
                                               backgroundImage: AssetImage(
-                                                  "assets/images/profile.jpg"),
+                                                  "assets/images/google.png"),
                                             )
                                           : CircleAvatar(
                                               backgroundColor:
                                                   Colors.green[100],
                                               backgroundImage: NetworkImage(
-                                                  targetDoctoreUser.image
+                                                  targetPatient.profilePicture
                                                       .toString()),
                                             ),
                                       title: Text(
-                                        capitalize(
-                                            targetDoctoreUser.name.toString()),
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400),
-                                      ),
+                                          targetPatient.firstName.toString()),
                                       subtitle: (chatRoomModel.lastMessage
                                                   .toString() !=
                                               "")
                                           ? Text(chatRoomModel.lastMessage
                                               .toString())
                                           : Text(
-                                              "Say hi!",
+                                              "Say hi to your new friend!",
                                               style: TextStyle(
                                                   color: Theme.of(context)
                                                       .colorScheme

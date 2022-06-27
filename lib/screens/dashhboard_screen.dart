@@ -5,7 +5,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:mero_doctor/models/data.dart';
 import 'package:mero_doctor/models/doctor.dart';
 import 'package:mero_doctor/models/user.dart';
-import 'package:mero_doctor/screens/HomepagePatient.dart';
+import 'package:mero_doctor/screens/MessagepagePatient.dart';
 import 'package:mero_doctor/screens/SearchPageDoctor.dart';
 import 'package:mero_doctor/screens/patient_profile.dart';
 import 'package:mero_doctor/utils/capatalize.dart';

@@ -3,6 +3,9 @@ import 'package:division/division.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/category.dart';
+import 'package:mero_doctor/screens/MessagepageDoctor.dart';
+import 'package:mero_doctor/screens/SearchPage.dart';
+import 'package:mero_doctor/utils/constants.dart';
 
 import '../models/data.dart';
 import '../widgets/doctor_dashboard_widgets.dart';
@@ -46,40 +49,107 @@ class _DoctorDashboardScreenState extends State<DoctorDashboardScreen> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Txt(
-                  'Doctors For Life',
-                  style: TxtStyle()
-                    ..fontSize(22)
-                    ..padding(horizontal: 24, vertical: 10)
-                    ..fontWeight(FontWeight.bold)
-                    ..textColor(Colors.black)
-                    ..fontFamily('quicksand'),
-                ),
-                Parent(
-                  style: ParentStyle()
-                    ..borderRadius(all: 15)
-                    ..background.image(
-                        path: 'assets/images/profile.jpg', fit: BoxFit.cover)
-                    ..width(screen.width)
-                    ..height(200)
-                    ..margin(
-                      bottom: 10,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Txt(
+                      'Doctors For Life',
+                      style: TxtStyle()
+                        ..fontSize(22)
+                        ..padding(horizontal: 24, vertical: 10)
+                        ..fontWeight(FontWeight.bold)
+                        ..textColor(Colors.black)
+                        ..fontFamily('quicksand'),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.fromLTRB(0, 10, 20, 0),
+                      child: InkWell(
+                        onTap: () {
+                          print('Profile');
+                        },
+                        child: CircleAvatar(
+                          backgroundColor: Colors.red,
+                          backgroundImage:
+                              AssetImage("assets/images/profile.jpg"),
+                          radius: 20,
+                        ),
+                      ),
                     )
-                    ..boxShadow(
-                        color: const Color(0xffe6e3fe),
-                        blur: 10,
-                        offset: const Offset(0, 5)),
+                  ],
                 ),
-                Center(
-                  child: Txt(
-                    ' Save Your Life',
-                    style: TxtStyle()
-                      ..fontSize(20)
-                      ..fontWeight(FontWeight.bold)
-                      ..textColor(Colors.black)
-                      ..fontFamily('quicksand'),
-                  ),
+                // Parent(
+                //   style: ParentStyle()
+                //     ..borderRadius(all: 15)
+                //     ..background.image(
+                //         path: 'assets/images/profile.jpg', fit: BoxFit.cover)
+                //     ..width(screen.width)
+                //     ..height(200)
+                //     ..margin(
+                //       bottom: 10,
+                //     )
+                //     ..boxShadow(
+                //         color: const Color(0xffe6e3fe),
+                //         blur: 10,
+                //         offset: const Offset(0, 5)),
+                // ),
+                const SizedBox(height: 25),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                      child: MaterialButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const MessagePageDoctor()));
+                        },
+                        color: COLOR_SECONDARY,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
+                        child: Text('Messages',
+                            style: TextStyle(
+                                // decoration: TextDecoration.underline,
+                                color: Colors.white,
+                                fontSize: 15)),
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
+                      child: MaterialButton(
+                        color: COLOR_SECONDARY,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const SearchPagePatient()));
+                        },
+                        child: Text(
+                          'Search Patient by name.',
+                          style: TextStyle(color: Colors.white, fontSize: 15),
+                        ),
+                      ),
+                    )
+                  ],
                 ),
+                const SizedBox(height: 20),
+                // Center(
+                //   child: Txt(
+                //     ' Save Your Life',
+                //     style: TxtStyle()
+                //       ..fontSize(20)
+                //       ..fontWeight(FontWeight.bold)
+                //       ..textColor(Colors.black)
+                //       ..fontFamily('quicksand'),
+                //   ),
+                // ),
                 Txt(
                   ' Schedules',
                   style: TxtStyle()
@@ -118,9 +188,9 @@ class _DoctorDashboardScreenState extends State<DoctorDashboardScreen> {
                   child: ListView(
                     shrinkWrap: true,
                     padding: const EdgeInsets.symmetric(horizontal: 24),
-                    children:
-                        appointmentList.map((e) => DoctorDashBoardWidget(e))
-                            .toList(),
+                    children: appointmentList
+                        .map((e) => DoctorDashBoardWidget(e))
+                        .toList(),
                   ),
                 )
               ],

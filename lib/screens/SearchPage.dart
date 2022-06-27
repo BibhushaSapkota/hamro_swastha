@@ -1,224 +1,254 @@
-// import 'dart:developer';
+import 'dart:developer';
 
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:demo/models/Customer.dart';
-// import 'package:demo/models/chatRoom.dart';
-// import 'package:demo/models/doctor.dart';
-// import 'package:demo/provider/google_sign_in.dart';
-// import 'package:demo/screens/authenticate/login.dart';
-// import 'package:demo/screens/doctor_profile_screen.dart';
-// import 'package:demo/screens/home/chatRoom.dart';
-// import 'package:demo/services/auth.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:flutter/material.dart';
-// import 'package:provider/provider.dart';
-// import 'package:uuid/uuid.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:division/division.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:mero_doctor/models/chatRoom.dart';
+import 'package:mero_doctor/models/user.dart';
+import 'package:mero_doctor/screens/Choose_Authencation.dart';
+import 'package:mero_doctor/screens/GoogleLogin/google_login.dart';
+import 'package:mero_doctor/screens/chatRoomDoctor.dart';
+import 'package:mero_doctor/screens/chatRoomPatient.dart';
+import 'package:provider/provider.dart';
+import 'package:uuid/uuid.dart';
 
-// class Messenger extends StatefulWidget {
-//   const Messenger({Key? key}) : super(key: key);
+class SearchPagePatient extends StatefulWidget {
+  const SearchPagePatient({Key? key}) : super(key: key);
 
-//   @override
-//   _MessengerState createState() => _MessengerState();
-// }
+  @override
+  _SearchPagePatientState createState() => _SearchPagePatientState();
+}
 
-// class _MessengerState extends State<Messenger> {
-//   var uid = Uuid();
-//   AuthServices _auth = AuthServices();
-//   Customer customer = Customer();
-//   final CollectionReference data =
-//       FirebaseFirestore.instance.collection('Customer');
+class _SearchPagePatientState extends State<SearchPagePatient> {
+  var uid = Uuid();
 
-//   TextEditingController _textEditingController = TextEditingController();
+  UserModel patient = UserModel();
+  final CollectionReference data =
+      FirebaseFirestore.instance.collection('users');
 
-//   List<Customer> AllDoctorOnSearch = [];
+  TextEditingController _textEditingController = TextEditingController();
 
-//   List<Customer> AllDoctor = [];
+  List<UserModel> AllPatientOnSearch = [];
 
-//   final User? user = FirebaseAuth.instance.currentUser;
+  List<UserModel> AllPatient = [];
 
-//   Future<ChatRoomModel?> getChatRoomModel(Customer targetUser) async {
-//     ChatRoomModel? chatRoom;
+  final User? user = FirebaseAuth.instance.currentUser;
 
-//     QuerySnapshot snapshot = await FirebaseFirestore.instance
-//         .collection('chatrooms')
-//         .where("participants.${user!.uid}", isEqualTo: true)
-//         .where("participants.${targetUser.uid}", isEqualTo: true)
-//         .get();
+  Future<ChatRoomModel?> getChatRoomModel(UserModel targetUser) async {
+    ChatRoomModel? chatRoom;
 
-//     if (snapshot.docs.length > 0) {
-//       // log("Chat Room Exists");
-//       var docData = snapshot.docs[0].data();
-//       ChatRoomModel existingChatRoom =
-//           ChatRoomModel.fromMap(docData as Map<String, dynamic>);
-//       log('Chat room Exists!');
-//       // print('My id........');
-//       // print(user?.uid);
-//       // print('Targets id......');
-//       // print(targetUser.uid);
-//       chatRoom = existingChatRoom;
-//     } else {
-//       ChatRoomModel newChatRoom = ChatRoomModel(
-//           chatroomId: uid.v1(),
-//           lastMessage: "",
-//           roomCreated: DateTime.now(),
-//           participants: {
-//             user!.uid.toString(): true,
-//             targetUser.uid.toString(): true,
-//           });
+    QuerySnapshot snapshot = await FirebaseFirestore.instance
+        .collection('chatrooms')
+        .where("participants.${user!.uid}", isEqualTo: true)
+        .where("participants.${targetUser.uid}", isEqualTo: true)
+        .get();
 
-//       await FirebaseFirestore.instance
-//           .collection("chatrooms")
-//           .doc(newChatRoom.chatroomId)
-//           .set(newChatRoom.toMap());
-//       log('New Chat room created!');
-//       chatRoom = newChatRoom;
-//     }
+    if (snapshot.docs.length > 0) {
+      // log("Chat Room Exists");
+      var docData = snapshot.docs[0].data();
+      ChatRoomModel existingChatRoom =
+          ChatRoomModel.fromMap(docData as Map<String, dynamic>);
+      log('Chat room Exists!');
+      // print('My id........');
+      // print(user?.uid);
+      // print('Targets id......');
+      // print(targetUser.uid);
+      chatRoom = existingChatRoom;
+    } else {
+      ChatRoomModel newChatRoom = ChatRoomModel(
+          chatroomId: uid.v1(),
+          lastMessage: "",
+          roomCreated: DateTime.now(),
+          participants: {
+            user!.uid.toString(): true,
+            targetUser.uid.toString(): true,
+          });
 
-//     return chatRoom;
-//   }
+      await FirebaseFirestore.instance
+          .collection("chatrooms")
+          .doc(newChatRoom.chatroomId)
+          .set(newChatRoom.toMap());
+      log('New Chat room created!');
+      chatRoom = newChatRoom;
+    }
 
-//   @override
-//   void initState() {
-//     super.initState();
-//     data.get().then((value) => {
-//           value.docs.forEach((element) {
-//             customer = Customer.fromMap(element.data());
-//             setState(() {
-//               String? id;
-//               if (customer.uid != null) {
-//                 id = customer.uid;
-//               }
-//               // print('All Id.......');
-//               // print(id);
-//               String? name = customer.first_name;
-//               String? image = customer.imageURL1;
-//               this.AllDoctor.add(Customer(
-//                     uid: customer.uid,
-//                     first_name: customer.first_name,
-//                     last_name: customer.last_name,
-//                     email: customer.email,
-//                     imageURL1: customer.imageURL1,
-//                     imageURL2: customer.imageURL2,
-//                     isCustomer: customer.isCustomer,
-//                     isNormalUser: customer.isNormalUser,
-//                     isGoogleUser: customer.isGoogleUser,
-//                     isFormCompleted: customer.isFormCompleted,
-//                   ));
-//               // this.AllDoctor.add(Doctor(id!, name!, image!, "orgName",
-//               //     "qualification", "123123", "description"));
-//             });
-//           })
-//         });
-//   }
+    return chatRoom;
+  }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: TextField(
-//             onChanged: (value) {
-//               setState(() {
-//                 AllDoctorOnSearch = AllDoctor.where((element) => element
-//                     .first_name!
-//                     .toLowerCase()
-//                     .contains(value.toLowerCase())).toList();
+  @override
+  void initState() {
+    super.initState();
+    print(user?.uid);
+    data.get().then((value) => {
+          value.docs.forEach((element) {
+            patient = UserModel.fromMap(element.data());
+            setState(() {
+              // String? id;
+              // id = patient.uid!;
+              // print('All Id.......');
+              // print(id);
+              String? name = patient.firstName;
+              String? image = patient.lastName;
+              this.AllPatient.add(UserModel(
+                    uid: patient.uid,
+                    firstName: patient.firstName,
+                    lastName: patient.lastName,
+                    email: patient.email,
+                    profilePicture: patient.profilePicture,
+                    isPatient: patient.isPatient,
+                    bookMarked: patient.bookMarked,
+                    oldReportFile: patient.oldReportFile,
+                    isGoogleUser: patient.isGoogleUser,
+                    isFormCompleted: patient.isFormCompleted,
+                  ));
+              // this.AllPatient.add(Doctor(id!, name!, image!, "orgName",
+              //     "qualification", "123123", "description"));
+            });
+          })
+        });
+  }
 
-//                 // foodonSearch = food
-//                 //     .where((element) =>
-//                 //         element.toLowerCase().contains(value.toLowerCase()))
-//                 //     .toList();
-//               });
-//               // print(_textEditingController.text);
-//               // if (_textEditingController.text.isEmpty) {
-//               //   print('Empty');
-//               // } else {
-//               //   print('Not Empty');
-//               // }
-//               // print(foodonSearch.length);
-//             },
-//             controller: _textEditingController,
-//             decoration: InputDecoration(
-//               border: InputBorder.none,
-//               errorBorder: InputBorder.none,
-//               focusedBorder: InputBorder.none,
-//               hintText: 'Search',
-//             )),
-//         actions: [
-//           Center(
-//             child: FlatButton.icon(
-//                 color: Colors.pink,
-//                 onPressed: () async {
-//                   _auth.SignOut();
-//                   final provider =
-//                       Provider.of<GoogleSignInProvider>(context, listen: false);
-//                   provider.logout();
-//                   Navigator.popUntil(context, (route) => route.isFirst);
-//                   Navigator.of(context).pushReplacement(
-//                       MaterialPageRoute(builder: (context) => const Login()));
-//                 },
-//                 icon: const Icon(Icons.logout),
-//                 label: const Text('Log Out')),
-//           ),
-//         ],
-//       ),
-//       body: _textEditingController.text.isEmpty || AllDoctorOnSearch.length == 0
-//           ? Center(
-//               child: Text('No Result found!'),
-//             )
-//           : ListView.builder(
-//               itemCount: _textEditingController.text.isNotEmpty
-//                   ? AllDoctorOnSearch.length
-//                   : AllDoctor.length,
-//               itemBuilder: (context, index) {
-//                 return InkWell(
-//                   onTap: () async {
-//                     ChatRoomModel? chatRoomModel =
-//                         await getChatRoomModel(AllDoctorOnSearch[index]);
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(),
+        body: Column(children: [
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+            alignment: Alignment.center,
+            height: 50,
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(50),
+                boxShadow: [
+                  BoxShadow(
+                    offset: const Offset(0, 10),
+                    blurRadius: 20,
+                    color: Colors.grey.withOpacity(0.23),
+                  )
+                ]),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: TextField(
+                      onChanged: (value) {
+                        print('asd');
+                        setState(() {
+                          AllPatientOnSearch = AllPatient.where((element) =>
+                              element.firstName!
+                                  .toLowerCase()
+                                  .contains(value.toLowerCase())).toList();
+                        });
+                      },
+                      controller: _textEditingController,
+                      decoration: InputDecoration(
+                        hintText: 'Search for a doctor',
+                        hintStyle: TextStyle(
+                          fontFamily: 'quicksand',
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                        ),
+                        enabledBorder: InputBorder.none,
+                        focusedBorder: InputBorder.none,
+                      ),
+                      style: TextStyle(
+                        fontFamily: 'quicksand',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ),
+                ),
+                Parent(
+                  style: ParentStyle()
+                    ..height(60)
+                    ..width(70)
+                    ..background.color(const Color(0xfff58173))
+                    ..borderRadius(all: 40),
+                  child: const Icon(
+                    Icons.search,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          _textEditingController.text.isEmpty || AllPatientOnSearch.length == 0
+              ? Expanded(
+                  child: Center(
+                    child: Text('No Result found!'),
+                  ),
+                )
+              : Expanded(
+                  child: ListView.builder(
+                      itemCount: _textEditingController.text.isNotEmpty
+                          ? AllPatientOnSearch.length
+                          : AllPatient.length,
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          onTap: () async {
+                            ChatRoomModel? chatRoomModel =
+                                await getChatRoomModel(
+                                    AllPatientOnSearch[index]);
 
-//                     if (chatRoomModel != null) {
-//                       // print(AllDoctorOnSearch[index].name);
-//                       // Navigator.push(
-//                       //     context,
-//                       //     MaterialPageRoute(
-//                       //         builder: (context) => DoctorProfileScreen(
-//                       //             doctor: AllDoctorOnSearch[index])));
-//                       Navigator.push(
-//                           context,
-//                           MaterialPageRoute(
-//                               builder: (context) => ChatRoom(
-//                                     username:
-//                                         AllDoctorOnSearch[index].first_name!,
-//                                     targetUser: AllDoctorOnSearch[index],
-//                                     chatroom: chatRoomModel,
-//                                   )));
-//                     }
-//                   },
-//                   child: Container(
-//                     margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-//                     child: Row(
-//                       children: [
-//                         CircleAvatar(
-//                           backgroundColor: Colors.green[100],
-//                           backgroundImage:
-//                               NetworkImage(AllDoctorOnSearch[index].imageURL1!),
-//                           // child: Image.network(AllDoctorOnSearch[index].image),
-//                         ),
-//                         SizedBox(
-//                           width: 20,
-//                         ),
-//                         Text(
-//                           _textEditingController.text.isNotEmpty
-//                               ? AllDoctorOnSearch[index].first_name!
-//                               : AllDoctor[index].first_name!,
-//                           // ? foodonSearch[index]
-//                           // : food[index],
-//                           style: TextStyle(fontSize: 20),
-//                         ),
-//                       ],
-//                     ),
-//                   ),
-//                 );
-//               }),
-//     );
-//   }
-// }
+                            if (chatRoomModel != null) {
+                              print(AllPatientOnSearch[index].firstName);
+                              // Navigator.push(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) => DoctorProfileScreen(
+                              //             doctor: AllPatientOnSearch[index])));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ChatRoomDoctor(
+                                            username: AllPatientOnSearch[index]
+                                                .firstName!,
+                                            targetUser:
+                                                AllPatientOnSearch[index],
+                                            chatroom: chatRoomModel,
+                                          )));
+                            }
+                          },
+                          child: Container(
+                            margin: EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 5),
+                            child: Row(
+                              children: [
+                                AllPatientOnSearch[index].profilePicture! != ""
+                                    ? CircleAvatar(
+                                        backgroundColor: Colors.green[100],
+                                        backgroundImage: NetworkImage(
+                                            AllPatientOnSearch[index]
+                                                .profilePicture!),
+                                        // child: Image.network(AllPatientOnSearch[index].image),
+                                      )
+                                    : CircleAvatar(
+                                        backgroundColor: Colors.green[100],
+                                        backgroundImage: AssetImage(
+                                            "assets/images/profile.jpg"),
+                                        // child: Image.network(AllPatientOnSearch[index].image),
+                                      ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Text(
+                                  _textEditingController.text.isNotEmpty
+                                      ? AllPatientOnSearch[index].firstName!
+                                      : AllPatient[index].firstName!,
+                                  // ? foodonSearch[indexlastName
+                                  // : food[index],
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }),
+                ),
+        ]));
+  }
+}

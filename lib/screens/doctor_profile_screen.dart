@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/chatRoom.dart';
 import 'package:mero_doctor/models/models.dart';
 import 'package:mero_doctor/screens/calender_screen.dart';
-import 'package:mero_doctor/screens/chatRoom.dart';
+import 'package:mero_doctor/screens/chatRoomPatient.dart';
 import 'package:mero_doctor/utils/constants.dart';
 import 'package:uuid/uuid.dart';
 
@@ -199,7 +199,7 @@ class DoctorProfileScreen extends StatelessWidget {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        ChatRoom(
+                                                        ChatRoomPatient(
                                                           username:
                                                               doctor!.name,
                                                           targetUser: doctor,

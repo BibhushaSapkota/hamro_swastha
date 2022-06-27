@@ -8,13 +8,13 @@ import 'package:mero_doctor/models/messegeModel.dart';
 import 'package:mero_doctor/models/user.dart';
 import 'package:uuid/uuid.dart';
 
-class ChatRoom extends StatefulWidget {
+class ChatRoomPatient extends StatefulWidget {
   String username;
   final targetUser;
 
   final ChatRoomModel chatroom;
 
-  ChatRoom(
+  ChatRoomPatient(
       {required this.targetUser,
       required this.chatroom,
       required this.username,
@@ -22,10 +22,10 @@ class ChatRoom extends StatefulWidget {
       : super(key: key);
 
   @override
-  _ChatRoomState createState() => _ChatRoomState();
+  _ChatRoomPatientState createState() => _ChatRoomPatientState();
 }
 
-class _ChatRoomState extends State<ChatRoom> {
+class _ChatRoomPatientState extends State<ChatRoomPatient> {
   var uuid = Uuid();
   bool isDoctor = false;
   UserModel patient = UserModel();
