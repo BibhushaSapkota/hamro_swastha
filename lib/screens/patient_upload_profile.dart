@@ -109,11 +109,9 @@ class _PatientUploadScreenState extends State<PatientUploadScreen> {
                                         height: 70,
                                         width: 70,
                                       )
-                                    : userModel.isGoogleUser! == true
-                                        ? Image.network("${profileImage}")
-                                        : Image.file(
-                                            File('$profileImage'),
-                                          ),
+                                    : Image.file(
+                                        File('$profileImage'),
+                                      ),
                               ),
                             ),
                             MaterialButton(
@@ -438,29 +436,33 @@ class _PatientUploadScreenState extends State<PatientUploadScreen> {
                                         ));
                                       });
                                     } else {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                              SnackMessage.errorSnackBar("Date of Birth is required!"));
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackMessage.errorSnackBar(
+                                              "Date of Birth is required!"));
                                       return;
                                     }
                                   } else {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackMessage.errorSnackBar("Phone Number is required!"));
+                                        SnackMessage.errorSnackBar(
+                                            "Phone Number is required!"));
                                     return;
                                   }
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackMessage.errorSnackBar("Gender is required!"));
+                                      SnackMessage.errorSnackBar(
+                                          "Gender is required!"));
                                   return;
                                 }
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackMessage.errorSnackBar("Date of Birth is required!"));
+                                    SnackMessage.errorSnackBar(
+                                        "Date of Birth is required!"));
                                 return;
                               }
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackMessage.errorSnackBar("Profile is required!"));
+                                  SnackMessage.errorSnackBar(
+                                      "Profile is required!"));
                               return;
                             }
                           },

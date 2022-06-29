@@ -224,7 +224,7 @@ Widget _getCategoryInfo(
     gesture: gesture,
     style: ParentStyle()
       ..height(80)
-      ..width(92)
+      ..width(150)
       ..elevation(3, color: Colors.grey.withOpacity(0.5))
       ..margin(right: 10)
       ..borderRadius(all: 10)
@@ -234,7 +234,7 @@ Widget _getCategoryInfo(
     child: Txt(
       value,
       style: TxtStyle()
-        ..margin(top: 10)
+        ..margin(top: 10, left: 10)
         ..alignmentContent.center()
         ..fontSize(16)
         ..textColor(Colors.black),

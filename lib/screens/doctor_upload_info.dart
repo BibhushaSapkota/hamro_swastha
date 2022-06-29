@@ -122,11 +122,9 @@ class _DoctorFormScreenState extends State<DoctorFormScreen> {
                                           height: 70,
                                           width: 70,
                                         )
-                                      : doctorModel.isGoogleUser == true
-                                          ? Image.network('$profileImageURL')
-                                          : Image.file(
-                                              File('$profileImageURL'),
-                                            )),
+                                      : Image.file(
+                                          File('$profileImageURL'),
+                                        )),
                             ),
                             InkWell(
                               onTap: () async {
@@ -504,29 +502,31 @@ class _DoctorFormScreenState extends State<DoctorFormScreen> {
                                             });
                                           } else {
                                             ScaffoldMessenger.of(context)
-                                                .showSnackBar(SnackMessage
-                                                    .errorSnackBar("Doctor Post is required!"));
+                                                .showSnackBar(
+                                                    SnackMessage.errorSnackBar(
+                                                        "Doctor Post is required!"));
 
                                             return;
                                           }
                                         } else {
                                           ScaffoldMessenger.of(context)
-                                              .showSnackBar(SnackMessage
-                                                  .errorSnackBar("Doctor Specialization is required!"));
+                                              .showSnackBar(
+                                                  SnackMessage.errorSnackBar(
+                                                      "Doctor Specialization is required!"));
 
                                           return;
                                         }
                                       } else {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(SnackMessage
-                                                .errorSnackBar("Doctor License file is required!"));
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                            SnackMessage.errorSnackBar(
+                                                "Doctor License file is required!"));
 
                                         return;
                                       }
                                     } else {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(SnackMessage
-                                              .errorSnackBar("Doctor Identification file is required!"));
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackMessage.errorSnackBar(
+                                              "Doctor Identification file is required!"));
                                       return;
                                     }
                                   },

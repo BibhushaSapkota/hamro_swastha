@@ -11,7 +11,7 @@ import 'package:uuid/uuid.dart';
 class DoctorProfileScreen extends StatelessWidget {
   final Doctor? doctor;
 
-  var uid = Uuid();
+  var uuid = Uuid();
 
   User? user = FirebaseAuth.instance.currentUser;
   DoctorProfileScreen({Key? key, this.doctor}) : super(key: key);
@@ -38,7 +38,7 @@ class DoctorProfileScreen extends StatelessWidget {
       chatRoom = existingChatRoom;
     } else {
       ChatRoomModel newChatRoom = ChatRoomModel(
-          chatroomId: uid.v1(),
+          chatroomId: uuid.v1(),
           lastMessage: "",
           roomCreated: DateTime.now(),
           participants: {
