@@ -37,6 +37,8 @@ dependencies:
   google_nav_bar: ^5.0.6
   firebase_auth: ^3.3.18
   firebase_core: ^1.17.0
+  firebase_messaging: ^11.4.2
+  flutter_local_notifications: ^9.6.1
   fluttertoast: ^8.0.9
   flutter_spinkit: ^5.1.0
   flutter_svg: ^1.0.3
