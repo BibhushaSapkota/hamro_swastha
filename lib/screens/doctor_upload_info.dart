@@ -502,53 +502,31 @@ class _DoctorFormScreenState extends State<DoctorFormScreen> {
                                             });
                                           } else {
                                             ScaffoldMessenger.of(context)
-<<<<<<< HEAD
                                                 .showSnackBar(
                                                     SnackMessage.errorSnackBar(
                                                         "Doctor Post is required!"));
-=======
-                                                .showSnackBar(SnackMessage
-                                                    .errorSnackBar("Doctor Post is required!"));
->>>>>>> 601cedbb1c72d31b15da7c0be8e2aeea7748cfcc
 
                                             return;
                                           }
                                         } else {
                                           ScaffoldMessenger.of(context)
-<<<<<<< HEAD
                                               .showSnackBar(
                                                   SnackMessage.errorSnackBar(
                                                       "Doctor Specialization is required!"));
-=======
-                                              .showSnackBar(SnackMessage
-                                                  .errorSnackBar("Doctor Specialization is required!"));
->>>>>>> 601cedbb1c72d31b15da7c0be8e2aeea7748cfcc
 
                                           return;
                                         }
                                       } else {
-<<<<<<< HEAD
                                         ScaffoldMessenger.of(context).showSnackBar(
                                             SnackMessage.errorSnackBar(
                                                 "Doctor License file is required!"));
-=======
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(SnackMessage
-                                                .errorSnackBar("Doctor License file is required!"));
->>>>>>> 601cedbb1c72d31b15da7c0be8e2aeea7748cfcc
 
                                         return;
                                       }
                                     } else {
-<<<<<<< HEAD
                                       ScaffoldMessenger.of(context).showSnackBar(
                                           SnackMessage.errorSnackBar(
                                               "Doctor Identification file is required!"));
-=======
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(SnackMessage
-                                              .errorSnackBar("Doctor Identification file is required!"));
->>>>>>> 601cedbb1c72d31b15da7c0be8e2aeea7748cfcc
                                       return;
                                     }
                                   },

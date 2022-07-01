@@ -1,14 +1,8 @@
-<<<<<<< HEAD
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/chatRoom.dart';
-=======
-import 'package:division/division.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
->>>>>>> 601cedbb1c72d31b15da7c0be8e2aeea7748cfcc
 import 'package:mero_doctor/models/models.dart';
 import 'package:mero_doctor/screens/calender_screen.dart';
 import 'package:mero_doctor/screens/chatRoomPatient.dart';
@@ -21,14 +15,15 @@ class DoctorProfileScreen extends StatefulWidget {
   const DoctorProfileScreen({Key? key, required this.doctor}) : super(key: key);
 
   @override
-  State<DoctorProfileScreen> createState() => _DoctorProfileScreenState();
+  State<DoctorProfileScreen> createState() =>
+      _DoctorProfileScreenState(doctor: doctor);
 }
 
-<<<<<<< HEAD
-  var uuid = Uuid();
-
+class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
+  var uuid = const Uuid();
+  final Doctor doctor;
   User? user = FirebaseAuth.instance.currentUser;
-  DoctorProfileScreen({Key? key, this.doctor}) : super(key: key);
+  _DoctorProfileScreenState({Key? key, required this.doctor});
 
   // Creating CHatRoom For two User
   Future<ChatRoomModel?> getChatRoomModel(Doctor targetUser) async {
@@ -70,10 +65,8 @@ class DoctorProfileScreen extends StatefulWidget {
 
     return chatRoom;
   }
-=======
-class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
+
   double rating = 0;
->>>>>>> 601cedbb1c72d31b15da7c0be8e2aeea7748cfcc
 
   @override
   Widget build(BuildContext context) {
@@ -212,15 +205,14 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                       child: ElevatedButton.icon(
                                         onPressed: () async {
                                           ChatRoomModel? chatRoomModel =
-                                              await getChatRoomModel(doctor!);
+                                              await getChatRoomModel(doctor);
                                           if (chatRoomModel != null) {
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         ChatRoomPatient(
-                                                          username:
-                                                              doctor!.name,
+                                                          username: doctor.name,
                                                           targetUser: doctor,
                                                           chatroom:
                                                               chatRoomModel,
