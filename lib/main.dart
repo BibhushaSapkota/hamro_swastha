@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
                 KhaltiLocalizations.delegate,
               ],
               routes: {
-                "/login": (context) => const LoginPage(),
+                "/": (context) => const LoginPage(),
                 "/register": (context) => const RegisterScreen(),
                 "/register_doctor": (context) => RegisterScreenDoc(),
                 "/register_patient": (context) => const RegisterScreen(),
@@ -77,7 +77,7 @@ class MyApp extends StatelessWidget {
                 "/profile": (context) => ProfileScreen(
                       id: '',
                     ),
-                "/dashboard_screen": (context) => DashboardScreen(
+                "/dashboard": (context) => DashboardScreen(
                       id: '',
                     ),
                 // '/': (context) => EnterOtpPage(),
