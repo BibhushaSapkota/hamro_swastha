@@ -75,16 +75,17 @@ class UserModel {
     };
   }
 
-  Map<String, dynamic> favoriteList(String date,String amount) {
+  Map<String, dynamic> transactionList(
+      String date, String amount, String appointmentDate, bool isPaymentDone) {
     return {
       'transaction_details': FieldValue.arrayUnion([
         {
           'transaction_date': date,
-          'transaction_amount':amount,
+          'transaction_amount': amount,
+          'apointment_date': appointmentDate,
+          'isPaymentDone': isPaymentDone,
         }
       ]),
-      
-      
     };
   }
 }

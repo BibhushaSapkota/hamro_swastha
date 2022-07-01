@@ -1,28 +1,79 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:khalti_flutter/khalti_flutter.dart';
+import 'package:mero_doctor/models/doctor.dart';
 import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/payment_screen.dart';
+import 'package:mero_doctor/utils/snack_bar.dart';
 
 class KhaltiPaymentPage extends StatefulWidget {
-  KhaltiPaymentPage({Key? key, this.getPay}) : super(key: key);
+  KhaltiPaymentPage(
+      {Key? key,
+      this.getPay,
+      required this.appointmentDate,
+      required this.doctor,
+      required this.selectedDate,
+      required this.selectedIndex})
+      : super(key: key);
   final String? getPay;
   final UserModel _userModel = UserModel();
+  final Doctor doctor;
+  List<String> appointmentDate = [];
+
+  int selectedIndex = -1;
+
+  String selectedDate = "";
   @override
   State<KhaltiPaymentPage> createState() => _KhaltiPaymentPageState();
 }
 
 class _KhaltiPaymentPageState extends State<KhaltiPaymentPage> {
   TextEditingController amountController = TextEditingController();
-
+  final _user = FirebaseAuth.instance.currentUser;
+  final CollectionReference data =
+      FirebaseFirestore.instance.collection("doctors");
   @override
   void initState() {
     super.initState();
     amountController.text = "${widget.getPay}";
+    print(widget.appointmentDate);
+    print(widget.selectedDate);
   }
 
   int getAmt() {
     return int.parse(amountController.text) * 100; // Converting to paisa
+  }
+
+  bookAppointment() async {
+    if (widget.selectedIndex == -1) return;
+    var user = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get();
+
+    UserModel userModel = UserModel.fromMap(user.data());
+    String name = "${userModel.firstName}  ${userModel.lastName}";
+
+    Map<String, String> appointment = {
+      "date": widget.selectedDate,
+      "time": widget.appointmentDate[widget.selectedIndex],
+      "username": name,
+      "profilePicture": userModel.profilePicture ?? "",
+    };
+
+    try {
+      await data
+          .doc(widget.doctor.id)
+          .collection("upcomingAppointment")
+          .add(appointment);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackMessage.successSnackBar("Appointment booked successfully!!"));
+    } catch (ex) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackMessage.successSnackBar(ex.toString()));
+    }
   }
 
   @override
@@ -39,7 +90,12 @@ class _KhaltiPaymentPageState extends State<KhaltiPaymentPage> {
             onPressed: () {
               Navigator.of(context).pushAndRemoveUntil(
                   MaterialPageRoute(
-                      builder: (context) => const PaymentScreen()),
+                      builder: (context) => PaymentScreen(
+                            appointmentDate: widget.appointmentDate,
+                            doctor: widget.doctor,
+                            selectedDate: widget.selectedDate,
+                            selectedIndex: widget.selectedIndex,
+                          )),
                   (route) => false);
             },
             icon: const Icon(Icons.arrow_back)),
@@ -83,16 +139,17 @@ class _KhaltiPaymentPageState extends State<KhaltiPaymentPage> {
                   KhaltiScope.of(context).pay(
                     config: PaymentConfig(
                       amount: getAmt(),
-                      productIdentity: '',
-                      productName: '',
+                      productIdentity: 'BookingTransaction',
+                      productName: 'Appointment',
                     ),
                     preferences: [
                       PaymentPreference.khalti,
-                      PaymentPreference.connectIPS,
                     ],
                     onSuccess: (su) {
                       dynamic date = DateTime.now().toString();
-                      transaction(date, getAmt().toString());
+                      bookAppointment();
+                      transaction(
+                          date, getAmt().toString(), widget.selectedDate);
                       const successsnackBar = SnackBar(
                         content: Text(
                           'Payment Successful',
@@ -133,10 +190,8 @@ class _KhaltiPaymentPageState extends State<KhaltiPaymentPage> {
     );
   }
 
-  Future transaction(dynamic date, String amount) async {
-    await FirebaseFirestore.instance
-        .collection("users")
-        .doc('2qTTJHYhnIahXmzC3HKV8WAet7Y2')
-        .update(widget._userModel.favoriteList(date, amount));
+  Future transaction(dynamic date, String amount, String selectedDate) async {
+    await FirebaseFirestore.instance.collection("users").doc(_user!.uid).update(
+        widget._userModel.transactionList(date, amount, selectedDate, true));
   }
 }

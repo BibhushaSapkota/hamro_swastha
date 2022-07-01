@@ -93,7 +93,7 @@ class MyApp extends StatelessWidget {
                 "/sendotp": (context) => EnterOtpPage(),
                 '/userhistory': (context) => DoctorHistoryScreen(),
                 // '/': (context) => const PaymentScreen(),
-                '/payment_screen': (context) => KhaltiPaymentPage()
+                // '/payment_screen': (context) => KhaltiPaymentPage()
                 // '/': (context) => DoctorCategoryScreen(),
               },
               debugShowCheckedModeBanner: false,

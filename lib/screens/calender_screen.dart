@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mero_doctor/models/doctor.dart';
 import 'package:mero_doctor/models/user.dart';
+import 'package:mero_doctor/screens/payment_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 import '../utils/snack_bar.dart';
@@ -102,7 +103,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
             ),
             Parent(
               style: ParentStyle()
-                ..height(360)
+                ..height(screen.height / 1.9)
                 ..width(screen.width)
                 ..borderRadius(all: 12),
               child: TableCalendar(
@@ -174,7 +175,17 @@ class _CalenderScreenState extends State<CalenderScreen> {
                         Center(
                           child: Parent(
                               gesture: Gestures()
-                                ..onTap(() => bookAppointment()),
+                                ..onTap(() =>
+                                    Navigator.of(context).pushAndRemoveUntil(
+                                        MaterialPageRoute(
+                                          builder: (context) => PaymentScreen(
+                                            appointmentDate: appointmentDate,
+                                            doctor: widget.doctor,
+                                            selectedDate: selectedDate,
+                                            selectedIndex: selectedIndex,
+                                          ),
+                                        ),
+                                        (route) => false)),
                               style: ParentStyle()
                                 ..height(52)
                                 ..elevation(3, color: Colors.black12)

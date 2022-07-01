@@ -1,10 +1,41 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:division/division.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:mero_doctor/models/doctor.dart';
+import 'package:mero_doctor/models/user.dart';
+import 'package:mero_doctor/screens/calender_screen.dart';
 import 'package:mero_doctor/screens/payment.dart';
+import 'package:mero_doctor/utils/snack_bar.dart';
 
-class PaymentScreen extends StatelessWidget {
-  const PaymentScreen({Key? key}) : super(key: key);
-  final String? getPay = "3200";
+class PaymentScreen extends StatefulWidget {
+  PaymentScreen(
+      {Key? key,
+      required this.doctor,
+      required this.appointmentDate,
+      required this.selectedDate,
+      required this.selectedIndex})
+      : super(key: key);
+  final Doctor doctor;
+  List<String> appointmentDate = [];
+
+  int selectedIndex = -1;
+
+  String selectedDate = "";
+
+  @override
+  State<PaymentScreen> createState() => _PaymentScreenState();
+}
+
+class _PaymentScreenState extends State<PaymentScreen> {
+  final String? getPay = "10";
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +65,19 @@ class PaymentScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Icon(
-                        Icons.arrow_back,
-                        size: 32,
-                        color: Colors.white,
-                      ),
+                      IconButton(
+                          onPressed: () {
+                            Navigator.of(context).pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        CalenderScreen(doctor: widget.doctor)),
+                                (route) => false);
+                          },
+                          icon: Icon(
+                            Icons.arrow_back,
+                            size: 32,
+                            color: Colors.white,
+                          )),
                       Image.asset(
                         'assets/images/scan.png',
                         height: 35,
@@ -81,7 +120,10 @@ class PaymentScreen extends StatelessWidget {
                               ..margin(left: 24, top: 16)
                               ..fontWeight(FontWeight.bold),
                           ),
-                          Image.asset('assets/images/payment.png'),
+                          Image.asset(
+                            'assets/images/payment.png',
+                            height: screen.height / 3,
+                          ),
                           Txt(
                             'Payment Methods',
                             style: TxtStyle()
@@ -89,34 +131,6 @@ class PaymentScreen extends StatelessWidget {
                               ..fontSize(22)
                               ..margin(left: 24, top: 12)
                               ..fontWeight(FontWeight.bold),
-                          ),
-                          Parent(
-                            style: ParentStyle()
-                              ..height(70)
-                              ..width(screen.width)
-                              ..margin(top: 18, left: 22, right: 22)
-                              ..background.color(Colors.white)
-                              ..boxShadow(
-                                color: const Color(0xffdddef2),
-                                blur: 20,
-                                offset: const Offset(0, 10),
-                              )
-                              ..borderRadius(all: 15),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Image.asset(
-                                  'assets/images/esewa.png',
-                                ),
-                                Txt(
-                                  'Esewa',
-                                  style: TxtStyle()
-                                    ..textColor(Colors.black)
-                                    ..fontSize(22)
-                                    ..fontWeight(FontWeight.bold),
-                                ),
-                              ],
-                            ),
                           ),
                           Parent(
                             style: ParentStyle()
@@ -139,18 +153,19 @@ class PaymentScreen extends StatelessWidget {
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 KhaltiPaymentPage(
-                                                    getPay: getPay)),
+                                                  getPay: getPay,
+                                                  appointmentDate:
+                                                      widget.appointmentDate,
+                                                  doctor: widget.doctor,
+                                                  selectedDate:
+                                                      widget.selectedDate,
+                                                  selectedIndex:
+                                                      widget.selectedIndex,
+                                                )),
                                         (route) => false);
                                   },
                                   child:
                                       Image.asset('assets/images/khalti.png'),
-                                ),
-                                Txt(
-                                  'Khalti',
-                                  style: TxtStyle()
-                                    ..textColor(Colors.black)
-                                    ..fontSize(22)
-                                    ..fontWeight(FontWeight.bold),
                                 ),
                               ],
                             ),
