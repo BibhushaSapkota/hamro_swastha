@@ -115,16 +115,12 @@ class _DoctorFormScreenState extends State<DoctorFormScreen> {
                               height: 70,
                               width: 70,
                               child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(90),
-                                  child: profileImageURL == ""
-                                      ? Image.asset(
-                                          "assets/images/profile.jpg",
-                                          height: 70,
-                                          width: 70,
-                                        )
-                                      : Image.file(
-                                          File('$profileImageURL'),
-                                        )),
+                                borderRadius: BorderRadius.circular(90),
+                                child: profileImageURL == "" ||
+                                        profileImageURL == null
+                                    ? Image.asset("/assets/images/profile.jpg")
+                                    : Image.network(profileImageURL!),
+                              ),
                             ),
                             InkWell(
                               onTap: () async {
@@ -494,11 +490,10 @@ class _DoctorFormScreenState extends State<DoctorFormScreen> {
                                               loading = true;
                                             });
                                             postDetails().whenComplete(() {
-                                              Navigator.of(context)
-                                                  .pushReplacement(
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              DoctorListScreen()));
+                                              Navigator.of(context).pushReplacement(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          DoctorDashboardScreen()));
                                             });
                                           } else {
                                             ScaffoldMessenger.of(context)

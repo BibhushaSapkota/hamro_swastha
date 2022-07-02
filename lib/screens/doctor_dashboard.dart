@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:division/division.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/category.dart';
+import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/MessagepageDoctor.dart';
 import 'package:mero_doctor/screens/SearchPage.dart';
 import 'package:mero_doctor/utils/constants.dart';
@@ -19,24 +21,37 @@ class DoctorDashboardScreen extends StatefulWidget {
 
 class _DoctorDashboardScreenState extends State<DoctorDashboardScreen> {
   List<Map<String, dynamic>> appointmentList = [];
+  DoctorModel doctorModel = DoctorModel();
+  final _user = FirebaseAuth.instance.currentUser!.uid;
+  String? profileUrl;
   final CollectionReference data =
       FirebaseFirestore.instance.collection("doctors");
 
   @override
   void initState() {
     super.initState();
-    getUpcomingAppointment();
+    data.doc(_user).get().then((value) {
+      doctorModel = DoctorModel.fromMap(value.data());
+      setState(() {
+        profileUrl = doctorModel.profileImageDownloadURL.toString();
+        print(profileUrl);
+      });
+    });
+    data.doc(_user).collection("UpcomingAppointment").get().then((value) {
+      setState(() {
+        for (var doc in value.docs) {
+          appointmentList.add(doc.data());
+        }
+      });
+    });
   }
 
-  getUpcomingAppointment() async {
-    var result = await data
-        .doc("DXSVyLt6fRZh3zqjELdI8q9Divq1")
-        .collection("upcomingAppointment")
-        .get();
-    for (var doc in result.docs) {
-      appointmentList.add(doc.data());
-    }
-  }
+  // Future getUpcomingAppointment() async {
+  //   var result = await data.doc(_user).collection("UpcomingAppointment").get();
+  //   for (var doc in result.docs) {
+  //     appointmentList.add(doc.data());
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -63,15 +78,17 @@ class _DoctorDashboardScreenState extends State<DoctorDashboardScreen> {
                     ),
                     Container(
                       margin: const EdgeInsets.fromLTRB(0, 10, 20, 0),
+                      height: 50,
+                      width: 50,
                       child: InkWell(
                         onTap: () {
                           print('Profile');
                         },
-                        child: CircleAvatar(
-                          backgroundColor: Colors.red,
-                          backgroundImage:
-                              AssetImage("assets/images/profile.jpg"),
-                          radius: 20,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(90),
+                          child: profileUrl == "" || profileUrl == null
+                              ? Image.asset("/assets/images/profile.jpg")
+                              : Image.network(profileUrl!),
                         ),
                       ),
                     )
@@ -185,14 +202,15 @@ class _DoctorDashboardScreenState extends State<DoctorDashboardScreen> {
                     ..fontFamily('quicksand'),
                 ),
                 Expanded(
-                  child: ListView(
+                  child: ListView.builder(
                     shrinkWrap: true,
                     padding: const EdgeInsets.symmetric(horizontal: 24),
-                    children: appointmentList
-                        .map((e) => DoctorDashBoardWidget(e))
-                        .toList(),
+                    itemCount: appointmentList.length,
+                    itemBuilder: (BuildContext context, index) {
+                      return DoctorDashBoardWidget(appointmentList[index]);
+                    },
                   ),
-                )
+                ),
               ],
             ),
           ],
@@ -200,35 +218,35 @@ class _DoctorDashboardScreenState extends State<DoctorDashboardScreen> {
       ),
     );
   }
-}
 
-Widget _getCategoryInfo(String title, String value) {
-  return Parent(
-    style: ParentStyle()
-      ..height(80)
-      ..width(80)
-      ..elevation(3, color: Colors.grey.withOpacity(0.5))
-      ..margin(right: 10)
-      ..borderRadius(all: 10)
-      ..background.color(Colors.grey.shade100),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Txt(
-          title,
-          style: TxtStyle()
-            ..fontSize(12)
-            ..fontWeight(FontWeight.bold)
-            ..textColor(const Color(0xff76B5C5)),
-        ),
-        Txt(
-          value,
-          style: TxtStyle()
-            ..margin(top: 10)
-            ..fontSize(12)
-            ..textColor(Colors.black),
-        )
-      ],
-    ),
-  );
+  Widget _getCategoryInfo(String title, String value) {
+    return Parent(
+      style: ParentStyle()
+        ..height(80)
+        ..width(80)
+        ..elevation(3, color: Colors.grey.withOpacity(0.5))
+        ..margin(right: 10)
+        ..borderRadius(all: 10)
+        ..background.color(Colors.grey.shade100),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Txt(
+            title,
+            style: TxtStyle()
+              ..fontSize(12)
+              ..fontWeight(FontWeight.bold)
+              ..textColor(const Color(0xff76B5C5)),
+          ),
+          Txt(
+            value,
+            style: TxtStyle()
+              ..margin(top: 10)
+              ..fontSize(12)
+              ..textColor(Colors.black),
+          )
+        ],
+      ),
+    );
+  }
 }

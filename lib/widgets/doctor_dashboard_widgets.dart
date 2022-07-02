@@ -31,7 +31,7 @@ class DoctorDashBoardWidget extends StatelessWidget {
               },
               child: CircleAvatar(
                 radius: 30,
-                backgroundImage: AssetImage(category["profilePicture"]),
+                backgroundImage: NetworkImage(category["profilePicture"]),
               ),
             ),
             Column(

@@ -6,6 +6,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:mero_doctor/models/models.dart';
 import 'package:mero_doctor/screens/calender_screen.dart';
 import 'package:mero_doctor/screens/chatRoomPatient.dart';
+import 'package:mero_doctor/screens/dashhboard_screen.dart';
 import 'package:mero_doctor/utils/constants.dart';
 import 'package:uuid/uuid.dart';
 
@@ -88,7 +89,13 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                       top: 0,
                       child: InkWell(
                         onTap: () {
-                          Navigator.pop(context);
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (context) => DashboardScreen(
+                                        id: user!.uid,
+                                        profileUrl: widget.doctor.image,
+                                      )),
+                              (route) => false);
                         },
                         child: const Icon(
                           Icons.arrow_back,

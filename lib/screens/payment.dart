@@ -53,25 +53,22 @@ class _KhaltiPaymentPageState extends State<KhaltiPaymentPage> {
     UserModel userModel = UserModel.fromMap(user.data());
     String name = "${userModel.firstName}  ${userModel.lastName}";
 
-    Map<String, dynamic> appointment() {
-      return {
-        'Upcoming Appointment': FieldValue.arrayUnion([
-          {
-            'isPaymentDone': true,
-            'transaction_amount': amount,
-            'transaction_date': date,
-            'transaction_time': time,
-            "date": widget.selectedDate,
-            "time": widget.appointmentDate[widget.selectedIndex],
-            "username": name,
-            "profilePicture": userModel.profilePicture ?? "",
-          }
-        ]),
-      };
-    }
+    Map<String, dynamic> appointment = {
+      'isPaymentDone': true,
+      'transaction_amount': amount,
+      'transaction_date': date,
+      'transaction_time': time,
+      "date": widget.selectedDate,
+      "time": widget.appointmentDate[widget.selectedIndex],
+      "username": name,
+      "profilePicture": userModel.profilePicture ?? "",
+    };
 
     try {
-      await data.doc(widget.doctor.id).update(appointment());
+      await data
+          .doc(widget.doctor.id)
+          .collection('UpcomingAppointment')
+          .add(appointment);
 
       ScaffoldMessenger.of(context).showSnackBar(
           SnackMessage.successSnackBar("Appointment booked successfully!!"));
@@ -151,18 +148,6 @@ class _KhaltiPaymentPageState extends State<KhaltiPaymentPage> {
                       PaymentPreference.khalti,
                     ],
                     onSuccess: (su) {
-                      var now = DateTime.now();
-                      var dateFormater = DateFormat('yyyy/MM/dd');
-                      String timeFormater = DateFormat('kk:mm a').format(now);
-                      String formattedDate = dateFormater.format(now);
-                      transaction(
-                          formattedDate,
-                          (getAmt() / 100).toString(),
-                          widget.selectedDate,
-                          timeFormater,
-                          widget.appointmentDate[widget.selectedIndex]);
-                      bookAppointment((getAmt() / 100).toString(),
-                          formattedDate, timeFormater);
                       const successsnackBar = SnackBar(
                         content: Text(
                           'Payment Successful',
@@ -185,6 +170,18 @@ class _KhaltiPaymentPageState extends State<KhaltiPaymentPage> {
                           .showSnackBar(failedsnackBar);
                     },
                     onCancel: () {
+                      var now = DateTime.now();
+                      var dateFormater = DateFormat('yyyy/MM/dd');
+                      String timeFormater = DateFormat('kk:mm a').format(now);
+                      String formattedDate = dateFormater.format(now);
+                      transaction(
+                          formattedDate,
+                          (getAmt() / 100).toString(),
+                          widget.selectedDate,
+                          timeFormater,
+                          widget.appointmentDate[widget.selectedIndex]);
+                      bookAppointment((getAmt() / 100).toString(),
+                          formattedDate, timeFormater);
                       const cancelsnackBar = SnackBar(
                         content: Text(
                           'Payment Cancelled',

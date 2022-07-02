@@ -34,7 +34,6 @@ class _PaymentScreenState extends State<PaymentScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
   }
 
   @override
@@ -171,7 +170,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                             ),
                           ),
                           const SizedBox(
-                            height: 50,
+                            height: 20,
                           ),
                           const Center(
                             child: Text(

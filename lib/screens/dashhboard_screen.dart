@@ -108,139 +108,151 @@ class _DashboardScreenState extends State<DashboardScreen> {
               itemExtent: screen.height,
               physics: const BouncingScrollPhysics(),
               children: [
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                  const SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Txt(
-                          "Find Your Desired\nConsultant",
-                          style: TxtStyle()
-                            ..fontSize(25)
-                            ..fontFamily("quicksand")
-                            ..fontWeight(FontWeight.bold)
-                            ..textColor(const Color(0xff2c295b)),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: 20),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 24),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      Navigator.pushAndRemoveUntil(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ProfileScreen(
-                                                    id: id,
-                                                    profilePicture: profileUrl,
-                                                  )),
-                                          (route) => false);
-                                    },
-                                    child: CircleAvatar(
-                                      radius: 20,
-                                      backgroundImage: NetworkImage(
-                                        "${profileUrl}",
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Txt(
+                            "Find Your Desired\nConsultant",
+                            style: TxtStyle()
+                              ..fontSize(25)
+                              ..fontFamily("quicksand")
+                              ..fontWeight(FontWeight.bold)
+                              ..textColor(const Color(0xff2c295b)),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(height: 20),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 24),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      height: 50,
+                                      width: 50,
+                                      child: InkWell(
+                                        onTap: () {
+                                          Navigator.pushAndRemoveUntil(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ProfileScreen(
+                                                        id: id,
+                                                        profilePicture:
+                                                            profileUrl,
+                                                      )),
+                                              (route) => false);
+                                        },
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(90),
+                                          child: profileUrl == "" ||
+                                                  profileUrl == null
+                                              ? Image.asset(
+                                                  "/assets/images/profile.jpg")
+                                              : Image.network(profileUrl!),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 25),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                          child: MaterialButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const PatientMessagePage()));
+                            },
+                            color: COLOR_SECONDARY,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50.0),
                             ),
-                          ],
+                            child: Text('Messages',
+                                style: TextStyle(
+                                    // decoration: TextDecoration.underline,
+                                    color: Colors.white,
+                                    fontSize: 15)),
+                          ),
                         ),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
+                          child: MaterialButton(
+                            color: COLOR_SECONDARY,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50.0),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const SearchPageDoctor()));
+                            },
+                            child: Text(
+                              'Search Doctors by name.',
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 15),
+                            ),
+                          ),
+                        )
                       ],
                     ),
-                  ),
-                  const SizedBox(height: 25),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                        child: MaterialButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const PatientMessagePage()));
-                          },
-                          color: COLOR_SECONDARY,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50.0),
-                          ),
-                          child: Text('Messages',
-                              style: TextStyle(
-                                  // decoration: TextDecoration.underline,
-                                  color: Colors.white,
-                                  fontSize: 15)),
-                        ),
+                    const SizedBox(height: 40),
+                    SizedBox(
+                      height: 140,
+                      child: ListView(
+                        padding: const EdgeInsets.only(left: 24),
+                        scrollDirection: Axis.horizontal,
+                        children:
+                            DiseasesList.map((e) => DoctorCategoryWidget(e))
+                                .toList(),
                       ),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
-                        child: MaterialButton(
-                          color: COLOR_SECONDARY,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(50.0),
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const SearchPageDoctor()));
-                          },
-                          child: Text(
-                            'Search Doctors by name.',
-                            style: TextStyle(color: Colors.white, fontSize: 15),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 40),
-                  SizedBox(
-                    height: 140,
-                    child: ListView(
-                      padding: const EdgeInsets.only(left: 24),
-                      scrollDirection: Axis.horizontal,
-                      children: DiseasesList.map((e) => DoctorCategoryWidget(e))
-                          .toList(),
                     ),
-                  ),
-                  Txt(
-                    "Top Categories",
-                    style: TxtStyle()
-                      ..fontFamily('quicksand')
-                      ..fontSize(18)
-                      ..margin(right: 24, left: 24)
-                      ..fontWeight(FontWeight.bold)
-                      ..textColor(const Color(0xff535282)),
-                  ),
-                  Expanded(
+                    Txt(
+                      "Top Categories",
+                      style: TxtStyle()
+                        ..fontFamily('quicksand')
+                        ..fontSize(18)
+                        ..margin(right: 24, left: 24)
+                        ..fontWeight(FontWeight.bold)
+                        ..textColor(const Color(0xff535282)),
+                    ),
+                    Expanded(
                       child: ListView.builder(
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    itemCount: _doctorListData.doctorList.length,
-                    itemBuilder: (BuildContext context, index) {
-                      return DoctorListView(
-                          _doctorListData.doctorList[index], id);
-                    },
-                  ))
-                ]),
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        itemCount: _doctorListData.doctorList.length,
+                        itemBuilder: (BuildContext context, index) {
+                          return DoctorListView(
+                              _doctorListData.doctorList[index], id);
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ],
             )));
   }
 }
-
-

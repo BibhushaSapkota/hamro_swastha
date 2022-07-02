@@ -106,7 +106,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
             ),
             Parent(
               style: ParentStyle()
-                ..height(screen.height / 1.9)
+                ..height(screen.height / 1.6)
                 ..width(screen.width)
                 ..borderRadius(all: 12),
               child: TableCalendar(
@@ -141,7 +141,6 @@ class _CalenderScreenState extends State<CalenderScreen> {
                           'Time Slots',
                           style: TxtStyle()
                             ..fontSize(24)
-                            ..padding(left: 16)
                             ..fontWeight(FontWeight.bold),
                         ),
                         const SizedBox(
@@ -149,7 +148,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                         ),
                         SizedBox(
                           child: SizedBox(
-                            height: 86,
+                            height: appointmentDate.isEmpty ? 30 : 86,
                             child: appointmentDate.isEmpty
                                 ? const Text("No Time Slot Available.")
                                 : ListView.builder(
