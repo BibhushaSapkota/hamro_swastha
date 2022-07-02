@@ -51,7 +51,6 @@ class UserModel {
         oldReportFile: map['oldReportFile'],
         isGoogleUser: map['isGoogleUser'],
         isNormalUser: map['isNormalUser'],
-        bookMarked: map["bookMarked"],
       );
 
   // Sending Data to the Server
@@ -76,7 +75,12 @@ class UserModel {
   }
 
   Map<String, dynamic> transactionList(
-      String date, String amount, String appointmentDate, bool isPaymentDone) {
+      String date,
+      String amount,
+      String appointmentDate,
+      bool isPaymentDone,
+      String time,
+      String appointmentTime) {
     return {
       'transaction_details': FieldValue.arrayUnion([
         {
@@ -84,6 +88,8 @@ class UserModel {
           'transaction_amount': amount,
           'apointment_date': appointmentDate,
           'isPaymentDone': isPaymentDone,
+          'transaction_time': time,
+          'time_slot': appointmentTime,
         }
       ]),
     };
@@ -165,5 +171,33 @@ class DoctorModel {
       "isGoogleUser": isGoogleUser,
       "isNormalUser": isNormalUser,
     };
+  }
+}
+
+class Appointment {
+  String? appointmentDate;
+  String? timeSlot;
+  bool? isPayment;
+  String? transactionAmount;
+  String? transactionDate;
+  String? transactionTime;
+
+  Appointment(
+      {this.appointmentDate,
+      this.isPayment,
+      this.timeSlot,
+      this.transactionAmount,
+      this.transactionDate,
+      this.transactionTime});
+
+  factory Appointment.fromMap(map) {
+    return Appointment(
+      appointmentDate: map['appointment_date'],
+      isPayment: map['isPayment'],
+      timeSlot: map['time_slot'],
+      transactionDate: map['transaction_date'],
+      transactionAmount: map['transaction_amount'],
+      transactionTime: map['transaction_time'],
+    );
   }
 }

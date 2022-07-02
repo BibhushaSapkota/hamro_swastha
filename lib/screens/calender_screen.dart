@@ -1,21 +1,17 @@
-import 'dart:collection';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:division/division.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:mero_doctor/models/doctor.dart';
-import 'package:mero_doctor/models/user.dart';
+import 'package:mero_doctor/screens/dashhboard_screen.dart';
+import 'package:mero_doctor/screens/doctor_profile_screen.dart';
 import 'package:mero_doctor/screens/payment_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../utils/snack_bar.dart';
-
 class CalenderScreen extends StatefulWidget {
   final Doctor doctor;
+  String? id;
 
-  const CalenderScreen({Key? key, required this.doctor}) : super(key: key);
+  CalenderScreen({Key? key, required this.doctor, this.id}) : super(key: key);
 
   @override
   State<CalenderScreen> createState() => _CalenderScreenState();
@@ -45,35 +41,32 @@ class _CalenderScreenState extends State<CalenderScreen> {
     });
   }
 
-  bookAppointment() async {
-    if (selectedIndex == -1) return;
-    var user = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .get();
+  // bookAppointment() async {
+  //   if (selectedIndex == -1) return;
+  //   var user = await FirebaseFirestore.instance
+  //       .collection('users')
+  //       .doc(FirebaseAuth.instance.currentUser!.uid)
+  //       .get();
 
-    UserModel userModel = UserModel.fromMap(user.data());
-    String name = "${userModel.firstName}  ${userModel.lastName}";
+  //   UserModel userModel = UserModel.fromMap(user.data());
+  //   String name = "${userModel.firstName}  ${userModel.lastName}";
 
-    Map<String, String> appointment = {
-      "date": selectedDate,
-      "time": appointmentDate[selectedIndex],
-      "username": name,
-      "profilePicture": userModel.profilePicture ?? "",
-    };
+  //   Map<String, String> appointment = {
+  //     "date": selectedDate,
+  //     "time": appointmentDate[selectedIndex],
+  //     "username": name,
+  //     "profilePicture": userModel.profilePicture ?? "",
+  //   };
 
-    try {
-      await data
-          .doc(widget.doctor.id)
-          .collection("upcomingAppointment")
-          .add(appointment);
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackMessage.successSnackBar("Appointment booked successfully!!"));
-    } catch (ex) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackMessage.successSnackBar(ex.toString()));
-    }
-  }
+  //   try {
+  //     await data.doc(widget.doctor.id).update(appointment);
+  //     ScaffoldMessenger.of(context).showSnackBar(
+  //         SnackMessage.successSnackBar("Appointment booked successfully!!"));
+  //   } catch (ex) {
+  //     ScaffoldMessenger.of(context)
+  //         .showSnackBar(SnackMessage.successSnackBar(ex.toString()));
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -85,12 +78,22 @@ class _CalenderScreenState extends State<CalenderScreen> {
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
+            Padding(
               padding: EdgeInsets.all(8.0),
-              child: Icon(
-                Icons.menu,
-                size: 26,
-                color: Colors.black,
+              child: IconButton(
+                onPressed: () {
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                          builder: (context) => DoctorProfileScreen(
+                                doctor: widget.doctor,
+                              )),
+                      (route) => false);
+                },
+                icon: const Icon(
+                  Icons.arrow_back,
+                  size: 26,
+                  color: Colors.black,
+                ),
               ),
             ),
             Txt(
