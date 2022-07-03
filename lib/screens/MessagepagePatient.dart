@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/chatRoom.dart';
 import 'package:mero_doctor/models/doctor.dart';
@@ -21,7 +20,7 @@ class PatientMessagePage extends StatefulWidget {
 
 class _PatientMessagePageState extends State<PatientMessagePage> {
   User? user = FirebaseAuth.instance.currentUser;
-  var uuid = Uuid();
+  var uuid = const Uuid();
   DoctorModel doctor = DoctorModel();
   User? firebaseUser = FirebaseAuth.instance.currentUser;
   final CollectionReference DoctorUserdata =
@@ -47,11 +46,8 @@ class _PatientMessagePageState extends State<PatientMessagePage> {
     DocumentSnapshot docSnap =
         await FirebaseFirestore.instance.collection("doctors").doc(uid).get();
 
-    if (docSnap != null) {
-      doctor = DoctorModel.fromMap(docSnap.data());
-      // print(customer.first_name);
-    }
-    if (doctor!.docid != "") {
+    doctor = DoctorModel.fromMap(docSnap.data());
+    if (doctor.docid != "") {
       id = doctor.docid!;
     }
     if (doctor.firstName != "") {
@@ -118,16 +114,16 @@ class _PatientMessagePageState extends State<PatientMessagePage> {
                         Map<String, dynamic> participants =
                             chatRoomModel.participants!;
 
-                        List<String> participants_keys =
+                        List<String> participantsKeys =
                             participants.keys.toList();
 
-                        participants_keys.remove(user?.uid);
+                        participantsKeys.remove(user?.uid);
                         print(
                             "Participants Keys..............................");
-                        print(participants_keys);
+                        print(participantsKeys);
 
                         return FutureBuilder(
-                            future: getDoctorById(participants_keys[0]),
+                            future: getDoctorById(participantsKeys[0]),
                             builder: (context, userData) {
                               if (userData.connectionState ==
                                   ConnectionState.done) {
@@ -152,7 +148,7 @@ class _PatientMessagePageState extends State<PatientMessagePage> {
                                       leading: targetDoctoreUser.image
                                                   .toString() ==
                                               ""
-                                          ? CircleAvatar(
+                                          ? const CircleAvatar(
                                               backgroundColor: Color.fromARGB(
                                                   255, 27, 216, 33),
                                               backgroundImage: AssetImage(
@@ -168,7 +164,7 @@ class _PatientMessagePageState extends State<PatientMessagePage> {
                                       title: Text(
                                         capitalize(
                                             targetDoctoreUser.name.toString()),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400),
                                       ),

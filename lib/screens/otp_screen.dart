@@ -38,7 +38,7 @@ class _EnterOtpPageState extends State<EnterOtpPage> {
           color: Colors.white,
           onPressed: () {
             Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => EnterEmailPage()),
+                MaterialPageRoute(builder: (context) => const EnterEmailPage()),
                 (route) => false);
           },
         ),
@@ -180,6 +180,7 @@ class _EnterOtpPageState extends State<EnterOtpPage> {
             isValid = true;
           });
         }
+        return null;
       },
     ));
   }

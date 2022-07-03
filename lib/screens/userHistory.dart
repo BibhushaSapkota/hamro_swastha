@@ -60,13 +60,13 @@ class _DoctorHistoryScreenState extends State<DoctorHistoryScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.only(top: 20, left: 16),
+              padding: const EdgeInsets.only(top: 20, left: 16),
               child: Row(
                 children: [
                   InkWell(
                     onTap: () {
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => DoctorListScreen()));
+                          builder: (context) => const DoctorListScreen()));
                     },
                     child: Container(
                       margin: const EdgeInsets.fromLTRB(0, 0, 20.0, 0),

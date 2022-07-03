@@ -6,7 +6,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mero_doctor/models/auth_patient.dart';
 import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/GoogleLogin/google_login.dart';
-import 'package:mero_doctor/screens/dashhboard_screen.dart';
 import 'package:mero_doctor/utils/constants.dart';
 import 'package:mero_doctor/screens/loading.dart';
 import 'package:mero_doctor/utils/snack_bar.dart';
@@ -36,7 +35,7 @@ class _LoginPageState extends State<LoginPage> {
                 ScaffoldMessenger.of(context).showSnackBar(
                     SnackMessage.successSnackBar("Login Successful.")),
                 Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => LoaderScreen())),
+                    MaterialPageRoute(builder: (context) => const LoaderScreen())),
                 Fluttertoast.showToast(msg: "Login Successful"),
                 // Navigator.of(context).pushReplacement(MaterialPageRoute(
                 //     builder: (context) => DashboardScreen(id: '')))
@@ -57,8 +56,8 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  final TextEditingController emailController = new TextEditingController();
-  final TextEditingController passwordController = new TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -244,7 +243,7 @@ class _LoginPageState extends State<LoginPage> {
                                                   listen: false);
                                           provider.googleLogout();
                                         },
-                                        child: Text('Logout'),
+                                        child: const Text('Logout'),
                                       ),
                                       Center(
                                         child: SizedBox(
@@ -340,7 +339,7 @@ class _LoginPageState extends State<LoginPage> {
       if (value.exists) {
         print('Value Exists');
         Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => LoaderScreen()));
+            MaterialPageRoute(builder: (context) => const LoaderScreen()));
       } else {
         userModel.firstName = data.displayName.toString();
         userModel.email = data.email.toString();
@@ -355,7 +354,7 @@ class _LoginPageState extends State<LoginPage> {
             .set(userModel.toMap())
             .whenComplete(() {
           Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => LoaderScreen()));
+              MaterialPageRoute(builder: (context) => const LoaderScreen()));
         });
       }
     });

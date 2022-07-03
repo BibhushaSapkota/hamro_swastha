@@ -27,7 +27,7 @@ class NotificationView extends StatelessWidget {
   }
   PreferredSizeWidget(){
     return AppBar(
-      title: Text("Notification Screen"),
+      title: const Text("Notification Screen"),
     );
   }
 
@@ -35,20 +35,20 @@ class NotificationView extends StatelessWidget {
     return ListView.separated(itemBuilder: (context , index){
       return listViewItem(index);
     }, separatorBuilder: (context , index){
-      return Divider(height: 0);
+      return const Divider(height: 0);
     }, itemCount: 15);
   }
 
   Widget listViewItem(int index){
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 13,vertical: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 13,vertical: 10),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           prefixIcon(),
           Expanded(
             child: Container(
-              margin: EdgeInsets.only(left: 0),
+              margin: const EdgeInsets.only(left: 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -70,7 +70,7 @@ class NotificationView extends StatelessWidget {
       child: Container(
         height: 50,
         width: 50,
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: Colors.grey.shade300,
@@ -95,7 +95,7 @@ class NotificationView extends StatelessWidget {
                       color: Colors.black,
                       fontWeight: FontWeight.bold
                   ),
-                  children: [
+                  children: const [
                     TextSpan(
                       text: 'Notification Description',
                       style: TextStyle(
@@ -112,10 +112,10 @@ class NotificationView extends StatelessWidget {
 
   Widget tineAndDate(int index){
     return Container(
-      margin: EdgeInsets.only(top: 5),
+      margin: const EdgeInsets.only(top: 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
+        children: const [
           Text(
             '23-08-2022',
             style: TextStyle(

@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/bookmark_page.dart';
@@ -31,7 +30,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     super.initState();
     print(id);
     FirebaseFirestore.instance.collection('users').doc(id).get().then((value) {
-      this.userModel = UserModel.fromMap(value.data());
+      userModel = UserModel.fromMap(value.data());
     }).whenComplete(() {
       setState(() {
         // profilePicture = userModel.profilePicture.toString();
@@ -76,7 +75,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         foregroundColor: Colors.black,
         centerTitle: true,
       ),
-      body: Container(
+      body: SizedBox(
         height: screen.height,
         width: screen.width,
         child: Padding(
@@ -121,8 +120,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               const SizedBox(height: 30),
               Text(
-                "${capFirst} ${capLast}",
-                style: TextStyle(
+                "$capFirst $capLast",
+                style: const TextStyle(
                   color: textColor,
                   fontSize: 20,
                 ),
@@ -193,7 +192,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           borderRadius: BorderRadius.circular(size),
           border: Border.all(
             width: 2,
-            color: Color.fromRGBO(118, 181, 197, 0.3),
+            color: const Color.fromRGBO(118, 181, 197, 0.3),
           )),
     );
   }
@@ -226,7 +225,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               color: Color(0xff464646),
             ),
           ),
-          Expanded(
+          const Expanded(
             child: Align(
               alignment: Alignment.centerRight,
               child: Icon(

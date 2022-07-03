@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:division/division.dart';
@@ -7,11 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/doctor.dart';
 import 'package:mero_doctor/models/user.dart';
-import 'package:mero_doctor/screens/Choose_Authencation.dart';
-import 'package:mero_doctor/screens/GoogleLogin/google_login.dart';
 import 'package:mero_doctor/screens/doctor_profile_screen.dart';
 import 'package:mero_doctor/utils/constants.dart';
-import 'package:provider/provider.dart';
 // import 'package:uuid/uuid.dart';
 
 class SearchPageDoctor extends StatefulWidget {
@@ -28,7 +24,7 @@ class _SearchPageDoctorState extends State<SearchPageDoctor> {
   final CollectionReference data =
       FirebaseFirestore.instance.collection('doctors');
 
-  TextEditingController _textEditingController = TextEditingController();
+  final TextEditingController _textEditingController = TextEditingController();
 
   List<Doctor> AllDoctorOnSearch = [];
 
@@ -74,7 +70,7 @@ class _SearchPageDoctorState extends State<SearchPageDoctor> {
               print(doctor.specialization);
               print(doctor.description);
 
-              this.AllDoctor.add(Doctor(id!, doctor.firstName!, imageURL!,
+              AllDoctor.add(Doctor(id!, doctor.firstName!, imageURL!,
                   position!, specialization!, "12:00", description!));
               // this.AllDoctor.add(Doctor(id!, name!, image!, "orgName",
               //     "qualification", "123123", "description"));
@@ -127,7 +123,7 @@ class _SearchPageDoctorState extends State<SearchPageDoctor> {
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: TextField(
                         onChanged: (value) {
                           print('asd');
@@ -139,7 +135,7 @@ class _SearchPageDoctorState extends State<SearchPageDoctor> {
                           });
                         },
                         controller: _textEditingController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: 'Search for a doctor',
                           hintStyle: TextStyle(
                             fontFamily: 'quicksand',
@@ -149,7 +145,7 @@ class _SearchPageDoctorState extends State<SearchPageDoctor> {
                           enabledBorder: InputBorder.none,
                           focusedBorder: InputBorder.none,
                         ),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontFamily: 'quicksand',
                           fontWeight: FontWeight.w500,
                           fontSize: 14,
@@ -171,8 +167,8 @@ class _SearchPageDoctorState extends State<SearchPageDoctor> {
                 ],
               ),
             ),
-            _textEditingController.text.isEmpty || AllDoctorOnSearch.length == 0
-                ? Expanded(
+            _textEditingController.text.isEmpty || AllDoctorOnSearch.isEmpty
+                ? const Expanded(
                     child: Center(
                       child: Text('No Result found!'),
                     ),
@@ -193,7 +189,7 @@ class _SearchPageDoctorState extends State<SearchPageDoctor> {
                                           doctor: AllDoctorOnSearch[index])));
                             },
                             child: Container(
-                              margin: EdgeInsets.symmetric(
+                              margin: const EdgeInsets.symmetric(
                                   vertical: 5, horizontal: 5),
                               child: Row(
                                 children: [
@@ -213,7 +209,7 @@ class _SearchPageDoctorState extends State<SearchPageDoctor> {
                                               "assets/images/profile.jpg"),
                                           // child: Image.network(AllDoctorOnSearch[index].image),
                                         ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 20,
                                   ),
                                   Text(
@@ -222,7 +218,7 @@ class _SearchPageDoctorState extends State<SearchPageDoctor> {
                                         : AllDoctor[index].name,
                                     // ? foodonSearch[index]
                                     // : food[index],
-                                    style: TextStyle(fontSize: 20),
+                                    style: const TextStyle(fontSize: 20),
                                   ),
                                 ],
                               ),

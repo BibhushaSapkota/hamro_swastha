@@ -27,9 +27,11 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  bindings_compatible: ^1.0.1
   carousel_slider: ^4.1.1
   cloud_firestore: ^3.1.15
   cupertino_icons: ^1.0.2
+  dio: ^4.0.6
   division: ^0.9.0
   file_picker: ^4.5.1
   firebase_auth: ^3.3.18
@@ -52,10 +54,12 @@ dependencies:
   intl_phone_number_input: ^0.7.0+2
   khalti_flutter: ^2.0.2
   page_transition: ^2.0.9
+  path_provider: ^2.0.11
   provider: ^6.0.2
   shared_preferences: ^2.0.15
   smooth_page_indicator: ^1.0.0+2
   table_calendar: ^3.0.6
+  upgrade_tool: ^1.0.6
   uuid: ^3.0.6
 
 dev_dependencies:

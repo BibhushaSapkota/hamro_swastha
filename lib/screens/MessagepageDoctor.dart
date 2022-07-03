@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/chatRoom.dart';
 import 'package:mero_doctor/models/user.dart';
@@ -18,7 +17,7 @@ class MessagePageDoctor extends StatefulWidget {
 
 class _MessagePageDoctorState extends State<MessagePageDoctor> {
   User? user = FirebaseAuth.instance.currentUser;
-  var uuid = Uuid();
+  var uuid = const Uuid();
   bool isDoctor = false;
   UserModel patient = UserModel();
   User? firebaseUser = FirebaseAuth.instance.currentUser;
@@ -38,12 +37,9 @@ class _MessagePageDoctorState extends State<MessagePageDoctor> {
     DocumentSnapshot docSnap =
         await FirebaseFirestore.instance.collection("users").doc(uid).get();
 
-    if (docSnap != null) {
-      patient = UserModel.fromMap(docSnap.data());
-      // print(patient.first_name);
-    }
+    patient = UserModel.fromMap(docSnap.data());
 
-    return patient!;
+    return patient;
   }
 
   @override
@@ -54,10 +50,10 @@ class _MessagePageDoctorState extends State<MessagePageDoctor> {
           FlatButton(
               onPressed: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => SearchPagePatient()),
+                  MaterialPageRoute(builder: (context) => const SearchPagePatient()),
                 );
               },
-              child: Text('Search'))
+              child: const Text('Search'))
         ],
       ),
       body: SafeArea(
@@ -83,16 +79,16 @@ class _MessagePageDoctorState extends State<MessagePageDoctor> {
                         Map<String, dynamic> participants =
                             chatRoomModel.participants!;
 
-                        List<String> participants_keys =
+                        List<String> participantsKeys =
                             participants.keys.toList();
 
-                        participants_keys.remove(user?.uid);
+                        participantsKeys.remove(user?.uid);
                         print(
                             "Participants Keys..............................");
-                        print(participants_keys);
+                        print(participantsKeys);
 
                         return FutureBuilder(
-                            future: getCustomerById(participants_keys[0]),
+                            future: getCustomerById(participantsKeys[0]),
                             builder: (context, userData) {
                               if (userData.connectionState ==
                                   ConnectionState.done) {
@@ -120,7 +116,7 @@ class _MessagePageDoctorState extends State<MessagePageDoctor> {
                                           ? CircleAvatar(
                                               backgroundColor:
                                                   Colors.green[100],
-                                              backgroundImage: AssetImage(
+                                              backgroundImage: const AssetImage(
                                                   "assets/images/google.png"),
                                             )
                                           : CircleAvatar(

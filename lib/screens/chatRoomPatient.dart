@@ -26,7 +26,7 @@ class ChatRoomPatient extends StatefulWidget {
 }
 
 class _ChatRoomPatientState extends State<ChatRoomPatient> {
-  var uuid = Uuid();
+  var uuid = const Uuid();
   bool isDoctor = false;
   UserModel patient = UserModel();
   DoctorModel doctor = DoctorModel();
@@ -124,7 +124,7 @@ class _ChatRoomPatientState extends State<ChatRoomPatient> {
             children: [
               Expanded(
                   child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: StreamBuilder(
                   stream: FirebaseFirestore.instance
                       .collection("chatrooms")
@@ -159,10 +159,10 @@ class _ChatRoomPatientState extends State<ChatRoomPatient> {
                                           : MainAxisAlignment.start,
                                   children: [
                                     Container(
-                                        padding: EdgeInsets.symmetric(
+                                        padding: const EdgeInsets.symmetric(
                                             vertical: 10, horizontal: 10),
                                         margin:
-                                            EdgeInsets.symmetric(vertical: 2),
+                                            const EdgeInsets.symmetric(vertical: 2),
                                         decoration: BoxDecoration(
                                             color: isDoctor
                                                 ? (currentMessage.sender ==
@@ -188,16 +188,16 @@ class _ChatRoomPatientState extends State<ChatRoomPatient> {
                           return const Center(child: Text('Say Hi!'));
                         }
                       } else if (snapshot.hasError) {
-                        return Center(
+                        return const Center(
                             child:
                                 Text('Please Check yout Internet Connection.'));
                       } else {
-                        return Center(
+                        return const Center(
                           child: Text("Say Hi"),
                         );
                       }
                     } else {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(),
                       );
                     }
@@ -206,21 +206,21 @@ class _ChatRoomPatientState extends State<ChatRoomPatient> {
               )),
               Container(
                 color: Colors.grey[200],
-                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                 child: Row(
                   children: [
                     Flexible(
                         child: TextField(
                       controller: messageController,
                       maxLines: null,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           border: InputBorder.none, hintText: "Enter message"),
                     )),
                     IconButton(
                         onPressed: () {
                           sendMessage();
                         },
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.send,
                           color: Colors.blue,
                         ))

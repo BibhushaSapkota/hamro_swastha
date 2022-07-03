@@ -204,9 +204,9 @@ class _KhaltiPaymentPageState extends State<KhaltiPaymentPage> {
   }
 
   Future transaction(dynamic date, String amount, String selectedDate,
-      String time, String appointment_time) async {
+      String time, String appointmentTime) async {
     await FirebaseFirestore.instance.collection("users").doc(_user!.uid).update(
         widget._userModel.transactionList(
-            date, amount, selectedDate, true, time, appointment_time));
+            date, amount, selectedDate, true, time, appointmentTime));
   }
 }

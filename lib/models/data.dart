@@ -1,9 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/models.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:mero_doctor/models/user.dart';
 
 final List categoryList = [
   Category(
@@ -76,7 +72,7 @@ final List DoctorList = [
   TopDoctorCategory("assets/images/ic_topDoctor2.png", 'Dr.Bina Zen',
       'Eye Surgeon', const Color(0xfff9f3eb), const Color(0xffffb060)),
   TopDoctorCategory("assets/images/ic_topDoctor3.png", 'Dr.Bina Zen',
-      'Eye Surgeon', const Color(0xcc1a6c4), const Color(0xffffc1af)),
+      'Eye Surgeon', const Color(0x0cc1a6c4), const Color(0xffffc1af)),
   TopDoctorCategory("assets/images/ic_topDoctor2.png", 'Dr.Bina Zen',
       'Eye Surgeon', const Color(0xfff9f3eb), const Color(0xffffb060)),
 ];

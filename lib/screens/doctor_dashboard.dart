@@ -1,15 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:division/division.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:mero_doctor/models/category.dart';
 import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/MessagepageDoctor.dart';
 import 'package:mero_doctor/screens/SearchPage.dart';
 import 'package:mero_doctor/utils/constants.dart';
 
-import '../models/data.dart';
 import '../widgets/doctor_dashboard_widgets.dart';
 
 class DoctorDashboardScreen extends StatefulWidget {
@@ -114,7 +111,7 @@ class _DoctorDashboardScreenState extends State<DoctorDashboardScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                      margin: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                       child: MaterialButton(
                         onPressed: () {
                           Navigator.push(
@@ -127,7 +124,7 @@ class _DoctorDashboardScreenState extends State<DoctorDashboardScreen> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(50.0),
                         ),
-                        child: Text('Messages',
+                        child: const Text('Messages',
                             style: TextStyle(
                                 // decoration: TextDecoration.underline,
                                 color: Colors.white,
@@ -135,7 +132,7 @@ class _DoctorDashboardScreenState extends State<DoctorDashboardScreen> {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
+                      margin: const EdgeInsets.fromLTRB(0, 0, 20, 0),
                       child: MaterialButton(
                         color: COLOR_SECONDARY,
                         shape: RoundedRectangleBorder(
@@ -148,7 +145,7 @@ class _DoctorDashboardScreenState extends State<DoctorDashboardScreen> {
                                   builder: (context) =>
                                       const SearchPagePatient()));
                         },
-                        child: Text(
+                        child: const Text(
                           'Search Patient by name.',
                           style: TextStyle(color: Colors.white, fontSize: 15),
                         ),

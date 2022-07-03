@@ -98,7 +98,7 @@ class _PatientUploadScreenState extends State<PatientUploadScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
+                            SizedBox(
                               height: 70,
                               width: 70,
                               child: ClipRRect(
@@ -231,7 +231,7 @@ class _PatientUploadScreenState extends State<PatientUploadScreen> {
                                   const SizedBox(
                                     width: 10,
                                   ),
-                                  Text('Male'),
+                                  const Text('Male'),
                                 ],
                               ),
                               Row(
@@ -357,7 +357,7 @@ class _PatientUploadScreenState extends State<PatientUploadScreen> {
                                         await FilePicker.platform.pickFiles(
                                       allowMultiple: false,
                                       type: FileType.custom,
-                                      allowedExtensions: ['png', 'jpg', 'pdf'],
+                                      allowedExtensions: ['jpg'],
                                     );
                                     if (oldFile == null) {
                                       ScaffoldMessenger.of(context)

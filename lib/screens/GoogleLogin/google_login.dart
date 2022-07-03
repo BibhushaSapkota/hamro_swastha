@@ -25,13 +25,11 @@ class GoogleLogInProvider extends ChangeNotifier {
       idToken: googleAuth.idToken,
     );
 
-    if (googleUser != null) {
-      UserCredential userCredential =
-          await FirebaseAuth.instance.signInWithCredential(credential);
-      User? useraccount = userCredential.user;
-      print(useraccount);
-      return useraccount;
-    }
+    UserCredential userCredential =
+        await FirebaseAuth.instance.signInWithCredential(credential);
+    User? useraccount = userCredential.user;
+    print(useraccount);
+    return useraccount;
 
     notifyListeners();
   }

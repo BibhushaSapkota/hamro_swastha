@@ -1,11 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:division/division.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/category.dart';
 import 'package:mero_doctor/models/doctor.dart';
 import 'package:mero_doctor/models/user.dart';
-import 'package:mero_doctor/screens/dashhboard_screen.dart';
 import 'package:mero_doctor/utils/constants.dart';
 import 'package:mero_doctor/widgets/doctor_widget.dart';
 
@@ -35,7 +33,7 @@ class _DoctorCategoryScreenState extends State<DoctorCategoryScreen> {
   // ignore: non_constant_identifier_names
   AllDoctorSpecialization() async {
     await FirebaseFirestore.instance.collection('doctors').get().then((value) {
-      value.docs.forEach((element) {
+      for (var element in value.docs) {
         doctorModel = DoctorModel.fromMap(element.data());
         print('Doctor Specialization.......');
         print(doctorModel.specialization);
@@ -86,7 +84,7 @@ class _DoctorCategoryScreenState extends State<DoctorCategoryScreen> {
                 id, name, image, orgName, Nephrology, schedule, description));
           });
         }
-      });
+      }
     });
   }
 
@@ -131,7 +129,7 @@ class _DoctorCategoryScreenState extends State<DoctorCategoryScreen> {
                   fit: BoxFit.cover,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 12,
               ),
               Expanded(

@@ -1,6 +1,5 @@
 import 'package:division/division.dart';
 import 'package:flutter/material.dart';
-import 'package:mero_doctor/screens/dashhboard_screen.dart';
 import 'package:mero_doctor/screens/doctor_category.dart';
 
 import '../models/category.dart';

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mero_doctor/utils/constants.dart';
-import 'package:flutter/services.dart';
 
 class Bookmarked extends StatefulWidget {
   const Bookmarked({Key? key}) : super(key: key);
@@ -64,7 +63,7 @@ class _BookmarkedState extends State<Bookmarked>
         body: Stack(
           children: [
             ListView(
-              physics: BouncingScrollPhysics(
+              physics: const BouncingScrollPhysics(
                   parent: AlwaysScrollableScrollPhysics()),
               children: [
                 const SizedBox(
@@ -131,7 +130,7 @@ class _BookmarkedState extends State<Bookmarked>
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "$name",
+                        name,
                         textScaleFactor: 1.4,
                         style: GoogleFonts.poppins(
                             textStyle: const TextStyle(
@@ -139,7 +138,7 @@ class _BookmarkedState extends State<Bookmarked>
                         )),
                       ),
                       Text(
-                        "$specialization",
+                        specialization,
                         style: GoogleFonts.poppins(
                           textStyle: const TextStyle(
                             fontWeight: FontWeight.w400,

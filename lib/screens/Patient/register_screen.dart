@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/loading.dart';
 import 'package:mero_doctor/screens/Patient/login_screens.dart';
@@ -35,7 +34,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final themeData = Theme.of(context);
     return SafeArea(
         child: loading
-            ? Loading()
+            ? const Loading()
             : Scaffold(
                 // appBar: AppBar(
                 //   leading: IconButton(
@@ -158,7 +157,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                 Radius.circular(20)),
                                           ),
                                         ),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 16,
                                             height: 0.8,
                                             color: Colors.black54),
@@ -347,7 +346,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       ),
                                       const SizedBox(height: 20.0),
                                       Text(
-                                        '$Success_message',
+                                        Success_message,
                                         style:
                                             TextStyle(color: Colors.green[20]),
                                       ),
@@ -442,6 +441,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
         SnackMessage.successSnackBar("Account Created Successful."));
     Navigator.pushAndRemoveUntil(context,
-        MaterialPageRoute(builder: (context) => LoginPage()), (route) => false);
+        MaterialPageRoute(builder: (context) => const LoginPage()), (route) => false);
   }
 }

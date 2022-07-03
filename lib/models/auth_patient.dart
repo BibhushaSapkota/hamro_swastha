@@ -7,7 +7,7 @@ import 'package:mero_doctor/screens/dashhboard_screen.dart';
 import 'package:mero_doctor/screens/patient_upload_profile.dart';
 
 class LoaderScreen extends StatefulWidget {
-  LoaderScreen({Key? key}) : super(key: key);
+  const LoaderScreen({Key? key}) : super(key: key);
 
   @override
   State<LoaderScreen> createState() => _LoaderScreenState();
@@ -16,12 +16,12 @@ class LoaderScreen extends StatefulWidget {
 class _LoaderScreenState extends State<LoaderScreen> {
   @override
   Widget build(BuildContext context) {
-    return Controller();
+    return const Controller();
   }
 }
 
 class Controller extends StatefulWidget {
-  Controller();
+  const Controller();
   @override
   State<Controller> createState() => _ControllerState();
 }
@@ -44,7 +44,7 @@ class _ControllerState extends State<Controller> {
         .doc(user?.uid)
         .get()
         .then((value) {
-      this.loginUserModel = UserModel.fromMap(value.data());
+      loginUserModel = UserModel.fromMap(value.data());
     }).whenComplete(() {
       const CircularProgressIndicator();
       setState(() {

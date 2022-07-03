@@ -3,15 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/Doctor/login_screens_doc.dart';
-import 'package:mero_doctor/screens/Doctor/register_screens_doctor.dart';
 import 'package:mero_doctor/screens/doctor_dashboard.dart';
-import 'package:mero_doctor/screens/doctor_list_screen.dart';
 import 'package:mero_doctor/screens/doctor_upload_info.dart';
-import 'package:mero_doctor/utils/snack_bar.dart';
-import 'package:mero_doctor/screens/dashhboard_screen.dart';
 
 class LoadingScreenDoc extends StatefulWidget {
-  LoadingScreenDoc({Key? key}) : super(key: key);
+  const LoadingScreenDoc({Key? key}) : super(key: key);
 
   @override
   State<LoadingScreenDoc> createState() => _LoadingScreenDocState();
@@ -20,12 +16,12 @@ class LoadingScreenDoc extends StatefulWidget {
 class _LoadingScreenDocState extends State<LoadingScreenDoc> {
   @override
   Widget build(BuildContext context) {
-    return ControllerDoc();
+    return const ControllerDoc();
   }
 }
 
 class ControllerDoc extends StatefulWidget {
-  ControllerDoc();
+  const ControllerDoc();
   @override
   State<ControllerDoc> createState() => _ControllerDocState();
 }
@@ -47,7 +43,7 @@ class _ControllerDocState extends State<ControllerDoc> {
         .doc(user!.uid)
         .get()
         .then((value) {
-      this.userModel = DoctorModel.fromMap(value.data());
+      userModel = DoctorModel.fromMap(value.data());
     }).whenComplete(() {
       const CircularProgressIndicator();
       setState(() {
@@ -66,7 +62,7 @@ class _ControllerDocState extends State<ControllerDoc> {
         return const DoctorDashboardScreen();
         // return DashboardScreen(id: id);
       } else {
-        return DoctorFormScreen();
+        return const DoctorFormScreen();
       }
     } else {
       return const LoginPageDoc();

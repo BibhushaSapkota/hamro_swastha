@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:division/division.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:mero_doctor/models/data.dart';
 import 'package:mero_doctor/models/doctor.dart';
@@ -15,10 +13,8 @@ import 'package:mero_doctor/utils/capatalize.dart';
 import 'package:mero_doctor/utils/constants.dart';
 import 'package:mero_doctor/widgets/doctor_category_widget.dart';
 import 'package:mero_doctor/widgets/doctor_list_view.dart';
-import 'package:mero_doctor/widgets/doctor_widget.dart';
 import 'package:page_transition/page_transition.dart';
 
-import '../widgets/doctor_top_widget.dart';
 
 class DashboardScreen extends StatefulWidget {
   DashboardScreen({Key? key, required this.id, this.profileUrl})
@@ -46,7 +42,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     // TODO: implement initState
     super.initState();
     _data.get().then((value) {
-      value.docs.forEach((element) {
+      for (var element in value.docs) {
         doctorModel = DoctorModel.fromMap(element.data());
         String? firstName;
         String? lastName;
@@ -61,7 +57,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           lastName = doctorModel.lastName.toString();
           String capFirst = capitalize(firstName!);
           String capLast = capitalize(lastName!);
-          fullName = "${capFirst} ${capLast}";
+          fullName = "$capFirst $capLast";
           if (doctorModel.profileImageDownloadURL != null) {
             imageUrl = doctorModel.profileImageDownloadURL;
           } else {
@@ -73,7 +69,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         });
         _doctorListData.doctorList.add(Doctor(docid!, fullName!, imageUrl!, '',
             specialization!, '', description!));
-      });
+      }
     });
   }
 
@@ -84,10 +80,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return SafeArea(
         child: Scaffold(
             bottomNavigationBar: GNav(
-              activeColor: Color(0xffd36868),
+              activeColor: const Color(0xffd36868),
               color: Colors.black45,
-              tabBackgroundColor: Color(0xFFF1EFEF),
-              padding: EdgeInsets.all(16),
+              tabBackgroundColor: const Color(0xFFF1EFEF),
+              padding: const EdgeInsets.all(16),
               gap: 10,
               curve: Curves.easeOutExpo,
               duration: const Duration(milliseconds: 400),
@@ -157,7 +153,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       height: 50,
                                       width: 50,
                                       child: InkWell(
@@ -197,7 +193,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          margin: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                          margin: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                           child: MaterialButton(
                             onPressed: () {
                               Navigator.push(
@@ -210,7 +206,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50.0),
                             ),
-                            child: Text('Messages',
+                            child: const Text('Messages',
                                 style: TextStyle(
                                     // decoration: TextDecoration.underline,
                                     color: Colors.white,
@@ -218,7 +214,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.fromLTRB(0, 0, 20, 0),
+                          margin: const EdgeInsets.fromLTRB(0, 0, 20, 0),
                           child: MaterialButton(
                             color: COLOR_SECONDARY,
                             shape: RoundedRectangleBorder(
@@ -231,7 +227,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                       builder: (context) =>
                                           const SearchPageDoctor()));
                             },
-                            child: Text(
+                            child: const Text(
                               'Search Doctors by name.',
                               style:
                                   TextStyle(color: Colors.white, fontSize: 15),

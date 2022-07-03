@@ -1,12 +1,10 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mero_doctor/screens/otp_screen.dart';
 import 'package:mero_doctor/utils/constants.dart';
-import 'package:table_calendar/table_calendar.dart';
 
 class EnterEmailPage extends StatefulWidget {
-  EnterEmailPage({Key? key}) : super(key: key);
+  const EnterEmailPage({Key? key}) : super(key: key);
 
   @override
   State<EnterEmailPage> createState() => _EnterEmailPageState();
@@ -26,10 +24,10 @@ class _EnterEmailPageState extends State<EnterEmailPage> {
       appBar: AppBar(
         backgroundColor: COLOR_SECONDARY,
         elevation: 0,
-        leading: BackButton(color: Colors.white),
+        leading: const BackButton(color: Colors.white),
         title: Text(
           "Reset Password",
-          style: GoogleFonts.poppins(textStyle: TextStyle(fontSize: 18)),
+          style: GoogleFonts.poppins(textStyle: const TextStyle(fontSize: 18)),
         ),
         centerTitle: true,
       ),

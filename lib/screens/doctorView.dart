@@ -1,15 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mero_doctor/models/category.dart';
 import 'package:mero_doctor/screens/doctor_dashboard.dart';
-import 'package:mero_doctor/widgets/doctor_widget.dart';
 
-import 'dashhboard_screen.dart';
 
 class doctorView extends StatelessWidget {
   final DoctorWidgets details;
-  doctorView(this.details, {Key? key}) : super(key: key);
+  const doctorView(this.details, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +32,7 @@ class doctorView extends StatelessWidget {
           foregroundColor: Colors.black,
           centerTitle: true,
         ),
-        body: Container(
+        body: SizedBox(
           height: screen.height,
           width: screen.width,
           child: Padding(
@@ -150,7 +146,7 @@ class doctorView extends StatelessWidget {
                           children: [
                             Padding(
                               padding: const EdgeInsets.fromLTRB(0, 90, 0, 0),
-                              child: Container(
+                              child: SizedBox(
                                 height: 90,
                                 width: 310,
                                 child: Align(

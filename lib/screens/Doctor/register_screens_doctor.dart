@@ -32,7 +32,7 @@ class _RegisterScreenDocState extends State<RegisterScreenDoc> {
     final themeData = Theme.of(context);
     return SafeArea(
         child: loading
-            ? Loading()
+            ? const Loading()
             : Scaffold(
                 body: SizedBox(
                   height: screen.height,
@@ -338,7 +338,7 @@ class _RegisterScreenDocState extends State<RegisterScreenDoc> {
                                         ),
                                         const SizedBox(height: 20.0),
                                         Text(
-                                          '$Success_message',
+                                          Success_message,
                                           style: TextStyle(
                                               color: Colors.green[20]),
                                         ),

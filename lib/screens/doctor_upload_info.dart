@@ -7,9 +7,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/doctor_dashboard.dart';
-import 'package:mero_doctor/screens/doctor_list_screen.dart';
 import 'package:mero_doctor/utils/snack_bar.dart';
-import 'package:path/path.dart';
 import 'loading.dart';
 import 'dart:io';
 
@@ -111,7 +109,7 @@ class _DoctorFormScreenState extends State<DoctorFormScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
+                            SizedBox(
                               height: 70,
                               width: 70,
                               child: ClipRRect(
@@ -203,10 +201,10 @@ class _DoctorFormScreenState extends State<DoctorFormScreen> {
                                   },
                                   activeColor: const Color(0xff76B5C5),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
-                                Text('Medical Officer'),
+                                const Text('Medical Officer'),
                               ],
                             ),
                             Row(
@@ -222,10 +220,10 @@ class _DoctorFormScreenState extends State<DoctorFormScreen> {
                                     });
                                   },
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 10,
                                 ),
-                                Text('Medical Manager'),
+                                const Text('Medical Manager'),
                               ],
                             ),
                             // ------------------------ Specialization ----------------------------------------------------------
@@ -280,7 +278,7 @@ class _DoctorFormScreenState extends State<DoctorFormScreen> {
                                 ],
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 15,
                             ),
                             // ------------------------ Identification ----------------------------------------------------------
@@ -367,7 +365,7 @@ class _DoctorFormScreenState extends State<DoctorFormScreen> {
                                 ),
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Txt(
@@ -378,7 +376,7 @@ class _DoctorFormScreenState extends State<DoctorFormScreen> {
                                 ..fontWeight(FontWeight.bold)
                                 ..textColor(Colors.black),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             // ------------------------ License ----------------------------------------------------------
@@ -493,7 +491,7 @@ class _DoctorFormScreenState extends State<DoctorFormScreen> {
                                               Navigator.of(context).pushReplacement(
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          DoctorDashboardScreen()));
+                                                          const DoctorDashboardScreen()));
                                             });
                                           } else {
                                             ScaffoldMessenger.of(context)

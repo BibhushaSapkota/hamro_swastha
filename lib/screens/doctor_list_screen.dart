@@ -10,7 +10,7 @@ import '../models/models.dart';
 
 class DoctorListScreen extends StatefulWidget {
   final String? profileUrl;
-  DoctorListScreen({this.profileUrl});
+  const DoctorListScreen({this.profileUrl});
   @override
   State<DoctorListScreen> createState() => _DoctorListScreenState();
 }
@@ -26,8 +26,8 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
     super.initState();
 
     data.get().then((value) {
-      value.docs.forEach((element) {
-        this.doctor_data = DoctorModel.fromMap(element.data());
+      for (var element in value.docs) {
+        doctor_data = DoctorModel.fromMap(element.data());
         String? id;
         String? name;
         String? imageURL = "";
@@ -45,9 +45,9 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
           print(id);
           print(imageURL);
         });
-        this.doctor_list.doctorList.add(Doctor(id!, name!, imageURL!, "orgName",
+        doctor_list.doctorList.add(Doctor(id!, name!, imageURL!, "orgName",
             "qualification", "12323", "description"));
-      });
+      }
     });
   }
 

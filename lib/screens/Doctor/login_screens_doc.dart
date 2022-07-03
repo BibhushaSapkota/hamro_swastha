@@ -2,18 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:mero_doctor/models/auth_doctor.dart';
-import 'package:mero_doctor/models/auth_patient.dart';
 import 'package:mero_doctor/models/user.dart';
-import 'package:mero_doctor/screens/Doctor/register_screens_doctor.dart';
 import 'package:mero_doctor/screens/GoogleLogin/google_login.dart';
-import 'package:mero_doctor/screens/Patient/register_screen.dart';
-import 'package:mero_doctor/screens/dashhboard_screen.dart';
-import 'package:mero_doctor/screens/doctor_dashboard.dart';
-import 'package:mero_doctor/screens/doctor_list_screen.dart';
-import 'package:mero_doctor/screens/doctor_upload_info.dart';
 // import 'package:mero_doctor/screens/dashhboard_screen.dart';
 import 'package:mero_doctor/utils/constants.dart';
 import 'package:mero_doctor/screens/loading.dart';
@@ -52,7 +43,7 @@ class _LoginPageDocState extends State<LoginPageDoc> {
                 ScaffoldMessenger.of(context).showSnackBar(
                     SnackMessage.successSnackBar("Login Successful.")),
                 Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => LoadingScreenDoc()))
+                    MaterialPageRoute(builder: (context) => const LoadingScreenDoc()))
                 // }
                 // else
                 //   {
@@ -285,7 +276,7 @@ class _LoginPageDocState extends State<LoginPageDoc> {
                                                 listen: false);
                                             provider.googleLogout();
                                           },
-                                          child: Text('Logout'),
+                                          child: const Text('Logout'),
                                         ),
                                         Center(
                                           child: SizedBox(
@@ -377,7 +368,7 @@ class _LoginPageDocState extends State<LoginPageDoc> {
       if (value.exists) {
         print('Value Exists');
         Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => LoadingScreenDoc()));
+            MaterialPageRoute(builder: (context) => const LoadingScreenDoc()));
       } else {
         doctorModel.docid = data.uid.toString();
         doctorModel.firstName = data.displayName.toString();
@@ -393,7 +384,7 @@ class _LoginPageDocState extends State<LoginPageDoc> {
             .set(doctorModel.toMap())
             .whenComplete(() {
           Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => LoadingScreenDoc()));
+              MaterialPageRoute(builder: (context) => const LoadingScreenDoc()));
         });
       }
     });

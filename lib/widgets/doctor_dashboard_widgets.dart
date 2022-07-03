@@ -1,7 +1,5 @@
 import 'package:division/division.dart';
 import 'package:flutter/material.dart';
-import 'package:mero_doctor/models/category.dart';
-import 'package:mero_doctor/screens/doctorView.dart';
 
 class DoctorDashBoardWidget extends StatelessWidget {
   final Map<String, dynamic> category;

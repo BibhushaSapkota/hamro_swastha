@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/doctor.dart';
 import 'package:mero_doctor/screens/doctor_profile_screen.dart';
-import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class DoctorWidget extends StatelessWidget {
@@ -49,7 +48,7 @@ class DoctorWidget extends StatelessWidget {
               color: Colors.grey.withOpacity(0.5),
               spreadRadius: 1,
               blurRadius: 3,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: const Offset(0, 3), // changes position of shadow
             ),
           ],
         ),
@@ -57,7 +56,7 @@ class DoctorWidget extends StatelessWidget {
         child: Row(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),
                   bottomLeft: Radius.circular(10)),
               child: doctor.image == ""
@@ -82,42 +81,42 @@ class DoctorWidget extends StatelessWidget {
                 children: [
                   Text(
                     doctor.name,
-                    style: TextStyle(color: Colors.black, fontSize: 14),
+                    style: const TextStyle(color: Colors.black, fontSize: 14),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   RichText(
                     text: TextSpan(children: [
                       TextSpan(
                         text: doctor.orgName == "" ? "" : doctor.orgName,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 14,
                         ),
                       ),
                       TextSpan(
                         text: ' (' + doctor.specialization + ')',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 14,
                         ),
                       ),
                     ]),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.watch_later_outlined,
                         size: 16,
                       ),
                       Text(
                         doctor.schedule,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                           fontSize: 14,
                         ),

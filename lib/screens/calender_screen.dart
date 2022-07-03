@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:division/division.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/doctor.dart';
-import 'package:mero_doctor/screens/dashhboard_screen.dart';
 import 'package:mero_doctor/screens/doctor_profile_screen.dart';
 import 'package:mero_doctor/screens/payment_screen.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -81,7 +80,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: IconButton(
                 onPressed: () {
                   Navigator.of(context).pushAndRemoveUntil(
@@ -209,7 +208,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                                   ..textColor(Colors.white),
                               )),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Txt(

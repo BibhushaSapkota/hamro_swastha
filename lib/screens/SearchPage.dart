@@ -6,11 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/chatRoom.dart';
 import 'package:mero_doctor/models/user.dart';
-import 'package:mero_doctor/screens/Choose_Authencation.dart';
-import 'package:mero_doctor/screens/GoogleLogin/google_login.dart';
 import 'package:mero_doctor/screens/chatRoomDoctor.dart';
-import 'package:mero_doctor/screens/chatRoomPatient.dart';
-import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
 class SearchPagePatient extends StatefulWidget {
@@ -21,13 +17,13 @@ class SearchPagePatient extends StatefulWidget {
 }
 
 class _SearchPagePatientState extends State<SearchPagePatient> {
-  var uid = Uuid();
+  var uid = const Uuid();
 
   UserModel patient = UserModel();
   final CollectionReference data =
       FirebaseFirestore.instance.collection('users');
 
-  TextEditingController _textEditingController = TextEditingController();
+  final TextEditingController _textEditingController = TextEditingController();
 
   List<UserModel> AllPatientOnSearch = [];
 
@@ -44,7 +40,7 @@ class _SearchPagePatientState extends State<SearchPagePatient> {
         .where("participants.${targetUser.uid}", isEqualTo: true)
         .get();
 
-    if (snapshot.docs.length > 0) {
+    if (snapshot.docs.isNotEmpty) {
       // log("Chat Room Exists");
       var docData = snapshot.docs[0].data();
       ChatRoomModel existingChatRoom =
@@ -90,7 +86,7 @@ class _SearchPagePatientState extends State<SearchPagePatient> {
               // print(id);
               String? name = patient.firstName;
               String? image = patient.lastName;
-              this.AllPatient.add(UserModel(
+              AllPatient.add(UserModel(
                     uid: patient.uid,
                     firstName: patient.firstName,
                     lastName: patient.lastName,
@@ -132,7 +128,7 @@ class _SearchPagePatientState extends State<SearchPagePatient> {
               children: [
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: TextField(
                       onChanged: (value) {
                         print('asd');
@@ -144,7 +140,7 @@ class _SearchPagePatientState extends State<SearchPagePatient> {
                         });
                       },
                       controller: _textEditingController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'Search for a doctor',
                         hintStyle: TextStyle(
                           fontFamily: 'quicksand',
@@ -154,7 +150,7 @@ class _SearchPagePatientState extends State<SearchPagePatient> {
                         enabledBorder: InputBorder.none,
                         focusedBorder: InputBorder.none,
                       ),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: 'quicksand',
                         fontWeight: FontWeight.w500,
                         fontSize: 14,
@@ -176,8 +172,8 @@ class _SearchPagePatientState extends State<SearchPagePatient> {
               ],
             ),
           ),
-          _textEditingController.text.isEmpty || AllPatientOnSearch.length == 0
-              ? Expanded(
+          _textEditingController.text.isEmpty || AllPatientOnSearch.isEmpty
+              ? const Expanded(
                   child: Center(
                     child: Text('No Result found!'),
                   ),
@@ -214,7 +210,7 @@ class _SearchPagePatientState extends State<SearchPagePatient> {
                             }
                           },
                           child: Container(
-                            margin: EdgeInsets.symmetric(
+                            margin: const EdgeInsets.symmetric(
                                 vertical: 5, horizontal: 5),
                             child: Row(
                               children: [
@@ -228,11 +224,11 @@ class _SearchPagePatientState extends State<SearchPagePatient> {
                                       )
                                     : CircleAvatar(
                                         backgroundColor: Colors.green[100],
-                                        backgroundImage: AssetImage(
+                                        backgroundImage: const AssetImage(
                                             "assets/images/profile.jpg"),
                                         // child: Image.network(AllPatientOnSearch[index].image),
                                       ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 20,
                                 ),
                                 Text(
@@ -241,7 +237,7 @@ class _SearchPagePatientState extends State<SearchPagePatient> {
                                       : AllPatient[index].firstName!,
                                   // ? foodonSearch[indexlastName
                                   // : food[index],
-                                  style: TextStyle(fontSize: 20),
+                                  style: const TextStyle(fontSize: 20),
                                 ),
                               ],
                             ),

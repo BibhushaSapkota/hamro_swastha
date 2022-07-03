@@ -1,30 +1,6 @@
 import 'package:division/division.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart'
-    show
-        BorderRadius,
-        BoxFit,
-        BuildContext,
-        Column,
-        Container,
-        EdgeInsets,
-        FontWeight,
-        FormState,
-        GlobalKey,
-        Image,
-        MediaQuery,
-        Padding,
-        RoundedRectangleBorder,
-        Row,
-        Size,
-        SizedBox,
-        Stack,
-        State,
-        StatefulWidget,
-        Text,
-        Widget;
 
 class ReportScreen extends StatefulWidget {
   @override
@@ -65,7 +41,7 @@ class _ReportScreenState extends State<ReportScreen> {
                   height: screen.height / 8,
                   fit: BoxFit.fill),
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
             Txt(
@@ -107,10 +83,10 @@ class _ReportScreenState extends State<ReportScreen> {
                       elevation: 200,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(32.0)),
-                      minimumSize: Size(150, 40), //////// HERE
+                      minimumSize: const Size(150, 40), //////// HERE
                     ),
                     onPressed: () {},
-                    child: Text('Upload Photo'),
+                    child: const Text('Upload Photo'),
                   ),
                 )
               ],
@@ -126,7 +102,7 @@ class _ReportScreenState extends State<ReportScreen> {
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(5, 250, 10, 0),
-              child: Container(
+              child: SizedBox(
                 height: 60,
                 child: CupertinoDatePicker(
                   mode: CupertinoDatePickerMode.date,
@@ -160,7 +136,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                 value: 1,
                                 groupValue: 'null',
                                 onChanged: (index) {}),
-                            Text(
+                            const Text(
                               'Male',
                               style: TextStyle(fontSize: 11),
                             )
@@ -172,7 +148,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                 value: 1,
                                 groupValue: 'null',
                                 onChanged: (index) {}),
-                            Text('Female', style: TextStyle(fontSize: 11))
+                            const Text('Female', style: TextStyle(fontSize: 11))
                           ],
                         ),
                         Row(
@@ -181,7 +157,7 @@ class _ReportScreenState extends State<ReportScreen> {
                                 value: 1,
                                 groupValue: 'null',
                                 onChanged: (index) {}),
-                            Text('Other', style: TextStyle(fontSize: 11))
+                            const Text('Other', style: TextStyle(fontSize: 11))
                           ],
                         ),
                       ],
@@ -199,8 +175,8 @@ class _ReportScreenState extends State<ReportScreen> {
                 ..margin(top: 389)
                 ..padding(left: 20),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(30, 401, 40, 0),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(30, 401, 40, 0),
               child: TextField(
                 decoration: InputDecoration(
                   hintText: '+977   Phone Number',
@@ -237,10 +213,10 @@ class _ReportScreenState extends State<ReportScreen> {
                       elevation: 200,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(32.0)),
-                      minimumSize: Size(150, 40),
+                      minimumSize: const Size(150, 40),
                     ),
                     onPressed: () {},
-                    child: Text('Upload Photo'),
+                    child: const Text('Upload Photo'),
                   ),
                 )
               ],
@@ -255,10 +231,10 @@ class _ReportScreenState extends State<ReportScreen> {
                   elevation: 200,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(32.0)),
-                  minimumSize: Size(150, 50), //////// HERE
+                  minimumSize: const Size(150, 50), //////// HERE
                 ),
                 onPressed: () {},
-                child: Text(
+                child: const Text(
                   'Submit',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 ),

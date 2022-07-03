@@ -1,12 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:division/division.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/doctor.dart';
-import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/calender_screen.dart';
 import 'package:mero_doctor/screens/payment.dart';
-import 'package:mero_doctor/utils/snack_bar.dart';
 
 class PaymentScreen extends StatefulWidget {
   String? profileUrl;
@@ -76,7 +72,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                         )),
                                 (route) => false);
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.arrow_back,
                             size: 32,
                             color: Colors.white,

@@ -7,7 +7,6 @@ import 'package:mero_doctor/screens/Choose_Authencation/Choose_Authencation_pati
 import 'package:mero_doctor/screens/Doctor/login_screens_doc.dart';
 import 'package:mero_doctor/screens/Doctor/register_screens_doctor.dart';
 import 'package:mero_doctor/screens/GoogleLogin/google_login.dart';
-import 'package:mero_doctor/screens/NotificaitonView.dart';
 import 'package:mero_doctor/screens/Patient/login_screens.dart';
 import 'package:mero_doctor/screens/Patient/register_screen.dart';
 import 'package:mero_doctor/screens/choose_screen.dart';
@@ -71,7 +70,7 @@ class MyApp extends StatelessWidget {
                 "/": (context) => const ChooseScreen(),
                 // "/choose_option": (context) => const ChooseScreen(),
                 "/login_doctor": (context) => const LoginPageDoc(),
-                "/doctorlist": (context) => DoctorListScreen(),
+                "/doctorlist": (context) => const DoctorListScreen(),
                 "/profile": (context) => ProfileScreen(
                       id: '',
                     ),
@@ -87,7 +86,7 @@ class MyApp extends StatelessWidget {
                 "/login": (context) => const LoginPage(),
                 // "/doctorprofile": (context) => DoctorProfileScreen(),
                 "/doctor_dashboard": (context) => const DoctorDashboardScreen(),
-                "/forgetpass": (context) => EnterEmailPage(),
+                "/forgetpass": (context) => const EnterEmailPage(),
                 "/sendotp": (context) => EnterOtpPage(),
                 '/userhistory': (context) => DoctorHistoryScreen(),
                 // '/': (context) => const PaymentScreen(),
@@ -97,10 +96,9 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               theme: ThemeData(
                   primaryColor: COLOR_PRIMARY,
-                  accentColor: COLOR_SECONDARY,
                   textTheme: screenWidth < 500
                       ? TEXT_THEME_SMALL
-                      : TEXT_THEME_DEFAULT),
+                      : TEXT_THEME_DEFAULT, colorScheme: ColorScheme.fromSwatch().copyWith(secondary: COLOR_SECONDARY)),
             );
           }),
     );

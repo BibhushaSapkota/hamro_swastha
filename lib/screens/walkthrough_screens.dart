@@ -108,7 +108,7 @@ class _WalkthroughScreenState extends State<WalkthroughScreen> {
                               duration: const Duration(milliseconds: 500),
                               curve: Curves.easeInOut);
                         },
-                        child: Text("NEXT")),
+                        child: const Text("NEXT")),
                   ],
                 ),
               ),
@@ -129,9 +129,9 @@ Widget buildPage({
         children: [
           Text(
             title,
-            style: TextStyle(fontSize: 30, color: COLOR_SECONDARY),
+            style: const TextStyle(fontSize: 30, color: COLOR_SECONDARY),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Image.asset(
@@ -139,14 +139,14 @@ Widget buildPage({
             fit: BoxFit.cover,
             height: 350,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
               desc,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 18, color: Color.fromARGB(255, 134, 119, 119)),
               textAlign: TextAlign.center,
             ),

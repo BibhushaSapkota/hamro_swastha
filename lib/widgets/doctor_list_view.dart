@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:division/division.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/data.dart';
@@ -65,7 +64,7 @@ class _DoctorListViewState extends State<DoctorListView> {
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
-                  child: Container(
+                  child: SizedBox(
                     height: 60,
                     width: 60,
                     child: widget.doctor.image == ""

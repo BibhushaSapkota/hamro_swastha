@@ -13,7 +13,7 @@ import 'package:uuid/uuid.dart';
 class DoctorProfileScreen extends StatefulWidget {
   final Doctor doctor;
   final String? profileUrl;
-  DoctorProfileScreen({Key? key, required this.doctor, this.profileUrl})
+  const DoctorProfileScreen({Key? key, required this.doctor, this.profileUrl})
       : super(key: key);
 
   @override
@@ -37,7 +37,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
         .where("participants.${targetUser.id}", isEqualTo: true)
         .get();
 
-    if (snapshot.docs.length > 0) {
+    if (snapshot.docs.isNotEmpty) {
       print("Chat Room Exists");
       var docData = snapshot.docs[0].data();
       ChatRoomModel existingChatRoom =
@@ -290,7 +290,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                 const SizedBox(height: 10),
                                 const Text(
                                   "Upcoming schedule",
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold),
                                 ),
