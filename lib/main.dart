@@ -18,6 +18,7 @@ import 'package:mero_doctor/screens/doctor_dashboard.dart';
 import 'package:mero_doctor/screens/doctor_upload_info.dart';
 import 'package:mero_doctor/screens/forgetpass_screen.dart';
 import 'package:mero_doctor/screens/otp_screen.dart';
+import 'package:mero_doctor/screens/patientProfile.dart';
 import 'package:mero_doctor/screens/patient_profile.dart';
 import 'package:mero_doctor/screens/patient_upload_profile.dart';
 import 'package:mero_doctor/screens/payment.dart';
@@ -80,7 +81,7 @@ class MyApp extends StatelessWidget {
                 "/dashboard": (context) => DashboardScreen(
                       id: '',
                     ),
-                // '/': (context) => EnterOtpPage(),
+                '/patientprofile': (context) => patientProfile(),
                 // "/": (context) => EnterEmailPage(),
                 // '/': (context) => SplashScreen(),
                 '/walkthrough': (context) => const WalkthroughScreen(),
