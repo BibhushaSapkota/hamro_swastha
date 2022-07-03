@@ -12,8 +12,9 @@ import 'package:uuid/uuid.dart';
 
 class DoctorProfileScreen extends StatefulWidget {
   final Doctor doctor;
-
-  const DoctorProfileScreen({Key? key, required this.doctor}) : super(key: key);
+  final String? profileUrl;
+  DoctorProfileScreen({Key? key, required this.doctor, this.profileUrl})
+      : super(key: key);
 
   @override
   State<DoctorProfileScreen> createState() =>
@@ -93,7 +94,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                               MaterialPageRoute(
                                   builder: (context) => DashboardScreen(
                                         id: user!.uid,
-                                        profileUrl: widget.doctor.image,
+                                        profileUrl: widget.profileUrl,
                                       )),
                               (route) => false);
                         },
@@ -385,7 +386,9 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                             MaterialPageRoute(
                                               builder: (context) =>
                                                   CalenderScreen(
-                                                      doctor: widget.doctor),
+                                                      doctor: widget.doctor,
+                                                      profileUrl:
+                                                          widget.profileUrl),
                                             ),
                                           )
                                         },

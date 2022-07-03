@@ -11,7 +11,9 @@ import 'package:mero_doctor/widgets/doctor_widget.dart';
 
 class DoctorCategoryScreen extends StatefulWidget {
   final DiseasesCategory category;
-  DoctorCategoryScreen({required this.category, Key? key}) : super(key: key);
+  String? profileUrl;
+  DoctorCategoryScreen({required this.category, Key? key, this.profileUrl})
+      : super(key: key);
 
   @override
   State<DoctorCategoryScreen> createState() => _DoctorCategoryScreenState();
@@ -138,27 +140,39 @@ class _DoctorCategoryScreenState extends State<DoctorCategoryScreen> {
                           padding: const EdgeInsets.all(8),
                           itemCount: cardiology.length,
                           itemBuilder: (BuildContext context, index) {
-                            return DoctorWidget(cardiology[index]);
+                            return DoctorWidget(
+                              doctor: cardiology[index],
+                              profileUrl: widget.profileUrl,
+                            );
                           })
                       : widget.category.name == 'Dermatology'
                           ? ListView.builder(
                               padding: const EdgeInsets.all(8),
                               itemCount: dermatology.length,
                               itemBuilder: (BuildContext context, index) {
-                                return DoctorWidget(dermatology[index]);
+                                return DoctorWidget(
+                                  doctor: dermatology[index],
+                                  profileUrl: widget.profileUrl,
+                                );
                               })
                           : widget.category.name == 'Psychiatry'
                               ? ListView.builder(
                                   padding: const EdgeInsets.all(8),
                                   itemCount: psychiatry.length,
                                   itemBuilder: (BuildContext context, index) {
-                                    return DoctorWidget(psychiatry[index]);
+                                    return DoctorWidget(
+                                      doctor: psychiatry[index],
+                                      profileUrl: widget.profileUrl,
+                                    );
                                   })
                               : ListView.builder(
                                   padding: const EdgeInsets.all(8),
                                   itemCount: nephroloy.length,
                                   itemBuilder: (BuildContext context, index) {
-                                    return DoctorWidget(nephroloy[index]);
+                                    return DoctorWidget(
+                                      doctor: nephroloy[index],
+                                      profileUrl: widget.profileUrl,
+                                    );
                                   }))
             ],
           ),

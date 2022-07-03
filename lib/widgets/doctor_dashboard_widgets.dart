@@ -5,7 +5,7 @@ import 'package:mero_doctor/screens/doctorView.dart';
 
 class DoctorDashBoardWidget extends StatelessWidget {
   final Map<String, dynamic> category;
-
+  
   const DoctorDashBoardWidget(this.category) : super();
 
   @override

@@ -10,8 +10,10 @@ import 'package:table_calendar/table_calendar.dart';
 class CalenderScreen extends StatefulWidget {
   final Doctor doctor;
   String? id;
+  String? profileUrl;
 
-  CalenderScreen({Key? key, required this.doctor, this.id}) : super(key: key);
+  CalenderScreen({Key? key, required this.doctor, this.id, this.profileUrl})
+      : super(key: key);
 
   @override
   State<CalenderScreen> createState() => _CalenderScreenState();
@@ -86,6 +88,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                       MaterialPageRoute(
                           builder: (context) => DoctorProfileScreen(
                                 doctor: widget.doctor,
+                                profileUrl: widget.profileUrl,
                               )),
                       (route) => false);
                 },
@@ -183,6 +186,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
                                           builder: (context) => PaymentScreen(
                                             appointmentDate: appointmentDate,
                                             doctor: widget.doctor,
+                                            profileUrl:widget.profileUrl,
                                             selectedDate: selectedDate,
                                             selectedIndex: selectedIndex,
                                           ),

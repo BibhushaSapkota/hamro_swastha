@@ -9,12 +9,14 @@ import 'package:mero_doctor/screens/payment.dart';
 import 'package:mero_doctor/utils/snack_bar.dart';
 
 class PaymentScreen extends StatefulWidget {
+  String? profileUrl;
   PaymentScreen(
       {Key? key,
       required this.doctor,
       required this.appointmentDate,
       required this.selectedDate,
-      required this.selectedIndex})
+      required this.selectedIndex,
+      this.profileUrl})
       : super(key: key);
   final Doctor doctor;
   List<String> appointmentDate = [];
@@ -68,8 +70,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           onPressed: () {
                             Navigator.of(context).pushAndRemoveUntil(
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        CalenderScreen(doctor: widget.doctor)),
+                                    builder: (context) => CalenderScreen(
+                                          doctor: widget.doctor,
+                                          profileUrl: widget.profileUrl,
+                                        )),
                                 (route) => false);
                           },
                           icon: Icon(
@@ -160,6 +164,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                                       widget.selectedDate,
                                                   selectedIndex:
                                                       widget.selectedIndex,
+                                                      profileUrl:widget.profileUrl
                                                 )),
                                         (route) => false);
                                   },

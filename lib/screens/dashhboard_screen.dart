@@ -225,9 +225,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       child: ListView(
                         padding: const EdgeInsets.only(left: 24),
                         scrollDirection: Axis.horizontal,
-                        children:
-                            DiseasesList.map((e) => DoctorCategoryWidget(e))
-                                .toList(),
+                        children: DiseasesList.map((e) => DoctorCategoryWidget(
+                            category: e, profileUrl: profileUrl)).toList(),
                       ),
                     ),
                     Txt(
@@ -246,7 +245,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         itemCount: _doctorListData.doctorList.length,
                         itemBuilder: (BuildContext context, index) {
                           return DoctorListView(
-                              _doctorListData.doctorList[index], id);
+                            doctor: _doctorListData.doctorList[index],
+                            uid: id,
+                            profileUrl: profileUrl,
+                          );
                         },
                       ),
                     ),

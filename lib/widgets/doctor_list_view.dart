@@ -10,7 +10,8 @@ import 'package:mero_doctor/utils/constants.dart';
 class DoctorListView extends StatefulWidget {
   final Doctor doctor;
   String? uid;
-  DoctorListView(this.doctor, this.uid) : super();
+  String? profileUrl;
+  DoctorListView({required this.doctor, this.uid, this.profileUrl}) : super();
 
   @override
   State<DoctorListView> createState() => _DoctorListViewState(doctor, uid);
@@ -34,7 +35,10 @@ class _DoctorListViewState extends State<DoctorListView> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => DoctorProfileScreen(doctor: doctor)));
+                builder: (context) => DoctorProfileScreen(
+                      doctor: doctor,
+                      profileUrl: widget.profileUrl,
+                    )));
       },
       child: Parent(
         style: ParentStyle()

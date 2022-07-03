@@ -9,13 +9,15 @@ import 'package:mero_doctor/screens/payment_screen.dart';
 import 'package:mero_doctor/utils/snack_bar.dart';
 
 class KhaltiPaymentPage extends StatefulWidget {
+  String? profileUrl;
   KhaltiPaymentPage(
       {Key? key,
       this.getPay,
       required this.appointmentDate,
       required this.doctor,
       required this.selectedDate,
-      required this.selectedIndex})
+      required this.selectedIndex,
+      this.profileUrl})
       : super(key: key);
   final String? getPay;
   final UserModel _userModel = UserModel();
@@ -97,6 +99,7 @@ class _KhaltiPaymentPageState extends State<KhaltiPaymentPage> {
                             doctor: widget.doctor,
                             selectedDate: widget.selectedDate,
                             selectedIndex: widget.selectedIndex,
+                            profileUrl: widget.profileUrl,
                           )),
                   (route) => false);
             },
@@ -148,6 +151,18 @@ class _KhaltiPaymentPageState extends State<KhaltiPaymentPage> {
                       PaymentPreference.khalti,
                     ],
                     onSuccess: (su) {
+                      var now = DateTime.now();
+                      var dateFormater = DateFormat('yyyy/MM/dd');
+                      String timeFormater = DateFormat('kk:mm a').format(now);
+                      String formattedDate = dateFormater.format(now);
+                      transaction(
+                          formattedDate,
+                          (getAmt() / 100).toString(),
+                          widget.selectedDate,
+                          timeFormater,
+                          widget.appointmentDate[widget.selectedIndex]);
+                      bookAppointment((getAmt() / 100).toString(),
+                          formattedDate, timeFormater);
                       const successsnackBar = SnackBar(
                         content: Text(
                           'Payment Successful',
@@ -170,18 +185,6 @@ class _KhaltiPaymentPageState extends State<KhaltiPaymentPage> {
                           .showSnackBar(failedsnackBar);
                     },
                     onCancel: () {
-                      var now = DateTime.now();
-                      var dateFormater = DateFormat('yyyy/MM/dd');
-                      String timeFormater = DateFormat('kk:mm a').format(now);
-                      String formattedDate = dateFormater.format(now);
-                      transaction(
-                          formattedDate,
-                          (getAmt() / 100).toString(),
-                          widget.selectedDate,
-                          timeFormater,
-                          widget.appointmentDate[widget.selectedIndex]);
-                      bookAppointment((getAmt() / 100).toString(),
-                          formattedDate, timeFormater);
                       const cancelsnackBar = SnackBar(
                         content: Text(
                           'Payment Cancelled',

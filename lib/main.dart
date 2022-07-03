@@ -18,6 +18,7 @@ import 'package:mero_doctor/screens/doctor_dashboard.dart';
 import 'package:mero_doctor/screens/doctor_upload_info.dart';
 import 'package:mero_doctor/screens/forgetpass_screen.dart';
 import 'package:mero_doctor/screens/otp_screen.dart';
+import 'package:mero_doctor/screens/patientDetails.dart';
 import 'package:mero_doctor/screens/patient_profile.dart';
 import 'package:mero_doctor/screens/patient_upload_profile.dart';
 import 'package:mero_doctor/screens/payment.dart';
@@ -64,7 +65,7 @@ class MyApp extends StatelessWidget {
                 KhaltiLocalizations.delegate,
               ],
               routes: {
-                "/": (context) => const LoginPage(),
+                // "/": (context) => const LoginPage(),
                 "/register": (context) => const RegisterScreen(),
                 "/register_doctor": (context) => RegisterScreenDoc(),
                 "/register_patient": (context) => const RegisterScreen(),

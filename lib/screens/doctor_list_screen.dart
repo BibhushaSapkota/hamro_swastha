@@ -9,6 +9,8 @@ import '../models/data.dart';
 import '../models/models.dart';
 
 class DoctorListScreen extends StatefulWidget {
+  final String? profileUrl;
+  DoctorListScreen({this.profileUrl});
   @override
   State<DoctorListScreen> createState() => _DoctorListScreenState();
 }
@@ -112,7 +114,10 @@ class _DoctorListScreenState extends State<DoctorListScreen> {
                 padding: const EdgeInsets.all(8),
                 itemCount: doctor_list.doctorList.length,
                 itemBuilder: (BuildContext context, index) {
-                  return DoctorWidget(doctor_list.doctorList[index]);
+                  return DoctorWidget(
+                    doctor: doctor_list.doctorList[index],
+                    profileUrl: widget.profileUrl,
+                  );
                 },
               ),
             )

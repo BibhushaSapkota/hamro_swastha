@@ -7,8 +7,8 @@ import '../models/category.dart';
 
 class DoctorCategoryWidget extends StatelessWidget {
   final DiseasesCategory category;
-
-  DoctorCategoryWidget(this.category) : super();
+  String? profileUrl;
+  DoctorCategoryWidget({required this.category, this.profileUrl}) : super();
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,8 @@ class DoctorCategoryWidget extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-              builder: (context) => DoctorCategoryScreen(category: category)),
+              builder: (context) => DoctorCategoryScreen(
+                  category: category, profileUrl: profileUrl)),
         );
       },
       child: Container(

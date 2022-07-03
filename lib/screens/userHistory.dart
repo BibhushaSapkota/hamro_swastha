@@ -138,7 +138,7 @@ class _DoctorHistoryScreenState extends State<DoctorHistoryScreen> {
                       padding: const EdgeInsets.all(8),
                       itemCount: DoctorHistory.length,
                       itemBuilder: (BuildContext context, index) {
-                        return DoctorWidget(DoctorHistory[index]);
+                        return DoctorWidget(doctor: DoctorHistory[index]);
                       },
                     ),
                   )

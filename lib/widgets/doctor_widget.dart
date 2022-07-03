@@ -9,8 +9,10 @@ import 'package:provider/provider.dart';
 class DoctorWidget extends StatelessWidget {
   User? user = FirebaseAuth.instance.currentUser;
   final Doctor doctor;
+  final String? profileUrl;
 
-  DoctorWidget(this.doctor, {Key? key}) : super(key: key);
+  DoctorWidget({required this.doctor, this.profileUrl, Key? key})
+      : super(key: key);
   DoctorHistoryModel doctorHistoryModel = DoctorHistoryModel();
 
   @override
@@ -20,7 +22,10 @@ class DoctorWidget extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => DoctorProfileScreen(doctor: doctor)));
+                builder: (context) => DoctorProfileScreen(
+                      doctor: doctor,
+                      profileUrl: profileUrl,
+                    )));
         doctorHistoryModel.id = doctor.id;
         doctorHistoryModel.description = doctor.description;
         doctorHistoryModel.image = doctor.image;
@@ -85,7 +90,7 @@ class DoctorWidget extends StatelessWidget {
                   RichText(
                     text: TextSpan(children: [
                       TextSpan(
-                        text: doctor.orgName,
+                        text: doctor.orgName == "" ? "" : doctor.orgName,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 14,
