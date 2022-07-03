@@ -1,18 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:division/division.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:mero_doctor/models/data.dart';
 import 'package:mero_doctor/models/doctor.dart';
 import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/MessagepagePatient.dart';
 import 'package:mero_doctor/screens/SearchPageDoctor.dart';
+import 'package:mero_doctor/screens/patientProfile.dart';
 import 'package:mero_doctor/screens/patient_profile.dart';
 import 'package:mero_doctor/utils/capatalize.dart';
 import 'package:mero_doctor/utils/constants.dart';
 import 'package:mero_doctor/widgets/doctor_category_widget.dart';
 import 'package:mero_doctor/widgets/doctor_list_view.dart';
 import 'package:mero_doctor/widgets/doctor_widget.dart';
+import 'package:page_transition/page_transition.dart';
 
 import '../widgets/doctor_top_widget.dart';
 
@@ -75,33 +79,50 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    int _indexSelected = 0;
     final screen = MediaQuery.of(context).size;
     return SafeArea(
         child: Scaffold(
-            bottomNavigationBar: const GNav(
+            bottomNavigationBar: GNav(
               activeColor: Color(0xffd36868),
               color: Colors.black45,
               tabBackgroundColor: Color(0xFFF1EFEF),
               padding: EdgeInsets.all(16),
               gap: 10,
               curve: Curves.easeOutExpo,
-              duration: Duration(milliseconds: 400),
+              duration: const Duration(milliseconds: 400),
               tabs: [
                 GButton(
+                  onPressed: () {},
                   icon: Icons.home,
                   text: 'Home',
                   textSize: 12,
                 ),
-                GButton(
+                const GButton(
                     icon: Icons.date_range_rounded,
                     text: 'Schedule',
                     textSize: 12),
-                GButton(
+                const GButton(
                     icon: Icons.notifications_active_rounded,
                     text: 'Notification',
                     textSize: 12),
-                GButton(icon: Icons.person, text: 'Profile', textSize: 12),
+                GButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                            child: PatientProfile(id: id),
+                            type: PageTransitionType.rightToLeft),
+                      );
+                    },
+                    icon: Icons.person,
+                    text: 'Profile',
+                    textSize: 12),
               ],
+              selectedIndex: _indexSelected,
+              onTabChange: (index) {
+                _indexSelected = index;
+              },
             ),
             backgroundColor: const Color(0xfff9f9f9),
             body: ListView(

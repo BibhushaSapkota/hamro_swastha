@@ -13,16 +13,13 @@ import 'package:mero_doctor/screens/Patient/register_screen.dart';
 import 'package:mero_doctor/screens/choose_screen.dart';
 import 'package:mero_doctor/screens/dashhboard_screen.dart';
 import 'package:mero_doctor/screens/doctor_list_screen.dart';
-import 'package:mero_doctor/screens/doctor_profile_screen.dart';
 import 'package:mero_doctor/screens/doctor_dashboard.dart';
 import 'package:mero_doctor/screens/doctor_upload_info.dart';
 import 'package:mero_doctor/screens/forgetpass_screen.dart';
 import 'package:mero_doctor/screens/otp_screen.dart';
-import 'package:mero_doctor/screens/patientDetails.dart';
+import 'package:mero_doctor/screens/patientProfile.dart';
 import 'package:mero_doctor/screens/patient_profile.dart';
 import 'package:mero_doctor/screens/patient_upload_profile.dart';
-import 'package:mero_doctor/screens/payment.dart';
-import 'package:mero_doctor/screens/payment_screen.dart';
 import 'package:mero_doctor/screens/userHistory.dart';
 import 'package:mero_doctor/screens/walkthrough_screens.dart';
 import 'package:mero_doctor/utils/constants.dart';
@@ -81,7 +78,7 @@ class MyApp extends StatelessWidget {
                 "/dashboard": (context) => DashboardScreen(
                       id: '',
                     ),
-                // '/': (context) => EnterOtpPage(),
+                '/patientprofile': (context) => PatientProfile(),
                 // "/": (context) => EnterEmailPage(),
                 // '/': (context) => SplashScreen(),
                 '/walkthrough': (context) => const WalkthroughScreen(),
