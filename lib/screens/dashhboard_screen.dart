@@ -47,22 +47,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    // _patient.doc(id).get().then((value) {
-    //   patientData = value.data() as Map<String, dynamic>;
-    //   for (var i = 0; i < patientData!.length; i++) {
-    //     print(patientData!['transaction_details'][i]["time_slot"]);
-    //     time_slots.add(patientData!['transaction_details'][i]["time_slot"]);
-    //     isPayment.add(patientData!['transaction_details'][i]["isPaymentDone"]);
-    //     appointment_date
-    //         .add(patientData!['transaction_details'][i]["appointment_date"]);
-    //   }
-    //   ;
-    //   setState(() {
-    //     print(time_slots);
-    //     print(isPayment);
-    //     print(appointment_date);
-    //   });
-    // });
+    _patient.doc(id).get().then((value) {
+      patientData = value.data() as Map<String, dynamic>;
+      patientData!['transaction_details'];
+      setState(() {
+        if (appointment_date.contains("2022/07/02")) {
+          print('yes it contains');
+        }
+        print(appointment_date);
+      });
+    });
 
     _data.get().then((value) {
       for (var element in value.docs) {
@@ -88,7 +82,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           }
           specialization = doctorModel.specialization;
           description = doctorModel.description;
-          print(description);
+          // print(description);
         });
         _doctorListData.doctorList.add(Doctor(docid!, fullName!, imageUrl!, '',
             specialization!, '', description!));
