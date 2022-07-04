@@ -15,7 +15,6 @@ import 'package:mero_doctor/widgets/doctor_category_widget.dart';
 import 'package:mero_doctor/widgets/doctor_list_view.dart';
 import 'package:page_transition/page_transition.dart';
 
-
 class DashboardScreen extends StatefulWidget {
   DashboardScreen({Key? key, required this.id, this.profileUrl})
       : super(key: key);
@@ -32,15 +31,39 @@ class _DashboardScreenState extends State<DashboardScreen> {
   String? profileUrl;
   String id;
   final DoctorListData _doctorListData = DoctorListData();
+  Appointment _appointment = Appointment();
 
   DoctorModel doctorModel = DoctorModel();
   final CollectionReference _data =
       FirebaseFirestore.instance.collection("doctors");
+  final CollectionReference _patient =
+      FirebaseFirestore.instance.collection("users");
+  Map<String, dynamic>? patientData = Map();
+  List time_slots = [];
+  List isPayment = [];
+  List appointment_date = [];
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    // _patient.doc(id).get().then((value) {
+    //   patientData = value.data() as Map<String, dynamic>;
+    //   for (var i = 0; i < patientData!.length; i++) {
+    //     print(patientData!['transaction_details'][i]["time_slot"]);
+    //     time_slots.add(patientData!['transaction_details'][i]["time_slot"]);
+    //     isPayment.add(patientData!['transaction_details'][i]["isPaymentDone"]);
+    //     appointment_date
+    //         .add(patientData!['transaction_details'][i]["appointment_date"]);
+    //   }
+    //   ;
+    //   setState(() {
+    //     print(time_slots);
+    //     print(isPayment);
+    //     print(appointment_date);
+    //   });
+    // });
+
     _data.get().then((value) {
       for (var element in value.docs) {
         doctorModel = DoctorModel.fromMap(element.data());

@@ -90,13 +90,13 @@ class _PatientProfileState extends State<PatientProfile> {
       _userModel = UserModel.fromMap(value.data());
 
       setState(() {
+        profileUrl = _userModel.profilePicture;
         firstName = _userModel.firstName!;
         lastName = _userModel.lastName!;
         email = _userModel.email;
         oldReport = _userModel.oldReportFile;
         fullName = firstName + " " + lastName;
         contactNumber = _userModel.contact;
-        profileUrl = _userModel.profilePicture;
         fullName = fullName!.toUpperCase();
         print(fullName);
       });

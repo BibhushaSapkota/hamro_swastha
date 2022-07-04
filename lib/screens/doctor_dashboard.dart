@@ -84,7 +84,7 @@ class _DoctorDashboardScreenState extends State<DoctorDashboardScreen> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(90),
                           child: profileUrl == "" || profileUrl == null
-                              ? Image.asset("/assets/images/profile.jpg")
+                              ? Image.asset("assets/images/profile.jpg")
                               : Image.network(profileUrl!),
                         ),
                       ),
