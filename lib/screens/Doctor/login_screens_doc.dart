@@ -42,8 +42,8 @@ class _LoginPageDocState extends State<LoginPageDoc> {
                 //   {
                 ScaffoldMessenger.of(context).showSnackBar(
                     SnackMessage.successSnackBar("Login Successful.")),
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => const LoadingScreenDoc()))
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const LoadingScreenDoc()))
                 // }
                 // else
                 //   {
@@ -268,16 +268,6 @@ class _LoginPageDocState extends State<LoginPageDoc> {
                                         const SizedBox(
                                           height: 5,
                                         ),
-                                        InkWell(
-                                          onTap: () {
-                                            final provider = Provider.of<
-                                                    GoogleLogInProvider>(
-                                                context,
-                                                listen: false);
-                                            provider.googleLogout();
-                                          },
-                                          child: const Text('Logout'),
-                                        ),
                                         Center(
                                           child: SizedBox(
                                             height: 50.0,
@@ -383,8 +373,8 @@ class _LoginPageDocState extends State<LoginPageDoc> {
             .doc(data.uid)
             .set(doctorModel.toMap())
             .whenComplete(() {
-          Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => const LoadingScreenDoc()));
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) => const LoadingScreenDoc()));
         });
       }
     });

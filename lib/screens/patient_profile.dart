@@ -1,8 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/user.dart';
+import 'package:mero_doctor/screens/GoogleLogin/google_login.dart';
 import 'package:mero_doctor/screens/bookmark_page.dart';
+import 'package:mero_doctor/screens/choose_screen.dart';
 import 'package:mero_doctor/screens/dashhboard_screen.dart';
+import 'package:provider/provider.dart';
 
 import '../utils/capatalize.dart';
 
@@ -160,7 +164,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const <Widget>[
+                    children: <Widget>[
                       Icon(
                         Icons.logout,
                         size: 25,
@@ -169,10 +173,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       SizedBox(
                         width: 10,
                       ),
-                      Text(
-                        "Sign Out",
-                        style: TextStyle(color: primary, fontSize: 18),
-                      )
+                      InkWell(
+                          onTap: () {
+                            FirebaseAuth.instance.signOut();
+                            final provider = Provider.of<GoogleLogInProvider>(
+                                context,
+                                listen: false);
+                            provider.googleLogout();
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) => const ChooseScreen()),
+                            );
+                          },
+                          child: Text(
+                            "Sign Out",
+                            style: TextStyle(color: primary, fontSize: 18),
+                          ))
                     ],
                   ),
                 ),

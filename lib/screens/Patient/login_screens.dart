@@ -34,8 +34,8 @@ class _LoginPageState extends State<LoginPage> {
           .then((uid) => {
                 ScaffoldMessenger.of(context).showSnackBar(
                     SnackMessage.successSnackBar("Login Successful.")),
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => const LoaderScreen())),
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const LoaderScreen())),
                 Fluttertoast.showToast(msg: "Login Successful"),
                 // Navigator.of(context).pushReplacement(MaterialPageRoute(
                 //     builder: (context) => DashboardScreen(id: '')))
@@ -234,16 +234,6 @@ class _LoginPageState extends State<LoginPage> {
                                       ),
                                       const SizedBox(
                                         height: 15,
-                                      ),
-                                      InkWell(
-                                        onTap: () {
-                                          final provider =
-                                              Provider.of<GoogleLogInProvider>(
-                                                  context,
-                                                  listen: false);
-                                          provider.googleLogout();
-                                        },
-                                        child: const Text('Logout'),
                                       ),
                                       Center(
                                         child: SizedBox(
