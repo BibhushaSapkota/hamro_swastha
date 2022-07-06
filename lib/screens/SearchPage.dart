@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/chatRoom.dart';
 import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/chatRoomDoctor.dart';
+import 'package:mero_doctor/utils/constants.dart';
 import 'package:uuid/uuid.dart';
 
 class SearchPagePatient extends StatefulWidget {
@@ -87,17 +88,17 @@ class _SearchPagePatientState extends State<SearchPagePatient> {
               String? name = patient.firstName;
               String? image = patient.lastName;
               AllPatient.add(UserModel(
-                    uid: patient.uid,
-                    firstName: patient.firstName,
-                    lastName: patient.lastName,
-                    email: patient.email,
-                    profilePicture: patient.profilePicture,
-                    isPatient: patient.isPatient,
-                    bookMarked: patient.bookMarked,
-                    oldReportFile: patient.oldReportFile,
-                    isGoogleUser: patient.isGoogleUser,
-                    isFormCompleted: patient.isFormCompleted,
-                  ));
+                uid: patient.uid,
+                firstName: patient.firstName,
+                lastName: patient.lastName,
+                email: patient.email,
+                profilePicture: patient.profilePicture,
+                isPatient: patient.isPatient,
+                bookMarked: patient.bookMarked,
+                oldReportFile: patient.oldReportFile,
+                isGoogleUser: patient.isGoogleUser,
+                isFormCompleted: patient.isFormCompleted,
+              ));
               // this.AllPatient.add(Doctor(id!, name!, image!, "orgName",
               //     "qualification", "123123", "description"));
             });
@@ -108,7 +109,9 @@ class _SearchPagePatientState extends State<SearchPagePatient> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          backgroundColor: COLOR_SECONDARY,
+        ),
         body: Column(children: [
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
@@ -141,7 +144,7 @@ class _SearchPagePatientState extends State<SearchPagePatient> {
                       },
                       controller: _textEditingController,
                       decoration: const InputDecoration(
-                        hintText: 'Search for a doctor',
+                        hintText: 'Search for a patient.',
                         hintStyle: TextStyle(
                           fontFamily: 'quicksand',
                           fontWeight: FontWeight.w500,

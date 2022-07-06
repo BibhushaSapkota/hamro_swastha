@@ -88,7 +88,10 @@ class _PatientMessagePageState extends State<PatientMessagePage> {
                       builder: (context) => const SearchPageDoctor()),
                 );
               },
-              child: const Text('Search'))
+              child: const Text(
+                'Search',
+                style: TextStyle(color: Colors.white, fontSize: 16.0),
+              ))
         ],
       ),
       body: SafeArea(
