@@ -268,16 +268,6 @@ class _LoginPageDocState extends State<LoginPageDoc> {
                                         const SizedBox(
                                           height: 5,
                                         ),
-                                        InkWell(
-                                          onTap: () {
-                                            final provider = Provider.of<
-                                                    GoogleLogInProvider>(
-                                                context,
-                                                listen: false);
-                                            provider.googleLogout();
-                                          },
-                                          child: const Text('Logout'),
-                                        ),
                                         Center(
                                           child: SizedBox(
                                             height: 50.0,

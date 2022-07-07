@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/Patient/login_screens.dart';
 import 'package:mero_doctor/screens/bookmark_page.dart';
+import 'package:mero_doctor/screens/choose_screen.dart';
 import 'package:mero_doctor/screens/dashhboard_screen.dart';
 import 'package:mero_doctor/screens/loading.dart';
 

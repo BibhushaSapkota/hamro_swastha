@@ -6,6 +6,7 @@ import 'package:mero_doctor/models/chatRoom.dart';
 import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/SearchPage.dart';
 import 'package:mero_doctor/screens/chatRoomDoctor.dart';
+import 'package:mero_doctor/utils/constants.dart';
 import 'package:uuid/uuid.dart';
 
 class MessagePageDoctor extends StatefulWidget {
@@ -46,14 +47,19 @@ class _MessagePageDoctorState extends State<MessagePageDoctor> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: COLOR_SECONDARY,
         actions: [
           FlatButton(
               onPressed: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const SearchPagePatient()),
+                  MaterialPageRoute(
+                      builder: (context) => const SearchPagePatient()),
                 );
               },
-              child: const Text('Search'))
+              child: const Text(
+                'Search',
+                style: TextStyle(color: Colors.white, fontSize: 16.0),
+              ))
         ],
       ),
       body: SafeArea(

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/chatRoom.dart';
 import 'package:mero_doctor/models/messegeModel.dart';
 import 'package:mero_doctor/models/user.dart';
+import 'package:mero_doctor/utils/constants.dart';
 import 'package:uuid/uuid.dart';
 
 class ChatRoomPatient extends StatefulWidget {
@@ -101,6 +102,7 @@ class _ChatRoomPatientState extends State<ChatRoomPatient> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: COLOR_SECONDARY,
         title: Row(
           children: [
             widget.targetUser.image.toString() != ""
@@ -161,8 +163,8 @@ class _ChatRoomPatientState extends State<ChatRoomPatient> {
                                     Container(
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 10, horizontal: 10),
-                                        margin:
-                                            const EdgeInsets.symmetric(vertical: 2),
+                                        margin: const EdgeInsets.symmetric(
+                                            vertical: 2),
                                         decoration: BoxDecoration(
                                             color: isDoctor
                                                 ? (currentMessage.sender ==
@@ -206,7 +208,8 @@ class _ChatRoomPatientState extends State<ChatRoomPatient> {
               )),
               Container(
                 color: Colors.grey[200],
-                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
                 child: Row(
                   children: [
                     Flexible(
