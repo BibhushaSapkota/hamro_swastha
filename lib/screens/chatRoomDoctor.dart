@@ -100,137 +100,142 @@ class _ChatRoomPatientState extends State<ChatRoomDoctor> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: COLOR_SECONDARY,
-      appBar: AppBar(
-        title: Row(
-          children: [
-            widget.targetUser.profilePicture.toString() != ""
-                ? CircleAvatar(
-                    backgroundColor: Colors.green[100],
-                    backgroundImage: NetworkImage(
-                        widget.targetUser.profilePicture.toString()),
-                  )
-                : CircleAvatar(
-                    backgroundColor: Colors.green[100],
-                    backgroundImage:
-                        const AssetImage("assets/images/profile.jpg"),
-                  ),
-            Text(widget.targetUser.firstName.toString())
-          ],
-        ),
-      ),
-      body: SafeArea(
-        child: Container(
-          child: Column(
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        backgroundColor: COLOR_SECONDARY,
+        appBar: AppBar(
+          title: Row(
             children: [
-              Expanded(
-                  child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: StreamBuilder(
-                  stream: FirebaseFirestore.instance
-                      .collection("chatrooms")
-                      .doc(widget.chatroom.chatroomId)
-                      .collection('messages')
-                      .orderBy("createdOn", descending: true)
-                      .snapshots(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.active) {
-                      if (snapshot.hasData) {
-                        QuerySnapshot dataSnapshot =
-                            snapshot.data as QuerySnapshot;
-                        // print(dataSnapshot.docs.isNotEmpty);
+              widget.targetUser.profilePicture.toString() != ""
+                  ? CircleAvatar(
+                      backgroundColor: Colors.green[100],
+                      backgroundImage: NetworkImage(
+                          widget.targetUser.profilePicture.toString()),
+                    )
+                  : CircleAvatar(
+                      backgroundColor: Colors.green[100],
+                      backgroundImage:
+                          const AssetImage("assets/images/profile.jpg"),
+                    ),
+              Text(widget.targetUser.firstName.toString())
+            ],
+          ),
+        ),
+        body: SafeArea(
+          child: Container(
+            child: Column(
+              children: [
+                Expanded(
+                    child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection("chatrooms")
+                        .doc(widget.chatroom.chatroomId)
+                        .collection('messages')
+                        .orderBy("createdOn", descending: true)
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.active) {
+                        if (snapshot.hasData) {
+                          QuerySnapshot dataSnapshot =
+                              snapshot.data as QuerySnapshot;
+                          // print(dataSnapshot.docs.isNotEmpty);
 
-                        if (dataSnapshot.docs.isNotEmpty) {
-                          return ListView.builder(
-                              reverse: true,
-                              itemCount: dataSnapshot.docs.length,
-                              itemBuilder: (context, index) {
-                                MessageModel currentMessage =
-                                    MessageModel.fromMap(
-                                        dataSnapshot.docs[index].data()
-                                            as Map<String, dynamic>);
+                          if (dataSnapshot.docs.isNotEmpty) {
+                            return ListView.builder(
+                                reverse: true,
+                                itemCount: dataSnapshot.docs.length,
+                                itemBuilder: (context, index) {
+                                  MessageModel currentMessage =
+                                      MessageModel.fromMap(
+                                          dataSnapshot.docs[index].data()
+                                              as Map<String, dynamic>);
 
-                                return Row(
-                                  mainAxisAlignment: isDoctor
-                                      ? (currentMessage.sender == doctor.docid)
-                                          ? MainAxisAlignment.end
-                                          : MainAxisAlignment.start
-                                      : (currentMessage.sender == patient.uid)
-                                          ? MainAxisAlignment.end
-                                          : MainAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 10, horizontal: 10),
-                                        margin: const EdgeInsets.symmetric(
-                                            vertical: 2),
-                                        decoration: BoxDecoration(
-                                            color: isDoctor
-                                                ? (currentMessage.sender ==
-                                                        doctor.docid)
-                                                    ? Theme.of(context)
-                                                        .colorScheme
-                                                        .secondary
-                                                    : Colors.grey
-                                                : (currentMessage.sender ==
-                                                        patient.uid)
-                                                    ? Theme.of(context)
-                                                        .colorScheme
-                                                        .secondary
-                                                    : Colors.grey,
-                                            borderRadius:
-                                                BorderRadius.circular(5)),
-                                        child: Text(
-                                            currentMessage.text.toString())),
-                                  ],
-                                );
-                              });
+                                  return Row(
+                                    mainAxisAlignment: isDoctor
+                                        ? (currentMessage.sender ==
+                                                doctor.docid)
+                                            ? MainAxisAlignment.end
+                                            : MainAxisAlignment.start
+                                        : (currentMessage.sender == patient.uid)
+                                            ? MainAxisAlignment.end
+                                            : MainAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 10, horizontal: 10),
+                                          margin: const EdgeInsets.symmetric(
+                                              vertical: 2),
+                                          decoration: BoxDecoration(
+                                              color: isDoctor
+                                                  ? (currentMessage.sender ==
+                                                          doctor.docid)
+                                                      ? Theme.of(context)
+                                                          .colorScheme
+                                                          .secondary
+                                                      : Colors.grey
+                                                  : (currentMessage.sender ==
+                                                          patient.uid)
+                                                      ? Theme.of(context)
+                                                          .colorScheme
+                                                          .secondary
+                                                      : Colors.grey,
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          child: Text(
+                                              currentMessage.text.toString())),
+                                    ],
+                                  );
+                                });
+                          } else {
+                            return const Center(child: Text('Say Hi!'));
+                          }
+                        } else if (snapshot.hasError) {
+                          return const Center(
+                              child: Text(
+                                  'Please Check yout Internet Connection.'));
                         } else {
-                          return const Center(child: Text('Say Hi!'));
+                          return const Center(
+                            child: Text("Say Hi"),
+                          );
                         }
-                      } else if (snapshot.hasError) {
-                        return const Center(
-                            child:
-                                Text('Please Check yout Internet Connection.'));
                       } else {
                         return const Center(
-                          child: Text("Say Hi"),
+                          child: CircularProgressIndicator(),
                         );
                       }
-                    } else {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                  },
-                ),
-              )),
-              Container(
-                color: Colors.grey[200],
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-                child: Row(
-                  children: [
-                    Flexible(
-                        child: TextField(
-                      controller: messageController,
-                      maxLines: null,
-                      decoration: const InputDecoration(
-                          border: InputBorder.none, hintText: "Enter message"),
-                    )),
-                    IconButton(
-                        onPressed: () {
-                          sendMessage();
-                        },
-                        icon: const Icon(
-                          Icons.send,
-                          color: Colors.blue,
-                        ))
-                  ],
-                ),
-              )
-            ],
+                    },
+                  ),
+                )),
+                Container(
+                  color: Colors.grey[200],
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+                  child: Row(
+                    children: [
+                      Flexible(
+                          child: TextField(
+                        controller: messageController,
+                        maxLines: null,
+                        decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Enter message"),
+                      )),
+                      IconButton(
+                          onPressed: () {
+                            sendMessage();
+                          },
+                          icon: const Icon(
+                            Icons.send,
+                            color: Colors.blue,
+                          ))
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
