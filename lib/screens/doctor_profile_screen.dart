@@ -24,6 +24,14 @@ class DoctorProfileScreen extends StatefulWidget {
 class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
   var uuid = const Uuid();
   final Doctor doctor;
+  final _user = FirebaseAuth.instance.currentUser;
+  final _patient = FirebaseFirestore.instance.collection("users");
+  List<Map<String, dynamic>> details_transaction = [];
+  List<Map<String, dynamic>> transaction_details = [];
+  List time_slots = [];
+  List appointment_date = [];
+  List doctorUid = [];
+  List isPaymentDone = [];
   User? user = FirebaseAuth.instance.currentUser;
   _DoctorProfileScreenState({Key? key, required this.doctor});
 
@@ -66,6 +74,31 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
     }
 
     return chatRoom;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    _patient
+        .doc(_user!.uid)
+        .collection("UpcomingAppointment")
+        .get()
+        .then((value) {
+      setState(() {
+        for (var doc in value.docs) {
+          transaction_details.add(doc.data());
+        }
+        for (var i = 0; i < transaction_details.length; i++) {
+          details_transaction.add(transaction_details[i]);
+          time_slots.add(details_transaction[i]['time_slot']);
+          appointment_date.add(details_transaction[i]['apointment_date']);
+          doctorUid.add(details_transaction[i]['doctor']);
+          isPaymentDone.add(details_transaction[i]['isPaymentDone']);
+        }
+      });
+    });
   }
 
   double rating = 0;
@@ -162,7 +195,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                     fontSize: 13, color: Colors.white),
                               ),
                               Text(
-                                widget.doctor.orgName,
+                                widget.doctor.position,
                                 style: const TextStyle(
                                     fontSize: 13, color: Colors.white),
                               ),
@@ -216,15 +249,16 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                               await getChatRoomModel(doctor);
                                           if (chatRoomModel != null) {
                                             Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        ChatRoomPatient(
-                                                          username: doctor.name,
-                                                          targetUser: doctor,
-                                                          chatroom:
-                                                              chatRoomModel,
-                                                        )));
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ChatRoomPatient(
+                                                  username: doctor.name,
+                                                  targetUser: doctor,
+                                                  chatroom: chatRoomModel,
+                                                ),
+                                              ),
+                                            );
                                           }
                                         },
                                         icon: const Icon(
@@ -247,7 +281,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      widget.doctor.orgName,
+                                      widget.doctor.position,
                                       style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold),
@@ -289,7 +323,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                 ),
                                 const SizedBox(height: 10),
                                 const Text(
-                                  "Upcoming schedule",
+                                  "Doctor schedule",
                                   style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold),
@@ -318,7 +352,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                         child: Column(
                                           children: const [
                                             Text(
-                                              "Consultant",
+                                              "Monday to Friday",
                                               style: TextStyle(
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.bold,
@@ -326,7 +360,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                               ),
                                             ),
                                             Text(
-                                              "Sunday 9 AM - 11 AM",
+                                              "9 AM - 4 PM",
                                               style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 14,
@@ -357,7 +391,7 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                           ],
                                         ),
                                         child: const Text(
-                                          "June 13",
+                                          "Time Slot",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold),
@@ -386,6 +420,12 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                                             MaterialPageRoute(
                                               builder: (context) =>
                                                   CalenderScreen(
+                                                      doctorUid: doctorUid,
+                                                      appointment_date:
+                                                          appointment_date,
+                                                      time_slot: time_slots,
+                                                      isPaymentDone:
+                                                          isPaymentDone,
                                                       doctor: widget.doctor,
                                                       profileUrl:
                                                           widget.profileUrl),

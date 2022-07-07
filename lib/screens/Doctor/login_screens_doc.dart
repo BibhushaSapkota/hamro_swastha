@@ -42,8 +42,8 @@ class _LoginPageDocState extends State<LoginPageDoc> {
                 //   {
                 ScaffoldMessenger.of(context).showSnackBar(
                     SnackMessage.successSnackBar("Login Successful.")),
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => const LoadingScreenDoc()))
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const LoadingScreenDoc()))
                 // }
                 // else
                 //   {
@@ -338,13 +338,13 @@ class _LoginPageDocState extends State<LoginPageDoc> {
                                       ],
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: screen.height / 11.5,
-                                  ),
-                                  Image.asset(
-                                      "assets/images/ic_login_bottom.png",
-                                      width: screen.width,
-                                      fit: BoxFit.fill),
+                                  // SizedBox(
+                                  //   height: screen.height / 11.5,
+                                  // ),
+                                  // Image.asset(
+                                  //     "assets/images/ic_login_bottom.png",
+                                  //     width: screen.width,
+                                  //     fit: BoxFit.fill),
                                 ],
                               ),
                             ),
@@ -383,8 +383,8 @@ class _LoginPageDocState extends State<LoginPageDoc> {
             .doc(data.uid)
             .set(doctorModel.toMap())
             .whenComplete(() {
-          Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => const LoadingScreenDoc()));
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+              builder: (context) => const LoadingScreenDoc()));
         });
       }
     });

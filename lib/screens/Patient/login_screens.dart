@@ -34,8 +34,8 @@ class _LoginPageState extends State<LoginPage> {
           .then((uid) => {
                 ScaffoldMessenger.of(context).showSnackBar(
                     SnackMessage.successSnackBar("Login Successful.")),
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => const LoaderScreen())),
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => const LoaderScreen())),
                 Fluttertoast.showToast(msg: "Login Successful"),
                 // Navigator.of(context).pushReplacement(MaterialPageRoute(
                 //     builder: (context) => DashboardScreen(id: '')))
@@ -310,11 +310,11 @@ class _LoginPageState extends State<LoginPage> {
                                     ],
                                   ),
                                 ),
-                                SizedBox(
-                                  height: screen.height / 13.5,
-                                ),
-                                Image.asset("assets/images/ic_login_bottom.png",
-                                    width: screen.width, fit: BoxFit.fill),
+                                // SizedBox(
+                                //   height: screen.height / 13.5,
+                                // ),
+                                // Image.asset("assets/images/ic_login_bottom.png",
+                                //     width: screen.width, fit: BoxFit.fill),
                               ],
                             ),
                           ),

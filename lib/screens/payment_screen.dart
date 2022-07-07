@@ -6,8 +6,16 @@ import 'package:mero_doctor/screens/payment.dart';
 
 class PaymentScreen extends StatefulWidget {
   String? profileUrl;
+  List? doctorUid;
+  List? appointment_date;
+  List? time_slot;
+  List? isPaymentDone;
   PaymentScreen(
       {Key? key,
+      this.appointment_date,
+      this.doctorUid,
+      this.isPaymentDone,
+      this.time_slot,
       required this.doctor,
       required this.appointmentDate,
       required this.selectedDate,
@@ -67,6 +75,11 @@ class _PaymentScreenState extends State<PaymentScreen> {
                             Navigator.of(context).pushAndRemoveUntil(
                                 MaterialPageRoute(
                                     builder: (context) => CalenderScreen(
+                                          doctorUid: widget.doctorUid,
+                                          appointment_date:
+                                              widget.appointment_date,
+                                          time_slot: widget.time_slot,
+                                          isPaymentDone: widget.isPaymentDone,
                                           doctor: widget.doctor,
                                           profileUrl: widget.profileUrl,
                                         )),
@@ -152,16 +165,16 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 KhaltiPaymentPage(
-                                                  getPay: getPay,
-                                                  appointmentDate:
-                                                      widget.appointmentDate,
-                                                  doctor: widget.doctor,
-                                                  selectedDate:
-                                                      widget.selectedDate,
-                                                  selectedIndex:
-                                                      widget.selectedIndex,
-                                                      profileUrl:widget.profileUrl
-                                                )),
+                                                    getPay: getPay,
+                                                    appointmentDate: widget
+                                                        .appointmentDate,
+                                                    doctor: widget.doctor,
+                                                    selectedDate: widget
+                                                        .selectedDate,
+                                                    selectedIndex:
+                                                        widget.selectedIndex,
+                                                    profileUrl:
+                                                        widget.profileUrl)),
                                         (route) => false);
                                   },
                                   child:
