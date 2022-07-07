@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/MessagepageDoctor.dart';
 import 'package:mero_doctor/screens/SearchPage.dart';
+import 'package:mero_doctor/screens/dotor_profile.dart';
 import 'package:mero_doctor/utils/constants.dart';
 
 import '../widgets/doctor_dashboard_widgets.dart';
@@ -18,7 +19,7 @@ class DoctorDashboardScreen extends StatefulWidget {
 
 class _DoctorDashboardScreenState extends State<DoctorDashboardScreen> {
   List<Map<String, dynamic>> appointmentList = [];
-  
+
   DoctorModel doctorModel = DoctorModel();
   final _user = FirebaseAuth.instance.currentUser!.uid;
   String? profileUrl;
@@ -80,7 +81,13 @@ class _DoctorDashboardScreenState extends State<DoctorDashboardScreen> {
                       width: 50,
                       child: InkWell(
                         onTap: () {
-                          print('Profile');
+                          Navigator.of(context).pushAndRemoveUntil(
+                              MaterialPageRoute(
+                                  builder: (context) => ProfileScreenDoc(
+                                        id: _user,
+                                        profilePicture: profileUrl,
+                                      )),
+                              (route) => false);
                         },
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(90),
