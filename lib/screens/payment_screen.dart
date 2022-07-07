@@ -152,16 +152,16 @@ class _PaymentScreenState extends State<PaymentScreen> {
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 KhaltiPaymentPage(
-                                                  getPay: getPay,
-                                                  appointmentDate:
-                                                      widget.appointmentDate,
-                                                  doctor: widget.doctor,
-                                                  selectedDate:
-                                                      widget.selectedDate,
-                                                  selectedIndex:
-                                                      widget.selectedIndex,
-                                                      profileUrl:widget.profileUrl
-                                                )),
+                                                    getPay: getPay,
+                                                    appointmentDate: widget
+                                                        .appointmentDate,
+                                                    doctor: widget.doctor,
+                                                    selectedDate: widget
+                                                        .selectedDate,
+                                                    selectedIndex:
+                                                        widget.selectedIndex,
+                                                    profileUrl:
+                                                        widget.profileUrl)),
                                         (route) => false);
                                   },
                                   child:

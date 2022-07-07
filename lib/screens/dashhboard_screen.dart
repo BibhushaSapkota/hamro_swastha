@@ -241,8 +241,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          const SearchPageDoctor()));
+                                      builder: (context) => SearchPageDoctor(
+                                          profileUrl: profileUrl)));
                             },
                             child: const Text(
                               'Search Doctors by name.',

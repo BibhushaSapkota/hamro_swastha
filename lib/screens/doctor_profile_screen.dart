@@ -93,9 +93,8 @@ class _DoctorProfileScreenState extends State<DoctorProfileScreen> {
                           Navigator.of(context).pushAndRemoveUntil(
                               MaterialPageRoute(
                                   builder: (context) => DashboardScreen(
-                                        id: user!.uid,
-                                        profileUrl: widget.profileUrl,
-                                      )),
+                                      id: user!.uid,
+                                      profileUrl: widget.profileUrl)),
                               (route) => false);
                         },
                         child: const Icon(

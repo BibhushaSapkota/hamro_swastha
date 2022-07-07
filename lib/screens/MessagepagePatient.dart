@@ -84,8 +84,7 @@ class _PatientMessagePageState extends State<PatientMessagePage> {
           FlatButton(
               onPressed: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute(
-                      builder: (context) => const SearchPageDoctor()),
+                  MaterialPageRoute(builder: (context) => SearchPageDoctor()),
                 );
               },
               child: const Text(
