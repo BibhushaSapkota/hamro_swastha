@@ -16,24 +16,25 @@ class UserModel {
   String? date;
   String? oldReportFile;
   List? bookMarked = [];
+  List? transaction = [];
 
-  UserModel({
-    this.uid,
-    this.email,
-    this.firstName,
-    this.lastName,
-    this.password,
-    this.isPatient,
-    this.isFormCompleted,
-    this.profilePicture,
-    this.gender,
-    this.contact,
-    this.date,
-    this.oldReportFile,
-    this.isGoogleUser,
-    this.isNormalUser,
-    this.bookMarked,
-  });
+  UserModel(
+      {this.uid,
+      this.email,
+      this.firstName,
+      this.lastName,
+      this.password,
+      this.isPatient,
+      this.isFormCompleted,
+      this.profilePicture,
+      this.gender,
+      this.contact,
+      this.date,
+      this.oldReportFile,
+      this.isGoogleUser,
+      this.isNormalUser,
+      this.bookMarked,
+      this.transaction});
 
   // Receiving Data from Server
   factory UserModel.fromMap(map) => UserModel(
@@ -51,6 +52,7 @@ class UserModel {
         oldReportFile: map['oldReportFile'],
         isGoogleUser: map['isGoogleUser'],
         isNormalUser: map['isNormalUser'],
+        transaction: map['transaction_details'],
       );
 
   // Sending Data to the Server
@@ -71,6 +73,7 @@ class UserModel {
       'isGoogleUser': isGoogleUser,
       'isNormalUser': isNormalUser,
       'bookMarked': bookMarked,
+      'transaction_details': transaction,
     };
   }
 
@@ -199,5 +202,33 @@ class Appointment {
         transactionAmount: map['transaction_amount'],
         transactionTime: map['transaction_time'],
         doctorUid: map['doctor']);
+  }
+}
+
+class TransactionData {
+  String? transaction_date;
+  String? transaction_amount;
+  String? appointment_date;
+  bool? isPaymentDone;
+  String? transaction_time;
+  String? time_slot;
+
+  TransactionData(
+      {this.transaction_date,
+      this.transaction_amount,
+      this.transaction_time,
+      this.appointment_date,
+      this.isPaymentDone,
+      this.time_slot});
+
+  factory TransactionData.fromMap(map) {
+    return TransactionData(
+      transaction_date: map["transaction_date"],
+      transaction_amount: map["transaction_amount"],
+      appointment_date: map["apointment_date"],
+      isPaymentDone: map["isPaymentDone"],
+      transaction_time: map["transaction_time"],
+      time_slot: map["time_slot"],
+    );
   }
 }
