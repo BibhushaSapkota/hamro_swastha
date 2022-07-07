@@ -80,18 +80,16 @@ class UserModel {
       String appointmentDate,
       bool isPaymentDone,
       String time,
-      String appointmentTime) {
+      String appointmentTime,
+      String doctorUid) {
     return {
-      'transaction_details': FieldValue.arrayUnion([
-        {
-          'transaction_date': date,
-          'transaction_amount': amount,
-          'apointment_date': appointmentDate,
-          'isPaymentDone': isPaymentDone,
-          'transaction_time': time,
-          'time_slot': appointmentTime,
-        }
-      ]),
+      'transaction_date': date,
+      'transaction_amount': amount,
+      'apointment_date': appointmentDate,
+      'isPaymentDone': isPaymentDone,
+      'transaction_time': time,
+      'time_slot': appointmentTime,
+      'doctor': doctorUid,
     };
   }
 }
@@ -181,6 +179,7 @@ class Appointment {
   String? transactionAmount;
   String? transactionDate;
   String? transactionTime;
+  String? doctorUid;
 
   Appointment(
       {this.appointmentDate,
@@ -188,16 +187,17 @@ class Appointment {
       this.timeSlot,
       this.transactionAmount,
       this.transactionDate,
-      this.transactionTime});
+      this.transactionTime,
+      this.doctorUid});
 
   factory Appointment.fromMap(map) {
     return Appointment(
-      appointmentDate: map['appointment_date'],
-      isPayment: map['isPayment'],
-      timeSlot: map['time_slot'],
-      transactionDate: map['transaction_date'],
-      transactionAmount: map['transaction_amount'],
-      transactionTime: map['transaction_time'],
-    );
+        appointmentDate: map['apointment_date'],
+        isPayment: map['isPaymentDone'],
+        timeSlot: map['time_slot'],
+        transactionDate: map['transaction_date'],
+        transactionAmount: map['transaction_amount'],
+        transactionTime: map['transaction_time'],
+        doctorUid: map['doctor']);
   }
 }

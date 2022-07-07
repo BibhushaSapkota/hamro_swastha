@@ -38,7 +38,7 @@ class _DoctorHistoryScreenState extends State<DoctorHistoryScreen> {
               id = doctorHistoryModel.id;
               name = doctorHistoryModel.name;
               image = doctorHistoryModel.image;
-              orgName = doctorHistoryModel.orgName;
+              orgName = doctorHistoryModel.position;
               specialization = doctorHistoryModel.specialization;
               schedule = doctorHistoryModel.schedule;
               description = doctorHistoryModel.description;

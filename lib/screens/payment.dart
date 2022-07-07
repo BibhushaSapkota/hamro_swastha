@@ -63,6 +63,7 @@ class _KhaltiPaymentPageState extends State<KhaltiPaymentPage> {
       "date": widget.selectedDate,
       "time": widget.appointmentDate[widget.selectedIndex],
       "username": name,
+      'userUid': _user!.uid,  
       "profilePicture": userModel.profilePicture ?? "",
     };
 
@@ -160,7 +161,8 @@ class _KhaltiPaymentPageState extends State<KhaltiPaymentPage> {
                           (getAmt() / 100).toString(),
                           widget.selectedDate,
                           timeFormater,
-                          widget.appointmentDate[widget.selectedIndex]);
+                          widget.appointmentDate[widget.selectedIndex],
+                          widget.doctor.id);
                       bookAppointment((getAmt() / 100).toString(),
                           formattedDate, timeFormater);
                       const successsnackBar = SnackBar(
@@ -204,9 +206,12 @@ class _KhaltiPaymentPageState extends State<KhaltiPaymentPage> {
   }
 
   Future transaction(dynamic date, String amount, String selectedDate,
-      String time, String appointmentTime) async {
-    await FirebaseFirestore.instance.collection("users").doc(_user!.uid).update(
-        widget._userModel.transactionList(
-            date, amount, selectedDate, true, time, appointmentTime));
+      String time, String appointmentTime, String doctorUid) async {
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(_user!.uid)
+        .collection("UpcomingAppointment")
+        .add(widget._userModel.transactionList(date, amount, selectedDate, true,
+            time, appointmentTime, doctorUid));
   }
 }

@@ -18,6 +18,7 @@ class DoctorDashboardScreen extends StatefulWidget {
 
 class _DoctorDashboardScreenState extends State<DoctorDashboardScreen> {
   List<Map<String, dynamic>> appointmentList = [];
+  
   DoctorModel doctorModel = DoctorModel();
   final _user = FirebaseAuth.instance.currentUser!.uid;
   String? profileUrl;

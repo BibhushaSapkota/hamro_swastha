@@ -29,7 +29,7 @@ class DoctorWidget extends StatelessWidget {
         doctorHistoryModel.description = doctor.description;
         doctorHistoryModel.image = doctor.image;
         doctorHistoryModel.name = doctor.name;
-        doctorHistoryModel.orgName = doctor.orgName;
+        doctorHistoryModel.position = doctor.position;
         doctorHistoryModel.schedule = doctor.schedule;
         doctorHistoryModel.specialization = doctor.specialization;
         print(doctorHistoryModel.id);
@@ -89,7 +89,7 @@ class DoctorWidget extends StatelessWidget {
                   RichText(
                     text: TextSpan(children: [
                       TextSpan(
-                        text: doctor.orgName == "" ? "" : doctor.orgName,
+                        text: doctor.position == "" ? "" : doctor.position,
                         style: const TextStyle(
                           color: Colors.black,
                           fontSize: 14,

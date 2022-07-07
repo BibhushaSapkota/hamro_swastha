@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
                 "/register_patient": (context) => const RegisterScreen(),
                 "/authDoc": (context) => const ChooseAuthDoc(),
                 "/auth": (context) => const ChooseAuth(),
-                "/": (context) => const ChooseScreen(),
+                "/choose_option": (context) => const ChooseScreen(),
                 // "/choose_option": (context) => const ChooseScreen(),
                 "/login_doctor": (context) => const LoginPageDoc(),
                 "/doctorlist": (context) => const DoctorListScreen(),
@@ -80,7 +80,7 @@ class MyApp extends StatelessWidget {
                 '/patientprofile': (context) => PatientProfile(),
                 // "/": (context) => EnterEmailPage(),
                 // '/': (context) => SplashScreen(),
-                '/walkthrough': (context) => const WalkthroughScreen(),
+                '/': (context) => const WalkthroughScreen(),
                 "/profile_form": (context) => const PatientUploadScreen(),
                 "/doctor_form": (context) => const DoctorFormScreen(),
                 "/login": (context) => const LoginPage(),
@@ -96,9 +96,10 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               theme: ThemeData(
                   primaryColor: COLOR_PRIMARY,
-                  textTheme: screenWidth < 500
-                      ? TEXT_THEME_SMALL
-                      : TEXT_THEME_DEFAULT, colorScheme: ColorScheme.fromSwatch().copyWith(secondary: COLOR_SECONDARY)),
+                  textTheme:
+                      screenWidth < 500 ? TEXT_THEME_SMALL : TEXT_THEME_DEFAULT,
+                  colorScheme: ColorScheme.fromSwatch()
+                      .copyWith(secondary: COLOR_SECONDARY)),
             );
           }),
     );
