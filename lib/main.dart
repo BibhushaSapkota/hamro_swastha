@@ -21,6 +21,7 @@ import 'package:mero_doctor/screens/otp_screen.dart';
 import 'package:mero_doctor/screens/patientProfile.dart';
 import 'package:mero_doctor/screens/patient_profile.dart';
 import 'package:mero_doctor/screens/patient_upload_profile.dart';
+import 'package:mero_doctor/screens/splash_screen.dart';
 import 'package:mero_doctor/screens/userHistory.dart';
 import 'package:mero_doctor/screens/walkthrough_screens.dart';
 import 'package:mero_doctor/utils/constants.dart';
@@ -82,8 +83,7 @@ class MyApp extends StatelessWidget {
                 '/patientprofile': (context) => PatientProfile(),
                 // "/": (context) => EnterEmailPage(),
                 // '/': (context) => Location(),
-                '/': (context) => const Authprovider(),
-                // '/': (context) => const WalkthroughScreen(),
+                '/': (context) => SplashScreen(),
                 "/profile_form": (context) => const PatientUploadScreen(),
                 "/doctor_form": (context) => const DoctorFormScreen(),
                 "/login": (context) => const LoginPage(),

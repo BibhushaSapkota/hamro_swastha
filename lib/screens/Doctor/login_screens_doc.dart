@@ -334,13 +334,13 @@ class _LoginPageDocState extends State<LoginPageDoc> {
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
-                                      height: screen.height / 11.5,
-                                    ),
-                                    Image.asset(
-                                        "assets/images/ic_login_bottom.png",
-                                        width: screen.width,
-                                        fit: BoxFit.fill),
+                                    // SizedBox(
+                                    //   height: screen.height / 11.5,
+                                    // ),
+                                    // Image.asset(
+                                    //     "assets/images/ic_login_bottom.png",
+                                    //     width: screen.width,
+                                    //     fit: BoxFit.fill),
                                   ],
                                 ),
                               ),

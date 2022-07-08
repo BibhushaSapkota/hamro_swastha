@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class DoctorDashBoardWidget extends StatelessWidget {
   final Map<String, dynamic> category;
-  
+
   const DoctorDashBoardWidget(this.category) : super();
 
   @override
@@ -12,7 +12,7 @@ class DoctorDashBoardWidget extends StatelessWidget {
     return Parent(
         style: ParentStyle()
           ..borderRadius(all: 10)
-          ..height(80)
+          ..height(100)
           ..background.color(Colors.white)
           ..elevation(3, color: Colors.grey.shade300)
           ..padding(all: 12)
@@ -42,6 +42,13 @@ class DoctorDashBoardWidget extends StatelessWidget {
                     ..fontFamily('quicksand'),
                 ),
                 Txt(
+                  category["date"],
+                  style: TxtStyle()
+                    ..fontSize(16)
+                    ..textColor(Colors.black)
+                    ..fontFamily('quicksand'),
+                ),
+                Txt(
                   category["time"],
                   style: TxtStyle()
                     ..fontSize(16)
@@ -50,42 +57,43 @@ class DoctorDashBoardWidget extends StatelessWidget {
                 ),
               ],
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Parent(
-                  style: ParentStyle()
-                    ..height(24)
-                    ..elevation(3)
-                    ..background.color(const Color(0xff76B5C5))
-                    ..width(60)
-                    ..elevation(3)
-                    ..borderRadius(all: 12),
-                  child: Txt(
-                    'Accept',
-                    style: TxtStyle()
-                      ..fontSize(13)
-                      ..textColor(Colors.white)
-                      ..alignmentContent.center(),
-                  ),
-                ),
-                Parent(
-                    style: ParentStyle()
-                      ..height(24)
-                      ..elevation(3)
-                      ..background.color(Colors.red)
-                      ..width(60)
-                      ..elevation(3)
-                      ..borderRadius(all: 12),
-                    child: Txt(
-                      'Decline',
-                      style: TxtStyle()
-                        ..fontSize(13)
-                        ..textColor(Colors.white)
-                        ..alignmentContent.center(),
-                    ))
-              ],
-            )
+            // Column(
+            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //   children: [
+            //     Parent(
+            //       style: ParentStyle()
+            //         ..height(24)
+            //         ..elevation(3)
+            //         ..background.color(const Color(0xff76B5C5))
+            //         ..width(60)
+            //         ..elevation(3)
+            //         ..borderRadius(all: 12),
+            //       child: Txt(
+            //         'Accept',
+            //         style: TxtStyle()
+            //           ..fontSize(13)
+            //           ..textColor(Colors.white)
+            //           ..alignmentContent.center(),
+            //       ),
+            //     ),
+            //     Parent(
+            //         style: ParentStyle()
+            //           ..height(24)
+            //           ..elevation(3)
+            //           ..background.color(Colors.red)
+            //           ..width(60)
+            //           ..elevation(3)
+            //           ..borderRadius(all: 12),
+            //         child: Txt(
+            //           'Decline',
+            //           style: TxtStyle()
+            //             ..fontSize(13)
+            //             ..textColor(Colors.white)
+            //             ..alignmentContent.center(),
+            //         ))
+            //   ],
+            // )
+            const Icon(Icons.message, color: Colors.green),
           ],
         ));
   }

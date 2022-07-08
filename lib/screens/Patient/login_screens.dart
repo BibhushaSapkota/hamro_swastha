@@ -304,13 +304,13 @@ class _LoginPageState extends State<LoginPage> {
                                       ],
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: screen.height / 13.5,
-                                  ),
-                                  Image.asset(
-                                      "assets/images/ic_login_bottom.png",
-                                      width: screen.width,
-                                      fit: BoxFit.fill),
+                                  // SizedBox(
+                                  //   height: screen.height / 13.5,
+                                  // ),
+                                  // Image.asset(
+                                  //     "assets/images/ic_login_bottom.png",
+                                  //     width: screen.width,
+                                  //     fit: BoxFit.fill),
                                 ],
                               ),
                             ),
