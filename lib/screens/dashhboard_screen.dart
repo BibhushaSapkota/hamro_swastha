@@ -30,9 +30,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
   UserModel? userModel = UserModel();
   String? profileUrl;
   String id;
+  String? oldReport;
+
   final DoctorListData _doctorListData = DoctorListData();
   Appointment _appointment = Appointment();
-
+  UserModel _userModel = UserModel();
   DoctorModel doctorModel = DoctorModel();
   final CollectionReference _data =
       FirebaseFirestore.instance.collection("doctors");
@@ -48,6 +50,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
     // TODO: implement initState
     super.initState();
     _patient.doc(id).get().then((value) {
+      _userModel = UserModel.fromMap(value.data());
+      oldReport = _userModel.oldReportFile;
       patientData = value.data() as Map<String, dynamic>;
       patientData!['transaction_details'];
       setState(() {
@@ -124,7 +128,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       Navigator.push(
                         context,
                         PageTransition(
-                            child: PatientProfile(id: id),
+                            child: PatientProfile(id: id, oldReport: oldReport),
                             type: PageTransitionType.rightToLeft),
                       );
                     },

@@ -12,7 +12,9 @@ import 'package:page_transition/page_transition.dart';
 
 class PatientProfile extends StatefulWidget {
   String? id;
-  PatientProfile({Key? key, this.id}) : super(key: key);
+  String? oldReport;
+
+  PatientProfile({Key? key, this.id, this.oldReport}) : super(key: key);
 
   @override
   State<PatientProfile> createState() => _PatientProfileState();
@@ -21,7 +23,6 @@ class PatientProfile extends StatefulWidget {
 class _PatientProfileState extends State<PatientProfile> {
   String? profileUrl;
   bool downloading = false;
-  String? oldReport;
   String? fullName;
   String? email;
   String? contactNumber;
@@ -40,7 +41,7 @@ class _PatientProfileState extends State<PatientProfile> {
     var randid = random.nextInt(10000);
     try {
       await dio.download(
-        oldReport!,
+        widget.oldReport!,
         path + "$fullName" "OldReport" + randid.toString() + ".jpg",
         onReceiveProgress: (recivedBytes, totalBytes) {
           setState(() {
@@ -94,7 +95,6 @@ class _PatientProfileState extends State<PatientProfile> {
         firstName = _userModel.firstName!;
         lastName = _userModel.lastName!;
         email = _userModel.email;
-        oldReport = _userModel.oldReportFile;
         fullName = firstName + " " + lastName;
         contactNumber = _userModel.contact;
         fullName = fullName!.toUpperCase();
@@ -369,31 +369,35 @@ class _PatientProfileState extends State<PatientProfile> {
                                     ),
                                   ],
                                 ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 5, 0, 0),
-                                  child: InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        loading = true;
-                                        Future.delayed(
-                                            const Duration(seconds: 3), () {
-                                          setState(() {
-                                            startDownloading();
-                                          });
-                                        });
-                                      });
-                                    },
-                                    child: SizedBox(
-                                      height: screen.height / 3,
-                                      width: screen.width / 1.2,
-                                      child: Image.network(
-                                        "$oldReport",
-                                        fit: BoxFit.fill,
-                                      ),
-                                    ),
-                                  ),
-                                )
+                                widget.oldReport != null ||
+                                        widget.oldReport != ""
+                                    ? Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            10, 5, 0, 0),
+                                        child: InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              loading = true;
+                                              Future.delayed(
+                                                  const Duration(seconds: 3),
+                                                  () {
+                                                setState(() {
+                                                  startDownloading();
+                                                });
+                                              });
+                                            });
+                                          },
+                                          child: SizedBox(
+                                            height: screen.height / 3,
+                                            width: screen.width / 1.2,
+                                            child: Image.network(
+                                              "${widget.oldReport}",
+                                              fit: BoxFit.fill,
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    : SizedBox(),
                               ],
                             ),
                           )

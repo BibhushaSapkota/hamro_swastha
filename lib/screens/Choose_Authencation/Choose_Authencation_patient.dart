@@ -18,7 +18,7 @@ class _ChooseAuthState extends State<ChooseAuth> {
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
-              Navigator.pushReplacementNamed(context, "/");
+              Navigator.pushReplacementNamed(context, "/choose_option");
             },
             icon: const Icon(
               Icons.arrow_back,
