@@ -9,14 +9,9 @@ class GoogleLogInProvider extends ChangeNotifier {
   GoogleSignInAccount get user => _user!;
 
   Future googleLogin() async {
-    print("GoogleLogin Function Reached...........");
-
     final googleUser = await googleSignIn.signIn();
     if (googleUser == null) return;
     _user = googleUser;
-
-    print("User ...........");
-    print(_user);
 
     final googleAuth = await googleUser.authentication;
 
@@ -25,13 +20,12 @@ class GoogleLogInProvider extends ChangeNotifier {
       idToken: googleAuth.idToken,
     );
 
+    notifyListeners();
     UserCredential userCredential =
         await FirebaseAuth.instance.signInWithCredential(credential);
     User? useraccount = userCredential.user;
     print(useraccount);
     return useraccount;
-
-    notifyListeners();
   }
 
   Future googleLogout() async {

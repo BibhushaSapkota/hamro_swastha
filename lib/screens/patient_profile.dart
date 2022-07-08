@@ -8,6 +8,7 @@ import 'package:mero_doctor/screens/bookmark_page.dart';
 import 'package:mero_doctor/screens/choose_screen.dart';
 import 'package:mero_doctor/screens/dashhboard_screen.dart';
 import 'package:mero_doctor/screens/loading.dart';
+import 'package:mero_doctor/screens/transactionPage.dart';
 
 import '../utils/capatalize.dart';
 
@@ -154,7 +155,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                               const Bookmarked()));
                                 },
                               ),
-                              _getCard("My Appointment", Icons.app_blocking),
+                              InkWell(
+                                child: _getCard(
+                                    "My Appointment", Icons.app_blocking),
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          const TrasnactionHistoryPage()));
+                                },
+                              ),
+                              // _getCard("My Appointment", Icons.app_blocking),
                               _getCard("History", Icons.watch_later_outlined),
                               _getCard("Location", Icons.location_on_outlined),
                             ],

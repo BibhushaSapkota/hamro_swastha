@@ -7,6 +7,7 @@ import 'package:mero_doctor/screens/Choose_Authencation/Choose_Authencation_pati
 import 'package:mero_doctor/screens/Doctor/login_screens_doc.dart';
 import 'package:mero_doctor/screens/Doctor/register_screens_doctor.dart';
 import 'package:mero_doctor/screens/GoogleLogin/google_login.dart';
+import 'package:mero_doctor/screens/LoggedInCheck.dart';
 import 'package:mero_doctor/screens/Patient/login_screens.dart';
 import 'package:mero_doctor/screens/Patient/register_screen.dart';
 import 'package:mero_doctor/screens/choose_screen.dart';

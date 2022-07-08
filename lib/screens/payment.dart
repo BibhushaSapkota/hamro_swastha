@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:khalti_flutter/khalti_flutter.dart';
 import 'package:mero_doctor/models/doctor.dart';
+import 'package:mero_doctor/models/transachHistory.dart';
 import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/payment_screen.dart';
 import 'package:mero_doctor/utils/snack_bar.dart';
@@ -36,6 +37,7 @@ class _KhaltiPaymentPageState extends State<KhaltiPaymentPage> {
   final _user = FirebaseAuth.instance.currentUser;
   final CollectionReference data =
       FirebaseFirestore.instance.collection("doctors");
+  User? user = FirebaseAuth.instance.currentUser!;
   @override
   void initState() {
     super.initState();
@@ -63,7 +65,7 @@ class _KhaltiPaymentPageState extends State<KhaltiPaymentPage> {
       "date": widget.selectedDate,
       "time": widget.appointmentDate[widget.selectedIndex],
       "username": name,
-      'userUid': _user!.uid,  
+      'userUid': _user!.uid,
       "profilePicture": userModel.profilePicture ?? "",
     };
 
@@ -152,6 +154,7 @@ class _KhaltiPaymentPageState extends State<KhaltiPaymentPage> {
                       PaymentPreference.khalti,
                     ],
                     onSuccess: (su) {
+                      // setTransactiondata();
                       var now = DateTime.now();
                       var dateFormater = DateFormat('yyyy/MM/dd');
                       String timeFormater = DateFormat('kk:mm a').format(now);
@@ -203,6 +206,23 @@ class _KhaltiPaymentPageState extends State<KhaltiPaymentPage> {
         ),
       ),
     );
+  }
+
+  void setTransactiondata(dynamic date, String amount, String selectedDate,
+      String time, String appointmentTime, String uid) async {
+    TransactionModel transactionModel = TransactionModel();
+
+    transactionModel.date = date;
+    transactionModel.time = time;
+    transactionModel.selectedDate = selectedDate;
+    transactionModel.uid = uid;
+    transactionModel.amount = amount;
+    transactionModel.appointmentTime = appointmentTime;
+
+    await FirebaseFirestore.instance
+        .collection('transaction')
+        .doc(user?.uid)
+        .set(transactionModel.toMap());
   }
 
   Future transaction(dynamic date, String amount, String selectedDate,
