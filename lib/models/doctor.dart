@@ -64,3 +64,41 @@ class DoctorHistoryModel {
     };
   }
 }
+
+class Patient {
+  String? id;
+  String? firstName;
+  String? lastName;
+  String? email;
+  String? profileUrl;
+  String? dateOfBirth;
+  Patient(
+      {this.id,
+      this.email,
+      this.firstName,
+      this.lastName,
+      this.profileUrl,
+      this.dateOfBirth});
+
+  Map<String, dynamic> toMap() {
+    return {
+      'uid': id,
+      'firstName': firstName,
+      'lastName': lastName,
+      'email': email,
+      'profileUrl': profileUrl,
+      'dateOfBirth': dateOfBirth,
+    };
+  }
+
+  factory Patient.fromMap() {
+    return Patient(
+      id: 'uid',
+      firstName: 'firstName',
+      lastName: 'lastName',
+      email: 'email',
+      profileUrl: 'profileUrl',
+      dateOfBirth: "dateOfBirth",
+    );
+  }
+}
