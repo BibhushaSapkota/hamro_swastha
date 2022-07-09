@@ -6,7 +6,9 @@ import 'package:mero_doctor/models/data.dart';
 import 'package:mero_doctor/models/doctor.dart';
 import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/MessagepagePatient.dart';
+import 'package:mero_doctor/screens/NotificaitonView.dart';
 import 'package:mero_doctor/screens/SearchPageDoctor.dart';
+import 'package:mero_doctor/screens/notification_screen.dart';
 import 'package:mero_doctor/screens/patientProfile.dart';
 import 'package:mero_doctor/screens/patient_profile.dart';
 import 'package:mero_doctor/utils/capatalize.dart';
@@ -119,7 +121,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     icon: Icons.date_range_rounded,
                     text: 'Schedule',
                     textSize: 12),
-                const GButton(
+                GButton(
+                    onPressed: () {
+                      // Navigator.push(
+                      //   context,
+                      //   PageTransition(
+                      //       child: NotificationScreen(),
+                      //       type: PageTransitionType.rightToLeft),
+                      // );
+                    },
                     icon: Icons.notifications_active_rounded,
                     text: 'Notification',
                     textSize: 12),

@@ -159,6 +159,7 @@ class _KhaltiPaymentPageState extends State<KhaltiPaymentPage> {
                       var dateFormater = DateFormat('yyyy/MM/dd');
                       String timeFormater = DateFormat('kk:mm a').format(now);
                       String formattedDate = dateFormater.format(now);
+                      
                       transaction(
                           formattedDate,
                           (getAmt() / 100).toString(),

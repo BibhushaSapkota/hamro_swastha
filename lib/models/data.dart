@@ -49,6 +49,10 @@ class DoctorListData {
   ];
 }
 
+class PatientListData {
+  final List patientList = [];
+}
+
 class BookMarked {
   final List bookMarked = [];
 }

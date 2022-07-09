@@ -82,7 +82,7 @@ class MyApp extends StatelessWidget {
                     ),
                 '/patientprofile': (context) => PatientProfile(),
                 // "/": (context) => EnterEmailPage(),
-                // '/': (context) => Location(),
+                '/walkthrough': (context) => WalkthroughScreen(),
                 '/': (context) => SplashScreen(),
                 "/profile_form": (context) => const PatientUploadScreen(),
                 "/doctor_form": (context) => const DoctorFormScreen(),

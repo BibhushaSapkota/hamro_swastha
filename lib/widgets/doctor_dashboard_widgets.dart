@@ -1,10 +1,47 @@
+import 'dart:math';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:division/division.dart';
 import 'package:flutter/material.dart';
+import 'package:mero_doctor/models/doctor.dart';
+import 'package:mero_doctor/models/user.dart';
+import 'package:mero_doctor/screens/patient_details_view.dart';
 
-class DoctorDashBoardWidget extends StatelessWidget {
-  final Map<String, dynamic> category;
+class DoctorDashBoardWidget extends StatefulWidget {
+  final Map<String, dynamic>? category;
 
-  const DoctorDashBoardWidget(this.category) : super();
+  DoctorDashBoardWidget({this.category}) : super();
+
+  @override
+  State<DoctorDashBoardWidget> createState() => _DoctorDashBoardWidgetState();
+}
+
+class _DoctorDashBoardWidgetState extends State<DoctorDashBoardWidget> {
+  UserModel _userModel = UserModel();
+  String? firstName;
+  String? lastName;
+  String? email;
+  String? profileUrl;
+  String? dateOfBirth;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(widget.category!['userUid'])
+        .get()
+        .then((value) {
+      _userModel = UserModel.fromMap(value.data());
+      setState(() {
+        firstName = _userModel.firstName;
+        lastName = _userModel.lastName;
+        email = _userModel.email;
+        profileUrl = _userModel.profilePicture;
+        dateOfBirth = _userModel.date;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,83 +55,92 @@ class DoctorDashBoardWidget extends StatelessWidget {
           ..padding(all: 12)
           ..margin(bottom: 12)
           ..width(screen.width),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            InkWell(
-              onTap: () {
-                print("pressed");
-                // Navigator.of(context).pushReplacement(MaterialPageRoute(
-                //     builder: (context) => doctorView()));
-              },
-              child: CircleAvatar(
+        child: InkWell(
+          onTap: () {
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                    builder: (context) => PatientProfileView(
+                          firstName: firstName,
+                          lastName: lastName,
+                          email: email,
+                          dateOfBirth: dateOfBirth,
+                          profileUrl: profileUrl,
+                        )),
+                (route) => false);
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              CircleAvatar(
                 radius: 30,
-                backgroundImage: NetworkImage(category["profilePicture"]),
+                backgroundImage:
+                    NetworkImage(widget.category!["profilePicture"]),
               ),
-            ),
-            Column(
-              children: [
-                Txt(
-                  category["username"],
-                  style: TxtStyle()
-                    ..fontSize(16)
-                    ..textColor(Colors.black)
-                    ..fontFamily('quicksand'),
-                ),
-                Txt(
-                  category["date"],
-                  style: TxtStyle()
-                    ..fontSize(16)
-                    ..textColor(Colors.black)
-                    ..fontFamily('quicksand'),
-                ),
-                Txt(
-                  category["time"],
-                  style: TxtStyle()
-                    ..fontSize(16)
-                    ..textColor(Colors.black)
-                    ..fontFamily('quicksand'),
-                ),
-              ],
-            ),
-            // Column(
-            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //   children: [
-            //     Parent(
-            //       style: ParentStyle()
-            //         ..height(24)
-            //         ..elevation(3)
-            //         ..background.color(const Color(0xff76B5C5))
-            //         ..width(60)
-            //         ..elevation(3)
-            //         ..borderRadius(all: 12),
-            //       child: Txt(
-            //         'Accept',
-            //         style: TxtStyle()
-            //           ..fontSize(13)
-            //           ..textColor(Colors.white)
-            //           ..alignmentContent.center(),
-            //       ),
-            //     ),
-            //     Parent(
-            //         style: ParentStyle()
-            //           ..height(24)
-            //           ..elevation(3)
-            //           ..background.color(Colors.red)
-            //           ..width(60)
-            //           ..elevation(3)
-            //           ..borderRadius(all: 12),
-            //         child: Txt(
-            //           'Decline',
-            //           style: TxtStyle()
-            //             ..fontSize(13)
-            //             ..textColor(Colors.white)
-            //             ..alignmentContent.center(),
-            //         ))
-            //   ],
-            // )
-            const Icon(Icons.message, color: Colors.green),
-          ],
+
+              Column(
+                children: [
+                  Txt(
+                    widget.category!["username"],
+                    style: TxtStyle()
+                      ..fontSize(16)
+                      ..textColor(Colors.black)
+                      ..fontFamily('quicksand'),
+                  ),
+                  Txt(
+                    widget.category!["date"],
+                    style: TxtStyle()
+                      ..fontSize(16)
+                      ..textColor(Colors.black)
+                      ..fontFamily('quicksand'),
+                  ),
+                  Txt(
+                    widget.category!["time"],
+                    style: TxtStyle()
+                      ..fontSize(16)
+                      ..textColor(Colors.black)
+                      ..fontFamily('quicksand'),
+                  ),
+                ],
+              ),
+              // Column(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     Parent(
+              //       style: ParentStyle()
+              //         ..height(24)
+              //         ..elevation(3)
+              //         ..background.color(const Color(0xff76B5C5))
+              //         ..width(60)
+              //         ..elevation(3)
+              //         ..borderRadius(all: 12),
+              //       child: Txt(
+              //         'Accept',
+              //         style: TxtStyle()
+              //           ..fontSize(13)
+              //           ..textColor(Colors.white)
+              //           ..alignmentContent.center(),
+              //       ),
+              //     ),
+              //     Parent(
+              //         style: ParentStyle()
+              //           ..height(24)
+              //           ..elevation(3)
+              //           ..background.color(Colors.red)
+              //           ..width(60)
+              //           ..elevation(3)
+              //           ..borderRadius(all: 12),
+              //         child: Txt(
+              //           'Decline',
+              //           style: TxtStyle()
+              //             ..fontSize(13)
+              //             ..textColor(Colors.white)
+              //             ..alignmentContent.center(),
+              //         ))
+              //   ],
+              // )
+              const Icon(Icons.message, color: Colors.green),
+            ],
+          ),
         ));
   }
 }

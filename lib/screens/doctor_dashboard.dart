@@ -2,6 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:division/division.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:mero_doctor/models/data.dart';
+import 'package:mero_doctor/models/doctor.dart';
 import 'package:mero_doctor/models/user.dart';
 import 'package:mero_doctor/screens/MessagepageDoctor.dart';
 import 'package:mero_doctor/screens/SearchPage.dart';
@@ -25,10 +28,14 @@ class _DoctorDashboardScreenState extends State<DoctorDashboardScreen> {
   String? profileUrl;
   final CollectionReference data =
       FirebaseFirestore.instance.collection("doctors");
+  // final CollectionReference _patient =
+  //     FirebaseFirestore.instance.collection('users');
+  // final PatientListData _patientListData = PatientListData();
 
   @override
   void initState() {
     super.initState();
+
     data.doc(_user).get().then((value) {
       doctorModel = DoctorModel.fromMap(value.data());
       setState(() {
@@ -43,6 +50,26 @@ class _DoctorDashboardScreenState extends State<DoctorDashboardScreen> {
         }
       });
     });
+
+    // _patient.get().then((value) {
+    //   for (var doc in value.docs) {
+    //     _userModel = UserModel.fromMap(doc.data());
+    //     setState(() {
+    //       id = _userModel.uid;
+    //       firstName = _userModel.firstName;
+    //       lastName = _userModel.lastName;
+    //       email = _userModel.email;
+    //       dateOfBirth = _userModel.date;
+    //       profileUrl = _userModel.profilePicture;
+    //     });
+    //     _patientListData.patientList.add(Patient(
+    //         id: id,
+    //         dateOfBirth: "",
+    //         email: "",
+    //         firstName: "",
+    //         lastName: ""));
+    //   }
+    // });
   }
 
   // Future getUpcomingAppointment() async {
@@ -212,7 +239,9 @@ class _DoctorDashboardScreenState extends State<DoctorDashboardScreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 24),
                     itemCount: appointmentList.length,
                     itemBuilder: (BuildContext context, index) {
-                      return DoctorDashBoardWidget(appointmentList[index]);
+                      return DoctorDashBoardWidget(
+                        category: appointmentList[index],
+                      );
                     },
                   ),
                 ),
